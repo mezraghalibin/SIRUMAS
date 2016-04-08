@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
-  	<meta charset="utf-8">
+  <title>Home</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="author" href="humans.txt">
     <link rel="stylesheet" href="assets/css/master.css">
@@ -12,8 +12,8 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<!-- HEADER -->
-	<nav class="navbar navbar-fixed-top shadow-nav">
+  <!-- HEADER -->
+  <nav class="navbar navbar-fixed-top shadow-nav">
     <div class="container-fluid">
       <div class="col-md-12 navbar-container">
         <div class="col-md-6 navbar-content">
@@ -40,13 +40,13 @@
       </div>
     </div>
   </nav>
-	<!-- END OF HEADER -->
+  <!-- END OF HEADER -->
 
   <!-- SIDEBAR -->
   <div class="wrapper">
     <div class="sidebar-wrapper shadow-nav-side">
       <ul class="sidebar-nav sidebar-nav-top">
-      	<li><a href="#" style="opacity:0">A</a></li>
+        <li>A</li>
         <li class="top-menu"><a href="#">BERANDA</a></li> <!-- ALL -->
         <li><a href="#">PANDUAN</a></li> <!-- Reviewer -->
         <li><a href="#">HIBAH</a></li> <!-- Staf Riset & Dosen -->
@@ -56,6 +56,9 @@
         <li><a href="#">LAPORAN</a></li> <!-- Dosen & Staf Riset & Reviewer -->
         <li><a href="#">KONTAK</a></li> <!-- Staf Riset -->
         <li><a href="#">MOU</a></li> <!-- Staf Riset -->
+        <li><a href="#">BORANG</a></li> <!-- Staf Riset -->
+        <li><a href="#">REPOSITORY</a></li> <!-- All -->
+        <li><a href="#">KELOLA REPOSITORY</a></li> <!-- Staf Riset -->
       </ul>
     </div>
   </div>  
