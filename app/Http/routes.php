@@ -21,3 +21,8 @@ Route::get('/master', function () {
 
 Route::get('/hibah', 'HibahController@index');
 
+Route::get('/pesan', 'PesanController@index');
+
+Route::get('/mou', 'MouController@index');
+
+

@@ -38,7 +38,7 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#">PORTAL</a></li>
-        <li><a href="#">PESAN</a></li>
+        <li><a href="{{action('PesanController@index')}}">PESAN</a></li>
         <li><a href="#">LOGOUT</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
@@ -59,7 +59,7 @@
       <li><a href="#" class="waves-effect waves-teal">PROPOSAL HIBAH</a></li> <!-- Staf Keuangan & Dosen-->
       <li><a href="#" class="waves-effect waves-teal">LAPORAN</a></li> <!-- Dosen & Staf Riset & Reviewer -->
       <li><a href="#" class="waves-effect waves-teal">KONTAK</a></li> <!-- Staf Riset -->
-      <li><a href="#" class="waves-effect waves-teal">MOU</a></li> <!-- Staf Riset -->
+      <li><a href="{{action('MouController@index')}}" class="waves-effect waves-teal">MOU</a></li> <!-- Staf Riset -->
       <li><a href="#" class="waves-effect waves-teal">BORANG</a></li> <!-- Staf Riset -->
       <li><a href="#" class="waves-effect waves-teal">REPOSITORY</a></li> <!-- Staf Riset -->
       <li><a href="#" class="waves-effect waves-teal">KELOLA REPOSITORY</a></li> <!-- Staf Riset -->
