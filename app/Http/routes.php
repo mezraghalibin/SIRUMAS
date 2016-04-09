@@ -11,15 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/master', function () {
     return view('master');
 });
 
+/**************** ROUTE BERANDA ****************/
+Route::get('/', 'BerandaController@index');
+Route::get('/detailpengumuman', 'BerandaController@detailPengumuman');
+
+/**************** ROUTE HIBAH ******************/
 Route::get('/hibah', 'HibahController@index');
+Route::get('/applyhibah', 'HibahController@applyHibah');
+Route::get('/kelolahibah', 'HibahController@kelolaHibah');
 
 Route::get('/pesan', 'PesanController@index');
 
