@@ -6299,24 +6299,26 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-bottom: 5em; } }
 
 html, body {
-  height: 100%;
-  width: 100%; }
+  height: 100%; }
 
-.nav-wrapper {
-  background: #e0e0e0; }
-  .nav-wrapper .brand-logo, .nav-wrapper img {
-    height: 64px; }
+.page-content {
+  padding-left: 15%;
+  top: 4.4em; }
+  .page-content .second-navbar {
+    height: 40px;
+    line-height: 40px; }
+  .page-content .nav-wrapper {
+    background: #FFFFFF; }
+    .page-content .nav-wrapper ul, .page-content .nav-wrapper li, .page-content .nav-wrapper a {
+      color: #333333; }
+  .page-content .container {
+    width: 95%; }
+    .page-content .container .header {
+      padding-top: 25px;
+      padding-bottom: 25px;
+      padding-bottom: 25px;
+      font-weight: bold;
+      font-size: 21px;
+      font-style: "Montserrat", sans-serif; }
 
-/*********** SIDEBAR **********/
-/* CSS declarations go here */
-.side-nav {
-  top: 4.25em;
-  width: 15%;
-  box-shadow: 0px 0px 0px;
-  border-right: 1px solid #000000; }
-  .side-nav li, .side-nav a {
-    height: 50px;
-    line-height: 50px;
-    font-size: 0.9em; }
-
-/*# sourceMappingURL=master.css.map */
+/*# sourceMappingURL=proposalhibah.css.map */

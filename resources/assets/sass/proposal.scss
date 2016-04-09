@@ -1,5 +1,5 @@
-//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap"; //IMPORT BUAT BOOTSTRAP JANGAN DIHAPUS
-@import "node_modules/materialize-css/sass/materialize.scss"; //INI UDAH BENER MANGGILNYA
+@import "node_modules/materialize-css/sass/materialize.scss";
+//@import "app/bower_components/font-awesome/scss/font-awesome.scss";
 
 $base-color1: #fff;
 $base-color2: #222;
@@ -8,12 +8,10 @@ $heading-font: 'Montserrat', sans-serif;
 $content-font: 'Josefin Slab', serif;
 
 html, body {
-	height: 100%;
-    width: 100%;
+    height: 100%;
 }
 
 .page-content {
-    //padding-left: 220px;
     padding-left: 15%;
     top: 4.4em;
     .second-navbar {
@@ -33,10 +31,126 @@ html, body {
         .header {
             padding-top: 25px;
             padding-bottom: 25px;
-        }
-        .daftar-content {
-            
+            padding-bottom: 25px;
+            font-weight: bold;
+            font-size: 21px;
+            font-style: $heading-font;
         }
 
+        #upload-revisi{
+            .upload-revisi-attach{
+                width: 40%;
+
+            }
+
+        }
+        
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

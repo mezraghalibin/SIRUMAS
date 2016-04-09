@@ -8,12 +8,10 @@ $heading-font: 'Montserrat', sans-serif;
 $content-font: 'Josefin Slab', serif;
 
 html, body {
-	height: 100%;
-    width: 100%;
+    height: 100%;
 }
 
 .page-content {
-    //padding-left: 220px;
     padding-left: 15%;
     top: 4.4em;
     .second-navbar {
@@ -33,10 +31,24 @@ html, body {
         .header {
             padding-top: 25px;
             padding-bottom: 25px;
+            font-size: 30px;
         }
-        .daftar-content {
-            
+
+        .row{
+            form{
+                .browse{
+                    input{
+                        color: black;
+                    }
+                }
+                
+            }
+
+
         }
+        .btn{
+                    background-color: black;
+                }
 
     }
 }
