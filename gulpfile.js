@@ -19,6 +19,21 @@ elixir(function(mix) {
     mix.sass('master.scss', 'public/assets/css/master.css');
 });
 
+/*********** BERANDA ***********/
+elixir(function(mix) {
+    mix.sass('beranda.scss', 'public/assets/css/beranda.css');
+});
+elixir(function(mix) {
+    mix.sass('detailPengumuman.scss', 'public/assets/css/detailPengumuman.css');
+});
+
+/*********** HIBAH *************/
 elixir(function(mix) {
     mix.sass('hibah.scss', 'public/assets/css/hibah.css');
+});
+elixir(function(mix) {
+    mix.sass('applyHibah.scss', 'public/assets/css/applyHibah.css');
+});
+elixir(function(mix) {
+    mix.sass('kelolaHibah.scss', 'public/assets/css/kelolaHibah.css');
 });
