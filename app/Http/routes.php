@@ -21,3 +21,12 @@ Route::get('/master', function () {
 
 Route::get('/hibah', 'HibahController@index');
 
+Route::get('/proposalhibah', 'ProposalHibahController@index');
+
+Route::get('/proposal', 'ProposalController@index');
+
+Route::get('/proposalupload', 'ProposalController@uploadRevisi');
+
+Route::get('/nilaiproposal', 'ProposalHibahController@nilaiProposal');
+
+Route::get('/sesuaikanproposal', 'ProposalHibahController@sesuaikanProposal');

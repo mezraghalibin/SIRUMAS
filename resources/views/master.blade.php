@@ -55,8 +55,8 @@
       <li><a href="#" class="waves-effect waves-teal">PANDUAN</a></li> <!-- Reviewer -->
       <li><a href="#" class="waves-effect waves-teal">HIBAH</a></li> <!-- Staf Riset & Dosen -->
       <li><a href="#" class="waves-effect waves-teal">PENGUMUMAN</a></li> <!-- Staf Riset -->
-      <li><a href="#" class="waves-effect waves-teal">PROPOSAL</a></li> <!-- Staf Riset -->
-      <li><a href="#" class="waves-effect waves-teal">PROPOSAL HIBAH</a></li> <!-- Staf Keuangan & Dosen-->
+      <li><a href='{{action('ProposalController@index')}}' class="waves-effect waves-teal">PROPOSAL</a></li> <!-- Dosen -->
+      <li><a href='{{action('ProposalHibahController@index')}}' class="waves-effect waves-teal">PROPOSAL HIBAH</a></li> <!-- Staf Keuangan & Riset-->
       <li><a href="#" class="waves-effect waves-teal">LAPORAN</a></li> <!-- Dosen & Staf Riset & Reviewer -->
       <li><a href="#" class="waves-effect waves-teal">KONTAK</a></li> <!-- Staf Riset -->
       <li><a href="#" class="waves-effect waves-teal">MOU</a></li> <!-- Staf Riset -->

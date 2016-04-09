@@ -22,3 +22,19 @@ elixir(function(mix) {
 elixir(function(mix) {
     mix.sass('hibah.scss', 'public/assets/css/hibah.css');
 });
+
+elixir(function(mix) {
+    mix.sass('proposalhibah.scss', 'public/assets/css/proposalhibah.css');
+});
+
+elixir(function(mix) {
+    mix.sass('proposal.scss', 'public/assets/css/proposal.css');
+});
+
+elixir(function(mix) {
+    mix.sass('nilaiproposal.scss', 'public/assets/css/nilaiproposal.css');
+});
+
+elixir(function(mix) {
+    mix.sass('sesuaikanproposal.scss', 'public/assets/css/sesuaikanproposal.css');
+});
