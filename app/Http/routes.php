@@ -21,3 +21,5 @@ Route::get('/master', function () {
 
 Route::get('/hibah', 'HibahController@index');
 
+Route::get('/pengumuman', 'PengumumanController@index');
+Route::get('/kelolapengumuman', 'PengumumanController@kelola');

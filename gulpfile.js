@@ -22,3 +22,7 @@ elixir(function(mix) {
 elixir(function(mix) {
     mix.sass('hibah.scss', 'public/assets/css/hibah.css');
 });
+
+elixir(function(mix) {
+    mix.sass('pengumuman.scss', 'public/assets/css/pengumuman.css');
+});
