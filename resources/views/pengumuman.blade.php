@@ -69,7 +69,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Hibah Riset FIA UI 2016</td>
+                    <td>Hibah Riset UI 2015</td>
                     <td>123456</td>
                     <td>Riset</td>
                     <td>Lorem ipsum dolor ....</td>

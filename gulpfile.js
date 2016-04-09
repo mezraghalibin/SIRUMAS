@@ -26,31 +26,27 @@ elixir(function(mix) {
 elixir(function(mix) {
     mix.sass('detailPengumuman.scss', 'public/assets/css/detailPengumuman.css');
 });
+/*********** EO BERANDA ***********/
 
 /*********** HIBAH *************/
 elixir(function(mix) {
     mix.sass('hibah.scss', 'public/assets/css/hibah.css');
 });
-<<<<<<< HEAD
 
-
-elixir(function(mix) {
-    mix.sass('pengumuman.scss', 'public/assets/css/pengumuman.css');
-});
-
-=======
->>>>>>> c3935214254484df199d5e1e34c92f087456637e
 elixir(function(mix) {
     mix.sass('applyHibah.scss', 'public/assets/css/applyHibah.css');
 });
+
 elixir(function(mix) {
     mix.sass('kelolaHibah.scss', 'public/assets/css/kelolaHibah.css');
 });
+/*********** EO HIBAH ***********/
 
 /*********** PROPOSAL *************/
 elixir(function(mix) {
     mix.sass('proposal.scss', 'public/assets/css/proposal.css');
 });
+/*********** EO PROPOSAL ***********/
 
 /*********** PROPOSAL HIBAH *************/
 elixir(function(mix) {
@@ -62,21 +58,17 @@ elixir(function(mix) {
 elixir(function(mix) {
     mix.sass('sesuaikanproposal.scss', 'public/assets/css/sesuaikanproposal.css');
 });
+/*********** EO PROPOSAL HIBAH ***********/
+
 
 /*********** PESAN & MOU ***********/
 elixir(function(mix) {
     mix.sass('pesan.scss', 'public/assets/css/pesan.css');
-<<<<<<< HEAD
 });
+/*********** EO PESAN & MOU ***********/
 
+/*********** PENGUMUMAN ***********/
 elixir(function(mix) {
-    mix.sass('applyHibah.scss', 'public/assets/css/applyHibah.css');
+    mix.sass('pengumuman.scss', 'public/assets/css/pengumuman.css');
 });
-elixir(function(mix) {
-    mix.sass('kelolaHibah.scss', 'public/assets/css/kelolaHibah.css');
-
-});
-=======
-});
->>>>>>> c3935214254484df199d5e1e34c92f087456637e
-
+/*********** EO PENGUMUMAN ***********/

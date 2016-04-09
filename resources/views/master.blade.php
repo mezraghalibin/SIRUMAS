@@ -56,7 +56,7 @@
       <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li>
       <li><a href="#" class="waves-effect waves-teal">PANDUAN</a></li>
       <li><a href="{{action('HibahController@index')}}" class="waves-effect waves-teal">HIBAH</a></li>
-      <li><a href="#" class="waves-effect waves-teal">PENGUMUMAN</a></li>
+      <li><a href="{{action('PengumumanController@index')}}" class="waves-effect waves-teal">PENGUMUMAN</a></li>
       <li><a href="{{action('ProposalController@index')}}" class="waves-effect waves-teal">PROPOSAL</a></li>
       <li><a href="{{action('ProposalHibahController@index')}}" class="waves-effect waves-teal">PROPOSAL HIBAH</a></li>
       <li><a href="{{action('LaporanController@index')}}" class="waves-effect waves-teal">LAPORAN</a></li>

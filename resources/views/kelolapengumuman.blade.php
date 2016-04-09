@@ -59,7 +59,7 @@
 			        <form class="col s12">
 			              <div class="row">
 			                <div class="input-field col s4">
-			                  <input value="Hibah Riset FIA UI 2016" id="judul_hibah" type="text" class="validate">
+			                  <input value="Hibah Riset UI 2015" id="judul_hibah" type="text" class="validate">
 			                  <label class="active" for="judul_hibah">Judul</label>
 			                </div>
 			                <div class="input-field col s4">
