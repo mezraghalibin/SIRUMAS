@@ -53,18 +53,18 @@
 
   <header>
     <ul id="nav-mobile" class="side-nav fixed">
-      <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li> <!-- ALL -->
-      <li><a href="#" class="waves-effect waves-teal">PANDUAN</a></li> <!-- Reviewer -->
-      <li><a href="{{action('HibahController@index')}}" class="waves-effect waves-teal">HIBAH</a></li> <!-- Staf Riset & Dosen -->
-      <li><a href="#" class="waves-effect waves-teal">PENGUMUMAN</a></li> <!-- Staf Riset -->
-      <li><a href='{{action('ProposalController@index')}}' class="waves-effect waves-teal">PROPOSAL</a></li> <!-- Dosen -->
-      <li><a href='{{action('ProposalHibahController@index')}}' class="waves-effect waves-teal">PROPOSAL HIBAH</a></li> <!-- Staf Keuangan & Riset-->
-      <li><a href="#" class="waves-effect waves-teal">LAPORAN</a></li> <!-- Dosen & Staf Riset & Reviewer -->
-      <li><a href="#" class="waves-effect waves-teal">KONTAK</a></li> <!-- Staf Riset -->
-      <li><a href="{{action('MouController@index')}}" class="waves-effect waves-teal">MOU</a></li> <!-- Staf Riset -->
-      <li><a href="#" class="waves-effect waves-teal">BORANG</a></li> <!-- Staf Riset -->
-      <li><a href="#" class="waves-effect waves-teal">REPOSITORY</a></li> <!-- Staf Riset -->
-      <li><a href="#" class="waves-effect waves-teal">KELOLA REPOSITORY</a></li> <!-- Staf Riset -->
+      <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li>
+      <li><a href="#" class="waves-effect waves-teal">PANDUAN</a></li>
+      <li><a href="{{action('HibahController@index')}}" class="waves-effect waves-teal">HIBAH</a></li>
+      <li><a href="#" class="waves-effect waves-teal">PENGUMUMAN</a></li>
+      <li><a href="{{action('ProposalController@index')}}" class="waves-effect waves-teal">PROPOSAL</a></li>
+      <li><a href="{{action('ProposalHibahController@index')}}" class="waves-effect waves-teal">PROPOSAL HIBAH</a></li>
+      <li><a href="{{action('LaporanController@index')}}" class="waves-effect waves-teal">LAPORAN</a></li>
+      <li><a href="#" class="waves-effect waves-teal">KONTAK</a></li>
+      <li><a href="{{action('MouController@index')}}" class="waves-effect waves-teal">MOU</a></li>
+      <li><a href="{{action('BorangController@index')}}" class="waves-effect waves-teal">BORANG</a></li>
+      <li><a href="#" class="waves-effect waves-teal">REPOSITORY</a></li>
+      <li><a href="#" class="waves-effect waves-teal">KELOLA REPOSITORY</a></li>
     </ul>
   </header>
   @yield('main_content')
