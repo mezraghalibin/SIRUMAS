@@ -32,7 +32,6 @@ Route::get('/pesan', 'PesanController@index');
 
 Route::get('/mou', 'MouController@index');
 
-
 Route::get('/proposalhibah', 'ProposalHibahController@index');
 
 Route::get('/proposal', 'ProposalController@index');
@@ -41,9 +40,8 @@ Route::get('/proposalupload', 'ProposalController@uploadRevisi');
 
 Route::get('/nilaiproposal', 'ProposalHibahController@nilaiProposal');
 
-<<<<<<< HEAD
 Route::get('/pengumuman', 'PengumumanController@index');
 Route::get('/kelolapengumuman', 'PengumumanController@kelola');
-=======
+
 Route::get('/sesuaikanproposal', 'ProposalHibahController@sesuaikanProposal');
->>>>>>> 77b2f6263249212a543caf2708f88181a2b12ae6
+

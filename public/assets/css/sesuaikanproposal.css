@@ -6315,6 +6315,10 @@ html, body {
     width: 95%; }
     .page-content .container .header {
       padding-top: 25px;
-      padding-bottom: 25px; }
+      padding-bottom: 25px;
+      padding-bottom: 25px;
+      font-weight: bold;
+      font-size: 21px;
+      font-style: "Montserrat", sans-serif; }
 
-/*# sourceMappingURL=pengumuman.css.map */
+/*# sourceMappingURL=sesuaikanproposal.css.map */
