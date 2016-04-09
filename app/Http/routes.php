@@ -41,4 +41,18 @@ Route::get('/proposalupload', 'ProposalController@uploadRevisi');
 
 Route::get('/nilaiproposal', 'ProposalHibahController@nilaiProposal');
 
+<<<<<<< HEAD
 Route::get('/sesuaikanproposal', 'ProposalHibahController@sesuaikanProposal');
+=======
+Route::get('/borang', 'BorangController@index');
+
+Route::get('/laporan', 'LaporanController@index');
+
+Route::get('/laporankemajuan', 'LaporanController@laporankemajuan');
+
+Route::get('/uploadkemajuan', 'LaporanController@uploadkemajuan');
+
+Route::get('/uploadlaporanberhibah', 'LaporanController@uploadlaporanberhibah');
+
+Route::get('/uploadlaporantdkberhibah', 'LaporanController@uploadlaporantdkberhibah');
+>>>>>>> 5a34c0b9fc7e259885ef15b127a60e19a9682084
