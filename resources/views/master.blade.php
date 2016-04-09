@@ -32,13 +32,14 @@
 </head>
 <body>
 <!-- HEADER -->
-  <nav>
+  <div class="navbar-fixed">
+  <nav class="z-depth-0">
     <div class="nav-wrapper">
       <a href="#" class="brand-logo"><img class="responsive-img" src="/images/FIA_UI.png" alt="Logo"></a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#">PORTAL</a></li>
-        <li><a href="#">PESAN</a></li>
+        <li><a href="{{action('PesanController@index')}}">PESAN</a></li>
         <li><a href="#">LOGOUT</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
@@ -48,42 +49,24 @@
       </ul>
     </div>
   </nav>
+  </div>
 
   <header>
     <ul id="nav-mobile" class="side-nav fixed">
-      <li><a href="#" class="waves-effect waves-teal">BERANDA</a></li> <!-- ALL -->
+      <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li> <!-- ALL -->
       <li><a href="#" class="waves-effect waves-teal">PANDUAN</a></li> <!-- Reviewer -->
-      <li><a href="#" class="waves-effect waves-teal">HIBAH</a></li> <!-- Staf Riset & Dosen -->
+      <li><a href="{{action('HibahController@index')}}" class="waves-effect waves-teal">HIBAH</a></li> <!-- Staf Riset & Dosen -->
       <li><a href="#" class="waves-effect waves-teal">PENGUMUMAN</a></li> <!-- Staf Riset -->
       <li><a href='{{action('ProposalController@index')}}' class="waves-effect waves-teal">PROPOSAL</a></li> <!-- Dosen -->
       <li><a href='{{action('ProposalHibahController@index')}}' class="waves-effect waves-teal">PROPOSAL HIBAH</a></li> <!-- Staf Keuangan & Riset-->
       <li><a href="#" class="waves-effect waves-teal">LAPORAN</a></li> <!-- Dosen & Staf Riset & Reviewer -->
       <li><a href="#" class="waves-effect waves-teal">KONTAK</a></li> <!-- Staf Riset -->
-      <li><a href="#" class="waves-effect waves-teal">MOU</a></li> <!-- Staf Riset -->
+      <li><a href="{{action('MouController@index')}}" class="waves-effect waves-teal">MOU</a></li> <!-- Staf Riset -->
       <li><a href="#" class="waves-effect waves-teal">BORANG</a></li> <!-- Staf Riset -->
       <li><a href="#" class="waves-effect waves-teal">REPOSITORY</a></li> <!-- Staf Riset -->
       <li><a href="#" class="waves-effect waves-teal">KELOLA REPOSITORY</a></li> <!-- Staf Riset -->
     </ul>
   </header>
-
-  {{-- <!-- SIDEBAR -->
-  <div class="wrapper">
-    <div class="sidebar-wrapper shadow-nav-side">
-      <ul class="sidebar-nav sidebar-nav-top">
-        <li>A</li>
-        <li class="top-menu"><a href="#">BERANDA</a></li> <!-- ALL -->
-        <li><a href="#">PANDUAN</a></li> <!-- Reviewer -->
-        <li><a href="#">HIBAH</a></li> <!-- Staf Riset & Dosen -->
-        <li><a href="#">PENGUMUMAN</a></li> <!-- Staf Riset -->
-        <li><a href="#">PROPOSAL</a></li> <!-- Staf Riset -->
-        <li><a href="#">PROPOSAL HIBAH</a></li> <!-- Staf Keuangan & Dosen-->
-        <li><a href="#">LAPORAN</a></li> <!-- Dosen & Staf Riset & Reviewer -->
-        <li><a href="#">KONTAK</a></li> <!-- Staf Riset -->
-        <li><a href="#">MOU</a></li> <!-- Staf Riset -->
-        <li><a href="#">BORANG</a></li> <!-- Staf Riset -->
-      </ul>
-    </div>
-  </div> --}}
   @yield('main_content')
 </body>
 </html>

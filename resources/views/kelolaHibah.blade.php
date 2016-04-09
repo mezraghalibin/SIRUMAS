@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>HIBAH</title>
+  <title>KELOLA HIBAH</title>
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="assets/css/hibah.css">
+    <link rel="stylesheet" href="assets/css/kelolaHibah.css">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -25,27 +25,6 @@
 
     <script>
     $(document).ready(function(){
-        $("#kelola-hibah").hide(); //hide page kelola hibah
-        $("#buat-hibah").hide(); //hide page buat hibah
-
-        $("#daftar").click(function(){
-            $("#daftar-hibah").fadeIn(500);
-            $("#kelola-hibah").hide(); //hide page kelola hibah
-            $("#buat-hibah").hide(); //hide page buat hibah
-        });
-
-        $("#kelola").click(function(){
-            $("#kelola-hibah").fadeIn(500);
-            $("#daftar-hibah").hide(); //hide page daftar hibah
-            $("#buat-hibah").hide(); //hide page buat hibah
-        });
-
-        $("#buat").click(function(){
-            $("#buat-hibah").fadeIn(500);
-            $("#daftar-hibah").hide(); //hide page daftar hibah
-            $("#kelola-hibah").hide(); //hide page kelola hibah
-        });
-
         //DATE PICKER
         $('.datepicker').pickadate({
           selectMonths: true, // Creates a dropdown to control month
@@ -60,100 +39,19 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="daftar"><a href="#">Daftar Hibah</a></li>
-          <li id="kelola"><a href="#">Kelola Hibah</a></li>
-          <li id="buat"><a href="#">Buat Hibah</a></li>
+          <li id="kelola"><a href="{{action('HibahController@index')}}">BACK</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
         </ul>
       </div>
     </nav>
-    
-    <!-- CONTENT DAFTAR HIBAH -->
-    <div class="container">
-      <div id="daftar-hibah">
-        <div class="header">DAFTAR HIBAH</div>
-          <div class="daftar-content">
-            <table class="highlight centered">
-              <tbody>
-                <tr>
-                  <td>Hibah Riset Univeristas Indonesia Tahun 2016</td>
-                  <td><a href="{{action('HibahController@applyHibah')}}" class="waves-effect waves-light btn">Info & Daftar</a></td>
-                </tr>
-                <tr>
-                  <td>Hibah Riset Bank Indonesia Tahun 2015</td>
-                  <td><a href="{{action('HibahController@applyHibah')}}" class="waves-effect waves-light btn">Info & Daftar</a></td>
-                </tr>
-                <tr>
-                  <td>Hibah Pengmas Bank Indonesia Tahun 2015</td>
-                  <td><a href="{{action('HibahController@applyHibah')}}" class="waves-effect waves-light btn">Info & Daftar</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-      </div>
-    </div>
-
-    <!-- CONTENT KELOLA HIBAH -->
-    <div class="container">
-      <div id="kelola-hibah">
-        <div class="header">KELOLA HIBAH</div>
-          <div class="kelola-content">
-            <table class="highlight centered">
-              <thead>
-                <tr>
-                    <th data-field="id">Nama Hibah</th>
-                    <th data-field="name">Kategori</th>
-                    <th data-field="price">Pemberi</th>
-                    <th data-field="price">Besar Dana</th>
-                    <th data-field="price">Periode</th>
-                    <th data-field="price"></th>
-                    <th data-field="price"></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>Universitas Indonesia Hibah</td>
-                  <td>Hibah</td>
-                  <td>Garuda Indonesia</td>
-                  <td>RP. 150.000.000</td>
-                  <td>11/04/2015 - 11/05/2016</td>
-                  <td><a href="{{action('HibahController@kelolaHibah')}}"><i class="material-icons right">mode_edit</i></a></td>
-                  <td><i class="material-icons right">delete</i></td>
-                </tr>
-                <tr>
-                  <td>ABCDEFGHIJK Hibah</td>
-                  <td>Hibah</td>
-                  <td>Garuda Indonesia</td>
-                  <td>RP. 150.000.000</td>
-                  <td>11/04/2015 - 11/05/2016</td>
-                  <td><a href="{{action('HibahController@kelolaHibah')}}"><i class="material-icons right">mode_edit</i></a></td>
-                  <td><i class="material-icons right">delete</i></td>
-                </tr>
-                <tr>
-                  <td>ULALALALALA Hibah</td>
-                  <td>Hibah</td>
-                  <td>Garuda Indonesia</td>
-                  <td>RP. 150.000.000</td>
-                  <td>11/04/2015 - 11/05/2016</td>
-                  <td><a href="{{action('HibahController@kelolaHibah')}}"><i class="material-icons right">mode_edit</i></a></td>
-                  <td><i class="material-icons right">delete</i></td>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-      </div>
-    </div>
-      <!-- END OF CONTENT KELOLA HIBAH -->
 
     <!-- CONTENT BUAT HIBAH -->
     <div class="container">
-      <div id="buat-hibah">
-        <div class="header">BUAT HIBAH</div>
-        <div class="buat-content">
+      <div id="kelola-hibah">
+        <div class="header">KELOLA HIBAH</div>
+        <div class="kelola-content">
           <div class="row">
             <form class="col s12">
             <!-- FIRST ROW = CATEGORY, TIME START, TIME END -->
