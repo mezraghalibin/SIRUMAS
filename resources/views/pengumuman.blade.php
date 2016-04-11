@@ -53,7 +53,7 @@
       <!-- CONTENT KELOLA PENGUMUMAN -->
       <div class="container">        
         <div id="kelola-pengumuman">
-          <div class="header">KELOLA PENGUMUMAN</div>
+          <div class="header"><h4>Kelola Pengumuman</h4></div>
             <div class="kelola-content">
               <table class="highlight centered">  
                 <thead>

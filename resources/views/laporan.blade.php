@@ -85,7 +85,7 @@
     <!-- CONTENT LAPORAN BERHIBAH -->
     <div class="container">
       <div id="laporan-berhibah">
-        <div class="header">PILIH HIBAH</div>
+        <div class="header"><h4>Pilih Hibah</h4></div>
           <div class="berhibah-content">
             <table class="highlight centered">
              <tbody>
@@ -115,7 +115,7 @@
     <!-- CONTENT tidak-hibah HIBAH -->
     <div class="container">
       <div id="laporan-tidak-berhibah">
-      <div class="header">LAPORAN AKHIR</div>
+      <div class="header">Laporan Akhir</div>
           <div class="kemajuan-content">
            <table class="highlight centered">
               <thead>
@@ -162,7 +162,7 @@
 
     <div class="container">
       <div id="upload-laporan-kemajuan">
-        <div class="header">JUDUL PROPOSAL TERKAIT</div>
+        <div class="header">Judul Proposal Terkait</div>
           <div class="kemajuan-content">
            <table class="highlight centered">
               <thead>

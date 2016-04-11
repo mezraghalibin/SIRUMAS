@@ -79,7 +79,7 @@
         <div id="hibah-riset">
 
         <!-- PILIH HIBAH -->
-        <div class="header">Pilih Hibah Riset</div>
+        <div class="header"><h4>Pilih Hibah Riset</h4></div>
         <div class="hibah-riset-content">
             <table id="list-hibah-riset" class="highlight centered">
             <tbody>

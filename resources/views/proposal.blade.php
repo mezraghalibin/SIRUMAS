@@ -66,7 +66,7 @@
         <div id="daftar-proposal">
 
             <!-- TABLE DAFTAR PROPOSAL-->
-              <div class="header">Daftar Proposal</div>
+              <div class="header"><h4>Daftar Proposal</h4></div>
               <div class="daftar-proposal-content">
                 <table class="highlight centered">
                   <thead>

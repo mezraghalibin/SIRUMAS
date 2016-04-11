@@ -60,7 +60,7 @@
       <!-- CONTENT UPLOAD MOU-->
       <div class="container">
         <div id="upload-mou">
-          <div class="header">Upload MoU</div>
+          <div class="header"><h4>Upload MoU</h4></div>
           <div class="kelola-content">
               <div class="row">
               <form class="col s12">
@@ -79,8 +79,8 @@
 
               <form action="#">
                 <div class="file-field input-field">
-                  <div class="btn">
-                    <span>File</span>
+                  <div class="btn card-panel red darken-2">
+                    <span class="white-text">File</span>
                     <input type="file">
                   </div>
                   <div class="file-path-wrapper">
@@ -88,7 +88,8 @@
                   </div>
                 </div>
              </form>
-             <button class="btn waves-effect waves-light" type="submit" name="action">SIMPAN
+             <br>
+             <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">SIMPAN</span>
              </button>
           </div>
         </div>

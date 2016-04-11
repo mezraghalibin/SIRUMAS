@@ -59,7 +59,7 @@
       <!-- CONTENT DAFTAR PESAN-->
       <div class="container">
         <div id="kelola-pesan">
-          <div class="header">DAFTAR PESAN</div>
+          <div class="header"><h4>Daftar Pesan</h4></div>
           <div class="kelola-content">
             <table class="highlight centered">
               <thead>

@@ -8,6 +8,7 @@
     <!-- CSS FOR PAGE HIBAH -->
     <link rel="stylesheet" href="assets/css/hibah.css">
     <link rel="stylesheet" href="assets/css/borang.css">
+    <!--<link rel="stylesheet" href="assets/css/buatButton.css">-->
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -44,7 +45,7 @@
     <!-- CONTENT BUAT BORANG -->
     <div class="container">
       <div id="kelola-hibah">
-        <div class="header">BUAT BORANG</div>
+        <div class="header"><h4>Buat Borang</h4></div>
           <div class="kelola-content">
             <table class="highlight centered">
               <thead>
@@ -112,7 +113,7 @@
     </div>
       <!-- END OF CONTENT KELOLA HIBAH -->
 <div align="center">
-<a class="waves-effect waves-light btn">SIMPAN BORANG</a>
+<a class="waves-effect waves-light btn, card-panel red darken-2"><span class="white-text">SIMPAN BORANG</span></a>
 </div>
 
   </div>

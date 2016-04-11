@@ -76,7 +76,7 @@
     <!-- END of SECOND NAVBAR -->
 
     <div class="container">
-    <div class="header">Penyesuaian Dana Hibah Riset</div>
+    <div class="header"><h4>Penyesuaian Dana Hibah Riset</h4></div>
      <!-- display pdf-->
      <div class="row">
      <div class="col s6">
@@ -93,7 +93,7 @@
                <textarea id="textarea1" class="materialize-textarea" length="120"></textarea>
             <label for="textarea1">Isi penyesuaian dana..</label>
             <br>
-             <button class="btn waves-effect waves-light" type="submit" name="action">Kirim
+             <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Kirim</span>
                  <i class="material-icons right">send</i>
                  </button>
               

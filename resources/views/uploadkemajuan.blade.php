@@ -62,7 +62,7 @@
     <!-- CONTENT LAPORAN kemajuan -->
     <div class="container">
       <div id="laporan-kemajuan">
-        <div class="header">UPLOAD LAPORAN</div>
+        <div class="header">Upload Laporan</div>
           <div class="kemajuan-content">
           <div class="upload-revisi-attach">
 

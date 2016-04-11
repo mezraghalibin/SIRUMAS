@@ -45,7 +45,7 @@
     <!-- CONTENT BUAT BORANG -->
     <div class="container">
       <div id="kelola-hibah">
-        <div class="header">UPLOAD LAPORAN AKHIR</div>
+        <div class="header"><h4>Upload Laporan Akhir</h4></div>
           <div class="kelola-content">
                    <table class="highlight centered">
               <thead>

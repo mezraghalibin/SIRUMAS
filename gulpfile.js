@@ -19,6 +19,13 @@ elixir(function(mix) {
     mix.sass('master.scss', 'public/assets/css/master.css');
 });
 
+/*********** WARNA-WARNI ***********/
+elixir(function(mix) {
+    mix.sass('buatButton.scss', 'public/assets/css/buatButton.css');
+});
+/*********** EO WARNA-WARNI ***********/
+
+
 /*********** BERANDA ***********/
 elixir(function(mix) {
     mix.sass('beranda.scss', 'public/assets/css/beranda.css');

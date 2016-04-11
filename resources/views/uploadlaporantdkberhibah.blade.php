@@ -45,7 +45,7 @@
     <!-- CONTENT BUAT BORANG -->
     <div class="container">
       <div id="kelola-hibah">
-        <div class="header">UPLOAD LAPORAN AKHIR</div>
+        <div class="header"><h4>Upload Laporan Akhir</h4></div>
           <div class="kelola-content">
  <select class="browser-default" style="width:300px">
                         <option disabled selected>Kategori</option>
@@ -83,8 +83,8 @@
   </div>
   <form action="#">
               <div class="file-field input-field">
-                <div class="btn">
-                  <span>File</span>
+                <div class="btn card-panel red darken-2">
+                  <span class="white-text">File</span>
                   <input type="file" multiple>
                 </div>
                 <div class="file-path-wrapper">
@@ -92,8 +92,9 @@
                 </div>
               </div>
             </form>
+            <br>
             <div align="left">
-<a class="waves-effect waves-light btn">AJUKAN LAPORAN AKHIR</a>
+<a class="waves-effect waves-light btn card-panel red darken-2"><span class="white-text">AJUKAN LAPORAN AKHIR</a>
 <i class="material-icons right">send</i>
 </div>
 

@@ -76,7 +76,7 @@
     <!-- END of SECOND NAVBAR -->
 
     <div class="container">
-    <div class="header">Nilai Proposal</div>
+    <div class="header"><h4>Nilai Proposal</h4></div>
      <!-- display pdf-->
      <div class="row">
      <div class="col s6">
@@ -138,7 +138,7 @@
                 </tr>
               </tbody>
               </table>
-               <button class="btn waves-effect waves-light" type="submit" name="action">Simpan 
+               <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Simpan</span> 
                  <i class="material-icons right">send</i>
                  </button>
       </div>
