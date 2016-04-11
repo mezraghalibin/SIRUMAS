@@ -16,7 +16,6 @@ class CreateUsersTable extends Migration
             $table->string('username', 25);;
             $table->primary('username');
             $table->string('nama', 35);
-            $table->string('password');
             $table->string('no_pengenal', 20);
             $table->string('role', 25);
         });

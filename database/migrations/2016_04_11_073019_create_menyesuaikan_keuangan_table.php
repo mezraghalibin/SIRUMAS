@@ -14,7 +14,7 @@ class CreateMenyesuaikanKeuanganTable extends Migration
     {
         Schema::create('menyesuaikan_keuangan', function (Blueprint $table) {
             $table->string('staf_keuangan',25);
-            $table->integer('id_proposal',10);
+            $table->integer('id_proposal')->unsigned();
             $table->timestamps('tgl_komentar');
             $table->text('komentar');
             $table->primary(['staf_keuangan','id_proposal']);
