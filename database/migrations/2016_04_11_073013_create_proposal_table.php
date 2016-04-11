@@ -24,8 +24,7 @@ class CreateProposalTable extends Migration
             $table->string('status', 20);
             $table->string('judul_proposal', 50);
             $table->text('file');
-            $table->integer('id_laporan',10);
-            $table->integer('id_hibah',10);
+            $table->integer('id_hibah')->unsigned();
             $table->foreign('dosen')->references('username')->on('users');
             $table->foreign('id_hibah')->references('id_hibah')->on('hibah');
         });

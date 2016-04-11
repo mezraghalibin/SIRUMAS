@@ -19,7 +19,7 @@ class CreateLaporanTable extends Migration
             $table->string('pengumpul', 30);
             $table->string('judul', 50);
             $table->string('dosen', 25);
-            $table->integer('id_proposal', 10)->nullable();
+            $table->integer('id_proposal')->nullable()->unsigned();
             $table->foreign('dosen')->references('username')->on('users');
             $table->foreign('id_proposal')->references('id_proposal')->on('proposal');
         });

@@ -122,21 +122,19 @@
                   <td>11/04/2015 - 11/05/2016</td>
                   <td><a href="{{action('HibahController@kelolaHibah')}}"><i class="material-icons right">mode_edit</i></a></td>
                   <td>
-                    <!-- Modal Trigger  -->
-                    <i data-target="modal1" class="material-icons right modal-trigger">
-                      <!-- Modal Structure -->
-                      <div id="modal1" class="modal">
-                        <div class="modal-content">
-                          <h4>Hapus Pengumuman?</h4>
-                          <p>Pengumuman akan dihapus</p>
-                        </div>
-                        <div class="modal-footer">
-                          <a href="#!" class=" modal-action modal-close btn-flat">Ya</a>
-                          <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
-                        </div>
+                    <!-- Modal Trigger -->
+                    <button data-target="modal1" class="btn-flat btn modal-trigger">Hapus</button>
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal">
+                      <div class="modal-content">
+                        <h4>Hapus Pengumuman?</h4>
+                        <p>Pengumuman akan dihapus</p>
                       </div>
-                      delete
-                    </i>
+                      <div class="modal-footer">
+                        <a href="#!" class=" modal-action modal-close btn-flat">Ya</a>
+                        <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
+                      </div>
+                    </div>
                   </td>
                 </tr>
                 <tr>
@@ -238,7 +236,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>
   <script>
     $(document).ready(function() {
-        $('select').material_select();
+        $('select').material_select();  //FOR FORM SELECT
+        $('.modal-trigger').leanModal(); //FOR MODAL
     });
   </script>
   @stop

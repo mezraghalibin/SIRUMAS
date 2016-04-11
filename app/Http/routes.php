@@ -20,6 +20,11 @@ Route::get('/master', function () {
 });
 
 /**************** ROUTE BERANDA ****************/
+Route::get('/login', 'SSOController@index');
+Route::get('/logout', 'SSOController@logout');
+/**************** EO ROUTE BERANDA ****************/
+
+/**************** ROUTE BERANDA ****************/
 Route::get('/', 'BerandaController@index');
 Route::get('/detailpengumuman', 'BerandaController@detailPengumuman');
 /**************** EO ROUTE BERANDA ****************/
