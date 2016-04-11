@@ -121,7 +121,23 @@
                   <td>RP. 150.000.000</td>
                   <td>11/04/2015 - 11/05/2016</td>
                   <td><a href="{{action('HibahController@kelolaHibah')}}"><i class="material-icons right">mode_edit</i></a></td>
-                  <td><i class="material-icons right">delete</i></td>
+                  <td>
+                    <!-- Modal Trigger  -->
+                    <i data-target="modal1" class="material-icons right modal-trigger">
+                      <!-- Modal Structure -->
+                      <div id="modal1" class="modal">
+                        <div class="modal-content">
+                          <h4>Hapus Pengumuman?</h4>
+                          <p>Pengumuman akan dihapus</p>
+                        </div>
+                        <div class="modal-footer">
+                          <a href="#!" class=" modal-action modal-close btn-flat">Ya</a>
+                          <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
+                        </div>
+                      </div>
+                      delete
+                    </i>
+                  </td>
                 </tr>
                 <tr>
                   <td>ABCDEFGHIJK Hibah</td>
