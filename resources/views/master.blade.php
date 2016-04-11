@@ -40,7 +40,7 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="#">PORTAL</a></li>
         <li><a href="{{action('PesanController@index')}}">PESAN</a></li>
-        <li><a href="#">LOGOUT</a></li>
+        <li><a href="{{action('SSOController@logout')}}">LOGOUT</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="#">PORTAL</a></li>
