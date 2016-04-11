@@ -13,9 +13,9 @@ class CreateFileLampiranTable extends Migration
     public function up()
     {
         Schema::create('file_lampiran', function (Blueprint $table) {
-            $table->integer('id_pengumuman');
-            $table->text('file');
-            $table->foreign('id_pengumuman')->references('id_pengumuman')->on('pengumuman');
+            $table->integer('id_pengumuman')->unsigned();
+            $table->string('file');
+            $table->foreign('id_pengumuman')->references('id_pengumuman')->on('pengumuman')->onDelete('cascade');
             $table->primary(array('id_pengumuman','file'));
         });
     }

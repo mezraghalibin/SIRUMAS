@@ -19,8 +19,8 @@ class CreateHibahTable extends Migration
             $table->string('kategori_hibah', 30);
             $table->string('besar_dana', 15);
             $table->string('pemberi', 30);  
-            $table->timestamps('tgl_awal');
-            $table->timestamps('tgl_akhir');
+            $table->timestamp('tgl_awal');
+            $table->timestamp('tgl_akhir');
             $table->string('staf_riset',25);
             $table->foreign('staf_riset')->references('username')->on('users');
         });

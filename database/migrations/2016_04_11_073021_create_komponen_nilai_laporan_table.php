@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMenilaiLaporanTable extends Migration
+class CreateKomponenNilaiLaporanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,14 @@ class CreateMenilaiLaporanTable extends Migration
      */
     public function up()
     {
-        Schema::create('menilai_laporan', function (Blueprint $table) {
-            $table->integer('id_laporan',10);
+        Schema::create('komponen_nilai_laporan', function (Blueprint $table) {
+            $table->integer('id_laporan')->unsigned();
             $table->string('reviewer',25);
             $table->primary(['id_laporan','reviewer']);
             $table->foreign('id_laporan')->references('id_laporan')->on('laporan');
             $table->foreign('reviewer')->references('username')->on('users');
+            $table->text('nama_komp');
+            $table->float('nilai',25);
         });
     }
 
@@ -28,6 +30,6 @@ class CreateMenilaiLaporanTable extends Migration
      */
     public function down()
     {
-        Schema::drop('menilai_laporan');
+        Schema::drop('komponen_nilai_laporan');
     }
 }

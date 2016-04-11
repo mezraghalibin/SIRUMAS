@@ -13,7 +13,7 @@ class CreateKomponenNilaiProposalTable extends Migration
     public function up()
     {
         Schema::create('komponen_nilai_proposal', function (Blueprint $table) {
-            $table->integer('id_proposal',10);
+            $table->integer('id_proposal')->unsigned();
             $table->string('staf_riset',25);
             $table->primary(['id_proposal','staf_riset']);
             $table->foreign('id_proposal')->references('id_proposal')->on('proposal');

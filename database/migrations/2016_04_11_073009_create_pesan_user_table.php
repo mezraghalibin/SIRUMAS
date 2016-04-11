@@ -13,9 +13,8 @@ class CreatePesanUserTable extends Migration
     public function up()
     {
         Schema::create('pesan_user', function (Blueprint $table) {
-            $table->string('username', 25);
+            $table->string('username', 25)->unique();
             $table->increments('id_pesan');
-            $table->primary('username','id_pesan');
             $table->string('penerima', 25);
             $table->boolean('isread');
             $table->string('subjek', 30);
