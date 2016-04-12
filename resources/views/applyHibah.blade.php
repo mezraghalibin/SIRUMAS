@@ -56,7 +56,7 @@
     <!-- CONTENT INFORMASI HIBAH -->
     <div class="container">
       <div id="daftar-hibah">
-        <div class="header">HIBAH RISET/PENGMAS XXX</div>
+        <div class="header"><h4>Hibah Riset/Pengmas XXX</h4></div>
           <div class="daftar-content">
             <div class="row">
               <div class="col s4">
@@ -114,7 +114,7 @@
     </div>
 
     <div class="container center-align">
-      <button class="btn waves-effect waves-light" id="apply">Apply Hibah</button>
+      <button class="btn waves-effect waves-light card-panel red darken-2" id="apply" ><span class="white-text">Apply Hibah</span></button>
     </div>
 
     <!-- CONTENT APPLY HIBAH -->
@@ -158,8 +158,8 @@
 
               <form action="#">
                 <div class="file-field input-field col s6 offset-s3">
-                  <div class="btn">
-                    <span>File</span>
+                  <div class="btn card-panel red darken-2">
+                    <span class="white-text">File</span>
                     <input type="file">
                   </div>
                   <div class="file-path-wrapper">
@@ -169,8 +169,7 @@
               </form>
 
               <div class="center-align">
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                  <i class="material-icons right">send</i>
+                <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Submit</span><i class="material-icons right">send</i>
                 </button>
               </div>
             </form>

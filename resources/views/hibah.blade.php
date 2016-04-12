@@ -73,21 +73,21 @@
     <!-- CONTENT DAFTAR HIBAH -->
     <div class="container">
       <div id="daftar-hibah">
-        <div class="header">DAFTAR HIBAH</div>
+        <div class="header"><h4>Daftar Hibah</h4></div>
           <div class="daftar-content">
             <table class="highlight centered">
               <tbody>
                 <tr>
                   <td>Hibah Riset Univeristas Indonesia Tahun 2016</td>
-                  <td><a href="{{action('HibahController@applyHibah')}}" class="waves-effect waves-light btn">Info & Daftar</a></td>
+                  <td><a href="{{action('HibahController@applyHibah')}}" class="waves-effect waves-light btn card-panel red darken-2"><span class="white-text">Info & Daftar</span></a></td>
                 </tr>
                 <tr>
                   <td>Hibah Riset Bank Indonesia Tahun 2015</td>
-                  <td><a href="{{action('HibahController@applyHibah')}}" class="waves-effect waves-light btn">Info & Daftar</a></td>
+                  <td><a href="{{action('HibahController@applyHibah')}}" class="waves-effect waves-light btn card-panel red darken-2"><span class="white-text">Info & Daftar</span></a></td>
                 </tr>
                 <tr>
                   <td>Hibah Pengmas Bank Indonesia Tahun 2015</td>
-                  <td><a href="{{action('HibahController@applyHibah')}}" class="waves-effect waves-light btn">Info & Daftar</a></td>
+                  <td><a href="{{action('HibahController@applyHibah')}}" class="waves-effect waves-light btn card-panel red darken-2"><span class="white-text">Info & Daftar</span></a></td>
                 </tr>
               </tbody>
             </table>

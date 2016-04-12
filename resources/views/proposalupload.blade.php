@@ -62,7 +62,7 @@
         <div id="daftar-proposal">
 
             <!-- TABLE DAFTAR PROPOSAL-->
-              <div class="header">Daftar Proposal</div>
+              <div class="header"><h4>Daftar Proposal</h4></div>
               <div class="daftar-proposal-content">
                 <table class="highlight centered">
                   <thead>
@@ -96,15 +96,15 @@
       <!-- CONTENT UPLOAD REVISI -->
       <div class="container">
         <div id="upload-revisi">
-            <div class="header">Upload Revisi Proposal Hibah</div>
+            <div class="header"><h4>Upload Revisi Proposal Hibah</h4></div>
              
             <!--attach file -->
           <div class="upload-revisi-attach">
 
             <form action="#">
               <div class="file-field input-field">
-                <div class="btn">
-                  <span>File</span>
+                <div class="btn card-panel red darken-2">
+                  <span class="white-text">File</span>
                   <input type="file">
                 </div>
                 <div class="file-path-wrapper">
@@ -113,8 +113,8 @@
               </div>
             </form>
       
-
-                 <button class="btn waves-effect waves-light" type="submit" name="action">Ajukan Proposal 
+                  <br>
+                 <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Ajukan Proposal</span>
                  <i class="material-icons right">send</i>
                  </button>
                  </form>

@@ -50,7 +50,7 @@
     <!-- CONTENT BUAT HIBAH -->
     <div class="container">
       <div id="kelola-hibah">
-        <div class="header">KELOLA HIBAH</div>
+        <div class="header"><h4>Kelola Hibah</h4></div>
         <div class="kelola-content">
           <div class="row">
             <form class="col s12">
@@ -105,7 +105,7 @@
                 </div>
               </div>
               
-              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+              <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Submit</span>
                 <i class="material-icons right">send</i>
               </button>
             </form>

@@ -63,7 +63,7 @@
     <!-- CONTENT LAPORAN kemajuan -->
     <div class="container">
       <div id="laporan-kemajuan">
-        <div class="header">LAPORAN KEMAJUAN</div>
+        <div class="header"><h4>Laporan Kemajuan</h4></div>
           <div class="kemajuan-content">
            <table class="highlight centered">
               <thead>
