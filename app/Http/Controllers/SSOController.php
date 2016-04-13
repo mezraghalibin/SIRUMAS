@@ -59,30 +59,36 @@ class SSOController extends Controller
 
         //GET USER SIRUMAS SPECIFIC ROLE
         foreach ($userSIRUMAS as $key) {
-            $parse = get_object_vars($key);
-            $_SESSION['role'] = $parse['spesifik_role'];    
-            //echo $parse['spesifik_role'];
+            $user = get_object_vars($key);
+            $_SESSION['username']       = $user['username'];
+            $_SESSION['name']           = $user['nama'];
+            $_SESSION['role']           = $user['role'];      
+            $_SESSION['spesifik_role']  = $user['spesifik_role'];    
         }
         
-        $_SESSION['login'] = TRUE; //login counter
-        return redirect('/');
+        $_SESSION['login'] = '1'; //TRUE IF USER HAS LOGGED IN
+        return redirect('/'); //REDIRECCT TO HOMEPAGE
     }
 	
+    //FUNCTION UNTUK MEMBUAT USER LOGOUT DARI SISTEM
 	public function logout()
     {		
     	session_destroy(); //REMOVE ALL SESSION
         session_start();
-        $_SESSION['login'] = FALSE;
+        $_SESSION['login'] = ''; //MAKE LOGIN COUNTER EMPTY
         SSO::logout(); // LOGOUT FROM SSO
         return view ('login'); //REDIRECT TO LOGIN PAGE
     }
 
+    //FUCNTION UNTUK CHECK USER UDAH LOGGEDIN ATAU BELUM
     public function loggedIn() {
-        if (isset($_SESSION['login']) && !empty($_SESSION['login'])) {
-            return true;
+        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) 
+        {
+            return TRUE;
         }
-        else {
-            return false;
+        else
+        {
+            return FALSE;
         }
     }
 }
