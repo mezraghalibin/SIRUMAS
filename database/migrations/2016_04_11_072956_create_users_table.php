@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('nama', 35);
             $table->string('no_pengenal', 20);
             $table->string('role', 25);
+            $table->string('spesifik_role',25);
         });
     }
 

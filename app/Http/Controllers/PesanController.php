@@ -13,6 +13,7 @@ class PesanController extends Controller
 		//CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+       // $users = users::findAll(); //dptin semua
         if($check) {
             return view('pesan');
         }
