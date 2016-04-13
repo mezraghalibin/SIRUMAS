@@ -1,5 +1,6 @@
 @import "node_modules/materialize-css/sass/materialize.scss";
 //@import "app/bower_components/font-awesome/scss/font-awesome.scss";
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400); //MANGGIL GOOGLE FONTS
 
 $base-color1: #fff;
 $base-color2: #222;
@@ -34,7 +35,7 @@ html, body {
             padding-bottom: 25px;
             font-weight: bold;
             font-size: 21px;
-            font-style: $heading-font;
+            font: 100% $heading-font;
         }
         
 

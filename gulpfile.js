@@ -19,12 +19,6 @@ elixir(function(mix) {
     mix.sass('master.scss', 'public/assets/css/master.css');
 });
 
-/*********** WARNA-WARNI ***********/
-elixir(function(mix) {
-    mix.sass('buatButton.scss', 'public/assets/css/buatButton.css');
-});
-/*********** EO WARNA-WARNI ***********/
-
 
 /*********** BERANDA ***********/
 elixir(function(mix) {
@@ -79,3 +73,15 @@ elixir(function(mix) {
     mix.sass('pengumuman.scss', 'public/assets/css/pengumuman.css');
 });
 /*********** EO PENGUMUMAN ***********/
+
+/*********** LAPORAN ***********/
+elixir(function(mix) {
+    mix.sass('laporan.scss', 'public/assets/css/laporan.css');
+});
+/*********** EO LAPORAN ***********/
+
+/*********** BORANG ***********/
+elixir(function(mix) {
+    mix.sass('borang.scss', 'public/assets/css/borang.css');
+});
+/*********** EO BORANG ***********/

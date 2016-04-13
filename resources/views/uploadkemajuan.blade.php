@@ -62,14 +62,14 @@
     <!-- CONTENT LAPORAN kemajuan -->
     <div class="container">
       <div id="laporan-kemajuan">
-        <div class="header">Upload Laporan</div>
+        <div class="header"><h4>Upload Laporan</h4></div>
           <div class="kemajuan-content">
           <div class="upload-revisi-attach">
 
            <form action="#">
               <div class="file-field input-field">
-                <div class="btn">
-                  <span>File</span>
+                <div class="btn card-panel red darken-2">
+                  <span class="white-text">File</span>
                   <input type="file" multiple>
                 </div>
                 <div class="file-path-wrapper">
@@ -77,8 +77,9 @@
                 </div>
               </div>
             </form>
+            <br>
 
-                 <button class="btn waves-effect waves-light" type="submit" name="action">Ajukan Laporan 
+                 <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Ajukan Laporan</span> 
                  <i class="material-icons right">send</i>
                  </button>
                  </form>

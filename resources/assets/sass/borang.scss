@@ -6,13 +6,14 @@ $base-color2: #222;
 $base-color3: #999;
 $heading-font: 'Montserrat', sans-serif;
 $content-font: 'Josefin Slab', serif;
+$font-title: 'Oswald', sans-serif;
 
 html, body {
 	height: 100%;
 }
 
 .page-content {
-    padding-left: 220px;
+    padding-left: 15%;
     top: 4.4em;
     .second-navbar {
         height: 40px;
@@ -35,3 +36,8 @@ html, body {
 
     }
 }
+
+.judul {
+    font: 100% $font-title;
+}
+

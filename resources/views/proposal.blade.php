@@ -100,7 +100,7 @@
       <!-- CONTENT UPLOAD REVISI -->
       <div class="container">
         <div id="upload-revisi">
-            <div class="header">Upload Revisi Proposal Hibah</div>
+            <div class="header"><h4>Upload Revisi Proposal Hibah</h4></div>
               <div class="upload-revisi-content">
               <table class="highlight centered">
               <thead>

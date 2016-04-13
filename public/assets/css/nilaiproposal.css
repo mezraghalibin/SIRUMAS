@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400);
 .materialize-red {
   background-color: #e51c23 !important; }
 
@@ -6319,6 +6320,6 @@ html, body {
       padding-bottom: 25px;
       font-weight: bold;
       font-size: 21px;
-      font-style: "Montserrat", sans-serif; }
+      font: 100% "Montserrat", sans-serif; }
 
 /*# sourceMappingURL=nilaiproposal.css.map */

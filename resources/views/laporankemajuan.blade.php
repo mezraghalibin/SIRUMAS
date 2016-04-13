@@ -110,7 +110,7 @@
     <!-- CONTENT akhir HIBAH -->
     <div class="container">
       <div id="laporan-akhir">
-      <div class="header">LAPORAN AKHIR</div>
+      <div class="header"><h4>Laporan Akhir</h4></div>
           <div class="kemajuan-content">
            <table class="highlight centered">
               <thead>

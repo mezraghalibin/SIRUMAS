@@ -6319,7 +6319,8 @@ html, body {
       padding-bottom: 25px;
       font-weight: bold;
       font-size: 21px;
-      font-style: "Montserrat", sans-serif; }
+      font-style: "Montserrat", sans-serif;
+      font: 100% "Montserrat", sans-serif; }
     .page-content .container #upload-revisi .upload-revisi-attach {
       width: 40%; }
 

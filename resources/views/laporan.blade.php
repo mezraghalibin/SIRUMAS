@@ -6,7 +6,6 @@
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="assets/css/hibah.css">
     <link rel="stylesheet" href="assets/css/laporan.css">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
@@ -115,7 +114,7 @@
     <!-- CONTENT tidak-hibah HIBAH -->
     <div class="container">
       <div id="laporan-tidak-berhibah">
-      <div class="header">Laporan Akhir</div>
+      <div class="header"><h4>Laporan Akhir</h4></div>
           <div class="kemajuan-content">
            <table class="highlight centered">
               <thead>
@@ -162,7 +161,7 @@
 
     <div class="container">
       <div id="upload-laporan-kemajuan">
-        <div class="header">Judul Proposal Terkait</div>
+        <div class="header"><h4>Judul Proposal Terkait</h4></div>
           <div class="kemajuan-content">
            <table class="highlight centered">
               <thead>
@@ -203,7 +202,7 @@
 
      <div class="container">
       <div id="upload-laporan-akhir">
-        <div class="header">PILIH HIBAH</div>
+        <div class="header"><h4>Pilih Hibah</h4></div>
           <div class="berhibah-content" align="center">
             <ul>
               <li>
