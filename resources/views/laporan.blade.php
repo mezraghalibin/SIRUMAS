@@ -60,8 +60,16 @@
             $("#laporan-tidak-berhibah").hide();
         });
 
+          $('tr').click( function() {
+    window.location = $(this).find('a').attr('href');
+}).hover( function() {
+    $(this).toggleClass('hover');
+});
 
     });
+
+   
+
     </script>
 </head>
 <body>
@@ -92,18 +100,11 @@
                   <td><a href="{{action('LaporanController@laporankemajuan')}}">Hibah Riset UI 2015</a></td>
                 </tr>
                  <tr>
-                  <td>Hibah Riset UI 2014</td>
+                  <td><a href="{{action('LaporanController@laporankemajuan')}}">Hibah Riset UI 2014</a></td>
                 </tr>
-                <tr>
-                  <td>Hibah Riset UI 2014</td>
-                </tr>
-                <tr>
-                  <td>Hibah Riset UI 2014</td>
-                </tr>
-                <tr>
-                  <td>Hibah Riset UI 2014</td>
-                </tr>
-           
+                 <tr>
+                  <td><a href="{{action('LaporanController@laporankemajuan')}}">Hibah Riset UI 2013</a></td>
+                </tr>             
               </tbody>
             </table>
           </div>
@@ -203,18 +204,42 @@
      <div class="container">
       <div id="upload-laporan-akhir">
         <div class="header"><h4>Pilih Hibah</h4></div>
-          <div class="berhibah-content" align="center">
-            <ul>
-              <li>
-              <a href="{{action('LaporanController@uploadlaporanberhibah')}}"><i class="material-icons" style="font-size: 100px">receipt</a>
-              </li>
-              <li>  
-              <a href="{{action('LaporanController@uploadlaporantdkberhibah')}}"><i class="material-icons" style="font-size: 100px">description</a>
-              </li>
-            </ul>
-            </div>        
-      </div>
-    </div>
+
+          <div class="row">
+              <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                  <div align="center">
+                  <div class="card-content white-text">
+                    <span class="card-title">Laporan Berhibah</span>
+                    <p>Klik link di bawah ini jika Anda telah mendapatkan hibah dan ingin meng-upload laporan akhir.</p>
+                  </div>
+                  <div class="card-action">
+                    <a href="{{action('LaporanController@uploadlaporanberhibah')}}">Laporan Berhibah</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </div>
+
+           <div class="row">
+              <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                  <div align="center">
+                  <div class="card-content white-text">
+                    <span class="card-title">Laporan Tidak Berhibah</span>
+                    <p>Klik link di bawah ini jika Anda ingin meng-upload laporan akhir tanpa hibah.</p>
+                  </div>
+                  <div class="card-action">
+                    <a href="{{action('LaporanController@uploadlaporantdkberhibah')}}">Laporan Tidak Berhibah</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </div>
+          </div>
+          </div>
+
+
 
     </div>
   @stop

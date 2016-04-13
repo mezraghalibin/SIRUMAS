@@ -97,7 +97,7 @@
 
         <!-- TABLE DAFTAR PROPOSAL-->
           <div id="daftar-proposal-riset">
-          <div class="header">Daftar Proposal</div>
+          <div class="header"><h4>Daftar Proposal</h4></div>
           <div class="hibah-riset-content">
             <table class="highlight centered">
               <thead>
@@ -130,10 +130,10 @@
                 <td>01/01/2015</td>
                 <td>Hibah Riset UI 2015</td>
                 <td>
-                  <a href='{{action('ProposalHibahController@nilaiProposal')}}'><button class="btn waves-effect waves-teal">Nilai</button></a>
+                  <a href='{{action('ProposalHibahController@nilaiProposal')}}'><button class="btn waves-effect waves-teal card-panel red darken-2"><span class="white-text">Nilai</span></button></a>
                 </td>
                 <td>
-                  <a href='{{action('ProposalHibahController@sesuaikanProposal')}}'><button class="btn waves-effect waves-teal">Sesuaikan</button></a>
+                  <a href='{{action('ProposalHibahController@sesuaikanProposal')}}'><button class="btn waves-effect waves-teal card-panel red darken-2"><span class="white-text">Sesuaikan</span></button></a>
                 </td>
                 <td>Menunggu Penilaian</td>
                 <td>File.pdf</td>
@@ -153,7 +153,7 @@
             
         
        <!-- PILIH HIBAH -->
-        <div class="header">Pilih Hibah Pengmas</div>
+        <div class="header"><h4>Pilih Hibah Pengmas</h4></div>
         <div class="hibah-riset-content">
             <table id="list-hibah-pengmas" class="highlight centered">
             <tbody>
@@ -205,11 +205,11 @@
                 <td>01/01/2015</td>
                 <td>Hibah Pengmas UI 2015</td>
                 <td>
-                  <a href='{{action('ProposalHibahController@nilaiProposal')}}'><button class="btn waves-effect waves-teal">Nilai</button></a>
+                  <a href='{{action('ProposalHibahController@nilaiProposal')}}'><button class="btn waves-effect waves-teal card-panel red darken-2"><span class="white-text">Nilai</span></button></a>
                 </td>
                 <td>
                 <a href='{{action('ProposalHibahController@sesuaikanProposal')}}'>
-                <button class="btn waves-effect waves-teal">Sesuaikan</button></a>
+                <button class="btn waves-effect waves-teal card-panel red darken-2"><span class="white-text">Sesuaikan</span></button></a>
                 </td>
                 <td>Menunggu Penilaian</td>
                 <td>File.pdf</td>
