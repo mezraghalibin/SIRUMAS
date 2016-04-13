@@ -88,7 +88,7 @@
       <!-- CONTENT BUAT PESAN -->
       <div class="container">
         <div id="buat-pesan">
-            <div class="header">BUAT PESAN</div>
+            <div class="header"><h4>Buat Pesan</h4></div>
               <div class="kelola-content">
                 <div class="row">
                   <form class="col s12">
@@ -117,20 +117,23 @@
                 </form>
               </div>
 
-              <form action="#">
+              <form action="#" class="col s12">
                 <div class="file-field input-field">
-                  <div class="btn">
-                    <span>File</span>
+                  <div class="btn card-panel red darken-2">
+                    <span class="white-text">File</span>
                     <input type="file">
                   </div>
+                  <br>
                   <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" placeholder="Belum ada file yang dipilih">
                   </div>
                 </div>
              </form>
-             <button class="btn waves-effect waves-light" type="submit" name="action">SEND
+              <div class="col s12">
+             <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">SEND</span>
                 <i class="material-icons right">send</i>
              </button>
+             </div>
           </div>
       
         </div>

@@ -30,7 +30,7 @@ class SSOController extends Controller
                 );
         
         //FOR MAHASISWA
-        if(count($users) == 0){
+        if(count($users) == 0 && $userSSO->role == 'mahasiswa'){
             //username is new
             DB::table('users')->insert(
                 [
@@ -43,7 +43,7 @@ class SSOController extends Controller
         }
 
         //FOR STAFF & DOSEN
-        if(count($users) == 0){
+        if(count($users) == 0 $userSSO->role == 'staf'){
             //username is new
             DB::table('users')->insert(
                 [

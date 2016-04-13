@@ -1,6 +1,7 @@
 //@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 //@import "app/bower_components/font-awesome/scss/font-awesome.scss";
 @import "node_modules/materialize-css/sass/materialize.scss";
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400);
 
 $base-color1: #fff;
 $base-color2: #222;
@@ -32,6 +33,7 @@ html, body {
         .header {
             padding-top: 25px;
             padding-bottom: 25px;
+            font: 100% $heading-font;
         }
     }
 }

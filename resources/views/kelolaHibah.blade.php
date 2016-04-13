@@ -39,7 +39,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola"><a href="{{action('HibahController@index')}}">BACK</a></li>
+          <li id="kelola"><a href="{{action('HibahController@index')}}">Kembali</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>

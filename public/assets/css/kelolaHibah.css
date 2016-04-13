@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400);
 .materialize-red {
   background-color: #e51c23 !important; }
 
@@ -6316,6 +6317,7 @@ html, body {
     width: 95%; }
     .page-content .container .header {
       padding-top: 25px;
-      padding-bottom: 25px; }
+      padding-bottom: 25px;
+      font: 100% "Montserrat", sans-serif; }
 
 /*# sourceMappingURL=kelolaHibah.css.map */

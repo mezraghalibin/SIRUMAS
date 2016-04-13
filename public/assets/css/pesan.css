@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400);
 .materialize-red {
   background-color: #e51c23 !important; }
 
@@ -6316,7 +6317,8 @@ html, body {
     .page-content .container .header {
       padding-top: 25px;
       padding-bottom: 25px;
-      font-size: 30px; }
+      font-size: 30px;
+      font: 100% "Montserrat", sans-serif; }
     .page-content .container .row form .browse input {
       color: black; }
     .page-content .container .btn, .page-content .container .btn-large {

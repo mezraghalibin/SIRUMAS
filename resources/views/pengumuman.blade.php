@@ -126,7 +126,7 @@
       <!-- CONTENT BUAT HIBAH -->
       <div class="container">
         <div id="buat-pengumuman">
-            <div class="header">BUAT PENGUMUMAN</div>
+            <div class="header"><h4>Buat Pengumuman</h4></div>
             <!-- bagian atas -->
               <div class="row">
                 <form class="col s12">
@@ -162,17 +162,17 @@
                 </form>
                 <form action="#" class="col s5">
                   <div class="file-field input-field">
-                    <div class="btn">
-                      <span>File</span>
+                    <div class="btn card-panel red darken-2">
+                      <span class="white-text">File</span>
                       <input type="file" multiple>
                     </div>
                     <div class="file-path-wrapper">
-                      <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                      <input class="file-path validate" type="text" placeholder="Belum ada file yang dipilih">
                     </div>
                   </div>
                 </form>
                 <div class="col s12">
-                  <button class="btn waves-effect waves-light" type="submit" name="action">Buat Pengumuman
+                  <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Buat Pengumuman</span>
                   <i class="material-icons right">send</i>
                   </button>
                 </div>

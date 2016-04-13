@@ -35,6 +35,10 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
+          <li id="berhibah"><a href="#">Laporan Berhibah</a></li>
+          <li id="tidak-hibah"><a href="#">Laporan Tidak Berhibah</a></li>
+          <li id="upload-kemajuan"><a href="#">Upload Laporan Kemajuan</a></li>
+          <li id="upload-akhir"><a href="#">Upload Laporan Akhir</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
