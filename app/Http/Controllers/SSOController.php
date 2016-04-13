@@ -30,11 +30,7 @@ class SSOController extends Controller
                 );
         
         //FOR MAHASISWA
-<<<<<<< HEAD
-        if(count($users) == 0 && $userSSO->role == 'mahasiswa'){
-=======
         if(count($userSIRUMAS) == 0 && $userSSO->role == 'mahasiswa'){
->>>>>>> 47fdf249d510d2165e0f9e990032733f4b552846
             //username is new
             DB::table('users')->insert(
                 [
@@ -48,11 +44,7 @@ class SSOController extends Controller
         }
 
         //FOR STAFF & DOSEN
-<<<<<<< HEAD
-        if(count($users) == 0 $userSSO->role == 'staf'){
-=======
         if(count($userSIRUMAS) == 0 && $userSSO->role == 'staff'){
->>>>>>> 47fdf249d510d2165e0f9e990032733f4b552846
             //username is new
             DB::table('users')->insert(
                 [
