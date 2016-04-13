@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 Apr 2016 pada 13.45
+-- Generation Time: 13 Apr 2016 pada 05.43
 -- Versi Server: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -239,16 +239,20 @@ CREATE TABLE `users` (
   `username` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `nama` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
   `no_pengenal` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `role` varchar(25) COLLATE utf8_unicode_ci NOT NULL
+  `role` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `spesifik_role` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`username`, `nama`, `no_pengenal`, `role`) VALUES
-('Budi', 'Budi Budiarto', '123456789', 'mahasiswa'),
-('muhammad.ezra', 'Muhammad Ezra Ghalibin', '1306382915', 'mahasiswa');
+INSERT INTO `users` (`username`, `nama`, `no_pengenal`, `role`, `spesifik_role`) VALUES
+('azadya.p', 'Azadya Prikhaerannisa', '1306404683', 'staff', 'divisi keuangan'),
+('Budi', 'Budi Budiarto', '123456789', 'mahasiswa', 'mahasiswa'),
+('muhammad.ezra', 'Muhammad Ezra Ghalibin', '1306382915', 'staff', 'divisi riset'),
+('muhammad.ihcsan', 'Muhammad Ihcsan Kamil Supri', '1306382770', 'mahasiswa', 'mahasiswa'),
+('yara.azura', 'Yara Azura Sanurian', '1306382934', 'staff', 'dosen');
 
 --
 -- Indexes for dumped tables

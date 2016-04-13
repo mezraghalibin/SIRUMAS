@@ -1,8 +1,15 @@
+<?php 
+  //CHECK USER'S ROLE
+  $name           = $_SESSION['name'];
+  $role           = $_SESSION['role'];
+  $spesifik_role  = $_SESSION['spesifik_role']; 
+?>
+
 @extends('master')
 <!DOCTYPE html>
 <html>
 <head>
-  <title>HIBAH</title>
+  <title>HOME</title>
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
@@ -30,6 +37,12 @@
           selectMonths: true, // Creates a dropdown to control month
           selectYears: 15 // Creates a dropdown of 15 years to control year
         });
+
+        //WRITE USER SPECIFICATION
+        var name          = "<?php echo $name ?>";
+        var role          = "<?php echo $role ?>";
+        var spesifik_role = "<?php echo $spesifik_role ?>";
+        document.getElementById("user").innerHTML = "Selamat Datang " + name + " - " + role + " | " + spesifik_role;
     });
     </script>
 </head>
@@ -39,7 +52,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+          <li><a id="user" href="#"></a></li>
         </ul>
       </div>
     </nav>
