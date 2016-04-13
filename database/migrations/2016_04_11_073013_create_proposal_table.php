@@ -13,20 +13,20 @@ class CreateProposalTable extends Migration
     public function up()
     {
         Schema::create('proposal', function (Blueprint $table) {
-            $table->increments('id_proposal');
+            $table->increments('id');
             $table->string('nama_pengaju',30);
             $table->string('no_hp',20);
             $table->string('e-mail', 50);
             $table->string('nip/nup', 20);
-            $table->string('dosen', 25);
+            $table->integer('dosen')->unsigned();
             $table->timestamps('tgl_submit');
             $table->string('kategori', 20);
             $table->string('status', 20);
             $table->string('judul_proposal', 50);
             $table->text('file');
             $table->integer('id_hibah')->unsigned();
-            $table->foreign('dosen')->references('username')->on('users');
-            $table->foreign('id_hibah')->references('id_hibah')->on('hibah');
+            $table->foreign('dosen')->references('id')->on('users');
+            $table->foreign('id_hibah')->references('id')->on('hibah');
         });
     }
 
