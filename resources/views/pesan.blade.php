@@ -59,6 +59,7 @@
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
           <li id="kelola"><a href="#">Daftar Pesan</a></li>
+          <!-- if buat nampilin tab buat pesan khusus ke divisi riset-->
           @if($spesifik_role == 'divisi riset')
           <li id="buat"><a href="#">Buat Pesan</a></li>
           @endif
@@ -69,6 +70,7 @@
       </div>
     </nav>
 
+      <!--IF BUAT NAMPILIN SUCCESS MESSAGE-->
       @if(Session::has('flash_message'))
         <div class="card-panel teal">
           <span class="white-text">{{ Session::get('flash_message') }}</span>
@@ -88,6 +90,7 @@
                 </tr>
               </thead>
               <tbody>
+              <!--foreach untuk setiap message yg diambil bakal ngeprint tanggal dan subjeknya-->
               <?php foreach($messages as $message){
                   echo '<tr>
                   <td>'.$message->created_at.'</td>
@@ -119,6 +122,8 @@
                         <div class="input-field col s6">
                           <select name="penerima">
                             <option value="" disabled selected>Pilih</option>
+                            <!-- foreach untuk menampilkan user yg bisa dipilih ketika
+                            mengirim pesan -->
                             <?php foreach ($users as $user){
                                 echo "<option value=".$user->id.">".$user->nama."</option>";
                                 }
