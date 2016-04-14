@@ -1,15 +1,9 @@
 <?php 
     //CHECK USER'S ROLE
-<<<<<<< HEAD
 	$username 		= $_SESSION['username'];
 	$name           = $_SESSION['name'];
 	$role 			= $_SESSION['role'];
-  	$spesifik_role 	= $_SESSION['spesifik_role'];	
-=======
-	$username 		  = $_SESSION['username'];
-	$role 			    = $_SESSION['role'];
-  $spesifik_role 	= $_SESSION['spesifik_role'];	
->>>>>>> 2eef014f22b117eac5e2735a1c3d725aacf91836
+  	$spesifik_role 	= $_SESSION['spesifik_role'];		
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +71,7 @@
       });
     </script>
 </head>
+
 <body>
 <!-- HEADER -->
   <div class="navbar-fixed">
@@ -159,23 +154,6 @@
 	</header>
     </div>
     <!-- END OF SIDEBAR MENU FOR TIM REVIEWER -->
-  {{-- <header>
-    <ul id="nav-mobile" class="side-nav fixed">
-      <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li>
-      <li><a href="#" class="waves-effect waves-teal">PANDUAN</a></li>
-      <li><a href="{{action('HibahController@index')}}" class="waves-effect waves-teal">HIBAH</a></li>
-      <li><a href="{{action('PengumumanController@index')}}" class="waves-effect waves-teal">PENGUMUMAN</a></li>
-      <li><a href="{{action('ProposalController@index')}}" class="waves-effect waves-teal">PROPOSAL</a></li>
-      <li><a href="{{action('ProposalHibahController@index')}}" class="waves-effect waves-teal">PROPOSAL HIBAH</a></li>
-      <li><a href="{{action('LaporanController@index')}}" class="waves-effect waves-teal">LAPORAN</a></li>
-      <li><a href="#" class="waves-effect waves-teal">KONTAK</a></li>
-      <li><a href="{{action('MouController@index')}}" class="waves-effect waves-teal">MOU</a></li>
-      <li><a href="{{action('BorangController@index')}}" class="waves-effect waves-teal">BORANG</a></li>
-      <li><a href="#" class="waves-effect waves-teal">REPOSITORY</a></li>
-      <li><a href="#" class="waves-effect waves-teal">KELOLA REPOSITORY</a></li>
-    </ul>
-  </header> --}}
-  <!-- END OF SIDEBAR MENU MASTER -->
   @yield('main_content')
 </body>
 </html>

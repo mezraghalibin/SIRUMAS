@@ -21,4 +21,8 @@ class MouController extends Controller
             return view('login');
         }
 	}
+
+    public function upload() {
+        
+    }
 }

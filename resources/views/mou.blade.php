@@ -89,7 +89,7 @@
                 </div>
              </form>
              <br>
-             <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">SIMPAN</span>
+             <button href="#" class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">SIMPAN</span>
              </button>
           </div>
         </div>
