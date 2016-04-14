@@ -33,6 +33,10 @@ class PesanController extends Controller
             ]);
         //BIKIN PESAN BARU
         $msg = \App\Pesan::create($request->all());
+        $filename = $msg->id.'.'. $request->file('file')->getClientOriginalExtension();
+        $request->file('file')->move(base_path().'/public/upload/', $filename);
+        $msg->file = $filename;
+        $msg->save();
         Session::flash('flash_message','Pesan berhasil terkirim');
         return redirect('pesan');
     }
