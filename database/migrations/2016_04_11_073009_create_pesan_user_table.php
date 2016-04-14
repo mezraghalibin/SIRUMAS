@@ -15,13 +15,14 @@ class CreatePesanUserTable extends Migration
         Schema::create('pesan_user', function (Blueprint $table) {
             $table->integer('id_pengirim')->unsigned();
             $table->increments('id');
-            $table->string('penerima', 25);
+            $table->integer('penerima')->unsigned();
             $table->boolean('isread');
             $table->string('subjek', 30);
             $table->text('pesan');
             $table->timestamps('tgl_notif');
             $table->text('file')->nullable();
             $table->foreign('id_pengirim')->references('id')->on('users');
+            $table->foreign('penerima')->references('id')->on('users');
         });
     }
 
