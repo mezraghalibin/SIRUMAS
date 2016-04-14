@@ -127,21 +127,22 @@
         <div id="buat-pengumuman">
             <div class="header"><h4>Buat Pengumuman</h4></div>
             <!-- bagian atas -->
+              <form method="post" action="buatpengumuman" class="col s6">
               <div class="row">
                 <form class="col s12">
                     <div class="row">
                       <div class="input-field col s4">
-                        <input id="judul_hibah" type="text" class="validate">
+                        <input id="judul_hibah" type="text" class="validate" name='judul'>
                         <label class="active" for="judul_hibah">Judul</label>
                       </div>
                       <div class="input-field col s4">
-                        <input id="nomor_hibah" type="text" class="validate">
+                        <input id="nomor_hibah" type="text" class="validate" name='nomor'>
                         <label class="active" for="nomor_hibah">Nomor</label>
                       </div>
                       <div class="input-field col s2">
-                        <select>
-                        <option value="1">Riset</option>
-                        <option value="2">Pengmas</option>
+                        <select name='kategori'>
+                        <option value="riset">Riset</option>
+                        <option value="pengmas">Pengmas</option>
                         </select>
                         <label>Ketegori</label>
                       </div>
@@ -154,7 +155,7 @@
                 <form class="col s12">
                   <div class="row">
                     <div class="input-field col s10">
-                      <textarea id="konten_pengumuman" class="materialize-textarea"></textarea>
+                      <textarea id="konten_pengumuman" class="materialize-textarea" name='konten'></textarea>
                       <label for="konten_pengumuman">Konten Pengumuman</label>
                     </div>
                   </div>
@@ -171,8 +172,9 @@
                   </div>
                 </form>
                 <div class="col s12">
-                  <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Buat Pengumuman</span>
-                  <i class="material-icons right">send</i>
+                  <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit">
+                    <span class="white-text">Buat Pengumuman</span>
+                    <i class="material-icons right">send</i>
                   </button>
                 </div>
               </div>

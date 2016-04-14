@@ -45,7 +45,9 @@ class PengumumanController extends Controller
             'konten' => 'required',
             ]);
         //BIKIN PENGUMUMAN BARU
-        $createPengumuman = Pesan::create($request->all());
+        $pengumuman = new Pengumuman;
+        $pengumuman->status = 0;
+        $createPengumuman = Pengumuman::create($request->all());
         Session::flash('flash_message','Pengumuman berhasil dibuat');
         return redirect('pengumuman');
     }
