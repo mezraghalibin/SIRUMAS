@@ -122,8 +122,7 @@
       </div>
       <!-- END OF CONTENT KELOLA PENGUMUMAN -->
 
-
-      <!-- CONTENT BUAT HIBAH -->
+      <!-- CONTENT BUAT PENGUMUMAN -->
       <div class="container">
         <div id="buat-pengumuman">
             <div class="header"><h4>Buat Pengumuman</h4></div>
