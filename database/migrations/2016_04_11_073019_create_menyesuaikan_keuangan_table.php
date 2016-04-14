@@ -13,13 +13,14 @@ class CreateMenyesuaikanKeuanganTable extends Migration
     public function up()
     {
         Schema::create('menyesuaikan_keuangan', function (Blueprint $table) {
-            $table->string('staf_keuangan',25);
+            $table->increments('id');
+            $table->integer('staf_keuangan')->unsigned();
             $table->integer('id_proposal')->unsigned();
             $table->timestamps('tgl_komentar');
             $table->text('komentar');
-            $table->primary(['staf_keuangan','id_proposal']);
-            $table->foreign('staf_keuangan')->references('username')->on('users');
-            $table->foreign('id_proposal')->references('id_proposal')->on('proposal');
+            $table->unique(['staf_keuangan','id_proposal']);
+            $table->foreign('staf_keuangan')->references('id')->on('users');
+            $table->foreign('id_proposal')->references('id')->on('proposal');
         });
     }
 

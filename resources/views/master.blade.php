@@ -1,9 +1,15 @@
 <?php 
     //CHECK USER'S ROLE
+<<<<<<< HEAD
 	$username 		= $_SESSION['username'];
 	$name           = $_SESSION['name'];
 	$role 			= $_SESSION['role'];
   	$spesifik_role 	= $_SESSION['spesifik_role'];	
+=======
+	$username 		  = $_SESSION['username'];
+	$role 			    = $_SESSION['role'];
+  $spesifik_role 	= $_SESSION['spesifik_role'];	
+>>>>>>> 2eef014f22b117eac5e2735a1c3d725aacf91836
 ?>
 
 <!DOCTYPE html>

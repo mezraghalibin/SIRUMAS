@@ -6320,4 +6320,8 @@ html, body {
       padding-bottom: 25px;
       font: 100% "Montserrat", sans-serif; }
 
+tr.hover {
+  cursor: pointer;
+  /* whatever other hover styles you want */ }
+
 /*# sourceMappingURL=laporan.css.map */

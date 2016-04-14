@@ -60,6 +60,7 @@ class SSOController extends Controller
         //GET USER SIRUMAS SPECIFIC ROLE
         foreach ($userSIRUMAS as $key) {
             $user = get_object_vars($key);
+            $_SESSION['id']             = $user['id'];
             $_SESSION['username']       = $user['username'];
             $_SESSION['name']           = $user['nama'];
             $_SESSION['role']           = $user['role'];      

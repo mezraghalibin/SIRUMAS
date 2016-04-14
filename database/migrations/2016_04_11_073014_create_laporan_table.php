@@ -13,15 +13,15 @@ class CreateLaporanTable extends Migration
     public function up()
     {
         Schema::create('laporan', function (Blueprint $table) {
-            $table->increments('id_laporan');
+            $table->increments('id');
             $table->string('tipe_progres', 20);
             $table->timestamps('tgl_submit');
             $table->string('pengumpul', 30);
             $table->string('judul', 50);
-            $table->string('dosen', 25);
+            $table->integer('dosen')->unsigned();
             $table->integer('id_proposal')->nullable()->unsigned();
-            $table->foreign('dosen')->references('username')->on('users');
-            $table->foreign('id_proposal')->references('id_proposal')->on('proposal');
+            $table->foreign('dosen')->references('id')->on('users');
+            $table->foreign('id_proposal')->references('id')->on('proposal');
         });
     }
 
