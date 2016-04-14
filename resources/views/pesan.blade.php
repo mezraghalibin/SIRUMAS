@@ -1,4 +1,12 @@
 @extends('master')
+<?php 
+  //CHECK USER'S ROLE
+  $id             = $_SESSION['id'];
+  $username       = $_SESSION['username'];
+  $name           = $_SESSION['name'];
+  $role           = $_SESSION['role'];
+  $spesifik_role  = $_SESSION['spesifik_role']; 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -28,6 +36,7 @@
     <script>
       $(document).ready(function(){
         $("#buat-pesan").hide();
+        $('select').material_select();
 
         $("#kelola").click(function(){
             $("#kelola-pesan").fadeIn(500);
@@ -38,6 +47,8 @@
             $("#buat-pesan").fadeIn(500);
             $("#kelola-pesan").hide();
         });
+
+
       });
     </script>
 </head>
@@ -51,11 +62,16 @@
           <li id="buat"><a href="#">Buat Pesan</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+          <li><a href="#">Login Sebagai <?php echo $username ?> - <?php echo $spesifik_role ?></a></li>
         </ul>
       </div>
     </nav>
 
+      @if(Session::has('flash_message'))
+        <div class="card-panel teal">
+          <span class="white-text">{{ Session::get('flash_message') }}</span>
+        </div>
+      @endif
       <!-- CONTENT DAFTAR PESAN-->
       <div class="container">
         <div id="kelola-pesan">
@@ -91,53 +107,60 @@
             <div class="header"><h4>Buat Pesan</h4></div>
               <div class="kelola-content">
                 <div class="row">
-                  <form class="col s12">
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <input placeholder="Subjek" id="subjek" type="text" class="validate">
-                      <label for="subjek">Subjek</label>
-                    </div>
-                    <div class="input-field col s6">
-                      <input placeholder="Kepada" id="kepada" type="text" class="validate">
-                      <label for="kepada">Kepada</label>
-                    </div>
-                  </div>
-                </form>
+                  <form method="post" action="kirimpesan" class="col s6" enctype="multipart/form-data">
+                  <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                  <input type="hidden" name="id_pengirim" value="<?php echo $id ?>">
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input placeholder="Subjek" id="subjek" name="subjek" type="text" class="validate">
+                          <label for="subjek">Subjek</label>
+                        </div>
+                        <div class="input-field col s6">
+                          <select name="penerima">
+                            <option value="" disabled selected>Pilih</option>
+                            <?php foreach ($users as $user){
+                                echo "<option value=".$user->id.">".$user->nama."</option>";
+                                }
+                            ?>
+                          </select>
+                          <label>Kepada</label>
+                        </div>
+                      </div>
                 </div>
 
-
               <div class="row">
-                <form class="col s12">
+                <div class="col s12">
                   <div class="row">
                     <div class="input-field col s12">
-                      <textarea id="textarea1" placeholder="Isi Pesan" class="materialize-textarea"></textarea>
+                      <textarea id="textarea1" name="pesan" placeholder="Isi Pesan" class="materialize-textarea"></textarea>
                       <label for="textarea1">Pesan</label>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
 
-              <form action="#" class="col s12">
+              <div class="col s12">
                 <div class="file-field input-field">
                   <div class="btn card-panel red darken-2">
                     <span class="white-text">File</span>
-                    <input type="file">
+                    <input type="file" name="file">
                   </div>
                   <br>
                   <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" placeholder="Belum ada file yang dipilih">
                   </div>
                 </div>
-             </form>
+             </div>
               <div class="col s12">
-             <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">SEND</span>
+             <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">SEND</span>
                 <i class="material-icons right">send</i>
              </button>
              </div>
           </div>
-      
+          </form>
         </div>
       </div>
+     
       <!-- END OF CONTENT BUAT PESAN -->
 
    <!--Import jQuery before materialize.js-->
