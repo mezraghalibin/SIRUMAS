@@ -107,7 +107,7 @@
             <div class="header"><h4>Buat Pesan</h4></div>
               <div class="kelola-content">
                 <div class="row">
-                  <form method="post" action="kirimpesan" class="col s6">
+                  <form method="post" action="kirimpesan" class="col s6" enctype="multipart/form-data">
                   <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                   <input type="hidden" name="id_pengirim" value="<?php echo $id ?>">
                       <div class="row">
