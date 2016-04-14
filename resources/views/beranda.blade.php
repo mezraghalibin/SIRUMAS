@@ -42,7 +42,7 @@
         var name          = "<?php echo $name ?>";
         var role          = "<?php echo $role ?>";
         var spesifik_role = "<?php echo $spesifik_role ?>";
-        document.getElementById("user").innerHTML = "Selamat Datang " + name + " - " + role + " | " + spesifik_role;
+        document.getElementById("user").innerHTML = "Selamat Datang " + name + " | " + spesifik_role;
     });
     </script>
 </head>

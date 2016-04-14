@@ -92,4 +92,28 @@ class SSOController extends Controller
             return FALSE;
         }
     }
+
+    public function getId(){
+        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) 
+        {
+            return $_SESSION['id'];
+        
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    public function getSpesifikRole(){
+        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) 
+        {
+            return $_SESSION['spesifik_role'];
+        
+        }
+        else
+        {
+            return -1;
+        }
+    }
 }
