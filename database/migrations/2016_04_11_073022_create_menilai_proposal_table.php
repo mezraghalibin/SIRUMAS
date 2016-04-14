@@ -14,10 +14,11 @@ class CreateMenilaiProposalTable extends Migration
     {
         Schema::create('menilai_proposal', function (Blueprint $table) {
             $table->integer('id_proposal')->unsigned();
-            $table->string('staf_riset',25);
-            $table->primary(['id_proposal','staf_riset']);
-            $table->foreign('id_proposal')->references('id_proposal')->on('proposal');
-            $table->foreign('staf_riset')->references('username')->on('users');
+            $table->increments('id');
+            $table->integer('staf_riset')->unsigned();
+            $table->unique(['id_proposal','staf_riset']);
+            $table->foreign('id_proposal')->references('id')->on('proposal');
+            $table->foreign('staf_riset')->references('id')->on('users');
         });
     }
 

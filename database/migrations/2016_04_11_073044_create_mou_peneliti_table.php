@@ -13,12 +13,12 @@ class CreateMouPenelitiTable extends Migration
     public function up()
     {
         Schema::create('mou_peneliti', function (Blueprint $table) {
-            $table->increments('id_mou');
+            $table->increments('id');
             $table->text('file');
             $table->string('peneliti',30);
             $table->string('judul',50);
-            $table->string('staf_riset',25);
-            $table->foreign('staf_riset')->references('username')->on('users');
+            $table->integer('staf_riset')->unsigned();
+            $table->foreign('staf_riset')->references('id')->on('users');
         });
     }
 
