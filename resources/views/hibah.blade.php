@@ -25,25 +25,25 @@
 
     <script>
     $(document).ready(function(){
-        $("#kelola-hibah").hide(); //hide page kelola hibah
-        $("#buat-hibah").hide(); //hide page buat hibah
+        $("#kelola-hibah").hide(0); //hide page kelola hibah
+        $("#buat-hibah").hide(0); //hide page buat hibah
 
         $("#daftar").click(function(){
             $("#daftar-hibah").fadeIn(500);
-            $("#kelola-hibah").hide(); //hide page kelola hibah
-            $("#buat-hibah").hide(); //hide page buat hibah
+            $("#kelola-hibah").hide(0); //hide page kelola hibah
+            $("#buat-hibah").hide(0); //hide page buat hibah
         });
 
         $("#kelola").click(function(){
             $("#kelola-hibah").fadeIn(500);
-            $("#daftar-hibah").hide(); //hide page daftar hibah
-            $("#buat-hibah").hide(); //hide page buat hibah
+            $("#daftar-hibah").hide(0); //hide page daftar hibah
+            $("#buat-hibah").hide(0); //hide page buat hibah
         });
 
         $("#buat").click(function(){
             $("#buat-hibah").fadeIn(500);
-            $("#daftar-hibah").hide(); //hide page daftar hibah
-            $("#kelola-hibah").hide(); //hide page kelola hibah
+            $("#daftar-hibah").hide(0); //hide page daftar hibah
+            $("#kelola-hibah").hide(0); //hide page kelola hibah
         });
 
         //DATE PICKER
