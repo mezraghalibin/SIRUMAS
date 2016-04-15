@@ -21,7 +21,6 @@
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     
     <!--FOR MATERIALIZE DONT DELETE THIS-->
 
     <!--FOR BOOTSTRAP DONT DELETE THIS-->
@@ -76,6 +75,7 @@
           <span class="white-text">{{ Session::get('flash_message') }}</span>
         </div>
       @endif
+      
       <!-- CONTENT DAFTAR PESAN-->
       <div class="container">
         <div id="kelola-pesan">
@@ -85,8 +85,12 @@
               <thead>
                 <tr>
                   <th>Tanggal</th>
-                  <th>Subjek</th>
-                  <th></th>
+                  @if($spesifik_role == 'divisi riset')
+                  <th>Pesan Terkirim</th>
+                  @endif
+                  @if($spesifik_role == 'dosen')
+                  <th>Pesan Masuk</th>
+                  @endif
                 </tr>
               </thead>
               <tbody>
@@ -94,7 +98,7 @@
               <?php foreach($messages as $message){
                   echo '<tr>
                   <td>'.$message->created_at.'</td>
-                  <td>'.$message->subjek.'</td>
+                  <td><a href="/detailPesan/'.$message->id.'">'.$message->subjek.'</a></td>
                   </tr>';
                 }?>
               </tbody>

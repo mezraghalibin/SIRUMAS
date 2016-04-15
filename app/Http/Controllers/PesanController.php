@@ -14,6 +14,7 @@ class PesanController extends Controller
 		//CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        
         $users = \App\users::where('spesifik_role','dosen')->get(); //dapetin semua user yg spesifik role nya dosen
         $a = $SSOController->getId(); // ngambil id dari sso, liat methodnya di pesan model
         $b = $SSOController->getSpesifikRole(); // ambil spesifik role dr user, liat methodnya di pesan model
@@ -46,7 +47,7 @@ class PesanController extends Controller
         //BIKIN PESAN BARU
         $msg = \App\Pesan::create($request->all());
         //untuk upload file, request file dengan segala extensi
-        $filename = $msg->id.'.'. $request->file('file')->getClientOriginalExtension();
+        $filename = $request->file('file')->getClientOriginalName();
         //memindahkan file yg dilampirkan tadi ke path /public/upload
         $request->file('file')->move(base_path().'/public/upload/', $filename);
         $msg->file = $filename;
@@ -59,6 +60,9 @@ class PesanController extends Controller
     }
 
     public function detailPesan($id){
+        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        
         $message = \App\Pesan::find($id);
         return view('detailPesan',compact('message'));
     }
