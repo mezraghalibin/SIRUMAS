@@ -32,16 +32,21 @@ Route::get('/detailpengumuman', 'BerandaController@detailPengumuman');
 
 /**************** ROUTE HIBAH ******************/
 Route::get('/hibah', 'HibahController@index');
+Route::post('/createhibah', 'HibahController@create');
 Route::get('/applyhibah', 'HibahController@applyHibah');
 Route::get('/kelolahibah', 'HibahController@kelolaHibah');
 /**************** EO ROUTE HIBAH ******************/
 
 
-/**************** PESAN & MOU ******************/
+/**************** PESAN *************************/
 Route::get('/pesan', 'PesanController@index');
 Route::post('/kirimpesan', 'PesanController@store');
+/**************** EO PESAN ********************/
+
+/***************** EO MOU ***************************/
 Route::get('/mou', 'MouController@index');
-/**************** EO PESAN & MOU ******************/
+Route::post('/uploadmou', 'MouController@upload');
+/**************** EO MOU ********************/
 
 
 /**************** PROPOSAL ******************/

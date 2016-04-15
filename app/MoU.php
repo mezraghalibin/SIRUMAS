@@ -10,8 +10,5 @@ class MoU extends Model
     protected $table = 'mou_peneliti';
     protected $fillable = array('file', 'peneliti', 'judul','staf_riset');
     protected $guarded = ['id'];
-
-    public function uploadMOU() {
-    	
-    }
+    public $timestamps = false;
 }

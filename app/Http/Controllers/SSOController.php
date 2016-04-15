@@ -92,4 +92,8 @@ class SSOController extends Controller
             return FALSE;
         }
     }
+
+    public function getID() {
+        
+    }
 }
