@@ -59,7 +59,10 @@
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
           <li id="kelola"><a href="#">Daftar Pesan</a></li>
+          <!-- if buat nampilin tab buat pesan khusus ke divisi riset-->
+          @if($spesifik_role == 'divisi riset')
           <li id="buat"><a href="#">Buat Pesan</a></li>
+          @endif
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Login Sebagai <?php echo $username ?> - <?php echo $spesifik_role ?></a></li>
@@ -67,6 +70,7 @@
       </div>
     </nav>
 
+      <!--IF BUAT NAMPILIN SUCCESS MESSAGE-->
       @if(Session::has('flash_message'))
         <div class="card-panel teal">
           <span class="white-text">{{ Session::get('flash_message') }}</span>
@@ -81,19 +85,18 @@
               <thead>
                 <tr>
                   <th>Tanggal</th>
-                  <th>Pesan</th>
+                  <th>Subjek</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>01/01/2016</td>
-                  <td>MoU dengan dekan/wakil dekan</td>
-                </tr>
-                <tr>
-                	<td>01/09/2015</td>
-                	<td>Anda terpilih menjadi penerima hibah</td>
-                </tr>
+              <!--foreach untuk setiap message yg diambil bakal ngeprint tanggal dan subjeknya-->
+              <?php foreach($messages as $message){
+                  echo '<tr>
+                  <td>'.$message->created_at.'</td>
+                  <td>'.$message->subjek.'</td>
+                  </tr>';
+                }?>
               </tbody>
             </table>
           </div>
@@ -102,6 +105,7 @@
       <!-- END OF CONTENT DAFTAR PESAN -->
 
       <!-- CONTENT BUAT PESAN -->
+      @if($spesifik_role == 'divisi riset')
       <div class="container">
         <div id="buat-pesan">
             <div class="header"><h4>Buat Pesan</h4></div>
@@ -118,6 +122,8 @@
                         <div class="input-field col s6">
                           <select name="penerima">
                             <option value="" disabled selected>Pilih</option>
+                            <!-- foreach untuk menampilkan user yg bisa dipilih ketika
+                            mengirim pesan -->
                             <?php foreach ($users as $user){
                                 echo "<option value=".$user->id.">".$user->nama."</option>";
                                 }
@@ -160,7 +166,7 @@
           </form>
         </div>
       </div>
-     
+     @endif
       <!-- END OF CONTENT BUAT PESAN -->
 
    <!--Import jQuery before materialize.js-->
