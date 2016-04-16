@@ -33,7 +33,7 @@ class MouController extends Controller
 
         //INPUT NEW FILE
         $mou = MoU::create($request->all()); //SIMPAN SEMUA MASUKAN KE DATABASE
-        $mouname = $mou->peneliti . '-' . $mou->judul . "-" . $request->file('file')->getClientOriginalExtension(); //SIMPAN NAMA FILE
+        $mouname = $mou->peneliti . '-' . $mou->judul . "." . $request->file('file')->getClientOriginalExtension(); //SIMPAN NAMA FILE
         $request->file('file')->move(base_path().'/public/upload/MoU', $mouname); //SIMPAN MOU KE SUATU FOLDER
         $mou->file = $mouname; //MENAMAKAN FILE MOU DIDALAM DATABASE
         $mou->save(); //SAVE PERUBAHAN YANG DILAKUKAN KEDALAM DATABASE

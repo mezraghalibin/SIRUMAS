@@ -31,10 +31,12 @@ Route::get('/detailpengumuman', 'BerandaController@detailPengumuman');
 
 
 /**************** ROUTE HIBAH ******************/
-Route::get('/hibah', 'HibahController@index');
-Route::post('/createhibah', 'HibahController@create');
-Route::get('/applyhibah', 'HibahController@applyHibah');
-Route::get('/kelolahibah', 'HibahController@kelolaHibah');
+Route::get('/hibah', 'HibahController@index'); //FIRST TIME TO HIBAH PAGE
+Route::get('/hibah/applyhibah/{id}', 'HibahController@applyhibah'); //GO TO SPECIFIC HIBAH PAGE
+Route::post('/createhibah', 'HibahController@create'); //ROUTES TO CREATE HIBAH
+Route::get('/hibah/kelolahibah/{id}', 'HibahController@kelolaHibah'); //GOT TO SPECIFIC HIBAH PAGE FOR EDIT
+Route::post('/hibah/kelolahibah/updatehibah/{id}', 'HibahController@update'); //ROUTES TO UPDATE HIBAH
+Route::get('/hibah/deletehibah/{id}', 'HibahController@delete'); //GO TO SPECIFIC HIBAH PAGE
 /**************** EO ROUTE HIBAH ******************/
 
 

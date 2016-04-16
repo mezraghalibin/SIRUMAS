@@ -1,9 +1,9 @@
 <?php 
     //CHECK USER'S ROLE
-	$username 		= $_SESSION['username'];
+	$username 		  = $_SESSION['username'];
 	$name           = $_SESSION['name'];
-	$role 			= $_SESSION['role'];
-  	$spesifik_role 	= $_SESSION['spesifik_role'];		
+	$role 			    = $_SESSION['role'];
+  $spesifik_role 	= $_SESSION['spesifik_role'];		
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
 <head>
 	<title>Home</title>
   	<!--CSS FOR MASTER DONT DELETE THIS -->
-    <link rel="stylesheet" href="assets/css/master.css">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/master.css') }}">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
