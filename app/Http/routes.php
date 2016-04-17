@@ -26,7 +26,7 @@ Route::get('/logout', 'SSOController@logout');
 
 /**************** ROUTE BERANDA ****************/
 Route::get('/', 'BerandaController@index');
-Route::get('/detailpengumuman', 'BerandaController@detailPengumuman');
+Route::get('/detailpengumuman/{id}', 'BerandaController@show');
 /**************** EO ROUTE BERANDA ****************/
 
 
@@ -73,6 +73,8 @@ Route::get('/uploadlaporantdkberhibah', 'LaporanController@uploadlaporantdkberhi
 
 /**************** PENGUMUMAN ********************/
 Route::get('/pengumuman', 'PengumumanController@index');
-Route::get('/kelolapengumuman', 'PengumumanController@kelola');
+Route::get('/kelolapengumumansingle/{id}', 'PengumumanController@edit');
+Route::post('/hapuspengumuman/{id}', 'PengumumanController@destroy');
+Route::post('/kelolapengumumansingle/{id}', 'PengumumanController@update');
 Route::post('/buatpengumuman', 'PengumumanController@store');
 /**************** EO PENGUMUMAN ********************/
