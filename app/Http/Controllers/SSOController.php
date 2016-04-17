@@ -94,8 +94,7 @@ class SSOController extends Controller {
 
     public function getId() {
         if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) {
-            return $_SESSION['id'];
-        
+            return $_SESSION['id'];       
         }
         else {
             return -1;
