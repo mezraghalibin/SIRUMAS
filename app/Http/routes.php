@@ -55,6 +55,7 @@ Route::get('/proposalupload', 'ProposalController@uploadRevisi');
 Route::get('/proposalhibah', 'ProposalHibahController@index');
 Route::get('/nilaiproposal', 'ProposalHibahController@nilaiProposal');
 Route::get('/sesuaikanproposal', 'ProposalHibahController@sesuaikanProposal');
+Route::post('/applyProposal', 'HibahController@storeProposal');
 /**************** EO PROPOSAL HIBAH ******************/
 
 

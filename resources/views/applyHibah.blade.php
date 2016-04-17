@@ -1,4 +1,13 @@
 @extends('master')
+<?php 
+  //CHECK USER'S ROLE
+  $id             = $_SESSION['id'];
+  $username       = $_SESSION['username'];
+  $name           = $_SESSION['name'];
+  $role           = $_SESSION['role'];
+  $spesifik_role  = $_SESSION['spesifik_role']; 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +62,21 @@
       </div>
     </nav>
     
+    <!--IF BUAT NAMPILIN SUCCESS MESSAGE-->
+      @if(Session::has('flash_message'))
+        <div class="card-panel teal">
+          <span class="white-text">{{ Session::get('flash_message') }}</span>
+        </div>
+      @endif
+      <!-- CONTENT DAFTAR PESAN-->
+
+
+
     <!-- CONTENT INFORMASI HIBAH -->
+    
+
+
+
     <div class="container">
       <div id="daftar-hibah">
         <div class="header"><h4>Hibah Riset/Pengmas XXX</h4></div>
@@ -117,17 +140,31 @@
       <button class="btn waves-effect waves-light card-panel red darken-2" id="apply" ><span class="white-text">Apply Hibah</span></button>
     </div>
 
+    <?php 
+      $id_hibah = 1;
+    ?>
     <!-- CONTENT APPLY HIBAH -->
     <div class="container">
       <div id="apply-hibah">
         <div class="header">APPLY HIBAH</div>
         <div class="apply-content">
           <div class="row">
-            <form class="col s12">
+            <form class="col s12" method="post" action="applyProposal" enctype=multipart/form-data>
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <input type="hidden" name="dosen" value="<?php echo $id ?>">
+            
+            <!--ambil dari hibah-->
+
+            <input type="hidden" name="id_hibah" value={{$id_hibah}}>
+            <input type="hidden" name="kategori" value="Riset">
+
+            <!--nanti ditentuin statusnya bakal apa-->
+            <input type="hidden" name="status" value="">
+            
               <!-- FIRST ROW = NAMA -->
               <div class="row">
                 <div class="input-field col s6 offset-s3">
-                  <input placeholder="Nama Anda" id="nama" type="text" class="validate">
+                  <input placeholder="Nama Anda" id="nama" name="nama_pengaju" type="text" class="validate">
                   <label for="nama">Nama</label>
                 </div>
               </div>
@@ -135,15 +172,15 @@
               <!-- SECOND ROW = NIP/NUP -->
               <div class="row">
                 <div class="input-field col s6 offset-s3">
-                  <input placeholder="Masukan NIP/NUP Anda" id="nip/nup" type="text" class="validate">
-                  <label for="nip/nup">Nama</label>
+                  <input placeholder="Masukan NIP/NUP Anda" id="nip/nup" name="nip/nup" type="text" class="validate">
+                  <label for="nip/nup">NIP/NUP</label>
                 </div>
               </div>
 
               <!-- THIRD ROW = EMAIL -->
               <div class="row">
                 <div class="input-field col s6 offset-s3">
-                  <input placeholder="Email Anda" id="email" type="email" class="validate">
+                  <input placeholder="Email Anda" name="e-mail" id="email" type="email" class="validate">
                   <label for="email">Email</label>
                 </div>
               </div>
@@ -151,27 +188,35 @@
               <!-- FOUR ROW = NOMOR HP -->
               <div class="row">
                 <div class="input-field col s6 offset-s3">
-                  <input placeholder="Nomor HP Anda" id="nohp" type="text" class="validate">
+                  <input placeholder="Nomor HP Anda" name="no_hp" id="nohp" type="text" class="validate">
                   <label for="nohp">Nomor HP</label>
                 </div>
               </div>
 
-              <form action="#">
+              <!-- FIFTH ROW = JUDUL PROPOSAL -->
+              <div class="row">
+                <div class="input-field col s6 offset-s3">
+                  <input placeholder="Judul proposal yang diajukan" name="judul_proposal" id="judulproposal" type="text" class="validate">
+                  <label for="judulproposal">Judul Proposal</label>
+                </div>
+              </div>
+
+
+              
                 <div class="file-field input-field col s6 offset-s3">
                   <div class="btn card-panel red darken-2">
                     <span class="white-text">File</span>
-                    <input type="file">
+                    <input type="file" name="file">
                   </div>
                   <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">
                   </div>
-                </div>
-              </form>
-
-              <div class="center-align">
+                  <div class="center-align">
                 <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Submit</span><i class="material-icons right">send</i>
                 </button>
               </div>
+                </div>
+              
             </form>
           </div>
         </div>
