@@ -16,7 +16,7 @@ class CreateFileLampiranTable extends Migration
             $table->increments('id');
             $table->integer('id_pengumuman')->unsigned();
             $table->foreign('id_pengumuman')->references('id')->on('pengumuman')->onDelete('cascade');
-            $table->string('file', 30);
+            $table->string('file');
             $table->unique(array('id_pengumuman','file'));
         });
     }

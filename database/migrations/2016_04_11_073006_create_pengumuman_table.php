@@ -16,7 +16,7 @@ class CreatePengumumanTable extends Migration
             $table->increments('id');
             $table->string('nomor',50)->nullable();
             $table->integer('staf_riset')->unsigned();
-            $table->timestamp('tgl_post');
+            $table->timestamps();
             $table->string('judul',50);
             $table->boolean('status');
             $table->string('kategori',15);

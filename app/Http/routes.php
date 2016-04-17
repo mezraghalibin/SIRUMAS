@@ -75,4 +75,5 @@ Route::get('/uploadlaporantdkberhibah', 'LaporanController@uploadlaporantdkberhi
 /**************** PENGUMUMAN ********************/
 Route::get('/pengumuman', 'PengumumanController@index');
 Route::get('/kelolapengumuman', 'PengumumanController@kelola');
+Route::post('/buatpengumuman', 'PengumumanController@store');
 /**************** EO PENGUMUMAN ********************/

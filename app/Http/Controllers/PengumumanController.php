@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\SSOController;
+use App\Pengumuman;
 
 class PengumumanController extends Controller
 {
@@ -32,6 +33,23 @@ class PengumumanController extends Controller
         else {
             return view('login');
         }
+    }
+
+    //METHOD STORE PENGUMUMAN KE DATABASE
+    public function store(Request $request){
+        //VALIDASI INPUT
+        $this->validate($request, [
+            'judul' => 'required',
+            'nomor' => 'required',
+            'kategori' => 'required',
+            'konten' => 'required',
+            ]);
+        //BIKIN PENGUMUMAN BARU
+        $pengumuman = new Pengumuman;
+        $pengumuman->status = 0;
+        $createPengumuman = Pengumuman::create($request->all());
+        Session::flash('flash_message','Pengumuman berhasil dibuat');
+        return redirect('pengumuman');
     }
 
 }
