@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SSOController;
+<<<<<<< HEAD
+use App\users;
+use Session;
+=======
 use App\Hibah;
+>>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
 
 class HibahController extends Controller
 {
@@ -17,6 +22,14 @@ class HibahController extends Controller
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         
+<<<<<<< HEAD
+        $users = users::where('spesifik_role','dosen')->get(); //dapetin semua user yg spesifik role nya dosen
+        $id = $SSOController->getId(); // ngambil id dari sso 
+        $spesifik_role = $SSOController->getSpesifikRole(); // ambil spesifik role dr users
+
+
+=======
+>>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
         if($check) {
             $dataHibah = $this->read(); //GET ALL HIBAH
             return view('hibah', compact('dataHibah'));
@@ -37,8 +50,42 @@ class HibahController extends Controller
             return view('login');
         }
     }
+<<<<<<< HEAD
+
+
+//METHOD STORE PROPOSAL KE DATABASE
+    public function storeProposal(Request $request){
+        //VALIDASI INPUT
+        $this->validate($request, [
+            'nama_pengaju' => 'required',
+            'nip/nup' => 'required',
+            'e-mail' => 'required',
+            'no_hp' => 'required',
+            'judul_proposal' => 'required',
+            'file' => 'required'
+            ]);
+
+        //Bikin proposal
+        $aProposal = \App\Proposal::create($request->all());
+        //untuk upload file, request file dengan segala extensi
+        $filename = $aProposal->id.'.'. $request->file('file')->getClientOriginalExtension();
+        //memindahkan file yg dilampirkan tadi ke path /public/upload
+        $request->file('file')->move(base_path().'/public/upload/', $filename);
+        $aProposal->file = $filename;
+        //SAVE FILEnya
+        $aProposal->save();
+        // Session untuk Success Notif
+        Session::flash('flash_message','Sukses meng-apply hibah');
+        // then rederict back to pesan
+        return redirect('applyhibah');
+    }
+
+    public function kelolaHibah()
+    {
+=======
    
     public function kelolaHibah($id) {
+>>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
 		//CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();

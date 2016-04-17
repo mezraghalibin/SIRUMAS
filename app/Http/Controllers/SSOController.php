@@ -97,4 +97,36 @@ class SSOController extends Controller
             return FALSE;
         }
     }
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+    public function getId(){
+        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) 
+        {
+            return $_SESSION['id'];
+        
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    public function getSpesifikRole(){
+        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) 
+        {
+            return $_SESSION['spesifik_role'];
+        
+        }
+        else
+        {
+            return -1;
+        }
+=======
+    public function getID() {
+        
+>>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
+    }
+>>>>>>> c87677ece7ab6771ac47740bc87aaaac5d268448
 }

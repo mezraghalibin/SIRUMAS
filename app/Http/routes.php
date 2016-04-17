@@ -43,9 +43,13 @@ Route::get('/hibah/deletehibah/{id}', 'HibahController@delete'); //GO TO SPECIFI
 /**************** PESAN *************************/
 Route::get('/pesan', 'PesanController@index');
 Route::post('/kirimpesan', 'PesanController@store');
+<<<<<<< HEAD
+//Route::get('/detailPesan/{id}', 'PesanController@detailPesan');
+=======
 /**************** EO PESAN ********************/
 
 /***************** EO MOU ***************************/
+>>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
 Route::get('/mou', 'MouController@index');
 Route::post('/uploadmou', 'MouController@upload');
 /**************** EO MOU ********************/
@@ -61,6 +65,7 @@ Route::get('/proposalupload', 'ProposalController@uploadRevisi');
 Route::get('/proposalhibah', 'ProposalHibahController@index');
 Route::get('/nilaiproposal', 'ProposalHibahController@nilaiProposal');
 Route::get('/sesuaikanproposal', 'ProposalHibahController@sesuaikanProposal');
+Route::post('/applyProposal', 'HibahController@storeProposal');
 /**************** EO PROPOSAL HIBAH ******************/
 
 
