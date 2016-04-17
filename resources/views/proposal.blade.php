@@ -80,15 +80,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  
+              @if (count($dataProposal))
+                @foreach ($dataProposal as $proposal)
                   <tr>
-                    <td>Judul Proposal</td>
-                    <td>Riset</td>
-                    <td>01/01/2015</td>
-                    <td>Rp12.000.000</td>
-                    <td>Menunggu Penilaian</td>
-                    <td>File.pdf</td>
+                    <td>{{ $proposal->judul_proposal }}</td>
+                    <td>{{ $proposal->kategori}}</td>
+                    <td>{{ $proposal->created_at}}</td>
+                    <td>{{ $proposal->besar_dana}}</td>
+                    <td>{{ $proposal->status }}</td>
+                    <td>{{ $proposal->file}}</td>
                   </tr>
+                  @endforeach
+              @endif
                 </tbody>
               </table>
               </div>
