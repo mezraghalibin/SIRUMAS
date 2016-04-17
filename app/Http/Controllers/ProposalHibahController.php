@@ -7,10 +7,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SSOController;
 
-class ProposalHibahController extends Controller
-{
-    public function index()
-    {
+class ProposalHibahController extends Controller {
+    public function index() {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
@@ -22,8 +20,7 @@ class ProposalHibahController extends Controller
         }
     }
 
-     public function nilaiProposal()
-    {
+    public function nilaiProposal() {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
@@ -35,8 +32,7 @@ class ProposalHibahController extends Controller
         }
     }
 
-    public function sesuaikanProposal()
-    {
+    public function sesuaikanProposal() {
 		//CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();

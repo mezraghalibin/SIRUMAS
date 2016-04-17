@@ -74,6 +74,7 @@
 <body>
   @section('main_content')
   <div class="page-content">
+    {{-- CONTENT SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
@@ -86,13 +87,15 @@
         </ul>
       </div>
     </nav>
+    {{-- END OF CONTENT SECOND NAVBAR --}}
 
     {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
     <div id="flash-msg">
       @if(Session::has('flash_message'))
         <div class="card-panel teal">
           <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right"><i class="material-icons">clear</i></a>
+            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
+            <i class="material-icons">clear</i></a>
           </span>
         </div>
       @endif 
@@ -103,20 +106,20 @@
     <div class="container">
       <div id="daftar-hibah">
         <div class="header"><h4>Daftar Hibah</h4></div>
-          <div class="daftar-content">
-            <table class="highlight centered">
-              <tbody>
-                @if (count($dataHibah))
-                  @foreach ($dataHibah as $hibah)
-                    <tr>
-                      <td>{{ $hibah->nama_hibah }}</td>
-                      <td><a href="/hibah/applyhibah/{{$hibah->id}}" class="waves-effect waves-light btn card-panel red darken-2"><span class="white-text">Info & Daftar</span></a></td>
-                    </tr>
-                  @endforeach
-                @endif
-              </tbody>
-            </table>
-          </div>
+        <div class="daftar-content">
+          <table class="highlight centered">
+            <tbody>
+              @if (count($dataHibah))
+                @foreach ($dataHibah as $hibah)
+                  <tr>
+                    <td>{{ $hibah->nama_hibah }}</td>
+                    <td><a href="/hibah/applyhibah/{{$hibah->id}}" class="waves-effect waves-light btn card-panel red darken-2"><span class="white-text">Info & Daftar</span></a></td>
+                  </tr>
+                @endforeach
+              @endif
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     {{-- END OF CONTENT DAFTAR HIBAH --}}
@@ -125,56 +128,56 @@
     <div class="container">
       <div id="kelola-hibah">
         <div class="header"><h4>Kelola Hibah</h4></div>
-          <div class="kelola-content">
-            <table class="highlight centered">
-              <thead> {{-- NAMA JUDUL DARI KELOLA HIBAH --}}
-                <tr>
-                    <th data-field="nama_hibah" style="width:30%">Nama Hibah</th>
-                    <th data-field="kategori_hibah">Kategori</th>
-                    <th data-field="pemberi">Pemberi</th>
-                    <th data-field="besar_dana">Besar Dana</th>
-                    <th data-field="periode">Periode</th>
-                    <th data-field=""></th>
-                    <th data-field=""></th>
-                </tr>
-              </thead>
+        <div class="kelola-content">
+          <table class="highlight centered">
+            <thead> {{-- NAMA JUDUL DARI KELOLA HIBAH --}}
+              <tr>
+                  <th data-field="nama_hibah" style="width:30%">Nama Hibah</th>
+                  <th data-field="kategori_hibah">Kategori</th>
+                  <th data-field="pemberi">Pemberi</th>
+                  <th data-field="besar_dana">Besar Dana</th>
+                  <th data-field="periode">Periode</th>
+                  <th data-field=""></th>
+                  <th data-field=""></th>
+              </tr>
+            </thead>
 
-              <tbody>  {{-- ISI DARI TIAP HIBAH --}}
-                @if (count($dataHibah))
-                  @foreach ($dataHibah as $hibah)
-                    <tr>
-                      <td>{{ $hibah->nama_hibah }}</td>
-                      <td>{{ $hibah->kategori_hibah }}</td>
-                      <td>{{ $hibah->pemberi }}</td>
-                      <td>{{ $hibah->besar_dana }}</td>
-                      <td>{{ $hibah->tgl_awal }} - {{ $hibah->tgl_akhir }}</td>
-                      <td> {{-- BUTTON ICON UNTUK EDIT HIBAH --}}
-                        <a class="btn-floating" href="/hibah/kelolahibah/{{$hibah->id}}">
-                        <i class="material-icons right">mode_edit</i></a>
-                      </td>
-                      <td> {{-- BUTTON ICON UNTUK HAPUS HIBAH --}}
-                        <!-- Modal Trigger -->
-                        <button data-target="modal{{$hibah->id}}" class="btn-floating btn modal-trigger">
-                          <i class="material-icons right">delete</i>
-                        </button>
-                        <!-- Modal Structure -->
-                        <div id="modal{{$hibah->id}}" class="modal">
-                          <div class="modal-content">
-                            <h4>Hapus {{$hibah->nama_hibah}}?</h4>
-                            <p>Hibah akan dihapus secara permanen</p>
-                          </div>
-                          <div class="modal-footer center-align">
-                            <a href="/hibah/deletehibah/{{$hibah->id}}" class="modal-action modal-close btn-flat">Ya</a>
-                            <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
-                          </div>
+            <tbody>  {{-- ISI DARI TIAP HIBAH --}}
+              @if (count($dataHibah))
+                @foreach ($dataHibah as $hibah)
+                  <tr>
+                    <td>{{ $hibah->nama_hibah }}</td>
+                    <td>{{ $hibah->kategori_hibah }}</td>
+                    <td>{{ $hibah->pemberi }}</td>
+                    <td>{{ $hibah->besar_dana }}</td>
+                    <td>{{ $hibah->tgl_awal }} - {{ $hibah->tgl_akhir }}</td>
+                    <td> {{-- BUTTON ICON UNTUK EDIT HIBAH --}}
+                      <a class="btn-floating" href="/hibah/kelolahibah/{{$hibah->id}}">
+                      <i class="material-icons right">mode_edit</i></a>
+                    </td>
+                    <td> {{-- BUTTON ICON UNTUK HAPUS HIBAH --}}
+                      <!-- Modal Trigger -->
+                      <button data-target="modal{{$hibah->id}}" class="btn-floating btn modal-trigger">
+                        <i class="material-icons right">delete</i>
+                      </button>
+                      <!-- Modal Structure -->
+                      <div id="modal{{$hibah->id}}" class="modal">
+                        <div class="modal-content">
+                          <h4>Hapus {{$hibah->nama_hibah}}?</h4>
+                          <p>Hibah akan dihapus secara permanen</p>
                         </div>
-                      </td>
-                    </tr>
-                  @endforeach
-                @endif
-              </tbody>
-            </table>
-          </div>
+                        <div class="modal-footer center-align">
+                          <a href="/hibah/deletehibah/{{$hibah->id}}" class="modal-action modal-close btn-flat">Ya</a>
+                          <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                @endforeach
+              @endif
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     {{-- END OF CONTENT KELOLA HIBAH --}}
@@ -254,16 +257,17 @@
         </div>
       </div>
     </div>
-    <!-- END OF CONTENT BUAT HIBAH -->
+    {{-- END OF CONTENT BUAT HIBAH --}}
   </div>
-  <!--Import jQuery before materialize.js-->
+  
+  {{-- Import jQuery before materialize.js --}}
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>
   <script>
-    $(document).ready(function() {
-        $('select').material_select();  //FOR FORM SELECT
-        $('.modal-trigger').leanModal(); //FOR MODAL
-    });
+  $(document).ready(function() {
+      $('select').material_select();  //FOR FORM SELECT
+      $('.modal-trigger').leanModal(); //FOR MODAL
+  });
   </script>
   @stop
 </body>

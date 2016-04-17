@@ -10,12 +10,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use SSO\SSO;
 
-class SSOController extends Controller
-{
-    public function index()
-    {
-     	if (!SSO::check())
-        {
+class SSOController extends Controller {
+    public function index() {
+     	if (!SSO::check()) {
             SSO::authenticate();
         }
         $userSSO = SSO::getUser();
@@ -30,7 +27,7 @@ class SSOController extends Controller
                 );
         
         //FOR MAHASISWA
-        if(count($userSIRUMAS) == 0 && $userSSO->role == 'mahasiswa'){
+        if(count($userSIRUMAS) == 0 && $userSSO->role == 'mahasiswa') {
             //username is new
             DB::table('users')->insert(
                 [
@@ -72,15 +69,14 @@ class SSOController extends Controller
     }
 	
     //FUNCTION UNTUK MEMBUAT USER LOGOUT DARI SISTEM
-	public function logout()
-    {		
-    	session_destroy(); //REMOVE ALL SESSION
-        session_start();
-        $_SESSION['login'] = ''; //MAKE LOGIN COUNTER EMPTY
+	public function logout() {       
         if(empty($_SESSION['login'])) {
             return redirect('login'); //KEMBALIKAN KE HALAMAN LOGIN
         }
         else {
+            session_destroy(); //REMOVE ALL SESSION
+            session_start();
+            $_SESSION['login'] = ''; //MAKE LOGIN COUNTER EMPTY
             SSO::logout(); // LOGOUT FROM SSO
             return view ('login'); //REDIRECT TO LOGIN PAGE
         }
@@ -88,45 +84,30 @@ class SSOController extends Controller
 
     //FUCNTION UNTUK CHECK USER UDAH LOGGEDIN ATAU BELUM
     public function loggedIn() {
-        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) 
-        {
+        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) {
             return TRUE;
         }
-        else
-        {
+        else {
             return FALSE;
         }
     }
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-    public function getId(){
-        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) 
-        {
+    public function getId() {
+        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) {
             return $_SESSION['id'];
         
         }
-        else
-        {
+        else {
             return -1;
         }
     }
 
-    public function getSpesifikRole(){
-        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) 
-        {
+    public function getSpesifikRole() {
+        if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) {
             return $_SESSION['spesifik_role'];
-        
         }
-        else
-        {
+        else {
             return -1;
         }
-=======
-    public function getID() {
-        
->>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
     }
->>>>>>> c87677ece7ab6771ac47740bc87aaaac5d268448
 }
