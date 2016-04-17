@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Session;
+use Validator;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -51,7 +52,7 @@ class HibahController extends Controller
     }
     
     public function create(Request $request) {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'nama_hibah' => 'required',
             'deskripsi' => 'required',
             'kategori_hibah' => 'required',
@@ -61,6 +62,11 @@ class HibahController extends Controller
             'tgl_akhir' => 'required',
             'staf_riset' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            Session::flash('flash_message','Semua Data Harus Terisi'); //nampilin kalo sukses
+            return redirect('hibah');
+        }
 
         //INPUT NEW FILE
         $hibah = Hibah::create($request->all()); //SIMPAN SEMUA MASUKAN KE DATABASE
@@ -93,14 +99,14 @@ class HibahController extends Controller
         $hibahOld = Hibah::find($id); //GET HIBAH OLD BY FIND ON TABLE HIBAH
 
         //REPLACE THE OLD WITH THE NEW ONES
-        $hibahOld->nama_hibah = $hibahNew->nama_hibah;
-        $hibahOld->deskripsi = $hibahNew->deskripsi;
-        $hibahOld->kategori_hibah = $hibahNew->kategori_hibah;
-        $hibahOld->besar_dana = $this->getRupiah($hibahNew->besar_dana);
-        $hibahOld->pemberi = $hibahNew->pemberi;
-        $hibahOld->tgl_awal = $hibahNew->tgl_awal;
-        $hibahOld->tgl_akhir = $hibahNew->tgl_akhir;
-        $hibahOld->staf_riset = $hibahNew->staf_riset;
+        $hibahOld->nama_hibah       = $hibahNew->nama_hibah;
+        $hibahOld->deskripsi        = $hibahNew->deskripsi;
+        $hibahOld->kategori_hibah   = $hibahNew->kategori_hibah;
+        $hibahOld->besar_dana       = $this->getRupiah($hibahNew->besar_dana);
+        $hibahOld->pemberi          = $hibahNew->pemberi;
+        $hibahOld->tgl_awal         = $hibahNew->tgl_awal;
+        $hibahOld->tgl_akhir        = $hibahNew->tgl_akhir;
+        $hibahOld->staf_riset       = $hibahNew->staf_riset;
 
         $namaHibah = $hibahOld->nama_hibah;
         $hibahOld->save();

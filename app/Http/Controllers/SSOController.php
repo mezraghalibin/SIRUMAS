@@ -77,8 +77,13 @@ class SSOController extends Controller
     	session_destroy(); //REMOVE ALL SESSION
         session_start();
         $_SESSION['login'] = ''; //MAKE LOGIN COUNTER EMPTY
-        SSO::logout(); // LOGOUT FROM SSO
-        return view ('login'); //REDIRECT TO LOGIN PAGE
+        if(empty($_SESSION['login'])) {
+            return redirect('login'); //KEMBALIKAN KE HALAMAN LOGIN
+        }
+        else {
+            SSO::logout(); // LOGOUT FROM SSO
+            return view ('login'); //REDIRECT TO LOGIN PAGE
+        }
     }
 
     //FUCNTION UNTUK CHECK USER UDAH LOGGEDIN ATAU BELUM
@@ -91,9 +96,5 @@ class SSOController extends Controller
         {
             return FALSE;
         }
-    }
-
-    public function getID() {
-        
     }
 }
