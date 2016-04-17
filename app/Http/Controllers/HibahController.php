@@ -7,28 +7,22 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SSOController;
-<<<<<<< HEAD
+
 use App\users;
-use Session;
-=======
 use App\Hibah;
->>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
+
 
 class HibahController extends Controller
 {
     public function index() {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
-        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-        
-<<<<<<< HEAD
+        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();        
+
         $users = users::where('spesifik_role','dosen')->get(); //dapetin semua user yg spesifik role nya dosen
         $id = $SSOController->getId(); // ngambil id dari sso 
         $spesifik_role = $SSOController->getSpesifikRole(); // ambil spesifik role dr users
 
-
-=======
->>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
         if($check) {
             $dataHibah = $this->read(); //GET ALL HIBAH
             return view('hibah', compact('dataHibah'));
@@ -49,10 +43,21 @@ class HibahController extends Controller
             return view('login');
         }
     }
-<<<<<<< HEAD
 
-
-//METHOD STORE PROPOSAL KE DATABASE
+    public function kelolaHibah($id) {
+        //CHECK IF USER IS LOGGED IN OR NOT
+        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        if($check) {
+            $dataHibah = Hibah::find($id); //GET SPECIFIC HIBAH
+            return view('kelolaHibah', compact('dataHibah'));
+        }
+        else {
+            return view('login');
+        }
+    }
+    
+    //METHOD STORE PROPOSAL KE DATABASE
     public function storeProposal(Request $request){
         //VALIDASI INPUT
         $this->validate($request, [
@@ -77,24 +82,6 @@ class HibahController extends Controller
         Session::flash('flash_message','Sukses meng-apply hibah');
         // then rederict back to pesan
         return redirect('applyhibah');
-    }
-
-    public function kelolaHibah()
-    {
-=======
-   
-    public function kelolaHibah($id) {
->>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
-		//CHECK IF USER IS LOGGED IN OR NOT
-        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
-        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-        if($check) {
-            $dataHibah = Hibah::find($id); //GET SPECIFIC HIBAH
-            return view('kelolaHibah', compact('dataHibah'));
-        }
-        else {
-            return view('login');
-        }
     }
     
     public function create(Request $request) {

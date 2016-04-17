@@ -78,10 +78,10 @@
 
 
 
-=======
+
 
     {{-- CONTENT INFORMASI HIBAH --}}
->>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
+
     <div class="container">
       <div id="daftar-hibah">
         <div class="header"><h4>
