@@ -93,6 +93,7 @@ class SSOController extends Controller
         }
     }
 
+<<<<<<< HEAD
     public function getId(){
         if (isset($_SESSION['login']) && !(empty($_SESSION['login']))) 
         {
@@ -115,5 +116,9 @@ class SSOController extends Controller
         {
             return -1;
         }
+=======
+    public function getID() {
+        
+>>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
     }
 }

@@ -15,7 +15,7 @@
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="assets/css/applyHibah.css">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/applyHibah.css') }}">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -61,6 +61,7 @@
         </ul>
       </div>
     </nav>
+<<<<<<< HEAD
     
     <!--IF BUAT NAMPILIN SUCCESS MESSAGE-->
       @if(Session::has('flash_message'))
@@ -77,9 +78,24 @@
 
 
 
+=======
+
+    {{-- CONTENT INFORMASI HIBAH --}}
+>>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
     <div class="container">
       <div id="daftar-hibah">
-        <div class="header"><h4>Hibah Riset/Pengmas XXX</h4></div>
+        <div class="header"><h4>
+          <?php 
+            $namaHibah = $dataHibah->nama_hibah;
+            $find = stripos($namaHibah, "Hibah");
+            if ($find === false) { //MASUK IF DI NAMA HIBAH GA ADA WORD "HIBAH"
+              echo "Hibah " . $namaHibah;
+            }
+            else {
+              echo $namaHibah; //MASUK IF DI NAMA HIBAH ADA WORD "HIBAH"
+            }
+          ?>
+          </h4></div>
           <div class="daftar-content">
             <div class="row">
               <div class="col s4">
@@ -91,7 +107,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Rp. 150.000.000</td>
+                      <td id="besar_dana">{{$dataHibah->besar_dana}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -104,8 +120,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Universitas Indonesia</td>
+                    <tr>  
+                      <td>{{$dataHibah->pemberi}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -119,7 +135,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>11, April 2016 - 11, Juni 2016</td>
+                      <td>{{$dataHibah->tgl_awal}} - {{$dataHibah->tgl_akhir}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -127,14 +143,24 @@
             </div>
             <div class="row">
               <div class="col s12">
-                <div class="description-head">Deskripsi</div>
-                <div class="description-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa quiofficia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                <table>
+                  <thead>
+                    <tr>
+                        <th class="description-head">Deskripsi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="description-content">{{$dataHibah->deskripsi}}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
       </div>
     </div>
+    {{-- END OF CONTENT INFORMASI HIBAH --}}
 
     <div class="container center-align">
       <button class="btn waves-effect waves-light card-panel red darken-2" id="apply" ><span class="white-text">Apply Hibah</span></button>

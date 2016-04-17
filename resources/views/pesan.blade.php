@@ -47,14 +47,13 @@
             $("#buat-pesan").fadeIn(500);
             $("#kelola-pesan").hide();
         });
-
-
       });
     </script>
 </head>
 <body>
   @section('main_content')
     <div class="page-content">
+<<<<<<< HEAD
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
@@ -69,6 +68,19 @@
         </ul>
       </div>
     </nav>
+=======
+      <nav class="second-navbar">
+        <div class="nav-wrapper">
+          <ul class="left hide-on-med-and-down">
+            <li id="kelola"><a href="#">Daftar Pesan</a></li>
+            <li id="buat"><a href="#">Buat Pesan</a></li>
+          </ul>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#">Login Sebagai <?php echo $username ?> - <?php echo $spesifik_role ?></a></li>
+          </ul>
+        </div>
+      </nav>
+>>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
 
       <!--IF BUAT NAMPILIN SUCCESS MESSAGE-->
       @if(Session::has('flash_message'))
@@ -108,12 +120,13 @@
       @if($spesifik_role == 'divisi riset')
       <div class="container">
         <div id="buat-pesan">
-            <div class="header"><h4>Buat Pesan</h4></div>
-              <div class="kelola-content">
+          <div class="header"><h4>Buat Pesan</h4></div>
+            <div class="kelola-content">
+              <form method="post" action="kirimpesan" class="col s6" enctype="multipart/form-data">
                 <div class="row">
-                  <form method="post" action="kirimpesan" class="col s6" enctype="multipart/form-data">
                   <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                   <input type="hidden" name="id_pengirim" value="<?php echo $id ?>">
+<<<<<<< HEAD
                       <div class="row">
                         <div class="input-field col s6">
                           <input placeholder="Subjek" id="subjek" name="subjek" type="text" class="validate">
@@ -131,39 +144,57 @@
                           </select>
                           <label>Kepada</label>
                         </div>
+=======
+                  <div class="row">
+                      <div class="input-field col s6">
+                        <input placeholder="Subjek" id="subjek" name="subjek" type="text" class="validate">
+                        <label for="subjek">Subjek</label>
+>>>>>>> 22bc855e7e8dea6e5892e7ef05216cc2088e2bc9
                       </div>
+                      <div class="input-field col s6">
+                        <select name="penerima">
+                          <option value="" disabled selected>Pilih</option>
+                          <?php foreach ($users as $user){
+                              echo "<option value=".$user->id.">".$user->nama."</option>";
+                              }
+                          ?>
+                        </select>
+                        <label>Kepada</label>
+                      </div>
+                  </div>
                 </div>
 
-              <div class="row">
-                <div class="col s12">
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <textarea id="textarea1" name="pesan" placeholder="Isi Pesan" class="materialize-textarea"></textarea>
-                      <label for="textarea1">Pesan</label>
+                <div class="row">
+                  <div class="col s12">
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <textarea id="textarea1" name="pesan" placeholder="Isi Pesan" class="materialize-textarea"></textarea>
+                        <label for="textarea1">Pesan</label>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col s12">
-                <div class="file-field input-field">
-                  <div class="btn card-panel red darken-2">
-                    <span class="white-text">File</span>
-                    <input type="file" name="file">
-                  </div>
-                  <br>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Belum ada file yang dipilih">
+                <div class="col s12">
+                  <div class="file-field input-field">
+                    <div class="btn card-panel red darken-2">
+                      <span class="white-text">File</span>
+                      <input type="file" name="file">
+                    </div>
+                    <br>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text" placeholder="Belum ada file yang dipilih">
+                    </div>
                   </div>
                 </div>
-             </div>
-              <div class="col s12">
-             <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">SEND</span>
-                <i class="material-icons right">send</i>
-             </button>
-             </div>
-          </div>
-          </form>
+                
+                <div class="col s12">
+                 <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">SEND</span>
+                    <i class="material-icons right">send</i>
+                 </button>
+                </div>
+              </form>
+            </div>
         </div>
       </div>
      @endif
