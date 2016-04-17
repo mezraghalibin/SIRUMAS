@@ -1,4 +1,13 @@
 @extends('master')
+<?php 
+  //CHECK USER'S ROLE
+  $id             = $_SESSION['id'];
+  $username       = $_SESSION['username'];
+  $name           = $_SESSION['name'];
+  $role           = $_SESSION['role'];
+  $spesifik_role  = $_SESSION['spesifik_role']; 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +15,7 @@
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="assets/css/detailPengumuman.css">
+    <link rel="stylesheet" href="{{URL::asset('assets/css/detailPengumuman.css')}}">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -49,9 +58,9 @@
       <div class="row">
         <div class="col s8 offset-s2">
           <div class="pengumuman">
-            <div id="title" class="title center-align"><h5>Pengumuman Hibah Riset UI 2015</h5></div>
-            <div id="time" class="time center-align"><h6>Kamis, 5 April 2016</h6></div>
-            <div id="content" class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+            <div id="title" class="title center-align"><h5>{{$pengumuman->judul}}</h5></div>
+            <div id="time" class="time center-align"><h6>{{$pengumuman->created_at}}</h6></div>
+            <div id="content" class="content">{{$pengumuman->konten}}</div>
           </div>
         </div>
       </div>

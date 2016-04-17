@@ -12,8 +12,11 @@
 <html>
 <head>
   <title>PENGUMUMAN</title>
-    <link rel="author" href="humans.txt">
-    <link rel="stylesheet" href="assets/css/pengumuman.css">
+  <link rel="author" href="humans.txt">
+  <link rel="stylesheet" href="{{URL::asset('assets/css/master.css')}}">
+  <link rel="stylesheet" href="{{URL::asset('assets/css/pengumuman.css')}}">
+  <meta charset="utf-8">
+ 
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -68,99 +71,22 @@
         </div>
       @endif
 
-      <!-- CONTENT KELOLA PENGUMUMAN -->
-      <div class="container">        
-        <div id="kelola-pengumuman">
-          <div class="header"><h4>Kelola Pengumuman</h4></div>
-            <div class="kelola-content">
-              <table class="highlight centered">  
-                <thead>
-                  <tr>
-                    <th>Judul</th>
-                    <th>Nomor</th>
-                    <th>Kategori</th>
-                    <th>Created_at</th>
-                    <th>Updated_at</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach($allPengumuman as $pengumuman)
-                  <tr>
-                    <td>{{$pengumuman->judul}}</td>
-                    <td>{{$pengumuman->nomor}}</td>
-                    <td>{{$pengumuman->kategori}}</td>
-                    <td>{{$pengumuman->created_at}}</td>
-                    <td>{{$pengumuman->updated_at}}</td>
-                    <td>
-                          <!-- Modal Trigger -->
-                          <form method="post" action="/hapuspengumuman/{{$pengumuman->id}}" class="">
-                          <button data-target="modal{{$pengumuman->id}}" class="btn modal-trigger">Hapus</button>
-                          <!-- Modal Structure -->
-                          <div id="modal{{$pengumuman->id}}" class="modal">
-                            <div class="modal-content">
-                              <h4>Hapus Pengumuman?</h4>
-                              <p>Pengumuman akan dihapus</p>
-                              <!-- <input type="hidden" name="_method" value="delete"></input> -->
-                              <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                              <input type="submit" name="name" value="Hapus" class="btn"></input>
-                              <input type="" value="Tidak" class="modal-close btn">
-                                 <!--<a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>-->
-                              </input>
-                            </div>   
-                          </div>
-                          </form>
-                    </td>
-                    <td>
-                        <a href="/kelolapengumumansingle/{{$pengumuman->id}}" >
-                        <button class="btn" type="submit" id="edit-pengumuman">
-                          Edit
-                        </button>
-                        </a>
-                    </td>
-                    <td>
-                      <!-- Modal Trigger -->
-                      <button data-target="modal2" class="btn modal-trigger">Publish</button>
-                      <!-- Modal Structure -->
-                      <div id="modal{{$pengumuman->id}}" class="modal">
-                        <div class="modal-content">
-                          <h4>Publish Pengumuman?</h4>
-                          <p>Pengumuman Akan ditampilkan di Beranda</p>
-                        </div>
-                        <div class="modal-footer">
-                          <a href="#!" class=" modal-action modal-close btn-flat">Ya</a>
-                          <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
-                        </div>
-                      </div>
-                      </button>
-                    </td>
-                  <tr>
-                @endforeach
-                </tbody>
-              </table>
-          </div>
-        </div>
-      </div>
-      <!-- END OF CONTENT KELOLA PENGUMUMAN -->
-
       <!-- CONTENT BUAT PENGUMUMAN -->
       <div class="container">
-        <div id="buat-pengumuman">
-            <div class="header"><h4>Buat Pengumuman</h4></div>
-              <form method="post" action="buatpengumuman" class="col s12">
+        <div id="update-pengumuman">
+            <div class="header"><h4>Edit Pengumuman</h4></div>
+              <form method="post" action="/kelolapengumumansingle/{{$pengumuman->id}}" class="col s12">
               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
               <input type="hidden" name="staf_riset" value="<?php echo $id ?>"> <!-- naro id staf riset -->
               <input type="hidden" name="status" value=0> <!-- status di set 0 -->
               <!-- bagian atas -->
               <div class="row">
                 <div class="input-field col s4">
-                  <input id="judul_pengumuman" type="text" class="validate" name="judul">
+                  <input id="judul_pengumuman" type="text" class="validate" name="judul" value="{{$pengumuman->judul}}">
                   <label class="active" for="judul_hibah">Judul</label>
                 </div>
                 <div class="input-field col s4">
-                  <input id="nomor_pengumuman" type="text" class="validate" name="nomor">
+                  <input id="nomor_pengumuman" type="text" class="validate" name="nomor" value="{{$pengumuman->nomor}}">
                   <label class="active" for="nomor_hibah">Nomor</label>
                 </div>
                 <div class="input-field col s2">
@@ -179,20 +105,20 @@
                   <label for="konten_pengumuman">Konten Pengumuman</label>
                 </div>
               </div>
-              
+
               <div class="row">  
                 <div class="file-field input-field col s6">
                   <div class="btn card-panel red darken-2">
                     <span class="white-text">File</span>
-                    <input type="file" name="file">
+                    <input type="file" name="file" value="{{$pengumuman->file}}">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Belum ada file yang dipilih">
+                    <input class="file-path validate" type="text" placeholder="{{$pengumuman->file}}">
                   </div>
                 </div>
               </div>
               <div class="col s6">
-                <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">Buat Pengumuman</span>
+                <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">Perbarui Pengumuman</span>
                 <i class="material-icons right">send</i>
                 </button>
               </div>
@@ -208,12 +134,12 @@
       <script>
         $(document).ready(function() {
           $('select').material_select();
-          $('#konten_pengumuman_isi').val('Lorem ipsum dolor...');
+          $('#konten_pengumuman').val('{{$pengumuman->konten}}');
           $('#konten_pengumuman').trigger('autoresize');
-          $('#konten_pengumuman-isi').trigger('autoresize');
           $('.modal-trigger').leanModal();
         });
       </script>
+
     </div>
 
     @if ($errors->any())

@@ -8,6 +8,6 @@ class Pengumuman extends Model
 {
     //TABLE
     protected $table = 'pengumuman';
-    protected $fillable = array('nomor', 'judul', 'status','kategori','konten');
+    protected $fillable = array('nomor', 'judul', 'status','kategori','konten', 'staf_riset', 'file');
     //protected $guarded = ['id'];
 }
