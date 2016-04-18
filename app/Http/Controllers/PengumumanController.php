@@ -72,15 +72,23 @@ class PengumumanController extends Controller
             ]);
         //BIKIN PENGUMUMAN BARU
         
-        if($request->hasFile('file')){
-            $pengumuman = Pengumuman::create($request->all());
+        if($request->file('file')->isValid()){
+            $msg = \App\Pengumuman::create($request->all());
             //untuk upload file, request file dengan segala extensi
-            $filename = $request->file('file')->getClientOriginalExtension();
+            $filename = $request->file('file')->getClientOriginalName();
             //memindahkan file yg dilampirkan tadi ke path /public/upload
-            $request->file('file')->move(base_path().'/public/upload/pengumuman', $filename);
-            $pengumuman->file = $filename;
+            $request->file('file')->move(base_path().'/public/upload/', $filename);
+            $msg->file = $filename;
             //SAVE FILEnya
-            $pengumuman->save();
+            $msg->save();
+            // $pengumuman = Pengumuman::create($request->all());
+            // //untuk upload file, request file dengan segala extensi
+            // $filename = $request->file('file')->getClientOriginalExtension();
+            // //memindahkan file yg dilampirkan tadi ke path /public/upload
+            // $request->file('file')->move(base_path().'/public/upload/', $filename);
+            // $pengumuman->file = $filename;
+            // //SAVE FILEnya
+            // $pengumuman->save();
         } else {
             $pengumuman = Pengumuman::create($request->all());
             $pengumuman->file = null;

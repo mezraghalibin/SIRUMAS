@@ -157,7 +157,7 @@
       <div class="container">
         <div id="buat-pengumuman">
             <div class="header"><h4>Buat Pengumuman</h4></div>
-              <form method="post" action="buatpengumuman" class="col s12">
+              <form method="post" action="buatpengumuman" class="col s12" enctype="multipart/form-data">
               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
               <input type="hidden" name="staf_riset" value="<?php echo $id ?>"> <!-- naro id staf riset -->
               <input type="hidden" name="status" value=0> <!-- status di set 0 -->
