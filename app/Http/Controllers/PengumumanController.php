@@ -145,4 +145,13 @@ class PengumumanController extends Controller
         // //Post::destroy($id);
         //return redirect('pengumuman');
     }
+
+    public function publikasi($id){
+        $pengumuman = Pengumuman::find($id);
+        $pengumuman->status = 1;
+        $pengumuman->save();
+        Session::flash('flash_message', 'Pengumuman berhasil dipublish!');
+        return redirect('pengumuman');
+    }
+
 }

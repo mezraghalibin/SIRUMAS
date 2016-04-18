@@ -40,6 +40,7 @@ Route::get('/kelolahibah', 'HibahController@kelolaHibah');
 /**************** PESAN & MOU ******************/
 Route::get('/pesan', 'PesanController@index');
 Route::post('/kirimpesan', 'PesanController@store');
+Route::get('/detailPesan/{id}', 'PesanController@detailPesan');
 Route::get('/mou', 'MouController@index');
 /**************** EO PESAN & MOU ******************/
 
@@ -77,4 +78,5 @@ Route::get('/kelolapengumumansingle/{id}', 'PengumumanController@edit');
 Route::post('/hapuspengumuman/{id}', 'PengumumanController@destroy');
 Route::post('/kelolapengumumansingle/{id}', 'PengumumanController@update');
 Route::post('/buatpengumuman', 'PengumumanController@store');
+Route::post('/publishpengumuman/{id}', 'PengumumanController@publikasi');
 /**************** EO PENGUMUMAN ********************/

@@ -21,6 +21,7 @@ class CreatePengumumanTable extends Migration
             $table->boolean('status');
             $table->string('kategori',15);
             $table->text('konten');
+            $table->text('file')->nullable();
             $table->foreign('staf_riset')->references('id')->on('users');
         });
     }

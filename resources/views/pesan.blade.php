@@ -21,7 +21,6 @@
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     
     <!--FOR MATERIALIZE DONT DELETE THIS-->
 
     <!--FOR BOOTSTRAP DONT DELETE THIS-->
@@ -59,7 +58,10 @@
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
           <li id="kelola"><a href="#">Daftar Pesan</a></li>
+          <!-- if buat nampilin tab buat pesan khusus ke divisi riset-->
+          @if($spesifik_role == 'divisi riset')
           <li id="buat"><a href="#">Buat Pesan</a></li>
+          @endif
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Login Sebagai <?php echo $username ?> - <?php echo $spesifik_role ?></a></li>
@@ -67,11 +69,13 @@
       </div>
     </nav>
 
+      <!--IF BUAT NAMPILIN SUCCESS MESSAGE-->
       @if(Session::has('flash_message'))
         <div class="card-panel teal">
           <span class="white-text">{{ Session::get('flash_message') }}</span>
         </div>
       @endif
+      
       <!-- CONTENT DAFTAR PESAN-->
       <div class="container">
         <div id="kelola-pesan">
@@ -81,19 +85,22 @@
               <thead>
                 <tr>
                   <th>Tanggal</th>
-                  <th>Pesan</th>
-                  <th></th>
+                  @if($spesifik_role == 'divisi riset')
+                  <th>Pesan Terkirim</th>
+                  @endif
+                  @if($spesifik_role == 'dosen')
+                  <th>Pesan Masuk</th>
+                  @endif
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>01/01/2016</td>
-                  <td>MoU dengan dekan/wakil dekan</td>
-                </tr>
-                <tr>
-                	<td>01/09/2015</td>
-                	<td>Anda terpilih menjadi penerima hibah</td>
-                </tr>
+              <!--foreach untuk setiap message yg diambil bakal ngeprint tanggal dan subjeknya-->
+              <?php foreach($messages as $message){
+                  echo '<tr>
+                  <td>'.$message->created_at.'</td>
+                  <td><a href="/detailPesan/'.$message->id.'">'.$message->subjek.'</a></td>
+                  </tr>';
+                }?>
               </tbody>
             </table>
           </div>
@@ -102,12 +109,13 @@
       <!-- END OF CONTENT DAFTAR PESAN -->
 
       <!-- CONTENT BUAT PESAN -->
+      @if($spesifik_role == 'divisi riset')
       <div class="container">
         <div id="buat-pesan">
             <div class="header"><h4>Buat Pesan</h4></div>
               <div class="kelola-content">
                 <div class="row">
-                  <form method="post" action="kirimpesan" class="col s6">
+                  <form method="post" action="kirimpesan" class="col s6" enctype="multipart/form-data">
                   <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                   <input type="hidden" name="id_pengirim" value="<?php echo $id ?>">
                       <div class="row">
@@ -118,6 +126,8 @@
                         <div class="input-field col s6">
                           <select name="penerima">
                             <option value="" disabled selected>Pilih</option>
+                            <!-- foreach untuk menampilkan user yg bisa dipilih ketika
+                            mengirim pesan -->
                             <?php foreach ($users as $user){
                                 echo "<option value=".$user->id.">".$user->nama."</option>";
                                 }
@@ -160,7 +170,7 @@
           </form>
         </div>
       </div>
-     
+     @endif
       <!-- END OF CONTENT BUAT PESAN -->
 
    <!--Import jQuery before materialize.js-->

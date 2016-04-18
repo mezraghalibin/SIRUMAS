@@ -122,19 +122,33 @@
                     </td>
                     <td>
                       <!-- Modal Trigger -->
+<<<<<<< HEAD
                       <button data-target="modal{{$pengumuman->id}}" class="btn modal-trigger">Publish</button>
                       <!-- Modal Structure -->
                       <div id="modal{{$pengumuman->id}}" class="modal">
+=======
+                     
+                      @if($pengumuman->status === 1)
+                          Published
+                      @else
+                        <form method="post" action="/publishpengumuman/{{$pengumuman->id}}" class="">
+                        <button data-target="publish{{$pengumuman->id}}" class="btn modal-trigger">Publish</button>
+                        <!-- Modal Structure -->
+                        <div id="publish{{$pengumuman->id}}" class="modal">
+>>>>>>> 896703dbc6025a47aad621d90322d29d5c249d1c
                         <div class="modal-content">
                           <h4>Publish Pengumuman?</h4>
                           <p>Pengumuman Akan ditampilkan di Beranda</p>
                         </div>
                         <div class="modal-footer">
-                          <a href="#!" class=" modal-action modal-close btn-flat">Ya</a>
-                          <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
+                              <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                              <input type="submit" name="name" value="Ya" class="btn"></input>
+                              <input type="" value="Tidak" class="modal-close btn">
                         </div>
                       </div>
                       </button>
+                      </form>
+                      @endif
                     </td>
                   <tr>
                 @endforeach
