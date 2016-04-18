@@ -122,12 +122,7 @@
                     </td>
                     <td>
                       <!-- Modal Trigger -->
-<<<<<<< HEAD
-                      <button data-target="modal{{$pengumuman->id}}" class="btn modal-trigger">Publish</button>
-                      <!-- Modal Structure -->
-                      <div id="modal{{$pengumuman->id}}" class="modal">
-=======
-                     
+                      
                       @if($pengumuman->status === 1)
                           Published
                       @else
@@ -135,7 +130,6 @@
                         <button data-target="publish{{$pengumuman->id}}" class="btn modal-trigger">Publish</button>
                         <!-- Modal Structure -->
                         <div id="publish{{$pengumuman->id}}" class="modal">
->>>>>>> 896703dbc6025a47aad621d90322d29d5c249d1c
                         <div class="modal-content">
                           <h4>Publish Pengumuman?</h4>
                           <p>Pengumuman Akan ditampilkan di Beranda</p>
