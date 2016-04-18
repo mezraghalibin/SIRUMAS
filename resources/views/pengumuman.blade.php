@@ -55,7 +55,7 @@
               @endif
           </ul>
           <ul class="right hide-on-med-and-down">
-            <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+            <li><a href="#">Login Sebagai <?php echo $username ?> - <?php echo $spesifik_role ?></a></li>
           </ul>
         </div>
       </nav>
