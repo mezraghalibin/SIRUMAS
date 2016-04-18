@@ -109,7 +109,7 @@ class PengumumanController extends Controller
             ]);
         //UPDATE PENGUMUMAN BARU
         $pengumuman = Pengumuman::find($id);
-        if($request->file('file') === null){
+        if($request->file('file')->isValid()){
             $pengumuman->judul = $request->judul;
             $pengumuman->nomor = $request->nomor;
             $pengumuman->status = $request->status;
