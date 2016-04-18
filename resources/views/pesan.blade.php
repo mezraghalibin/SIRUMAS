@@ -21,7 +21,6 @@
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     
     <!--FOR MATERIALIZE DONT DELETE THIS-->
 
     <!--FOR BOOTSTRAP DONT DELETE THIS-->
@@ -68,6 +67,7 @@
       </div>
     </nav>
 
+<<<<<<< HEAD
     {{-- FLASH MESSAGE  --}}
     @if(Session::has('flash_message'))
       <div class="card-panel teal">
@@ -99,6 +99,43 @@
               }?>
             </tbody>
           </table>
+=======
+      <!--IF BUAT NAMPILIN SUCCESS MESSAGE-->
+      @if(Session::has('flash_message'))
+        <div class="card-panel teal">
+          <span class="white-text">{{ Session::get('flash_message') }}</span>
+        </div>
+      @endif
+      
+      <!-- CONTENT DAFTAR PESAN-->
+      <div class="container">
+        <div id="kelola-pesan">
+          <div class="header"><h4>Daftar Pesan</h4></div>
+          <div class="kelola-content">
+            <table class="highlight centered">
+              <thead>
+                <tr>
+                  <th>Tanggal</th>
+                  @if($spesifik_role == 'divisi riset')
+                  <th>Pesan Terkirim</th>
+                  @endif
+                  @if($spesifik_role == 'dosen')
+                  <th>Pesan Masuk</th>
+                  @endif
+                </tr>
+              </thead>
+              <tbody>
+              <!--foreach untuk setiap message yg diambil bakal ngeprint tanggal dan subjeknya-->
+              <?php foreach($messages as $message){
+                  echo '<tr>
+                  <td>'.$message->created_at.'</td>
+                  <td><a href="/detailPesan/'.$message->id.'">'.$message->subjek.'</a></td>
+                  </tr>';
+                }?>
+              </tbody>
+            </table>
+          </div>
+>>>>>>> 896703dbc6025a47aad621d90322d29d5c249d1c
         </div>
       </div>
     </div>

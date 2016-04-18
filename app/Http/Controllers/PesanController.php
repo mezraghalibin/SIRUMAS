@@ -13,6 +13,7 @@ class PesanController extends Controller
 		//CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        
         $users = \App\users::where('spesifik_role','dosen')->get(); //dapetin semua user yg spesifik role nya dosen
         $a = $SSOController->getId(); // ngambil id dari sso, liat methodnya di pesan model
         $b = $SSOController->getSpesifikRole(); // ambil spesifik role dr user, liat methodnya di pesan model
@@ -42,21 +43,35 @@ class PesanController extends Controller
         ]);
         
         //BIKIN PESAN BARU
-        $msg = \App\Pesan::create($request->all());
-        //untuk upload file, request file dengan segala extensi
-        $filename = $msg->id.'.'. $request->file('file')->getClientOriginalExtension();
-        //memindahkan file yg dilampirkan tadi ke path /public/upload
-        $request->file('file')->move(base_path().'/public/upload/', $filename);
-        $msg->file = $filename;
-        //SAVE FILEnya
-        $msg->save();
+        if($request->hasFile('file')){
+            $msg = \App\Pesan::create($request->all());
+            //untuk upload file, request file dengan segala extensi
+            $filename = $request->file('file')->getClientOriginalName();
+            //memindahkan file yg dilampirkan tadi ke path /public/upload
+            $request->file('file')->move(base_path().'/public/upload/', $filename);
+            $msg->file = $filename;
+            //SAVE FILEnya
+            $msg->save();
+        } else {
+             $msg = \App\Pesan::create($request->all());
+             $msg->file = null;
+             $msg->save();
+        }
+        
         // Session untuk Success Notif
         Session::flash('flash_message','Pesan berhasil terkirim');
         // then rederict back to pesan
         return redirect('pesan');
     }
 
+<<<<<<< HEAD
     public function detailPesan($id) {
+=======
+    public function detailPesan($id){
+        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        
+>>>>>>> 896703dbc6025a47aad621d90322d29d5c249d1c
         $message = \App\Pesan::find($id);
         return view('detailPesan',compact('message'));
     }

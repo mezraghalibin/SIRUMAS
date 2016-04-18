@@ -12,8 +12,14 @@
 <head>
 	<title>Home</title>
   	<!--CSS FOR MASTER DONT DELETE THIS -->
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{ URL::asset('assets/css/master.css') }}">
 
+=======
+    
+    <link rel="stylesheet" href="{{URL::asset('assets/css/master.css')}}">
+    
+>>>>>>> 896703dbc6025a47aad621d90322d29d5c249d1c
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
       <!--Import Google Icon Font-->

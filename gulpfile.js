@@ -66,8 +66,14 @@ elixir(function(mix) {
 elixir(function(mix) {
     mix.sass('pesan.scss', 'public/assets/css/pesan.css');
 });
+<<<<<<< HEAD
 elixir(function(mix) {
     mix.sass('mou.scss', 'public/assets/css/mou.css');
+=======
+
+elixir(function(mix) {
+    mix.sass('detailpesan.scss', 'public/assets/css/detailpesan.css');
+>>>>>>> 896703dbc6025a47aad621d90322d29d5c249d1c
 });
 /*********** EO PESAN & MOU ***********/
 

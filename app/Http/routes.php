@@ -22,7 +22,7 @@ Route::get('/logout', 'SSOController@logout');
 
 /**************** ROUTE BERANDA ****************/
 Route::get('/', 'BerandaController@index');
-Route::get('/detailpengumuman', 'BerandaController@detailPengumuman');
+Route::get('/detailpengumuman/{id}', 'BerandaController@show');
 /**************** EO ROUTE BERANDA ****************/
 
 
@@ -43,10 +43,14 @@ Route::get('/hibah/deletehibah/{id}', 'HibahController@delete'); //GO TO SPECIFI
 /**************** PESAN *************************/
 Route::get('/pesan', 'PesanController@index');
 Route::post('/kirimpesan', 'PesanController@store');
+<<<<<<< HEAD
 //Route::get('/detailPesan/{id}', 'PesanController@detailPesan');
 /**************** EO PESAN ********************/
 
 /***************** EO MOU ***************************/
+=======
+Route::get('/detailPesan/{id}', 'PesanController@detailPesan');
+>>>>>>> 896703dbc6025a47aad621d90322d29d5c249d1c
 Route::get('/mou', 'MouController@index');
 //CREATE
 Route::post('/uploadmou', 'MouController@upload');
@@ -91,5 +95,9 @@ Route::get('/uploadlaporantdkberhibah', 'LaporanController@uploadlaporantdkberhi
 
 /**************** PENGUMUMAN ********************/
 Route::get('/pengumuman', 'PengumumanController@index');
-Route::get('/kelolapengumuman', 'PengumumanController@kelola');
+Route::get('/kelolapengumumansingle/{id}', 'PengumumanController@edit');
+Route::post('/hapuspengumuman/{id}', 'PengumumanController@destroy');
+Route::post('/kelolapengumumansingle/{id}', 'PengumumanController@update');
+Route::post('/buatpengumuman', 'PengumumanController@store');
+Route::post('/publishpengumuman/{id}', 'PengumumanController@publikasi');
 /**************** EO PENGUMUMAN ********************/

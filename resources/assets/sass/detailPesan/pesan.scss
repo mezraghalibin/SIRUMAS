@@ -1,6 +1,5 @@
-//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-//@import "app/bower_components/font-awesome/scss/font-awesome.scss";
-@import "node_modules/materialize-css/sass/materialize.scss";
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap"; //IMPORT BUAT BOOTSTRAP JANGAN DIHAPUS
+@import "node_modules/materialize-css/sass/materialize.scss"; //INI UDAH BENER MANGGILNYA
 @import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400);
 
 $base-color1: #fff;
@@ -33,17 +32,25 @@ html, body {
         .header {
             padding-top: 25px;
             padding-bottom: 25px;
+            font-size: 30px;
             font: 100% $heading-font;
         }
 
-        td{
-            .ellipsis{
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;     /** IE6+, Firefox 7+, Opera 11+, Chrome, Safari **/
-                -o-text-overflow: ellipsis;  /** Opera 9 & 10 **/
-                width: 10px;
-            }    
+        .row{
+            form{
+                .browse{
+                    input{
+                        color: black;
+                    }
+                }
+                
+            }
+
+
         }
+        .btn{
+                    background-color: black;
+                }
+
     }
 }
