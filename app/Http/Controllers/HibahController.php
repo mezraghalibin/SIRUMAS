@@ -18,10 +18,11 @@ class HibahController extends Controller {
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         
-        $users = users::where('spesifik_role','dosen')->get(); //dapetin semua user yg spesifik role nya dosen
-        //KENAPA GA PAKE SESSION AJA? KAN UDAH DISIMPEN KETIKA LOGIN
-        $id = $SSOController->getId(); // ngambil id dari sso 
-        $spesifik_role = $SSOController->getSpesifikRole(); // ambil spesifik role dr users
+        //GET ALL USERS DENGAN SPESIFIK ROLE = DOSEN
+        $users = users::where('spesifik_role','dosen')->get();
+
+        $id = $SSOController->getId(); //GET ID FROM SSO
+        $spesifik_role = $SSOController->getSpesifikRole(); //GET USER'S SPESIFIK ROLE FROM USERS TABLE
         
         if ($check) {
             $dataHibah = $this->read(); //GET ALL HIBAH
@@ -79,9 +80,10 @@ class HibahController extends Controller {
         //Bikin proposal
         $proposal = Proposal::create($request->all());
         //untuk upload file, request file dengan segala extensi
-        $filename = $proposal->nama_pengaju. '_' . $proposal->judul_proposal . '.'. $request->file('file')->getClientOriginalExtension();
+        $filename = $proposal->id . "_" . $proposal->nama_pengaju. '_' . $proposal->judul_proposal . '.'. 
+                $request->file('file')->getClientOriginalExtension();
         //memindahkan file yg dilampirkan tadi ke path /public/upload
-        $request->file('file')->move(base_path().'/public/upload/', $filename);
+        $request->file('file')->move(base_path().'/public/upload/proposal', $filename);
         $proposal->file = $filename;
         //SAVE FILEnya
         $proposal->save();
@@ -92,7 +94,7 @@ class HibahController extends Controller {
     }
     
     public function create(Request $request) {
-        $validator = Validator::make($request->all(), [
+        $createValidator = Validator::make($request->all(), [
             'nama_hibah' => 'required',
             'deskripsi' => 'required',
             'kategori_hibah' => 'required',
@@ -103,28 +105,47 @@ class HibahController extends Controller {
             'staf_riset' => 'required'
         ]);
 
-        if ($validator->fails()) {
-            Session::flash('flash_message','Semua Data Harus di Isi'); //nampilin kalo sukses
+        //CHECK VALIDATOR, IF FAILS RETURN TO HIBAH PAGE
+        if ($createValidator->fails()) {
+            //FLASH MESSAGE IF FAILS
+            Session::flash('flash_message','Gagal Membuat Hibah, Harap Mengisi Semua Data.'); 
             return redirect('hibah');
         }
 
         //INPUT NEW FILE
-        $hibah = Hibah::create($request->all()); //SIMPAN SEMUA MASUKAN KE DATABASE
+        $hibah = Hibah::create($request->all()); //SIMPAN SEMUA MASUKAN DALAM BENTUK HIBAH
         $namaHibah = $hibah->nama_hibah; //GET NAMA HIBAH
 
         $hibah->besar_dana = $this->getRupiah($hibah->besar_dana); //PARSE NOMINAL TO RUPIAH
         $hibah->save(); //SAVE PERUBAHAN YANG DILAKUKAN KEDALAM DATABASE
-        Session::flash('flash_message',$namaHibah . ' Telah Tersimpan'); //nampilin kalo sukses
+        Session::flash('flash_message',$namaHibah . ' Telah Tersimpan'); //FLASH MESSAGE IF SUCCESS
         return redirect('hibah');
     }
 
     public function read() {
-        $dataHibah = Hibah::all();
+        $dataHibah = Hibah::all(); //GET ALL DATA
         return $dataHibah;
     }
 
+    public function readRiset() {
+        $dataHibahRiset = DB::table('hibah')
+            ->select('*')
+            ->where('kategori_hibah', '=', 'Riset')
+            ->get();
+        return $dataHibahRiset;
+    }
+
+    public function readPengmas() {
+        $dataHibahPengmas = DB::table('hibah')
+            ->select('*')
+            ->where('kategori_hibah', '=', 'Pengmas')
+            ->get();
+        return $dataHibahPengmas;
+    }
+
     public function update(Request $request, $id) {
-        $this->validate($request, [
+        //CHECK VALIDATOR
+        $updateValidator = Validator::make($request->all(), [
             'nama_hibah' => 'required',
             'deskripsi' => 'required',
             'kategori_hibah' => 'required',
@@ -134,6 +155,13 @@ class HibahController extends Controller {
             'tgl_akhir' => 'required',
             'staf_riset' => 'required'
         ]);
+
+        //IF CHECK THEN REDIRECT
+        if ($updateValidator->fails()) {
+            //FLASH MESSAGE IF FAILS
+            Session::flash('flash_message','Gagal Memperbaharui Hibah, Harap Mengisi Semua Data');
+            return redirect('hibah'); 
+        }
 
         $hibahNew = $request; //GET HIBAH NEW BY REQUEST USER
         $hibahOld = Hibah::find($id); //GET HIBAH OLD BY FIND ON TABLE HIBAH
@@ -148,14 +176,16 @@ class HibahController extends Controller {
         $hibahOld->tgl_akhir        = $hibahNew->tgl_akhir;
         $hibahOld->staf_riset       = $hibahNew->staf_riset;
 
-        $namaHibah = $hibahOld->nama_hibah;
-        $hibahOld->save();
-        Session::flash('flash_message',$namaHibah . ' Telah Diubah'); //nampilin kalo sukses
+        $namaHibah = $hibahOld->nama_hibah; //GET NAME OF OLD HIBAH
+        $hibahOld->save(); //SAVE TO DATABASE
+        Session::flash('flash_message',$namaHibah . ' Telah Diubah'); //FLASH MESSAGE IF SUCCESS
         return redirect('hibah');
     }
 
     public function delete($id) {
-        Hibah::find($id)->delete();
+        $hibah = Hibah::find($id);  //GET SPECIFIC HIBAH
+        Session::flash('flash_message',$hibah->nama_hibah . ' Telah Dihapus'); //FLASH MESSAGE IF SUCCESS
+        $hibah->delete(); //DELETE FROM DATABASE
         return redirect('hibah');
     }
 

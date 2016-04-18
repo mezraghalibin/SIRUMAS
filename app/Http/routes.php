@@ -28,10 +28,14 @@ Route::get('/detailpengumuman', 'BerandaController@detailPengumuman');
 
 /**************** ROUTE HIBAH ******************/
 Route::get('/hibah', 'HibahController@index'); //FIRST TIME TO HIBAH PAGE
+//APPLY
 Route::get('/hibah/applyhibah/{id}', 'HibahController@applyhibah'); //GO TO SPECIFIC HIBAH PAGE
+//CREATE
 Route::post('/createhibah', 'HibahController@create'); //ROUTES TO CREATE HIBAH
+//KELOLA
 Route::get('/hibah/kelolahibah/{id}', 'HibahController@kelolaHibah'); //GOT TO SPECIFIC HIBAH PAGE FOR EDIT
 Route::post('/hibah/kelolahibah/updatehibah/{id}', 'HibahController@update'); //ROUTES TO UPDATE HIBAH
+//DELETE
 Route::get('/hibah/deletehibah/{id}', 'HibahController@delete'); //GO TO SPECIFIC HIBAH PAGE
 /**************** EO ROUTE HIBAH ******************/
 
@@ -44,13 +48,22 @@ Route::post('/kirimpesan', 'PesanController@store');
 
 /***************** EO MOU ***************************/
 Route::get('/mou', 'MouController@index');
+//CREATE
 Route::post('/uploadmou', 'MouController@upload');
+//UPDATE
+Route::get('/mou/kelolamou/{id}', 'MouController@kelolaMoU');
+Route::post('/mou/kelolamou/updatemou/{id}', 'MouController@update');
+//DELETE
+Route::get('/mou/deletemou/{id}', 'MouController@delete');
+//DOWNLOAD
+Route::get('/mou/downloadmou/{id}', 'MouController@getDownload');
 /**************** EO MOU ********************/
 
 
 /**************** PROPOSAL ******************/
 Route::get('/proposal', 'ProposalController@index');
-Route::get('/proposalupload', 'ProposalController@uploadRevisi');
+Route::get('/proposalupload/{id}', 'ProposalController@uploadRevisi');
+Route::post('/proposalupload/uploadrevisi/{id}', 'ProposalController@revisi');
 /**************** EO PROPOSAL ******************/
 
 

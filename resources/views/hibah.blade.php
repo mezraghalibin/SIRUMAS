@@ -13,7 +13,6 @@
 <head>
   <title>HIBAH</title>
     <link rel="author" href="humans.txt">
-
     <!-- CSS FOR PAGE HIBAH -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/hibah.css') }}">
 
@@ -55,6 +54,7 @@
             $("#kelola-hibah").hide(0); //hide page kelola hibah
         });
 
+        //CLEAR FLASH MESSAGE
         $("#clear").click(function(){
           $("#flash-msg").fadeOut(1000);
         });
