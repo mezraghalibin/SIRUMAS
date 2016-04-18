@@ -122,7 +122,7 @@
                     </td>
                     <td>
                       <!-- Modal Trigger -->
-                      <button data-target="modal2" class="btn modal-trigger">Publish</button>
+                      <button data-target="modal{{$pengumuman->id}}" class="btn modal-trigger">Publish</button>
                       <!-- Modal Structure -->
                       <div id="modal{{$pengumuman->id}}" class="modal">
                         <div class="modal-content">
