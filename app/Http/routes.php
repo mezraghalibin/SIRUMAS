@@ -78,4 +78,5 @@ Route::get('/kelolapengumumansingle/{id}', 'PengumumanController@edit');
 Route::post('/hapuspengumuman/{id}', 'PengumumanController@destroy');
 Route::post('/kelolapengumumansingle/{id}', 'PengumumanController@update');
 Route::post('/buatpengumuman', 'PengumumanController@store');
+Route::post('/publishpengumuman/{id}', 'PengumumanController@publikasi');
 /**************** EO PENGUMUMAN ********************/

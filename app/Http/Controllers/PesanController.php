@@ -45,14 +45,21 @@ class PesanController extends Controller
             'pesan' => 'required'
             ]);
         //BIKIN PESAN BARU
-        $msg = \App\Pesan::create($request->all());
-        //untuk upload file, request file dengan segala extensi
-        $filename = $request->file('file')->getClientOriginalName();
-        //memindahkan file yg dilampirkan tadi ke path /public/upload
-        $request->file('file')->move(base_path().'/public/upload/', $filename);
-        $msg->file = $filename;
-        //SAVE FILEnya
-        $msg->save();
+        if($request->hasFile('file')){
+            $msg = \App\Pesan::create($request->all());
+            //untuk upload file, request file dengan segala extensi
+            $filename = $request->file('file')->getClientOriginalName();
+            //memindahkan file yg dilampirkan tadi ke path /public/upload
+            $request->file('file')->move(base_path().'/public/upload/', $filename);
+            $msg->file = $filename;
+            //SAVE FILEnya
+            $msg->save();
+        } else {
+             $msg = \App\Pesan::create($request->all());
+             $msg->file = null;
+             $msg->save();
+        }
+        
         // Session untuk Success Notif
         Session::flash('flash_message','Pesan berhasil terkirim');
         // then rederict back to pesan

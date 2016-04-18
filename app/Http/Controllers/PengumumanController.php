@@ -104,16 +104,16 @@ class PengumumanController extends Controller
         if($request->file('file') === null){
             $pengumuman->judul = $request->judul;
             $pengumuman->nomor = $request->nomor;
-            $pengumuman->status = $request->judul;
-            $pengumuman->kategori = $request->judul;
-            $pengumuman->konten = $request->judul;
+            $pengumuman->status = $request->status;
+            $pengumuman->kategori = $request->kategori;
+            $pengumuman->konten = $request->konten;
             $pengumuman->save();
         } else {
             $pengumuman->judul = $request->judul;
             $pengumuman->nomor = $request->nomor;
-            $pengumuman->status = $request->judul;
-            $pengumuman->kategori = $request->judul;
-            $pengumuman->konten = $request->judul;
+            $pengumuman->status = $request->status;
+            $pengumuman->kategori = $request->kategori;
+            $pengumuman->konten = $request->konten;
             $pengumuman->file = $request->file;
             //untuk upload file, request file dengan segala extensi
             $filename = $request->file('file')->getClientOriginalName();
@@ -145,4 +145,13 @@ class PengumumanController extends Controller
         // //Post::destroy($id);
         //return redirect('pengumuman');
     }
+
+    public function publikasi($id){
+        $pengumuman = Pengumuman::find($id);
+        $pengumuman->status = 1;
+        $pengumuman->save();
+        Session::flash('flash_message', 'Pengumuman berhasil dipublish!');
+        return redirect('pengumuman');
+    }
+
 }

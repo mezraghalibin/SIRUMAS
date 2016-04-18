@@ -226,7 +226,10 @@
                     echo '<h5 class="left-align">Penerima: '.$message->hasPenerima->nama.'</h5>';
                     echo '<h5 class="left-align">Subjek: '.$message->subjek.'</h5>';
                     echo '<h5 class="left-align">Pesan: '.$message->pesan.'</h5>';
-                    echo '<a href="/upload/'.$message->file.'">Unduh file</a>';
+                    if($message->file != null){
+                      echo '<a href="/upload/'.$message->file.'">Unduh file</a>';
+                    }
+                    
                   ?>  
                 </div>
               </div>
