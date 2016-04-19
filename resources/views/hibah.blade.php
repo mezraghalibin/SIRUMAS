@@ -137,8 +137,8 @@
                   <th data-field="pemberi">Pemberi</th>
                   <th data-field="besar_dana">Besar Dana</th>
                   <th data-field="periode">Periode</th>
-                  <th data-field=""></th>
-                  <th data-field=""></th>
+                  <th data-field="" style="width:7%">Edit</th>
+                  <th data-field="" style="width:4%">Delete</th>
               </tr>
             </thead>
 

@@ -11,5 +11,5 @@ class Hibah extends Model
     protected $fillable = array('nama_hibah', 'deskripsi', 'kategori_hibah',
     	'besar_dana','pemberi','tgl_awal','tgl_akhir','staf_riset');
     protected $guarded = ['id'];
-    public $timestamps = false;
+    //public $timestamps = false;
 }
