@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\CreatePesanFormRequest;
 use Session;
 use DB;
 use Illuminate\Http\Request;
@@ -65,13 +65,13 @@ class PesanController extends Controller
   // }
 
   //METHOD STORE PESAN KE DATABASE
-  public function create(Request $request) {
+  public function create(CreatePesanFormRequest $request) {
     //VALIDASI INPUT
-    $this->validate($request, [
-        'subjek' => 'required',
-        'penerima' => 'required',
-        'pesan' => 'required'
-    ]);
+    // $this->validate($request, [
+    //     'subjek' => 'required',
+    //     'penerima' => 'required',
+    //     'pesan' => 'required'
+    // ]);
     
     //BIKIN PESAN BARU
     if($request->hasFile('file')){

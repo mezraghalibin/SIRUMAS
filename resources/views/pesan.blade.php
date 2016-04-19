@@ -87,7 +87,19 @@
       @endif 
     </div>
     {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
-      
+    
+    @if (count($errors) > 0)
+      <div class="card-panel teal">
+          <span class="white-text">Pesan gagal dikirim.</span><br /> 
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+      </div>
+    @endif
+    
+
     {{--  CONTENT DAFTAR PESAN --}}
     <div class="container">
       <div id="kelola-pesan">

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\SSOController;
 use App\Pengumuman;
 use Session;
+use DB;
 
 class BerandaController extends Controller
 {
@@ -18,7 +19,13 @@ class BerandaController extends Controller
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         
         // get semua pengumuman yang statusnya udah published
-        $allPengumuman = Pengumuman::where('status', 1)->get();
+        //$allPengumuman = Pengumuman::where('status', 1)->get();
+        $allPengumuman = DB::table('pengumuman')
+            ->join('users', 'pengumuman.staf_riset', '=', 'users.id')
+            ->where('pengumuman.status', '=', 1)
+            ->select('pengumuman.*', 'users.nama')
+            ->orderBy('updated_at', 'DESC')
+            ->get();
         if($check) {
             return view('beranda', compact('allPengumuman'));
         }
@@ -32,11 +39,21 @@ class BerandaController extends Controller
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         if($check) {  
-            $pengumuman = Pengumuman::find($id);
+            //$pengumumanbyid = Pengumuman::find($id);
+            //$pengumumanbyid = DB::table('pengumuman')->where('id',$id)->first()->toString();
+            //return ($pengumumanbyid);
+            $pengumuman = DB::table('pengumuman')
+            ->join('users', 'pengumuman.staf_riset', '=', 'users.id')
+            //->where('pengumuman.status', '=', 1)
+            ->where('pengumuman.id', '=',$id)
+            ->select('pengumuman.*', 'users.nama')
+            ->get();
             if(!$pengumuman){
                 abort(404);
             } else {
-                return view('detailPengumuman',compact('pengumuman'));    
+                //return ($pengumuman);
+                return view('detailPengumuman',compact('pengumuman')); 
+                //return view('/detailPengumuman')->with(compact('pengumuman'));
             }
         }
         else {
