@@ -9,6 +9,7 @@ use App\Http\Controllers\SSOController;
 use App\Pengumuman;
 use Session;
 use App\users;
+use App\Http\Controllers\Carbon\Carbon;
 
 class PengumumanController extends Controller
 {
@@ -157,6 +158,7 @@ class PengumumanController extends Controller
     public function publikasi($id){
         $pengumuman = Pengumuman::find($id);
         $pengumuman->status = 1;
+        //$pengumuman->updated_at = \Carbon\Carbon::now();
         $pengumuman->save();
         Session::flash('flash_message', 'Pengumuman berhasil dipublish!');
         return redirect('pengumuman');

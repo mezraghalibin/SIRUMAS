@@ -21,4 +21,5 @@ class Pesan extends Model
     	return $this->hasOne('\App\users', 'id', 'penerima');
     }
 
+  
 }

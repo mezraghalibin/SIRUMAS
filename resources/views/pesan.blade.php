@@ -75,6 +75,18 @@
           <span class="white-text">{{ Session::get('flash_message') }}</span>
         </div>
       @endif
+
+      <!-- -->
+      @if (count($errors) > 0)
+      <div class="card-panel teal">
+          <span class="white-text">Pesan gagal dikirim</span>.<br />
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+      @endif
       
       <!-- CONTENT DAFTAR PESAN-->
       <div class="container">

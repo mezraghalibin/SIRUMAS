@@ -17,7 +17,7 @@ class BerandaController extends Controller
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         // get semua pengumuman yang statusnya udah published
-        $allPengumuman = Pengumuman::where('status', 1)->get();
+        $allPengumuman = Pengumuman::where('status', 1)->orderBy('updated_at', 'DESC')->get();
         if($check) {
             return view('beranda', compact('allPengumuman'));
         }
