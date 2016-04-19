@@ -19,6 +19,10 @@ Route::get('/master', function () {
     return view('master');
 });
 
+
+
+Route::resource('nilaiproposal', 'NilaiProposalController');
+
 /**************** ROUTE BERANDA ****************/
 Route::get('/login', 'SSOController@index');
 Route::get('/logout', 'SSOController@logout');
@@ -57,15 +61,11 @@ Route::get('/sesuaikanproposal', 'ProposalHibahController@sesuaikanProposal');
 /**************** EO PROPOSAL HIBAH ******************/
 
 
-/**************** BORANG ************************/
-Route::get('/borang', 'BorangController@index');
-/**************** EO BORANG ************************/
-
-
 /**************** LAPORAN ************************/
 Route::get('/laporan', 'LaporanController@index');
 Route::get('/laporankemajuan', 'LaporanController@laporankemajuan');
-Route::get('/uploadkemajuan', 'LaporanController@uploadkemajuan');
+Route::get('/uploadkemajuan/{id}', 'LaporanController@uploadkemajuan');
+Route::post('/uploadkemajuan/uploadprogress/{id}', 'LaporanController@uploadkemajuanstore');
 Route::get('/uploadlaporanberhibah', 'LaporanController@uploadlaporanberhibah');
 Route::get('/uploadlaporantdkberhibah', 'LaporanController@uploadlaporantdkberhibah');
 /**************** OE LAPORAN ********************/
@@ -75,3 +75,22 @@ Route::get('/uploadlaporantdkberhibah', 'LaporanController@uploadlaporantdkberhi
 Route::get('/pengumuman', 'PengumumanController@index');
 Route::get('/kelolapengumuman', 'PengumumanController@kelola');
 /**************** EO PENGUMUMAN ********************/
+
+/**************** NILAI PROPOSAL ******************/
+Route::get('/nilaiproposal', 'NilaiProposalController@index');
+Route::post('/nilaiproposal', 'NilaiProposalController@store');
+/**************** NILAI PROPOSAL ******************/
+
+/**************** SESUAIKAN PROPOSAL ******************/
+Route::get('/sesuaikanproposal', 'SesuaikanProposalController@index');
+Route::post('/sesuaikanproposal', 'SesuaikanProposalController@store');
+/**************** SESUAIKAN PROPOSAL ******************/
+
+
+/**************** BORANG PROPOSAL ******************/
+Route::get('/borang', 'BorangController@index');
+Route::post('/borang', 'BorangController@store');
+Route::post('/hapusborang/{id}', 'BorangController@destroy');
+Route::get('/editborang/{id}', 'BorangController@edit');
+Route::post('/editborang/{id}', 'BorangController@update');
+/**************** BORANG PROPOSAL ******************/

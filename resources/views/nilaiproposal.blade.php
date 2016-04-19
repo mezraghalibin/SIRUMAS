@@ -1,3 +1,13 @@
+<?php 
+  //CHECK USER'S ROLE
+  $id             = $_SESSION['id'];
+  $username       = $_SESSION['username'];
+  $name           = $_SESSION['name'];
+  $role           = $_SESSION['role'];
+  $spesifik_role  = $_SESSION['spesifik_role'];
+  //$id_proposal    = $_SESSION['id_proposal']; buat masukin id proposal
+?>
+
 @extends('master')
 <!DOCTYPE html>
 <html>
@@ -49,7 +59,8 @@
             $("#daftar-proposal-pengmas").fadeIn(500);
         });
 
-      });
+      
+
     </script>
 </head>
 <body>
@@ -76,86 +87,60 @@
     <!-- END of SECOND NAVBAR -->
 
     <div class="container">
-    <div class="header"><h4>Nilai Proposal</h4></div>
+    <div class="header"><h5>Nilai Proposal</h5></div>
+
+     @if(Session::has('flash_message'))
+        <div class="card-panel red darken-2">
+          <span class="white-text">{{ Session::get('flash_message') }}</span>
+        </div>
+
+    @endif
+
+  
+
      <!-- display pdf-->
-     <div class="row">
-     <div class="col s6">
-      
+     
+      <div align="center">
       <embed src="test.pdf" width="100%" height="500px">
-      
      </div>
      <!-- end display pdf-->
-
+       
       <div class="col s6">
-      <table class="highlight">
-              Borang Penilaian
-              <thead>
-                <tr>
-                    <th data-field="komponen">Komponen</th>
-                    <th data-field="name">Nilai</th>
-                </tr>
-              </thead>
+      <br>
+      <div class="sub-judul"><h5>Borang Penilaian</h5></div>
+      <div class="row">
 
-              <tbody>
-                <tr>
-                  <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-                  </td>
-                  <td>
-                    <select class="browser-default" style="width:100px">
-                        <option disabled selected>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                      </select>
-                  </td>
-                  
-                </tr>
-
-                <tr>
-                  <td>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</td>
-                  <td>
-                    <select class="browser-default" style="width:100px">
-                        <option disabled selected>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                      </select>
-
-                  </td>
-
-                </tr>
-              </tbody>
-              </table>
-               <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Simpan</span> 
-                 <i class="material-icons right">send</i>
-                 </button>
+      <br>
+        <div class="col s6">
+          <b>Komponen</b>
+        </div>
+        <div class="col s6">
+          <b>Nilai</b>
+        </div>
       </div>
-
-
-
-      </div>   
+      <hr>
+        
+        <?php foreach ($borangs as $borang) { ?>
+        
+        <form class="action" action="nilaiproposal" method="post">
+          <div class="row">
+          <div class="col s6">
+          <p><?php echo $borang->komponen ?></p><input type="hidden" name="nama_komp[]" value="<?php echo $borang->komponen ?>" placeholder="Isi komponen" class="validate"></div>
+          <div class="col s6"><select name="nilai[]" value="" class="browser-default validate" style="width:100px"><option disabled selected>Nilai</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
+          <input type="hidden" name="id_proposal[]" value="1" placeholder="Isi id proposal">
+          <input type="hidden" name="staf_riset[]" value="<?php echo $id ?>">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          </div>
+          <?php } ?>
+          <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="post"><span class="white-text">Simpan</span><i class="material-icons right">send</i>
+          
+        </form>
+        </div>
+         
       </div>
    </div>
-   <div>
-    <script>
-    
-    $(document).ready(function() {
-      $('select').material_select();
-    });
-              
-    </script></div>
+  
   @stop
 </body>
 </html>
+
