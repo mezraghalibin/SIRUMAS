@@ -1,5 +1,7 @@
 <?php 
   //CHECK USER'S ROLE
+  $id             = $_SESSION['id'];
+  $username       = $_SESSION['username'];
   $name           = $_SESSION['name'];
   $role           = $_SESSION['role'];
   $spesifik_role  = $_SESSION['spesifik_role']; 
@@ -63,23 +65,22 @@
       <div class="row">
         <div class="col s8 offset-s2">
           <div class="pengumuman">
-            <div id="title" class="title center-align"><h5>{{$pengumuman->judul}}</h5></div>
-            <div id="time" class="time center-align"><h6>{{$pengumuman->created_at}}</h6></div>
+            <div id="title" class="title center-align"><h5>{{ $pengumuman->judul }}</h5></div>
+            <div id="time" class="time center-align"><h6>{{ $pengumuman->created_at }}</h6></div>
             <div id="content{{$pengumuman->id}}" class="content">
-              {{$pengumuman->konten}}
+              {{ $pengumuman->konten }}
             </div>
             <a href="/detailpengumuman/{{$pengumuman->id}}" class="btn waves-effect waves-light card-panel red darken-2" name="action"><span class="white-text">Read More</span></a>
           </div>
         </div>
       </div>
     </div>
-    @endforeach
     <!-- END OF PENGUMUMAN -->
 
     <!-- SCRIPT FOR TRUNCATE -->
     <script>
-      var textParse =  document.getElementById("content{{$pengumuman->id}}").innerHTML;
-      document.getElementById("content{{$pengumuman->id}}").innerHTML = shorten(textParse, 1200);
+      var textParse =  document.getElementById("content{{ $pengumuman->id }}").innerHTML;
+      document.getElementById("content{{ $pengumuman->id }}").innerHTML = shorten(textParse, 1200);
       function shorten(text, maxLength) {
         var ret = text;
         if (ret.length > maxLength) {
@@ -89,6 +90,7 @@
       }
     </script>
     <!-- Script for truncate -->
+    @endforeach
     
   </div>
   <!--Import jQuery before materialize.js-->

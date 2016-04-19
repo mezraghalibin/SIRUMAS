@@ -106,8 +106,8 @@
                       <input type="file" name="file">
                     </div>
                     <div class="file-path-wrapper">
-                      <input class="file-path validate" type="text" placeholder="Kosongkan Jika Tidak Mengubah File"
-                          value="">
+                      <input class="file-path validate" type="text" 
+                        placeholder="Kosongkan Jika Tidak Mengubah File" value="">
                     </div>
                   </div>
                 </div>

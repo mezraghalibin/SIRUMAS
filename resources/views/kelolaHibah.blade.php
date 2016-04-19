@@ -46,6 +46,7 @@
         //SET WHO IS SELECTED
         $("#pengmas-selected").hide(0); //hide Selected Pengmas
         $("#riset-selected").hide(0); //hide Selected Riset
+
         var kategori = "<?php echo $kategori ?>";
         if(kategori == "Riset") {
           $("#riset-selected").show(0); //hide Selected Pengmas
@@ -95,7 +96,7 @@
               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
               {{-- FIRST ROW = CATEGORY, TIME START, TIME END --}}
               <div class="row">        
-              `{{-- FOR RISET IS BEING SELECTED --}}
+                {{-- FOR RISET IS BEING SELECTED --}}
                 <div id="riset-selected">
                   <div class="input-field col s6">
                     <select name="kategori_hibah">

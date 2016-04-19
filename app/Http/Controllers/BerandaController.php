@@ -16,6 +16,7 @@ class BerandaController extends Controller
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        
         // get semua pengumuman yang statusnya udah published
         $allPengumuman = Pengumuman::where('status', 1)->get();
         if($check) {
@@ -32,7 +33,6 @@ class BerandaController extends Controller
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         if($check) {  
             $pengumuman = Pengumuman::find($id);
-            //dd($pengumuman);
             if(!$pengumuman){
                 abort(404);
             } else {

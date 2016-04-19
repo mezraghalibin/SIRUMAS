@@ -10,19 +10,14 @@ class Pesan extends Model
     protected $table = 'pesan_user';
     protected $fillable = array('subjek', 'penerima', 'pesan','file','id_pengirim');
     protected $guarded = ['id'];
-<<<<<<< HEAD
-}
-=======
 
     //fungsi untuk mendapatkan foreign key one-to-one pengirim
-    public function hasPengirim(){
+    public function hasPengirim() {
     	return $this->hasOne('\App\users', 'id', 'id_pengirim');
     }
 
     //fungsi untuk mendapatkan foreign key one-to-one penerima
-    public function hasPenerima(){
+    public function hasPenerima() {
     	return $this->hasOne('\App\users', 'id', 'penerima');
     }
-
 }
->>>>>>> 896703dbc6025a47aad621d90322d29d5c249d1c

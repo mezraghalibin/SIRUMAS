@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="author" href="humans.txt">
-    <link rel="stylesheet" href="assets/css/pesan.css">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/pesan.css') }}">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -42,6 +42,11 @@
             $("#buat-pesan").hide();
         });
 
+        //CLEAR FLASH MESSAGE
+        $("#clear").click(function(){
+          $("#flash-msg").fadeOut(1000);
+        });
+
         $("#buat").click(function(){
             $("#buat-pesan").fadeIn(500);
             $("#kelola-pesan").hide();
@@ -50,8 +55,10 @@
     </script>
 </head>
 <body>
-  @section('main_content')
+@section('main_content')
+  {{-- PAGE CONTENT --}}
   <div class="page-content">
+    {{-- SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
@@ -66,76 +73,67 @@
         </ul>
       </div>
     </nav>
-
-<<<<<<< HEAD
-    {{-- FLASH MESSAGE  --}}
-    @if(Session::has('flash_message'))
-      <div class="card-panel teal">
-        <span class="white-text">{{ Session::get('flash_message') }}</span>
-      </div>
-    @endif
-    {{-- END OF FLASH MESSAGE  --}}
+    {{-- END OF SECOND NAVBAR --}}
+    
+    {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
+    <div id="flash-msg">
+      @if(Session::has('flash_message'))
+        <div class="card-panel teal">
+          <span class="white-text">
+            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
+            <i class="material-icons">clear</i></a>
+          </span>
+        </div>
+      @endif 
+    </div>
+    {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
       
     {{--  CONTENT DAFTAR PESAN --}}
     <div class="container">
       <div id="kelola-pesan">
-        <div class="header"><h4>Daftar Pesan</h4></div>
+        @if($spesifik_role == 'divisi riset')
+          <div class="header"><h4>Daftar Pesan Terkirim</h4></div>        
+        @endif
+        @if($spesifik_role == 'dosen')
+          <div class="header"><h4>Daftar Pesan Diterima</h4></div>        
+        @endif
         <div class="kelola-content">
           <table class="highlight centered">
             <thead>
               <tr>
                 <th>Tanggal</th>
-                <th>Subjek</th>
-                <th></th>
+                <th>Subjek Pesan</th>
+                <th>Detail</th>
               </tr>
             </thead>
             <tbody>
-              <!--foreach untuk setiap message yg diambil bakal ngeprint tanggal dan subjeknya-->
-              <?php foreach($messages as $message){
-                echo '<tr>
-                <td>'.$message->created_at.'</td>
-                <td>'.$message->subjek.'</td>
-                </tr>';
-              }?>
-            </tbody>
-          </table>
-=======
-      <!--IF BUAT NAMPILIN SUCCESS MESSAGE-->
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">{{ Session::get('flash_message') }}</span>
-        </div>
-      @endif
-      
-      <!-- CONTENT DAFTAR PESAN-->
-      <div class="container">
-        <div id="kelola-pesan">
-          <div class="header"><h4>Daftar Pesan</h4></div>
-          <div class="kelola-content">
-            <table class="highlight centered">
-              <thead>
-                <tr>
-                  <th>Tanggal</th>
-                  @if($spesifik_role == 'divisi riset')
-                  <th>Pesan Terkirim</th>
-                  @endif
-                  @if($spesifik_role == 'dosen')
-                  <th>Pesan Masuk</th>
-                  @endif
-                </tr>
-              </thead>
-              <tbody>
-              <!--foreach untuk setiap message yg diambil bakal ngeprint tanggal dan subjeknya-->
-              <?php foreach($messages as $message){
+              @if (count($messages))
+                @foreach ($messages as $message)
+                  <tr>
+                    <td>{{ $message->created_at }}</td>
+                    <td>{{ $message->subjek }}</td>
+                    <td>
+                      <a class="btn-floating" href="/detailPesan/{{ $message->id }}">
+                        <i class="material-icons right">visibility</i></a>
+                    </td>
+                  </tr>
+                @endforeach
+              @endif
+
+              {{-- PESAN BUAT YARA --}}
+                {{-- delete if udah baca -> cuma gue rubah dari php yang ke html laravel. kalo udah baca apus pesan ini sama yang bawah hehe --}}
+
+                <!--foreach untuk setiap message yg diambil bakal ngeprint tanggal dan subjeknya
+                <?php foreach($messages as $message){
                   echo '<tr>
                   <td>'.$message->created_at.'</td>
                   <td><a href="/detailPesan/'.$message->id.'">'.$message->subjek.'</a></td>
+                  <td><a href="/detailPesan/'.$message->id.'">'.$message->nama.'</a></td>
                   </tr>';
-                }?>
-              </tbody>
-            </table>
-          </div>
->>>>>>> 896703dbc6025a47aad621d90322d29d5c249d1c
+                }?> -->
+              {{-- PESAN BUAT YARA --}}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -148,15 +146,16 @@
           <div class="header"><h4>Buat Pesan</h4></div>
           <div class="kelola-content">
             <div class="row">
-              <form method="post" action="kirimpesan" class="col s6" enctype="multipart/form-data">            
+              <form method="post" action="kirimpesan" class="col s12" enctype="multipart/form-data">            
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <input type="hidden" name="id_pengirim" value="<?php echo $id ?>">
+                {{-- ROW 1 = SUBJEK + PENERIMA --}}
                 <div class="row">
-                  <div class="input-field col s6">
+                  <div class="input-field col s6 offset-s2">
                     <input placeholder="Subjek" id="subjek" name="subjek" type="text" class="validate">
                     <label for="subjek">Subjek</label>
                   </div>
-                  <div class="input-field col s6">
+                  <div class="input-field col s2">
                     <select name="penerima">
                       <option value="" disabled selected>Pilih</option>
                       <!-- foreach untuk menampilkan user yg bisa dipilih ketika mengirim pesan -->
@@ -168,21 +167,17 @@
                     <label>Kepada</label>
                   </div>
                 </div>
-
+                {{-- ROW 2 ISI PESAN --}}
                 <div class="row">
-                  <div class="col s12">
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <textarea id="textarea1" name="pesan" placeholder="Isi Pesan" 
-                          class="materialize-textarea"></textarea>
-                        <label for="textarea1">Pesan</label>
-                      </div>
-                    </div>
+                  <div class="input-field col s8 offset-s2">
+                    <textarea id="textarea1" name="pesan" placeholder="Isi Pesan" 
+                      class="materialize-textarea"></textarea>
+                    <label for="textarea1">Pesan</label>
                   </div>
                 </div>
-
-                <div class="col s12">
-                  <div class="file-field input-field">
+                {{-- ROW 3 INPUT FILE --}}
+                <div class="row">
+                  <div class="file-field input-field col s8 offset-s2">
                     <div class="btn card-panel red darken-2">
                       <span class="white-text">File</span>
                       <input type="file" name="file">
@@ -193,9 +188,9 @@
                     </div>
                   </div>
                 </div>
-              
-                <div class="col s12">
-                  <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">SEND</span>
+                {{-- BUTTON KIRIM PESAN --}}
+                <div class="center-align">
+                  <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">Kirim Pesan</span>
                       <i class="material-icons right">send</i>
                   </button>
                 </div>
@@ -206,10 +201,12 @@
       </div>
     @endif
     {{-- END OF CONTENT BUAT PESAN --}}
+  </div>
+  {{-- END OF PAGE CONTENT --}}
 
-    {{-- Import jQuery before materialize.js --}}
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-  @stop
+  {{-- Import jQuery before materialize.js --}}
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+@stop
 </body>
 </html>
