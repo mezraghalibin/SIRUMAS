@@ -74,21 +74,24 @@
                     <th>Judul</th>
                     <th>Kategori</th>
                     <th>Tanggal Submit</th>
-                    <th>Besar Dana</th>                          
+                    <th>Nama Hibah</th>                          
                     <th>Status</th>
                     <th>File</th>
                   </tr>
                 </thead>
                 <tbody>
-                  
+              @if (count($dataProposal))
+                @foreach ($dataProposal as $proposal)
                   <tr>
-                    <td>Judul Proposal</td>
-                    <td>Riset</td>
-                    <td>01/01/2015</td>
-                    <td>Rp12.000.000</td>
-                    <td>Menunggu Penilaian</td>
-                    <td>File.pdf</td>
+                    <td>{{ $proposal->judul_proposal }}</td>
+                    <td>{{ $proposal->kategori}}</td>
+                    <td>{{ $proposal->created_at}}</td>
+                    <td>{{ $proposal->nama_hibah}}</td>
+                    <td>{{ $proposal->status }}</td>
+                    <td>{{ $proposal->file}}</td>
                   </tr>
+                  @endforeach
+              @endif
                 </tbody>
               </table>
               </div>

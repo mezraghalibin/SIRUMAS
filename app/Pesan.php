@@ -10,5 +10,4 @@ class Pesan extends Model
     protected $table = 'pesan_user';
     protected $fillable = array('subjek', 'penerima', 'pesan','file','id_pengirim');
     protected $guarded = ['id'];
-
 }

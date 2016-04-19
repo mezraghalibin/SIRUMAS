@@ -73,7 +73,7 @@ class LaporanController extends Controller
       $request->file('file')->move(base_path().'/public/upload/laporankemajuan', $filename);
       $msg->file = $filename;
       $msg->save();
-      Session::flash('flash_message','Upload Laporan Kemajuan Berhasil Dilakukan'); //FLASH MESSAGE
+      Session::flash('flash_message','Upload laporan kemajuan berhasil dilakukan'); //FLASH MESSAGE
       return redirect('laporan');
     
   }

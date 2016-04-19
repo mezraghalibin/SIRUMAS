@@ -46,7 +46,7 @@ class SesuaikanProposalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
          $this->validate($request, [
         'komentar' => 'required|max:255',
@@ -56,6 +56,18 @@ class SesuaikanProposalController extends Controller
         $sesuaikanproposal->save();
         Session::flash('flash_message','Komentar berhasil dikirim.');
         return redirect('sesuaikanproposal');
+    }
+
+  public function storeRiset(Request $request)
+    {
+         $this->validate($request, [
+        'komentar' => 'required|max:255',
+        ]);
+
+        $sesuaikanproposal = \App\SesuaikanProposal::create($request->all());       
+        $sesuaikanproposal->save();
+        Session::flash('flash_message','Komentar berhasil dikirim.');
+        return redirect()->back();
     }
 
     /**

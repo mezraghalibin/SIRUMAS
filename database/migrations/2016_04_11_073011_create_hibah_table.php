@@ -17,10 +17,10 @@ class CreateHibahTable extends Migration
             $table->string('nama_hibah',50);
             $table->text('deskripsi');
             $table->string('kategori_hibah', 30);
-            $table->string('besar_dana', 15);
+            $table->string('besar_dana', 30);
             $table->string('pemberi', 30);  
-            $table->timestamp('tgl_awal');
-            $table->timestamp('tgl_akhir');
+            $table->string('tgl_awal',255);
+            $table->string('tgl_akhir',255);
             $table->integer('staf_riset')->unsigned();
             $table->foreign('staf_riset')->references('id')->on('users');
         });

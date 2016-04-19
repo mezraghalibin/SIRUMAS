@@ -39,14 +39,20 @@
     <script>
     $(document).ready(function(){
 
-      $role="<?php echo $spesifik_role ?>";
+       $role="<?php echo $spesifik_role ?>";
       if ($role="dosen") {
         $("#laporan-tidak-berhibah").hide();
         $("#laporan-berhibah").hide();
         $("#upload-laporan-akhir").hide();
         $("#berhibah").hide();
         $("#tidak-hibah").hide();
-      } 
+      } else {
+        $("#laporan-tidak-berhibah").hide();
+        $("#upload-laporan-kemajuan").hide();
+        $("#upload-laporan-akhir").hide();
+        $("#upload-akhir").hide();
+        $("#upload-kemajuan").hide();
+      }
 
         $("#berhibah").click(function(){
             $("#laporan-berhibah").fadeIn(500);

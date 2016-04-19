@@ -11,10 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/master', function () {
     return view('master');
 });
@@ -35,17 +31,25 @@ Route::get('/detailpengumuman', 'BerandaController@detailPengumuman');
 
 
 /**************** ROUTE HIBAH ******************/
-Route::get('/hibah', 'HibahController@index');
-Route::get('/applyhibah', 'HibahController@applyHibah');
-Route::get('/kelolahibah', 'HibahController@kelolaHibah');
+Route::get('/hibah', 'HibahController@index'); //FIRST TIME TO HIBAH PAGE
+Route::get('/hibah/applyhibah/{id}', 'HibahController@applyhibah'); //GO TO SPECIFIC HIBAH PAGE
+Route::post('/createhibah', 'HibahController@create'); //ROUTES TO CREATE HIBAH
+Route::get('/hibah/kelolahibah/{id}', 'HibahController@kelolaHibah'); //GOT TO SPECIFIC HIBAH PAGE FOR EDIT
+Route::post('/hibah/kelolahibah/updatehibah/{id}', 'HibahController@update'); //ROUTES TO UPDATE HIBAH
+Route::get('/hibah/deletehibah/{id}', 'HibahController@delete'); //GO TO SPECIFIC HIBAH PAGE
 /**************** EO ROUTE HIBAH ******************/
 
 
-/**************** PESAN & MOU ******************/
+/**************** PESAN *************************/
 Route::get('/pesan', 'PesanController@index');
 Route::post('/kirimpesan', 'PesanController@store');
+//Route::get('/detailPesan/{id}', 'PesanController@detailPesan');
+/**************** EO PESAN ********************/
+
+/***************** EO MOU ***************************/
 Route::get('/mou', 'MouController@index');
-/**************** EO PESAN & MOU ******************/
+Route::post('/uploadmou', 'MouController@upload');
+/**************** EO MOU ********************/
 
 
 /**************** PROPOSAL ******************/
@@ -56,8 +60,14 @@ Route::get('/proposalupload', 'ProposalController@uploadRevisi');
 
 /**************** PROPOSAL HIBAH ******************/
 Route::get('/proposalhibah', 'ProposalHibahController@index');
-Route::get('/nilaiproposal', 'ProposalHibahController@nilaiProposal');
+Route::get('/daftarproposalhibahriset/{id}', 'ProposalHibahController@getProposalRiset');
+Route::get('/daftarproposalhibahpengmas/{id}', 'ProposalHibahController@getProposalPengmas');
+Route::get('/daftarproposalhibahriset/nilaiproposalriset/{id}', 'ProposalHibahController@nilaiProposalRiset');
+Route::get('/daftarproposalhibahpengmas/nilaiproposalpengmas/{id}', 'ProposalHibahController@nilaiProposalPengmas');
+Route::get('/daftarproposalhibahriset/sesuaikanproposalriset/{id}', 'ProposalHibahController@sesuaikanProposalRiset');
+Route::get('/daftarproposalhibahpengmas/sesuaikanproposalpengmas/{id}', 'ProposalHibahController@sesuaikanProposalPengmas');
 Route::get('/sesuaikanproposal', 'ProposalHibahController@sesuaikanProposal');
+Route::post('/hibah/applyhibah/applyproposal', 'HibahController@storeProposal');
 /**************** EO PROPOSAL HIBAH ******************/
 
 
@@ -77,15 +87,15 @@ Route::get('/kelolapengumuman', 'PengumumanController@kelola');
 /**************** EO PENGUMUMAN ********************/
 
 /**************** NILAI PROPOSAL ******************/
-Route::get('/nilaiproposal', 'NilaiProposalController@index');
-Route::post('/nilaiproposal', 'NilaiProposalController@store');
-
-
+Route::get('/nilaiproposalriset/{id}', 'NilaiProposalController@index');
+Route::post('/daftarproposalhibahriset/nilaiproposalriset/menilairiset/{id}', 'NilaiProposalController@storeRiset');
+Route::post('/daftarproposalhibahpengmas/nilaiproposalpengmas/menilaipengmas/{id}', 'NilaiProposalController@storePengmas');
 /**************** NILAI PROPOSAL ******************/
 
 /**************** SESUAIKAN PROPOSAL ******************/
 Route::get('/sesuaikanproposal', 'SesuaikanProposalController@index');
-Route::post('/sesuaikanproposal', 'SesuaikanProposalController@store');
+Route::post('/daftarproposalhibahriset/sesuaikanproposalriset/sesuaikanriset/{id}', 'SesuaikanProposalController@storeRiset');
+Route::post('/daftarproposalhibahpengmas/sesuaikanproposalpengmas/sesuaikanpengmas/{id}', 'SesuaikanProposalController@storePengmas');
 /**************** SESUAIKAN PROPOSAL ******************/
 
 

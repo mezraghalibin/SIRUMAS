@@ -1,8 +1,9 @@
 <?php 
     //CHECK USER'S ROLE
 	$username 		  = $_SESSION['username'];
+	$name           = $_SESSION['name'];
 	$role 			    = $_SESSION['role'];
-  $spesifik_role 	= $_SESSION['spesifik_role'];	
+  $spesifik_role 	= $_SESSION['spesifik_role'];		
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +35,8 @@
     //js code
       $(document).ready(function(){
       	//GET USER SPESIFIK_ROLE
+      	var name          = "<?php echo $name ?>";
+        var role          = "<?php echo $role ?>";
       	var spesifik_role = "<?php echo $spesifik_role ?>";
        	
        	//SIDE BAR CONFIGURATION
@@ -68,6 +71,7 @@
       });
     </script>
 </head>
+
 <body>
 <!-- HEADER -->
   <div class="navbar-fixed">
@@ -150,23 +154,6 @@
 	</header>
     </div>
     <!-- END OF SIDEBAR MENU FOR TIM REVIEWER -->
-  {{-- <header>
-    <ul id="nav-mobile" class="side-nav fixed">
-      <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li>
-      <li><a href="#" class="waves-effect waves-teal">PANDUAN</a></li>
-      <li><a href="{{action('HibahController@index')}}" class="waves-effect waves-teal">HIBAH</a></li>
-      <li><a href="{{action('PengumumanController@index')}}" class="waves-effect waves-teal">PENGUMUMAN</a></li>
-      <li><a href="{{action('ProposalController@index')}}" class="waves-effect waves-teal">PROPOSAL</a></li>
-      <li><a href="{{action('ProposalHibahController@index')}}" class="waves-effect waves-teal">PROPOSAL HIBAH</a></li>
-      <li><a href="{{action('LaporanController@index')}}" class="waves-effect waves-teal">LAPORAN</a></li>
-      <li><a href="#" class="waves-effect waves-teal">KONTAK</a></li>
-      <li><a href="{{action('MouController@index')}}" class="waves-effect waves-teal">MOU</a></li>
-      <li><a href="{{action('BorangController@index')}}" class="waves-effect waves-teal">BORANG</a></li>
-      <li><a href="#" class="waves-effect waves-teal">REPOSITORY</a></li>
-      <li><a href="#" class="waves-effect waves-teal">KELOLA REPOSITORY</a></li>
-    </ul>
-  </header> --}}
-  <!-- END OF SIDEBAR MENU MASTER -->
   @yield('main_content')
 </body>
 </html>

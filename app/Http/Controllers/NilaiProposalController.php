@@ -41,6 +41,7 @@ class NilaiProposalController extends Controller
 
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -96,6 +97,62 @@ class NilaiProposalController extends Controller
         Session::flash('flash_message','Penilaian berhasil disimpan.');
         return redirect('nilaiproposal');
     }
+
+
+ public function storeRiset(Request $request, $id)
+    {
+        $this->validate($request, [
+        'nama_komp' => 'required|max:255',
+        'nilai' => 'required',
+        'id_proposal' => 'required',
+        ]);
+        
+        $komponenString = implode(",", $request->get('nama_komp'));
+        $input=Input::all();
+        $count = count($input['nama_komp']); // here we will know how many entries have been posted
+        $proposal = array();
+        for($i=0; $i<$count; $i++){
+           if(!empty($input['nama_komp'][$i])){
+             array_push($proposal, array( // iterate through each entry and create an array of inputs
+              'nama_komp' => $input['nama_komp'][$i], 
+              'nilai' => $input['nilai'][$i], 
+              'id_proposal' => $input['id_proposal'][$i],
+              'staf_riset' => $input['staf_riset'][$i]
+             ));
+           }
+        }
+        NilaiProposal::insert($proposal); // save the array of models at once
+        Session::flash('flash_message','Penilaian berhasil disimpan.');
+        return redirect()->back();
+    }
+
+        public function storePengmas(Request $request, $id)
+            {
+                $this->validate($request, [
+                'nama_komp' => 'required|max:255',
+                'nilai' => 'required',
+                'id_proposal' => 'required',
+                ]);
+                
+                $komponenString = implode(",", $request->get('nama_komp'));
+                $input=Input::all();
+                $count = count($input['nama_komp']); // here we will know how many entries have been posted
+                $proposal = array();
+                for($i=0; $i<$count; $i++){
+                   if(!empty($input['nama_komp'][$i])){
+                     array_push($proposal, array( // iterate through each entry and create an array of inputs
+                      'nama_komp' => $input['nama_komp'][$i], 
+                      'nilai' => $input['nilai'][$i], 
+                      'id_proposal' => $input['id_proposal'][$i],
+                      'staf_riset' => $input['staf_riset'][$i]
+                     ));
+                   }
+                }
+                NilaiProposal::insert($proposal); // save the array of models at once
+                Session::flash('flash_message','Penilaian berhasil disimpan.');
+                return redirect()->back();
+            }
+
 
     /**
      * Display the specified resource.
