@@ -66,6 +66,7 @@
         <div class="col s8 offset-s2">
           <div class="pengumuman">
             <div id="title" class="title center-align"><h5>{{ $pengumuman->judul }}</h5></div>
+            <div id="created_by" class="time center-align"><h6>By {{ $pengumuman->nama }}</h6></div>
             <div id="time" class="time center-align"><h6>{{ $pengumuman->created_at }}</h6></div>
             <div id="content{{$pengumuman->id}}" class="content">
               {{ $pengumuman->konten }}
