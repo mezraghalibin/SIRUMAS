@@ -1,13 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Laporan;
-use App\Proposal;
+
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\SSOController;
-use DB;
-use Session;
 
 class LaporanController extends Controller
 {
@@ -18,10 +15,7 @@ class LaporanController extends Controller
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
     if($check) {
-        //$proposals = DB::table('proposal')->get();
-        $id = $_SESSION['id'];
-        $proposals = DB::table('proposal')->where('dosen', '=', $id)->get();
-        return view('laporan', ['proposals' => $proposals]);
+        return view('laporan');
     }
     else {
         return view('login');
@@ -47,36 +41,12 @@ class LaporanController extends Controller
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
     if($check) {
-        $id = $_SESSION['id'];
-        $proposal = Proposal::find($id);
-         if(!$proposal){ 
-         abort(404);
-         } else {
-         return view('uploadkemajuan')->with('proposal',$proposal);
-            }
-        
+        return view('uploadkemajuan');
     }
     else {
         return view('login');
     }
   }   
-
-  public function uploadkemajuanstore(Request $request, $id)
-  {
-     $this->validate($request, [
-            'file' => 'required'
-        ]);
-  
-    
-      $msg=\App\Laporan::create($request->all());
-      $filename = $request->file('file')->getClientOriginalName();
-      $request->file('file')->move(base_path().'/public/upload/laporankemajuan', $filename);
-      $msg->file = $filename;
-      $msg->save();
-      Session::flash('flash_message','Upload Laporan Kemajuan Berhasil Dilakukan'); //FLASH MESSAGE
-      return redirect('laporan');
-    
-  }
 
   public function uploadlaporanberhibah()
   {

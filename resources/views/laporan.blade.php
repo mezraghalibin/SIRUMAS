@@ -1,13 +1,3 @@
-<?php 
-  //CHECK USER'S ROLE
-  $id             = $_SESSION['id'];
-  $username       = $_SESSION['username'];
-  $name           = $_SESSION['name'];
-  $role           = $_SESSION['role'];
-  $spesifik_role  = $_SESSION['spesifik_role'];
-  //$id_proposal    = $_SESSION['id_proposal']; buat masukin id proposal
-?>
-
 @extends('master')
 <!DOCTYPE html>
 <html>
@@ -38,22 +28,9 @@
 
     <script>
     $(document).ready(function(){
-
-      $role="<?php echo $spesifik_role ?>";
-      if ($role=="dosen") {
         $("#laporan-tidak-berhibah").hide();
-        $("#laporan-berhibah").hide();
-        $("#upload-laporan-akhir").hide();
-        $("#berhibah").hide();
-        $("#tidak-hibah").hide();
-      } else {
-        $("#upload-laporan-akhir").hide();
-        $("#upload-akhir").hide();
-        $("#upload-laporan-kemajuan").hide();
-        $("#upload-kemajuan").hide();
-        $("#laporan-tidak-berhibah").hide();
-      }
-
+         $("#upload-laporan-kemajuan").hide();
+          $("#upload-laporan-akhir").hide();
 
         $("#berhibah").click(function(){
             $("#laporan-berhibah").fadeIn(500);
@@ -84,10 +61,10 @@
         });
 
           $('tr').click( function() {
-              window.location = $(this).find('a').attr('href');
-          }).hover( function() {
-              $(this).toggleClass('hover');
-          });
+    window.location = $(this).find('a').attr('href');
+}).hover( function() {
+    $(this).toggleClass('hover');
+});
 
     });
 
@@ -107,7 +84,7 @@
           <li id="upload-akhir"><a href="#">Upload Laporan Akhir</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai <?php echo $username ?> - <?php echo $spesifik_role ?></a></li>
+          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
         </ul>
       </div>
     </nav>
@@ -135,7 +112,7 @@
     </div>
       <!-- END OF CONTENT LAPORAN BERHIBAH -->
 
-    <!-- CONTENT  HIBAH -->
+    <!-- CONTENT tidak-hibah HIBAH -->
     <div class="container">
       <div id="laporan-tidak-berhibah">
       <div class="header"><h4>Laporan Akhir</h4></div>
@@ -186,38 +163,40 @@
     <div class="container">
       <div id="upload-laporan-kemajuan">
         <div class="header"><h4>Judul Proposal Terkait</h4></div>
-
-           @if(Session::has('flash_message'))
-              <div class="card-panel red darken-2">
-                <span class="white-text">{{ Session::get('flash_message') }}</span>
-              </div>
-
-          @endif
           <div class="kemajuan-content">
-          <table>
+           <table class="highlight centered">
               <thead>
-                  <th>Judul Proposal</th>
-                  <th>Kategori</th>
-                  <th>Status</th>
+                <tr>
+                    <th data-field="id">Judul Proposal</th>
+                    <th data-field="name">Kategori</th>
+                    <th data-field="price">Upload Laporan Kemajuan</th>
+                </tr>
               </thead>
 
-              @foreach($proposals as $proposal)
-
-                  <tr>
-                      <td>{{ $proposal->judul_proposal }}</td>
-                      <td>{{ $proposal->kategori }}</td>
-                      <td>{{ $proposal->status }}</td>
-                      <td>
-                      <button class="btn" type="submit" id="edit">
-                        <a class="white-text" href="/uploadkemajuan/{{$proposal->id}}">Upload</a>
-                        </button>
-                      </td>
-                  </tr>
-
-              @endforeach
-              
-          </table>
-
+              <tbody>
+                <tr>
+                  <td>Hibah Riset 2015</td>              
+                  <td>Milki</td>
+                  <td>
+                    <a href="{{action('LaporanController@uploadkemajuan')}}" class="waves-effect waves-teal btn-flat"><i class="material-icons">open_in_new</i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Hibah Riset 2015</td>
+                  <td>Rangga</td>
+                  <td>
+                  <a class="waves-effect waves-teal btn-flat"><i class="material-icons">open_in_new</i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Hibah Riset 2016</td>
+                  <td>Cinta</td>
+                  <td>
+                    <a class="waves-effect waves-teal btn-flat"><i class="material-icons">open_in_new</i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
       </div>
     </div>

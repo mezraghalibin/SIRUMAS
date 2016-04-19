@@ -1,13 +1,3 @@
-<?php 
-  //CHECK USER'S ROLE
-  $id             = $_SESSION['id'];
-  $username       = $_SESSION['username'];
-  $name           = $_SESSION['name'];
-  $role           = $_SESSION['role'];
-  $spesifik_role  = $_SESSION['spesifik_role'];
-  //$id_proposal    = $_SESSION['id_proposal']; buat masukin id proposal
-?>
-
 @extends('master')
 <!DOCTYPE html>
 <html>
@@ -16,7 +6,7 @@
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/hibah.css') }}">
+    <link rel="stylesheet" href="assets/css/hibah.css">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -39,6 +29,18 @@
 
     <script>
     $(document).ready(function(){
+        $("#laporan-akhir").hide();
+
+        $("#kemajuan").click(function(){
+            $("#laporan-kemajuan").fadeIn(500);
+            $("#laporan-akhir").hide();
+        });
+
+        $("#akhir").click(function(){
+            $("#laporan-akhir").fadeIn(500);
+            $("#laporan-kemajuan").hide();
+        });
+
 
     });
     </script>
@@ -62,51 +64,77 @@
       <div id="laporan-kemajuan">
         <div class="header"><h4>Upload Laporan</h4></div>
           <div class="kemajuan-content">
-          <table>
-              <thead>
-                  <th>Judul Proposal</th>
-                  <th>Kategori</th>
-                  <th>Status</th>
-              </thead>
-
-         
-                  <tr>
-                      <td>{{ $proposal->judul_proposal }}</td>
-                      <td>{{ $proposal->kategori }}</td>
-                      <td>{{ $proposal->status }}</td>
-                  </tr>
-              
-          </table>
           <div class="upload-revisi-attach">
 
-           <form class="" action="uploadprogress/{{ $proposal->id }}" method="post" enctype="multipart/form-data">
-              <input type="hidden" name="id_proposal" value="{{ $proposal->id }}">
-              <input type="hidden" name="tipe_progres" value="kemajuan">
-              <input type="hidden" name="judul" value="{{ $proposal->judul_proposal }}">
-              <input type="hidden" name="dosen" value="<?php echo $id ?>">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+           <form action="#">
               <div class="file-field input-field">
                 <div class="btn card-panel red darken-2">
                   <span class="white-text">File</span>
-                  <input name="file" type="file" multiple>
+                  <input type="file" multiple>
                 </div>
                 <div class="file-path-wrapper">
                   <input class="file-path validate" type="text" placeholder="Upload laporan">
                 </div>
               </div>
-              <br>
-               <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Ajukan Laporan</span> 
-                 <i class="material-icons right">send</i>
-                 </button>
             </form>
             <br>
 
-                 
+                 <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Ajukan Laporan</span> 
+                 <i class="material-icons right">send</i>
+                 </button>
+                 </form>
           </div>
           </div>
       </div>
     </div>
       <!-- END OF CONTENT LAPORAN kemajuan -->
+
+    <!-- CONTENT akhir HIBAH -->
+    <div class="container">
+      <div id="laporan-akhir">
+      <div class="header">LAPORAN AKHIR</div>
+          <div class="kemajuan-content">
+           <table class="highlight centered">
+              <thead>
+                <tr>
+                    <th data-field="id">Judul Laporan</th>
+                    <th data-field="name">Pengaju</th>
+                    <th data-field="price">Tanggal Submit</th>
+                    <th data-field="price">File</th>
+                </tr>
+              </thead>  
+
+              <tbody>
+                <tr>
+                  <td>Hibah Riset 2015</td>              
+                  <td>Milki</td>
+                  <td>11/04/2015</td>
+                  <td>
+                    <a class="waves-effect waves-teal btn-flat"><i class="material-icons">system_update_alt</i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Hibah Riset 2015</td>
+                  <td>Rangga</td>
+                  <td>11/04/2015</td>
+                  <td>
+                    <a class="waves-effect waves-teal btn-flat"><i class="material-icons">system_update_alt</i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Hibah Riset 2016</td>
+                  <td>Cinta</td>
+                  <td>11/04/2015</td>
+                  <td>
+                    <a class="waves-effect waves-teal btn-flat"><i class="material-icons">system_update_alt</i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+    <!-- END OF CONTENT akhir HIBAH -->
   </div>
 
   @stop

@@ -1,13 +1,3 @@
-<?php 
-  //CHECK USER'S ROLE
-  $id             = $_SESSION['id'];
-  $username       = $_SESSION['username'];
-  $name           = $_SESSION['name'];
-  $role           = $_SESSION['role'];
-  $spesifik_role  = $_SESSION['spesifik_role'];
-  //$id_proposal    = $_SESSION['id_proposal']; buat masukin id proposal
-?>
-
 @extends('master')
 <!DOCTYPE html>
 <html>
@@ -88,14 +78,6 @@
     <div class="container">
     <div class="header"><h4>Penyesuaian Dana Hibah Riset</h4></div>
      <!-- display pdf-->
-
-      @if(Session::has('flash_message'))
-        <div class="card-panel red darken-2">
-          <span class="white-text">{{ Session::get('flash_message') }}</span>
-        </div>
-
-      @endif
-
      <div class="row">
      <div class="col s6">
       
@@ -106,19 +88,14 @@
 
       <div class="col s6">
     
-              <div class="sub-judul"><h5>Penyesuaian Dana</h5></div>
+              Penyesuaian Dana
               <br>
-
-               <form class="action" action="sesuaikanproposal" method="post">
-               <textarea id="textarea1" class="materialize-textarea" length="120" name="komentar" placeholder="Isi penyesuaian.."></textarea>
-               <input type="hidden" name="id_proposal" value="1" placeholder="Isi id proposal">
-               <input type="hidden" name="staf_keuangan" value="<?php echo $id ?>">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+               <textarea id="textarea1" class="materialize-textarea" length="120"></textarea>
+            <label for="textarea1">Isi penyesuaian dana..</label>
             <br>
-             <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" value="post"><span class="white-text">Kirim</span>
-            <i class="material-icons right">send</i>
-             </button>
-             </form>
+             <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Kirim</span>
+                 <i class="material-icons right">send</i>
+                 </button>
               
       </div>
 
