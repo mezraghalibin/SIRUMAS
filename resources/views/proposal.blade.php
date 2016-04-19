@@ -77,6 +77,7 @@
     </div>
     {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
 
+<<<<<<< HEAD
     {{-- CONTENT DAFTAR PROPOSAL --}}
     <div class="container">
       <div id="daftar-proposal">
@@ -95,6 +96,23 @@
               </tr>
             </thead>
             <tbody>
+=======
+            <!-- TABLE DAFTAR PROPOSAL-->
+              <div class="header"><h4>Daftar Proposal</h4></div>
+              <div class="daftar-proposal-content">
+                <table class="highlight centered">
+                  <thead>
+                  <tr>
+                    <th>Judul</th>
+                    <th>Kategori</th>
+                    <th>Tanggal Submit</th>
+                    <th>Nama Hibah</th>                          
+                    <th>Status</th>
+                    <th>File</th>
+                  </tr>
+                </thead>
+                <tbody>
+>>>>>>> 763311fc63f21bd835352b44bb239f2f8954cfb1
               @if (count($dataProposal))
                 @foreach ($dataProposal as $proposal)
                   <tr>

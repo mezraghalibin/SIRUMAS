@@ -16,7 +16,7 @@
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="assets/css/nilaiproposal.css">
+    <link rel="stylesheet" href="{{URL::asset('assets/css/nilaiproposal.css')}}">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -72,9 +72,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-            <li id="navbar-hibah-riset"><a href='{{action('ProposalHibahController@index')}}'>Proposal Hibah Riset
-            </a></li>
-            <li id="navbar-hibah-pengmas"><a href='{{action('ProposalHibahController@index')}}'>Proposal Hibah Pengmas
+            <li id="navbar-hibah-riset"><a href='/daftarproposalhibahriset/{{$proposal->id}}'>Kembali
             </a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -101,7 +99,7 @@
      <!-- display pdf-->
      
       <div align="center">
-      <embed src="test.pdf" width="100%" height="500px">
+      <embed src="/public/upload/test.pdf" width="100%" height="500px">
      </div>
      <!-- end display pdf-->
        
@@ -122,12 +120,12 @@
         
         <?php foreach ($borangs as $borang) { ?>
         
-        <form class="action" action="nilaiproposal" method="post">
+        <form class="action" action="menilaipengmas/{{ $proposal->id }}" method="post">
           <div class="row">
           <div class="col s6">
           <p><?php echo $borang->komponen ?></p><input type="hidden" name="nama_komp[]" value="<?php echo $borang->komponen ?>" placeholder="Isi komponen" class="validate"></div>
           <div class="col s6"><select name="nilai[]" value="" class="browser-default validate" style="width:100px"><option disabled selected>Nilai</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
-          <input type="hidden" name="id_proposal[]" value="1" placeholder="Isi id proposal">
+          <input type="hidden" name="id_proposal[]" value="{{$proposal->id}}" placeholder="Isi id proposal">
           <input type="hidden" name="staf_riset[]" value="<?php echo $id ?>">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           </div>

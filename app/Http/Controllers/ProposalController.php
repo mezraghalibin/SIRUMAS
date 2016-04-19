@@ -48,6 +48,7 @@ class ProposalController extends Controller {
         }
     }
 
+<<<<<<< HEAD
     public function revisi(Request $request, $id) {
         $this->validate($request, [
             'file' => 'required'
@@ -76,6 +77,12 @@ class ProposalController extends Controller {
         $dataProposal = Proposal::where('dosen', $id)->get();
         return $dataProposal;
     }
+=======
+    // public function read($id) {
+    //     $dataProposal = Proposal::where('dosen', $id)->get();
+    //     return $dataProposal;
+    // }
+>>>>>>> 763311fc63f21bd835352b44bb239f2f8954cfb1
 
     //JOIN TABLE PROPOSAL DAN TABLE HIBAH DIMANA ID HIBAH PADA PROPOSAL = ID HIBAH PADA HIBAH
     public function joinTabel($id_user) {
