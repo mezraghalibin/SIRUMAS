@@ -44,10 +44,10 @@ class ProposalController extends Controller {
         }
     }
 
-    public function read($id) {
-        $dataProposal = Proposal::where('dosen', $id)->get();
-        return $dataProposal;
-    }
+    // public function read($id) {
+    //     $dataProposal = Proposal::where('dosen', $id)->get();
+    //     return $dataProposal;
+    // }
 
     public function joinTabel($id_user) {
         $joinProposalHibah =  DB::table('proposal')

@@ -74,7 +74,7 @@
                     <th>Judul</th>
                     <th>Kategori</th>
                     <th>Tanggal Submit</th>
-                    <th>Besar Dana</th>                          
+                    <th>Nama Hibah</th>                          
                     <th>Status</th>
                     <th>File</th>
                   </tr>
@@ -86,7 +86,7 @@
                     <td>{{ $proposal->judul_proposal }}</td>
                     <td>{{ $proposal->kategori}}</td>
                     <td>{{ $proposal->created_at}}</td>
-                    <td>{{ $proposal->besar_dana}}</td>
+                    <td>{{ $proposal->nama_hibah}}</td>
                     <td>{{ $proposal->status }}</td>
                     <td>{{ $proposal->file}}</td>
                   </tr>
