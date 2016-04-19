@@ -22,6 +22,7 @@ class CreateLaporanTable extends Migration
             $table->integer('id_proposal')->nullable()->unsigned();
             $table->foreign('dosen')->references('id')->on('users');
             $table->foreign('id_proposal')->references('id')->on('proposal');
+            $table->text('file');
         });
     }
 
