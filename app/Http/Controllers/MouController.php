@@ -60,7 +60,7 @@ class MouController extends Controller {
         //INPUT NEW FILE
         $mou = MoU::create($request->all()); //SIMPAN SEMUA MASUKAN KE DATABASE
         $mouname = $request->file('file')->getClientOriginalName(); //SIMPAN NAMA FILE
-        $request->file('file')->move(base_path().'/public/upload/MoU', $mouname); //SIMPAN MOU KE FOLDER MOU
+        $request->file('file')->move(public_path('/upload/MoU'), $mouname); //SIMPAN MOU KE FOLDER MOU
         $mou->file = $mouname; //MENAMAKAN FILE MOU DIDALAM DATABASE
         $mou->save(); //SAVE PERUBAHAN YANG DILAKUKAN KEDALAM DATABASE
         Session::flash('flash_message','MoU Telah Berhasil Dibuat'); //FLASH MESSAGE IF SUKSES

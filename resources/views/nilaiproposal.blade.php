@@ -65,81 +65,77 @@
 </head>
 <body>
   @section('main_content')
-  
-
-  <!-- SECOND NAVBAR -->
-    <div class="page-content">
+  {{-- PAGE CONTENT --}}
+  <div class="page-content">
+    {{-- SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-            <li id="navbar-hibah-riset"><a href='{{action('ProposalHibahController@index')}}'>Proposal Hibah Riset
+            <li id="navbar-hibah-riset"><a href="{{action('ProposalHibahController@index')}}">Proposal Hibah Riset
             </a></li>
-            <li id="navbar-hibah-pengmas"><a href='{{action('ProposalHibahController@index')}}'>Proposal Hibah Pengmas
+            <li id="navbar-hibah-pengmas"><a href="{{action('ProposalHibahController@index')}}">Proposal Hibah Pengmas
             </a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
             <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset
             </a></li>
         </ul>
-        </div>
+      </div>
     </nav>
+    {{-- END OF SECOND NAVBAR --}}
     
-    <!-- END of SECOND NAVBAR -->
-
+    {{-- CONTENT NILAI PROPOSAL --}}
     <div class="container">
-    <div class="header"><h5>Nilai Proposal</h5></div>
-
-     @if(Session::has('flash_message'))
+      <div class="header"><h5>Nilai Proposal</h5></div>
+      @if(Session::has('flash_message'))
         <div class="card-panel red darken-2">
           <span class="white-text">{{ Session::get('flash_message') }}</span>
         </div>
-
-    @endif
-
-  
-
-     <!-- display pdf-->
-     
+      @endif
+      {{-- display pdf --}}
       <div align="center">
-      <embed src="test.pdf" width="100%" height="500px">
-     </div>
-     <!-- end display pdf-->
-       
-      <div class="col s6">
-      <br>
-      <div class="sub-judul"><h5>Borang Penilaian</h5></div>
-      <div class="row">
-
-      <br>
-        <div class="col s6">
-          <b>Komponen</b>
-        </div>
-        <div class="col s6">
-          <b>Nilai</b>
-        </div>
+        <embed src="test.pdf" width="100%" height="500px">
       </div>
-      <hr>
+      {{-- end display pdf --}}
+      <div class="col s6">
+        <br>
+        <div class="sub-judul"><h5>Borang Penilaian</h5></div>
+        <div class="row">
+          <br>
+            <div class="col s6">
+              <b>Komponen</b>
+            </div>
+            <div class="col s6">
+              <b>Nilai</b>
+            </div>
+        </div>
         
         <?php foreach ($borangs as $borang) { ?>
         
         <form class="action" action="nilaiproposal" method="post">
           <div class="row">
-          <div class="col s6">
-          <p><?php echo $borang->komponen ?></p><input type="hidden" name="nama_komp[]" value="<?php echo $borang->komponen ?>" placeholder="Isi komponen" class="validate"></div>
-          <div class="col s6"><select name="nilai[]" value="" class="browser-default validate" style="width:100px"><option disabled selected>Nilai</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
-          <input type="hidden" name="id_proposal[]" value="1" placeholder="Isi id proposal">
-          <input type="hidden" name="staf_riset[]" value="<?php echo $id ?>">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="col s6">
+              <p><?php echo $borang->komponen ?></p>
+              <input type="hidden" name="nama_komp[]" value="<?php echo $borang->komponen ?>" 
+                placeholder="Isi komponen" class="validate">
+            </div>
+            <div class="col s6">
+              <select name="nilai[]" value="" class="browser-default validate" style="width:100px">
+              <option disabled selected>Nilai</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+            </div>
+            <input type="hidden" name="id_proposal[]" value="1" placeholder="Isi id proposal">
+            <input type="hidden" name="staf_riset[]" value="<?php echo $id ?>">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
           </div>
           <?php } ?>
-          <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="post"><span class="white-text">Simpan</span><i class="material-icons right">send</i>
-          
+          <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="post">
+          <span class="white-text">Simpan</span><i class="material-icons right">send</i></button>s
         </form>
-        </div>
-         
       </div>
-   </div>
-  
+    </div>
+    {{-- END OF CONTENT NILAI PROPOSAL --}}
+  </div>
   @stop
 </body>
 </html>

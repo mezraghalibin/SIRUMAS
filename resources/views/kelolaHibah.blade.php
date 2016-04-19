@@ -74,7 +74,9 @@
 </head>
 <body>
   @section('main_content')
+  {{-- PAGE CONTENT --}}
   <div class="page-content">
+    {{-- SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
@@ -85,8 +87,9 @@
         </ul>
       </div>
     </nav>
+    {{-- END OF SECOND NAVBAR --}}
 
-    <!-- CONTENT UPDATE HIBAH -->
+    {{-- CONTENT UPDATE HIBAH --}}
     <div class="container">
       <div id="kelola-hibah">
         <div class="header"><h4>Kelola Hibah</h4></div>
@@ -181,8 +184,10 @@
         </div>
       </div>
     </div>
-    <!-- END OF CONTENT BUAT HIBAH -->
+    {{-- END OF CONTENT BUAT HIBAH --}}
   </div>
+  {{-- END OF PAGE CONTENT --}}
+  
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>

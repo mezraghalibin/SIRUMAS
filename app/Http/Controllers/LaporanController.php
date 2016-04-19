@@ -9,11 +9,9 @@ use App\Http\Controllers\SSOController;
 use DB;
 use Session;
 
-class LaporanController extends Controller
-{
+class LaporanController extends Controller {
  
-  public function index()
-  {
+  public function index() {
 		//CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
@@ -28,8 +26,7 @@ class LaporanController extends Controller
     }
   }   
 
-  public function laporankemajuan()
-  {  
+  public function laporankemajuan() {  
 		//CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
@@ -41,8 +38,7 @@ class LaporanController extends Controller
     }
   }   
 
-  public function uploadkemajuan()
-  {
+  public function uploadkemajuan() {
     //CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
@@ -61,8 +57,7 @@ class LaporanController extends Controller
     }
   }   
 
-  public function uploadkemajuanstore(Request $request, $id)
-  {
+  public function uploadkemajuanstore(Request $request, $id) {
      $this->validate($request, [
             'file' => 'required'
         ]);
@@ -78,8 +73,7 @@ class LaporanController extends Controller
     
   }
 
-  public function uploadlaporanberhibah()
-  {
+  public function uploadlaporanberhibah() {
     //CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
@@ -91,8 +85,7 @@ class LaporanController extends Controller
     }
   }   
 
-public function uploadlaporantdkberhibah()
-{
+  public function uploadlaporantdkberhibah() {
 		//CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
@@ -103,5 +96,4 @@ public function uploadlaporantdkberhibah()
         return view('login');
     }
   }   
-
 }

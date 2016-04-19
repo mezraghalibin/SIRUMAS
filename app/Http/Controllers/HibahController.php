@@ -80,8 +80,7 @@ class HibahController extends Controller {
         //Bikin proposal
         $proposal = Proposal::create($request->all());
         //untuk upload file, request file dengan segala extensi
-        $filename = $proposal->id . "_" . $proposal->nama_pengaju. '_' . $proposal->judul_proposal . '.'. 
-                $request->file('file')->getClientOriginalExtension();
+        $filename = $request->file('file')->getClientOriginalName();
         //memindahkan file yg dilampirkan tadi ke path /public/upload
         $request->file('file')->move(base_path().'/public/upload/proposal', $filename);
         $proposal->file = $filename;

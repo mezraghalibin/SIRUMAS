@@ -15,14 +15,12 @@ Route::get('/master', function () {
     return view('master');
 });
 
-
-
 Route::resource('nilaiproposal', 'NilaiProposalController');
 
-/**************** ROUTE BERANDA ****************/
+/**************** ROUTE LOGIN/LOGOUT ****************/
 Route::get('/login', 'SSOController@index');
 Route::get('/logout', 'SSOController@logout');
-/**************** EO ROUTE BERANDA ****************/
+/**************** EO ROUTE LOGIN/LOGOUT ****************/
 
 /**************** ROUTE BERANDA ****************/
 Route::get('/', 'BerandaController@index');
@@ -96,14 +94,11 @@ Route::get('/uploadlaporantdkberhibah', 'LaporanController@uploadlaporantdkberhi
 
 /**************** PENGUMUMAN ********************/
 Route::get('/pengumuman', 'PengumumanController@index');
-<<<<<<< HEAD
 Route::get('/kelolapengumumansingle/{id}', 'PengumumanController@edit');
 Route::get('/hapuspengumuman/{id}', 'PengumumanController@delete');
 Route::post('/kelolapengumumansingle/{id}', 'PengumumanController@update');
 Route::post('/buatpengumuman', 'PengumumanController@create');
 Route::get('/publishpengumuman/{id}', 'PengumumanController@publikasi');
-/**************** EO PENGUMUMAN ********************/
-=======
 Route::get('/kelolapengumuman', 'PengumumanController@kelola');
 /**************** EO PENGUMUMAN ********************/
 
@@ -117,7 +112,7 @@ Route::post('/daftarproposalhibahpengmas/nilaiproposalpengmas/menilaipengmas/{id
 Route::get('/sesuaikanproposal', 'SesuaikanProposalController@index');
 Route::post('/daftarproposalhibahriset/sesuaikanproposalriset/sesuaikanriset/{id}', 'SesuaikanProposalController@storeRiset');
 Route::post('/daftarproposalhibahpengmas/sesuaikanproposalpengmas/sesuaikanpengmas/{id}', 'SesuaikanProposalController@storePengmas');
-/**************** SESUAIKAN PROPOSAL ******************/
+/**************** EO SESUAIKAN PROPOSAL ******************/
 
 
 /**************** BORANG PROPOSAL ******************/
@@ -126,5 +121,4 @@ Route::post('/borang', 'BorangController@store');
 Route::post('/hapusborang/{id}', 'BorangController@destroy');
 Route::get('/editborang/{id}', 'BorangController@edit');
 Route::post('/editborang/{id}', 'BorangController@update');
-/**************** BORANG PROPOSAL ******************/
->>>>>>> 763311fc63f21bd835352b44bb239f2f8954cfb1
+/**************** EO BORANG PROPOSAL ******************/

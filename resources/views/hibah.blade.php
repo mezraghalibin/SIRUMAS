@@ -73,6 +73,7 @@
 </head>
 <body>
   @section('main_content')
+  {{-- PAGE CONTENT --}}
   <div class="page-content">
     {{-- CONTENT SECOND NAVBAR --}}
     <nav class="second-navbar">
@@ -259,6 +260,7 @@
     </div>
     {{-- END OF CONTENT BUAT HIBAH --}}
   </div>
+  {{-- END OF PAGE CONTENT --}}
   
   {{-- Import jQuery before materialize.js --}}
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

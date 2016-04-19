@@ -44,7 +44,9 @@
 </head>
 <body>
   @section('main_content')
+  {{-- PAGE CONTENT --}}
   <div class="page-content">
+    {{-- SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="right hide-on-med-and-down">
@@ -52,8 +54,9 @@
         </ul>
       </div>
     </nav>
+    {{-- END OF SECOND NAVBAR --}}
 
-    <!-- PENGUMUMAN -->
+    {{-- PENGUMUMAN --}}
     <div class="container">
       <div class="row">
         <div class="col s8 offset-s2">
@@ -65,9 +68,9 @@
         </div>
       </div>
     </div>
-    <!-- END OF PENGUMUMAN -->
-    
+    {{-- END OF PENGUMUMAN --}}
   </div>
+  
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>

@@ -39,66 +39,72 @@
 </head>
 <body>
   @section('main_content')
-
-  <!-- SECOND NAVBAR -->
-    <div class="page-content">
+  {{-- PAGE CONTENT --}}
+  <div class="page-content">
+    {{-- SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-            <li id="navbar-hibah-riset"><a href='{{action('ProposalHibahController@index')}}'>Kembali
+            <li id="navbar-hibah-riset"><a href="{{action('ProposalHibahController@index')}}">Kembali
             </a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-            <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset
-            </a></li>
+            <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
         </ul>
         </div>
     </nav>
-    <!-- END of SECOND NAVBAR -->
+    {{-- END of SECOND NAVBAR --}}
 
+    {{-- LIST OF PROPOSAL PENGMAS --}}
     <div class="container">    
-        <!-- TABLE DAFTAR PROPOSAL-->
-          <div id="daftar-proposal-riset">
-          <div class="header"><h4>Daftar Proposal</h4></div>
-          <div class="hibah-riset-content">
-            <table class="highlight centered">
+      <!-- TABLE DAFTAR PROPOSAL-->
+      <div id="daftar-proposal-riset">
+        <div class="header"><h4>Daftar Proposal</h4></div>
+        <div class="hibah-riset-content">
+          <table class="highlight centered">
               <thead>
-              <tr>
-                <th>Judul</th>
-                <th>Pengaju</th>
-                <th>Tanggal Submit</th>
-                <th>Hibah</th>                           
-                <th>Nilai</th>
-                <th>Penyesuaian</th>
-                <th>Status</th>
-                <th>File</th>
-              </tr>
-            </thead>
-            <tbody>
-              
+                <tr>
+                  <th>Judul</th>
+                  <th>Pengaju</th>
+                  <th>Tanggal Submit</th>
+                  <th>Hibah</th>                           
+                  <th>Nilai</th>
+                  <th>Penyesuaian</th>
+                  <th>Status</th>
+                  <th>File</th>
+                </tr>
+              </thead>
+              <tbody>
                 @foreach ($AllProposal as $proposal)
-              <tr>
-                <td>{{ $proposal->judul_proposal }}</td>
-                <td>{{ $proposal->nama_pengaju}}</td>
-                <td>{{ $proposal->created_at}}</td>
-                <td>{{ $proposal->nama_hibah}}</td>
-                <td><a href='nilaiproposalpengmas/{{$proposal->id}}'><button class="btn waves-effect waves-teal card-panel red darken-2"><span class="white-text">Nilai</span></button></a></td>
-                <td>
-                <a href='sesuaikanproposalpengmas/{{$proposal->id}}'><button class="btn waves-effect waves-teal card-panel red darken-2"><span class="white-text">Sesuaikan</span></button></a>
-                </td>
-                <td>{{ $proposal->status }}</td>
-                <td>{{ $proposal->file}}</td>
-              </tr>
-               @endforeach
-            </tbody>
+                  <tr>
+                    <td>{{ $proposal->judul_proposal }}</td>
+                    <td>{{ $proposal->nama_pengaju}}</td>
+                    <td>{{ $proposal->created_at}}</td>
+                    <td>{{ $proposal->nama_hibah}}</td>
+                    <td>
+                      <a href='nilaiproposalpengmas/{{$proposal->id}}'>
+                      <button class="btn waves-effect waves-teal card-panel red darken-2">
+                        <span class="white-text">Nilai</span>
+                      </button></a>
+                    </td>
+                    <td>
+                      <a href='sesuaikanproposalpengmas/{{$proposal->id}}'>
+                      <button class="btn waves-effect waves-teal card-panel red darken-2">
+                      <span class="white-text">Sesuaikan</span></button></a>
+                    </td>
+                    <td>{{ $proposal->status }}</td>
+                    <td>{{ $proposal->file}}</td>
+                  </tr>
+                @endforeach
+              </tbody>
           </table>
-          </div>
-          <!-- END OF TABEL DAFTAR PROPOSAL -->
-          </div>
+        </div>
+            <!-- END OF TABEL DAFTAR PROPOSAL -->
       </div>
-
-      <!-- END OF PROPOSAL HIBAH RISET -->
-
+    </div>
+    {{-- LIST OF PROPOSAL PENGMAS --}}
+  </div>
+  {{-- PAGE CONTENT --}}
   @stop
 </body>
 </html>

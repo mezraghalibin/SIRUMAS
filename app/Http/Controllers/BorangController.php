@@ -3,24 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Borang;
-
 use Session;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use Illuminate\Support\Facades\Input;
 
-class BorangController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+class BorangController extends Controller {
+    public function index() {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
@@ -33,24 +22,11 @@ class BorangController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function create() {
         return view('borang.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $this->validate($request, [
         'komponen' => 'required|unique:borang|max:255',
         ]);
@@ -74,25 +50,11 @@ class BorangController extends Controller
         return redirect('borang');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
+    public function edit($id) {
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         if($check) {
@@ -108,17 +70,7 @@ class BorangController extends Controller
         }
     }
 
-    
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
          $this->validate($request, [
         'komponen' => 'required|unique:borang|max:255',
         ]);
@@ -131,14 +83,7 @@ class BorangController extends Controller
         return redirect('borang');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $borang = Borang::find($id);
         $borang->delete();
         Session::flash('flash_message','Komponen berhasil dihapus.');

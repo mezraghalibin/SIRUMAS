@@ -23,6 +23,7 @@ class CreateHibahTable extends Migration
             $table->string('tgl_akhir',255);
             $table->integer('staf_riset')->unsigned();
             $table->foreign('staf_riset')->references('id')->on('users');
+            $table->timestamp();
         });
     }
 

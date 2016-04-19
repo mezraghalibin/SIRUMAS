@@ -36,8 +36,9 @@
    </head>
 <body>
 @section('main_content')
+	{{-- PAGE CONTENT --}}
     <div class="page-content">
-    	<!-- SECOND NAVBAR -->
+    	{{-- SECOND NAVBAR --}}
       	<nav class="second-navbar">
 	        <div class="nav-wrapper">
 	          <ul class="left hide-on-med-and-down">
@@ -49,15 +50,16 @@
 	          </ul>
 	        </div>
       	</nav>
-      	<!-- END of SECOND NAVBAR -->
+      	{{-- END of SECOND NAVBAR --}}
 		
+		{{-- CONTENT KELOLA PENGUMUMAN --}}
 		<div class="container">  
 			<div id="kelola-pengumuman">
           		<div class="header"><h4>Kelola Pengumuman</h4></div>
-          		<!-- bagian atas -->
+          		{{-- ROW I --}}
 		    	<div class="row">
 			        <form class="col s12">
-			              <div class="row">
+			            <div class="row">
 			                <div class="input-field col s4">
 			                  <input value="Hibah Riset UI 2015" id="judul_hibah" type="text" class="validate">
 			                  <label class="active" for="judul_hibah">Judul</label>
@@ -68,24 +70,24 @@
 			                </div>
 			                <div class="input-field col s2">
 			                  <select>
-			                  <option value="1">Riset</option>
-			                  <option value="2">Pengmas</option>
+				                  <option value="1">Riset</option>
+				                  <option value="2">Pengmas</option>
 			                  </select>
 			                  <label>Ketegori</label>
 			                </div>
-			             </div>
+		            	</div>
 			        </form>
-		      </div>
+		      	</div>
 
-		      <!-- bagian isi -->
-		      <div class="row">
+		      	{{-- ROW II --}}
+		      	<div class="row">
 			        <form class="col s12">
-			          <div class="row">
-			            <div class="input-field col s10">
-			              <textarea id="konten_pengumuman_isi" class="materialize-textarea"></textarea>
-			              <label for="konten_pengumuman_isi">Konten Pengumuman</label>
-			            </div>
-			          </div>
+			          	<div class="row">
+				            <div class="input-field col s10">
+				              <textarea id="konten_pengumuman_isi" class="materialize-textarea"></textarea>
+				              <label for="konten_pengumuman_isi">Konten Pengumuman</label>
+				            </div>
+			          	</div>
 			        </form>
 			        <form action="#" class="col s5">
 			          <div class="file-field input-field">
@@ -103,11 +105,12 @@
 			          <i class="material-icons right">send</i>
 			          </button>
 			        </div>
-		      </div>
+		    	</div>
           	</div>
         </div>
+        {{-- END OF CONTENT KELOLA PENGUMUMAN --}}
     </div>
-
+    {{-- END OF PAGE CONTENT --}}
 @stop
 </body>
 </html>

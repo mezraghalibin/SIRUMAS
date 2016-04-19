@@ -168,17 +168,4 @@ class ProposalHibahController extends Controller {
                     
                 );
     }
- 
-    
-
-     // public function joinTabel() {
- 
-    //        $joinProposalHibah =  DB::table('proposal')
-    //         ->join('hibah', 'id_hibah', '=', 'hibah.id')
-    //         ->select('*')
-    //         ->where('proposal.id_hibah', '=', '')
-    //         ->get();
-    //         return $joinProposalHibah;
-    // }
-
 }

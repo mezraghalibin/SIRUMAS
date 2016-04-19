@@ -137,7 +137,7 @@
       <div id="apply-hibah">
         <div class="apply-content">
           <div class="row">
-            <form class="col s12" method="post" action="applyproposal" enctype=multipart/form-data>
+            <form class="col s12" method="post" action="applyproposal" enctype="multipart/form-data">
               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
               
               {{-- GET ID DAN KATEGORI SPECIFIC HIBAH YANG DIPANGGIL --}}

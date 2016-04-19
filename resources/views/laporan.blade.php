@@ -38,8 +38,7 @@
 
     <script>
     $(document).ready(function(){
-
-       $role="<?php echo $spesifik_role ?>";
+      $role="<?php echo $spesifik_role ?>";
       if ($role="dosen") {
         $("#laporan-tidak-berhibah").hide();
         $("#laporan-berhibah").hide();
@@ -82,21 +81,19 @@
             $("#laporan-tidak-berhibah").hide();
         });
 
-          $('tr').click( function() {
-    window.location = $(this).find('a').attr('href');
-}).hover( function() {
-    $(this).toggleClass('hover');
-});
-
-    });
-
-   
-
+        $('tr').click( function() {
+          window.location = $(this).find('a').attr('href');
+        }).hover( function() {
+            $(this).toggleClass('hover');
+          });
+      });
     </script>
 </head>
 <body>
   @section('main_content')
+  {{-- PAGE CONTENT --}}
   <div class="page-content">
+    {{-- SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
@@ -110,14 +107,15 @@
         </ul>
       </div>
     </nav>
+    {{-- END OF SECOND NAVBAR --}}
 
-    <!-- CONTENT LAPORAN BERHIBAH -->
+    {{-- CONTENT LAPORAN BERHIBAH --}}
     <div class="container">
       <div id="laporan-berhibah">
         <div class="header"><h4>Pilih Hibah</h4></div>
           <div class="berhibah-content">
             <table class="highlight centered">
-             <tbody>
+              <tbody>
                 <tr>
                   <td><a href="{{action('LaporanController@laporankemajuan')}}">Hibah Riset UI 2015</a></td>
                 </tr>
@@ -132,9 +130,9 @@
           </div>
       </div>
     </div>
-      <!-- END OF CONTENT LAPORAN BERHIBAH -->
+    {{-- END OF CONTENT LAPORAN BERHIBAH --}}
 
-    <!-- CONTENT tidak-hibah HIBAH -->
+    {{-- CONTENT tidak-hibah HIBAH --}}
     <div class="container">
       <div id="laporan-tidak-berhibah">
       <div class="header"><h4>Laporan Akhir</h4></div>
@@ -179,88 +177,80 @@
           </div>
       </div>
     </div>
-    <!-- END OF CONTENT tidak-hibah HIBAH -->
+    {{-- END OF CONTENT tidak-hibah HIBAH --}}
 
-
+    {{-- CONTENT UPDATE LAPORAN KEMAJUAN     --}}
     <div class="container">
       <div id="upload-laporan-kemajuan">
         <div class="header"><h4>Judul Proposal Terkait</h4></div>
-           @if(Session::has('flash_message'))
-              <div class="card-panel red darken-2">
-                <span class="white-text">{{ Session::get('flash_message') }}</span>
-              </div>
-
-          @endif
-          <div class="kemajuan-content">
-          <table>
-              <thead>
-                  <th>Judul Proposal</th>
-                  <th>Kategori</th>
-                  <th>Status</th>
-              </thead>
-
-              @foreach($proposals as $proposal)
-
-                  <tr>
-                      <td>{{ $proposal->judul_proposal }}</td>
-                      <td>{{ $proposal->kategori }}</td>
-                      <td>{{ $proposal->status }}</td>
-                      <td>
-                      <button class="btn" type="submit" id="edit">
-                        <a class="white-text" href="/uploadkemajuan/{{$proposal->id}}">Upload</a>
-                        </button>
-                      </td>
-                  </tr>
-
-              @endforeach
-              
-          </table>
-
+        @if(Session::has('flash_message'))
+          <div class="card-panel red darken-2">
+            <span class="white-text">{{ Session::get('flash_message') }}</span>
           </div>
+        @endif
+        <div class="kemajuan-content">
+          <table>
+            <thead>
+              <th>Judul Proposal</th>
+              <th>Kategori</th>
+              <th>Status</th>
+            </thead>          
+            @foreach($proposals as $proposal)
+              <tr>
+                <td>{{ $proposal->judul_proposal }}</td>
+                <td>{{ $proposal->kategori }}</td>
+                <td>{{ $proposal->status }}</td>
+                <td>
+                <button class="btn" type="submit" id="edit">
+                  <a class="white-text" href="/uploadkemajuan/{{$proposal->id}}">Upload</a>
+                  </button>
+                </td>
+              </tr>
+            @endforeach              
+          </table>
+        </div>
       </div>
     </div>
+    {{-- END OF UPDATE LAPORAN KEMAJUAN --}}
 
-     <div class="container">
+    {{-- CONTENT UPLOAD LAPORAN AKHIR --}}
+    <div class="container">
       <div id="upload-laporan-akhir">
         <div class="header"><h4>Pilih Hibah</h4></div>
-
-          <div class="row">
-              <div class="col s12 m6">
-                <div class="card blue-grey darken-1">
-                  <div align="center">
-                  <div class="card-content white-text">
-                    <span class="card-title">Laporan Berhibah</span>
-                    <p>Klik link di bawah ini jika Anda telah mendapatkan hibah dan ingin meng-upload laporan akhir.</p>
-                  </div>
-                  <div class="card-action">
-                    <a href="{{action('LaporanController@uploadlaporanberhibah')}}">Laporan Berhibah</a>
-                  </div>
+        <div class="row">
+          <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+              <div align="center">
+                <div class="card-content white-text">
+                  <span class="card-title">Laporan Berhibah</span>
+                  <p>Klik link di bawah ini jika Anda telah mendapatkan hibah dan ingin meng-upload laporan akhir.</p>
+                </div>
+                <div class="card-action">
+                  <a href="{{action('LaporanController@uploadlaporanberhibah')}}">Laporan Berhibah</a>
                 </div>
               </div>
             </div>
-           </div>
+          </div>
+        </div>
+      </div>
 
-           <div class="row">
-              <div class="col s12 m6">
-                <div class="card blue-grey darken-1">
-                  <div align="center">
-                  <div class="card-content white-text">
-                    <span class="card-title">Laporan Tidak Berhibah</span>
-                    <p>Klik link di bawah ini jika Anda ingin meng-upload laporan akhir tanpa hibah.</p>
-                  </div>
-                  <div class="card-action">
-                    <a href="{{action('LaporanController@uploadlaporantdkberhibah')}}">Laporan Tidak Berhibah</a>
-                  </div>
-                </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div align="center">
+              <div class="card-content white-text">
+                <span class="card-title">Laporan Tidak Berhibah</span>
+                <p>Klik link di bawah ini jika Anda ingin meng-upload laporan akhir tanpa hibah.</p>
+              </div>
+              <div class="card-action">
+                <a href="{{action('LaporanController@uploadlaporantdkberhibah')}}">Laporan Tidak Berhibah</a>
               </div>
             </div>
-           </div>
           </div>
-          </div>
-
-
-
+        </div>
+      </div>
     </div>
+  </div>
   @stop
 </body>
 </html>

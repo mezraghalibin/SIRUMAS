@@ -11,6 +11,7 @@ use App\proposal;
 use DB;
 use Session;
 use Validator;
+use File;
 
 class ProposalController extends Controller {
     public function index() {
@@ -48,7 +49,6 @@ class ProposalController extends Controller {
         }
     }
 
-<<<<<<< HEAD
     public function revisi(Request $request, $id) {
         $this->validate($request, [
             'file' => 'required'
@@ -57,9 +57,8 @@ class ProposalController extends Controller {
         $proposalOld = Proposal::find($id); //GET HIBAH OLD BY FIND ON TABLE HIBAH
 
         //PLAY WITH NEW FILE
-        $filenameNew = $proposalOld->id . "_" . $proposalOld->nama_pengaju. '_' . $proposalOld->judul_proposal . '_Revisi.'. 
-            $request->file('file')->getClientOriginalExtension(); //RENAME NEW FILE
-        $request->file('file')->move(public_path() .'upload/proposal', $filenameNew); //MASUKIN FILE BARU KE FOLDER
+        $filenameNew = $request->file('file')->getClientOriginalName(); //RENAME NEW FILE
+        $request->file('file')->move(public_path('/upload/proposal'), $filenameNew); //MASUKIN FILE BARU KE FOLDER
         
         //PLAY WITH OLD FILE
         $filenameOld = public_path('upload/proposal/' . $proposalOld->file); //GET SPECIFIC MOU FILE NAME
@@ -67,7 +66,7 @@ class ProposalController extends Controller {
             File::delete($filenameOld); //DELETE FILE FROM DIRECTORY
         }
 
-        $proposalOld->file = $filename;// SAVE THE NEW ONES
+        $proposalOld->file = $filenameNew;// SAVE THE NEW ONES
         $proposalOld->save(); //SAVE TO DATABASE
         Session::flash('flash_message','Revisi Proposal Berhasil Dilakukan'); //FLASH MESSAGE
         return redirect('proposal');
@@ -77,12 +76,7 @@ class ProposalController extends Controller {
         $dataProposal = Proposal::where('dosen', $id)->get();
         return $dataProposal;
     }
-=======
-    // public function read($id) {
-    //     $dataProposal = Proposal::where('dosen', $id)->get();
-    //     return $dataProposal;
-    // }
->>>>>>> 763311fc63f21bd835352b44bb239f2f8954cfb1
+
 
     //JOIN TABLE PROPOSAL DAN TABLE HIBAH DIMANA ID HIBAH PADA PROPOSAL = ID HIBAH PADA HIBAH
     public function joinTabel($id_user) {

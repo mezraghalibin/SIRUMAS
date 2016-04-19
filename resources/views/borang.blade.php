@@ -46,7 +46,7 @@
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
         
-         var x = 1; //initlal text box count
+        var x = 1; //initlal text box count
         $(add_button).click(function(e){ //on add input button click
             e.preventDefault();
             if(x < max_fields){ //max input box allowed
@@ -58,10 +58,6 @@
         $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
             e.preventDefault(); $(this).parent('div').remove(); x--;
         })
-        
-
-
-
       });
 
     </script>
@@ -82,108 +78,97 @@
       </div>
     </nav>
 
-    <!-- CONTENT BUAT BORANG -->
+    {{-- CONTENT BUAT BORANG --}}
     <div class="container">
       <div id="buat-borang">
         <div class="header"><h4>Buat Borang</h4></div>
 
-        @if(Session::has('flash_message'))
-        <div class="card-panel red darken-2">
-          <span class="white-text alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</span>
-        </div>
-        @endif
-
-          <div class="kelola-content">
-          <form class="action" action="borang" method="post">
-         
-           <div class="input_fields_wrap">
-            <button class="add_field_button btn-floating btn-large card-panel red darken-2"><i class="material-icons">add</i></button>
-            <div class="col s6"><input type="text" name="komponen[]" value="" placeholder="Isi komponen" class="validate">
+          @if(Session::has('flash_message'))
+            <div class="card-panel red darken-2">
+              <span class="white-text alert {{ Session::get('alert-class', 'alert-info') }}">
+              {{ Session::get('message') }}</span>
             </div>
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-           
-          </div>
-          <div align="center"><button class="btn waves-effect waves-light card-panel red darken-2" type="submit" value="post"><span class="white-text">Simpan Borang</span><i class="material-icons right">send</i></button></div>
-    
-        </form>
-          </div>
+          @endif
+
+        <div class="kelola-content">
+            <form class="action" action="borang" method="post">
+              <div class="input_fields_wrap">
+                <button class="add_field_button btn-floating btn-large card-panel red darken-2">
+                  <i class="material-icons">add</i></button>
+                <div class="col s6"><input type="text" name="komponen[]" 
+                  value="" placeholder="Isi komponen" class="validate">
+                </div>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              </div>
+              <div align="center">
+                <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" value="post">
+                <span class="white-text">Simpan Borang</span><i class="material-icons right">send</i></button>
+              </div>
+            </form>
+        </div>
       </div>
     </div>
-      <!-- END OF CONTENT BUAT BORANG -->
+    {{-- END OF CONTENT BUAT BORANG --}}
 
-
-      <div class="container">
-        <div id="kelola-borang">
-          <div class="header"><h4>Kelola Borang</h4></div>
-
+    {{-- CONTENT KELOLA BORANG --}}
+    <div class="container">
+      <div id="kelola-borang">
+      <div class="header"><h4>Kelola Borang</h4></div>
         @if(Session::has('flash_message'))
           <div class="card-panel red darken-2">
             <span class="white-text">{{ Session::get('flash_message') }}</span>
           </div>
         @endif
-         
-          <table>
-              <thead>
-                  <th>ID Komponen</th>
-                  <th>Nama Komponen</th>
-              </thead>
-
-              @foreach($borangs as $borang)
-
-                  <tr>
-                      <td>{{ $borang->id }}</td>
-                      <td>{{ $borang->komponen }}</td>
-                      <td>
-                      <form class="" action="/hapusborang/{{$borang->id}}" method="post">
-                      
-                       <!-- Modal Trigger -->
-                      <button data-target="modal{{$borang->id}}" class="btn btn modal-trigger" type="submit" value="post">Hapus</button>
-                      <!-- Modal Structure -->
-                      <div id="modal{{$borang->id}}" class="modal">
-                        <div class="modal-content">
-                          <h4>Hapus Pengumuman?</h4>
-                          <p>Pengumuman akan dihapus</p>
-                        </div>
-                        <div class="modal-footer">
-                        <input type="submit" name="name" value="Hapus" class="btn">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="" value="Tidak" class="modal-close btn">    
-                        </div>
-                      </div>
-                      </button>
-                      
-                      </form>
-                      </td>
-                      <td>
-                      <button class="btn" type="submit" id="edit">
-                        <a class="white-text" href="/editborang/{{$borang->id}}">Edit</a>
-                        </button>
-                      </td>
-                  </tr>
-
-              @endforeach
-              
-          </table>
-        </div>
+        <table>
+          <thead>
+              <th>ID Komponen</th>
+              <th>Nama Komponen</th>
+          </thead>
+          @foreach($borangs as $borang)
+            <tr>
+              <td>{{ $borang->id }}</td>
+              <td>{{ $borang->komponen }}</td>
+              <td>
+                <form class="" action="/hapusborang/{{$borang->id}}" method="post">
+                  {{-- Modal Trigger --}}
+                  <button data-target="modal{{$borang->id}}" class="btn btn modal-trigger" 
+                    type="submit" value="post">Hapus</button>
+                  {{-- Modal Structure --}}
+                  <div id="modal{{$borang->id}}" class="modal">
+                    <div class="modal-content">
+                      <h4>Hapus Pengumuman?</h4>
+                      <p>Pengumuman akan dihapus</p>
+                    </div>
+                    <div class="modal-footer">
+                      <input type="submit" name="name" value="Hapus" class="btn">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                      <input type="" value="Tidak" class="modal-close btn">    
+                    </div>
+                  </div>
+                </form>
+              </td>
+              <td>
+                <button class="btn" type="submit" id="edit">
+                  <a class="white-text" href="/editborang/{{$borang->id}}">Edit</a>
+                </button>
+              </td>
+            </tr>
+          @endforeach
+        </table>
       </div>
-
-
+    </div>
+    {{-- END OF CONTENT KELOLA BORANG --}}
   </div>
 
   <div>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-      <script>
-        $(document).ready(function() {
-          $('.modal-trigger').leanModal();
-        });
-      </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.modal-trigger').leanModal();
+      });
+    </script>
   </div>
-
-  {{-- <div class="wrapper">
-    
-    </div>
-  </div> --}}
   @stop
 </body>
 </html>

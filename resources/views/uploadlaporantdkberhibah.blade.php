@@ -106,11 +106,6 @@
       <!-- END OF CONTENT KELOLA HIBAH -->
 
   </div>
-
-  {{-- <div class="wrapper">
-    
-    </div>
-  </div> --}}
   @stop
 </body>
 </html>
