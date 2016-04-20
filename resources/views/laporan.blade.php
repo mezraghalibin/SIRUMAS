@@ -5,7 +5,6 @@
   $name           = $_SESSION['name'];
   $role           = $_SESSION['role'];
   $spesifik_role  = $_SESSION['spesifik_role'];
-  //$id_proposal    = $_SESSION['id_proposal']; buat masukin id proposal
 ?>
 
 @extends('master')
@@ -38,8 +37,8 @@
 
     <script>
     $(document).ready(function(){
-      $role="<?php echo $spesifik_role ?>";
-      if ($role="dosen") {
+      $role = "<?php echo $spesifik_role ?>";
+      if ($role == "dosen") {
         $("#laporan-tidak-berhibah").hide();
         $("#laporan-berhibah").hide();
         $("#upload-laporan-akhir").hide();
@@ -103,7 +102,7 @@
           <li id="upload-akhir"><a href="#">Upload Laporan Akhir</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+          <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
         </ul>
       </div>
     </nav>
@@ -232,18 +231,18 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col s12 m6">
-          <div class="card blue-grey darken-1">
-            <div align="center">
-              <div class="card-content white-text">
-                <span class="card-title">Laporan Tidak Berhibah</span>
-                <p>Klik link di bawah ini jika Anda ingin meng-upload laporan akhir tanpa hibah.</p>
-              </div>
-              <div class="card-action">
-                <a href="{{action('LaporanController@uploadlaporantdkberhibah')}}">Laporan Tidak Berhibah</a>
+        <div class="row">
+          <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+              <div align="center">
+                <div class="card-content white-text">
+                  <span class="card-title">Laporan Tidak Berhibah</span>
+                  <p>Klik link di bawah ini jika Anda ingin meng-upload laporan akhir tanpa hibah.</p>
+                </div>
+                <div class="card-action">
+                  <a href="{{action('LaporanController@uploadlaporantdkberhibah')}}">Laporan Tidak Berhibah</a>
+                </div>
               </div>
             </div>
           </div>

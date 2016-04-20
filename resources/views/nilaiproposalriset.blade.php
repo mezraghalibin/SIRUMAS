@@ -58,50 +58,38 @@
         $("#list-hibah-pengmas").click(function(){
             $("#daftar-proposal-pengmas").fadeIn(500);
         });
-
-      
-
+      });
     </script>
 </head>
 <body>
   @section('main_content')
-  
-
-  <!-- SECOND NAVBAR -->
-    <div class="page-content">
+  {{-- PAGE CONTENT --}}
+  <div class="page-content">
+    {{-- SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-            <li id="navbar-hibah-riset"><a href='/daftarproposalhibahriset/{{$proposal->id}}'>Kembali
-            </a></li>
+          <li id="navbar-hibah-riset"><a href="{{action('ProposalHibahController@index')}}">Kembali</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-            <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset
-            </a></li>
+          <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
         </ul>
-        </div>
+      </div>
     </nav>
-    
-    <!-- END of SECOND NAVBAR -->
+    {{-- END of SECOND NAVBAR --}}
 
     <div class="container">
-    <div class="header"><h5>Nilai Proposal</h5></div>
-
-     @if(Session::has('flash_message'))
+      <div class="header"><h5>Nilai Proposal</h5></div>
+      @if(Session::has('flash_message'))
         <div class="card-panel red darken-2">
           <span class="white-text">{{ Session::get('flash_message') }}</span>
         </div>
-
-    @endif
-
-  
-
-     <!-- display pdf-->
-     
-      <div align="center">
-      <embed src="test.pdf" width="100%" height="500px">
-     </div>
-     <!-- end display pdf-->
+      @endif
+      {{-- display pdf --}}
+      <div class="center-align">
+        <embed src="<?php echo public_path('upload/proposal/'.$proposal->file); ?>" width="100%" height="100%">
+      </div>
+      {{-- end display pdf --}}
        
       <div class="col s6">
       <br>

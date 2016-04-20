@@ -9,6 +9,7 @@ use App\Http\Controllers\SSOController;
 use App\users;
 use App\proposal;
 use App\Hibah;
+use App\Borang;
 use DB;
 
 class ProposalHibahController extends Controller {
@@ -33,8 +34,6 @@ class ProposalHibahController extends Controller {
                             FROM menyesuaikan_keuangan)"
                     
                 );
-             //return($penyesuaianKeuangan);
-            // $dataProposal = $this->joinTabel(); 
             return view('proposalhibah', compact('dataHibah','penyesuaianKeuangan'));
         }
         else {
@@ -46,6 +45,7 @@ class ProposalHibahController extends Controller {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        
         if($check) {
             $proposal= Proposal::find($id);
             $borangs = DB::table('borang')->get();
@@ -60,10 +60,10 @@ class ProposalHibahController extends Controller {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        
         if($check) {
-            $proposal= Proposal::find($id);
+            $proposal = Proposal::find($id);
             $borangs = DB::table('borang')->get();
-            //$pdf = DB::table('proposal')->select('file')->where('id_proposal', $id)->get();
             return view('nilaiproposalpengmas', ['borangs' => $borangs], ['proposal' => $proposal]);
         }
         else {
@@ -118,8 +118,8 @@ class ProposalHibahController extends Controller {
                             FROM menyesuaikan_keuangan)"
                     
                 );
-            $AllProposal = DB::table('proposal')
-                ->join('hibah', 'id_hibah', '=', 'hibah.id')
+            $AllProposal = DB::table('hibah')
+                ->join('proposal', 'proposal.id_hibah', '=', 'hibah.id')
                 ->select('*')
                 ->where('proposal.id_hibah', '=', $hibah->id)
                 ->get();
@@ -141,8 +141,8 @@ class ProposalHibahController extends Controller {
         if($check) {
             $hibah = Hibah::find($id);
 
-            $AllProposal = DB::table('proposal')
-                ->join('hibah', 'id_hibah', '=', 'hibah.id')
+            $AllProposal = DB::table('hibah')
+                ->join('proposal', 'proposal.id_hibah', '=', 'hibah.id')
                 ->select('*')
                 ->where('proposal.id_hibah', '=', $hibah->id)
                 ->get();

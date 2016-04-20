@@ -15,6 +15,10 @@ Route::get('/master', function () {
     return view('master');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
 Route::resource('nilaiproposal', 'NilaiProposalController');
 
 /**************** ROUTE LOGIN/LOGOUT ****************/

@@ -68,7 +68,7 @@
         <ul class="left hide-on-med-and-down">
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+          <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
         </ul>
       </div>
     </nav>

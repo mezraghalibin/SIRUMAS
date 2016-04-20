@@ -1,4 +1,15 @@
 @extends('master')
+
+<?php 
+  //CHECK USER'S ROLE
+  $id             = $_SESSION['id'];
+  $username       = $_SESSION['username'];
+  $name           = $_SESSION['name'];
+  $role           = $_SESSION['role'];
+  $spesifik_role  = $_SESSION['spesifik_role']; 
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +76,9 @@
 </head>
 <body>
   @section('main_content')
+  {{-- PAGE CONTENT --}}
   <div class="page-content">
+    {{-- SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
@@ -73,10 +86,11 @@
           <li id="buat"><a href="#">Buat Borang</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+          <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
         </ul>
       </div>
     </nav>
+    {{-- END OF SECOND NAVBAR --}}
 
     {{-- CONTENT BUAT BORANG --}}
     <div class="container">
@@ -91,20 +105,20 @@
           @endif
 
         <div class="kelola-content">
-            <form class="action" action="borang" method="post">
-              <div class="input_fields_wrap">
-                <button class="add_field_button btn-floating btn-large card-panel red darken-2">
-                  <i class="material-icons">add</i></button>
-                <div class="col s6"><input type="text" name="komponen[]" 
-                  value="" placeholder="Isi komponen" class="validate">
-                </div>
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <form class="action" action="borang" method="post">
+            <div class="input_fields_wrap">
+              <button class="add_field_button btn-floating btn-large card-panel red darken-2">
+                <i class="material-icons">add</i></button>
+              <div class="col s6"><input type="text" name="komponen[]" 
+                value="" placeholder="Isi komponen" class="validate">
               </div>
-              <div align="center">
-                <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" value="post">
-                <span class="white-text">Simpan Borang</span><i class="material-icons right">send</i></button>
-              </div>
-            </form>
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            </div>
+            <div align="center">
+              <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" value="post">
+              <span class="white-text">Simpan Borang</span><i class="material-icons right">send</i></button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -131,7 +145,7 @@
               <td>
                 <form class="" action="/hapusborang/{{$borang->id}}" method="post">
                   {{-- Modal Trigger --}}
-                  <button data-target="modal{{$borang->id}}" class="btn btn modal-trigger" 
+                  <button data-target="modal{{$borang->id}}" class="btn btn modal-trigger card-panel red darken-2" 
                     type="submit" value="post">Hapus</button>
                   {{-- Modal Structure --}}
                   <div id="modal{{$borang->id}}" class="modal">
@@ -148,7 +162,7 @@
                 </form>
               </td>
               <td>
-                <button class="btn" type="submit" id="edit">
+                <button class="btn card-panel red darken-2" type="submit" id="edit">
                   <a class="white-text" href="/editborang/{{$borang->id}}">Edit</a>
                 </button>
               </td>

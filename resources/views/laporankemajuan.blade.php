@@ -1,4 +1,15 @@
 @extends('master')
+
+<?php 
+  //CHECK USER'S ROLE
+  $id             = $_SESSION['id'];
+  $username       = $_SESSION['username'];
+  $name           = $_SESSION['name'];
+  $role           = $_SESSION['role'];
+  $spesifik_role  = $_SESSION['spesifik_role']; 
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +58,9 @@
 </head>
 <body>
   @section('main_content')
+  {{-- PAGE CONTENT --}}
   <div class="page-content">
+    {{-- SECOND NAVBAR --}}
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
@@ -55,12 +68,13 @@
           <li id="akhir"><a href="#">Laporan Akhir</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+          <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
         </ul>
       </div>
     </nav>
+    {{-- END OF SECOND NAVBAR --}}
 
-    <!-- CONTENT LAPORAN kemajuan -->
+    {{-- CONTENT LAPORAN kemajuan --}}
     <div class="container">
       <div id="laporan-kemajuan">
         <div class="header"><h4>Laporan Kemajuan</h4></div>

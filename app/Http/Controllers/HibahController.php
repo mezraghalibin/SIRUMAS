@@ -88,7 +88,7 @@ class HibahController extends Controller {
         $proposal->save();
         // Session untuk Success Notif
         Session::flash('flash_message','Sukses meng-apply hibah');
-        // then rederict back to pesan
+        // then rederict back to hibah
         return redirect('hibah');
     }
     
@@ -97,7 +97,7 @@ class HibahController extends Controller {
             'nama_hibah' => 'required',
             'deskripsi' => 'required',
             'kategori_hibah' => 'required',
-            'besar_dana' => 'required',
+            'nominal' => 'required',
             'pemberi' => 'required',
             'tgl_awal' => 'required',
             'tgl_akhir' => 'required',
@@ -115,7 +115,8 @@ class HibahController extends Controller {
         $hibah = Hibah::create($request->all()); //SIMPAN SEMUA MASUKAN DALAM BENTUK HIBAH
         $namaHibah = $hibah->nama_hibah; //GET NAMA HIBAH
 
-        $hibah->besar_dana = $this->getRupiah($hibah->besar_dana); //PARSE NOMINAL TO RUPIAH
+        $hibah->besar_dana = $this->getRupiah($hibah->nominal); //PARSE NOMINAL TO RUPIAH
+        $hibah->nominal = $request->nominal;
         $hibah->save(); //SAVE PERUBAHAN YANG DILAKUKAN KEDALAM DATABASE
         Session::flash('flash_message',$namaHibah . ' Telah Tersimpan'); //FLASH MESSAGE IF SUCCESS
         return redirect('hibah');
@@ -148,7 +149,7 @@ class HibahController extends Controller {
             'nama_hibah' => 'required',
             'deskripsi' => 'required',
             'kategori_hibah' => 'required',
-            'besar_dana' => 'required',
+            'nominal' => 'required',
             'pemberi' => 'required',
             'tgl_awal' => 'required',
             'tgl_akhir' => 'required',
@@ -169,7 +170,8 @@ class HibahController extends Controller {
         $hibahOld->nama_hibah       = $hibahNew->nama_hibah;
         $hibahOld->deskripsi        = $hibahNew->deskripsi;
         $hibahOld->kategori_hibah   = $hibahNew->kategori_hibah;
-        $hibahOld->besar_dana       = $this->getRupiah($hibahNew->besar_dana);
+        $hibahOld->nominal          = $hibahNew->nominal;
+        $hibahOld->besar_dana       = $this->getRupiah($hibahNew->nominal);
         $hibahOld->pemberi          = $hibahNew->pemberi;
         $hibahOld->tgl_awal         = $hibahNew->tgl_awal;
         $hibahOld->tgl_akhir        = $hibahNew->tgl_akhir;
@@ -188,8 +190,9 @@ class HibahController extends Controller {
         return redirect('hibah');
     }
 
-    public function getRupiah($nominal) {
+    public function getRupiah($angka) {
         //PARSE NOMINAL TO RUPIAH
+        $nominal = strval($angka); //INT TO STRING
         $length = strlen($nominal);
         $rupiah = "";
         $counter = 0;

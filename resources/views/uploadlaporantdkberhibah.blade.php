@@ -1,4 +1,15 @@
 @extends('master')
+
+<?php 
+  //CHECK USER'S ROLE
+  $id             = $_SESSION['id'];
+  $username       = $_SESSION['username'];
+  $name           = $_SESSION['name'];
+  $role           = $_SESSION['role'];
+  $spesifik_role  = $_SESSION['spesifik_role']; 
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +48,7 @@
          <li><a href="{{action('LaporanController@index')}}">Kembali</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+          <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
         </ul>
       </div>
     </nav>

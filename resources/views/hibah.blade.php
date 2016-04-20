@@ -33,8 +33,16 @@
 
     <script>
     $(document).ready(function(){
-        $("#kelola-hibah").hide(0); //hide page kelola hibah
-        $("#buat-hibah").hide(0); //hide page buat hibah
+        var spesifik_role = "<?php echo $spesifik_role; ?>";
+
+        if(spesifik_role == 'dosen') {
+          $("#kelola-hibah").hide(); //hide page kelola hibah
+          $("#buat-hibah").hide(); //hide page buat hibah
+        }
+        else if(spesifik_role == 'divisi riset') {
+          $("#daftar-hibah").hide(); //hide page daftar hibah
+          $("#buat-hibah").hide(); //hide page buat hibah
+        }
 
         $("#daftar").click(function(){
             $("#daftar-hibah").fadeIn(500);
@@ -79,12 +87,16 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="daftar"><a href="#">Daftar Hibah</a></li>
-          <li id="kelola"><a href="#">Kelola Hibah</a></li>
-          <li id="buat"><a href="#">Buat Hibah</a></li>
+          @if($spesifik_role == 'dosen')
+            <li id="daftar"><a href="#">Daftar Hibah</a></li>
+          @endif
+          @if($spesifik_role == 'divisi riset')
+            <li id="kelola"><a href="#">Kelola Hibah</a></li>
+            <li id="buat"><a href="#">Buat Hibah</a></li>
+          @endif
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+          <li><a id="user" href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
         </ul>
       </div>
     </nav>
@@ -221,8 +233,12 @@
               {{-- THIRD ROW = BESAR DANA --}}
               <div class="row">
                 <div class="input-field col s12">
-                  <input placeholder="Tuliskan Nominalnya Saja" id="besarDana" name="besar_dana" type="text" class="validate">
+                  <input placeholder="Tuliskan Nominalnya Saja" id="nominal" 
+                    name="nominal" type="number" class="validate" min="1">
                   <label for="nama">Besar Dana</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="besar_dana" name="besar_dana" type="hidden" class="validate" value="">
                 </div>
               </div>
 

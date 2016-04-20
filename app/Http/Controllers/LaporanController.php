@@ -30,6 +30,7 @@ class LaporanController extends Controller {
 		//CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+    
     if($check) {
         return view('laporankemajuan');
     }
@@ -38,18 +39,18 @@ class LaporanController extends Controller {
     }
   }   
 
-  public function uploadkemajuan() {
+  public function uploadkemajuan($id) {
     //CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
     if($check) {
-        $id = $_SESSION['id'];
         $proposal = Proposal::find($id);
-         if(!$proposal){ 
-         abort(404);
-         } else {
-         return view('uploadkemajuan')->with('proposal',$proposal);
-            }
+        if(!$proposal){ 
+          abort(404);
+        } 
+        else {
+          return view('uploadkemajuan')->with('proposal',$proposal);
+        }
         
     }
     else {

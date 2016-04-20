@@ -72,12 +72,11 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-            <li id="navbar-hibah-riset"><a href='/daftarproposalhibahriset/{{$proposal->id}}'>Kembali
+            <li id="navbar-hibah-riset"><a href="{{action('ProposalHibahController@index')}}">Kembali
             </a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-            <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset
-            </a></li>
+            <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
         </ul>
         </div>
     </nav>
@@ -85,23 +84,18 @@
     <!-- END of SECOND NAVBAR -->
 
     <div class="container">
-    <div class="header"><h5>Nilai Proposal</h5></div>
-
-     @if(Session::has('flash_message'))
+      <div class="header"><h5>Nilai Proposal</h5></div>
+      @if(Session::has('flash_message'))
         <div class="card-panel red darken-2">
           <span class="white-text">{{ Session::get('flash_message') }}</span>
         </div>
-
-    @endif
-
-  
-
-     <!-- display pdf-->
-     
+      @endif
+      {{-- display pdf --}}
       <div align="center">
-      <embed src="/public/upload/test.pdf" width="100%" height="500px">
-     </div>
-     <!-- end display pdf-->
+       <embed src="/public/upload/test.pdf" width="100%" height="500px">
+      </div>
+      {{-- end display pdf --}}
+     
        
       <div class="col s6">
       <br>
@@ -117,22 +111,22 @@
         </div>
       </div>
       <hr>
-        
-        <?php foreach ($borangs as $borang) { ?>
-        
-        <form class="action" action="menilaipengmas/{{ $proposal->id }}" method="post">
-          <div class="row">
-          <div class="col s6">
-          <p><?php echo $borang->komponen ?></p><input type="hidden" name="nama_komp[]" value="<?php echo $borang->komponen ?>" placeholder="Isi komponen" class="validate"></div>
-          <div class="col s6"><select name="nilai[]" value="" class="browser-default validate" style="width:100px"><option disabled selected>Nilai</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
-          <input type="hidden" name="id_proposal[]" value="{{$proposal->id}}" placeholder="Isi id proposal">
-          <input type="hidden" name="staf_riset[]" value="<?php echo $id ?>">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          </div>
-          <?php } ?>
-          <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="post"><span class="white-text">Simpan</span><i class="material-icons right">send</i>
-          
-        </form>
+        @if (count($borangs))
+          @foreach ($borangs as $borang)
+            <form class="action" action="menilaipengmas/{{ $proposal->id }}" method="post">
+            <div class="row">
+            <div class="col s6">
+            <p><?php echo $borang->komponen ?></p><input type="hidden" name="nama_komp[]" value="<?php echo $borang->komponen ?>" placeholder="Isi komponen" class="validate"></div>
+            <div class="col s6"><select name="nilai[]" value="" class="browser-default validate" style="width:100px"><option disabled selected>Nilai</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
+              <input type="hidden" name="id_proposal[]" value="{{$proposal->id}}" placeholder="Isi id proposal">
+              <input type="hidden" name="staf_riset[]" value="<?php echo $id ?>">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            </div>
+          @endforeach
+        @endif
+            <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="post"><span class="white-text">Simpan</span><i class="material-icons right">send</i>
+            
+            </form>
         </div>
          
       </div>

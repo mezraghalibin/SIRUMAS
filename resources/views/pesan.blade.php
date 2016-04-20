@@ -131,19 +131,6 @@
                   </tr>
                 @endforeach
               @endif
-
-              {{-- PESAN BUAT YARA --}}
-                {{-- delete if udah baca -> cuma gue rubah dari php yang ke html laravel. kalo udah baca apus pesan ini sama yang bawah hehe --}}
-
-                <!--foreach untuk setiap message yg diambil bakal ngeprint tanggal dan subjeknya
-                <?php foreach($messages as $message){
-                  echo '<tr>
-                  <td>'.$message->created_at.'</td>
-                  <td><a href="/detailPesan/'.$message->id.'">'.$message->subjek.'</a></td>
-                  <td><a href="/detailPesan/'.$message->id.'">'.$message->nama.'</a></td>
-                  </tr>';
-                }?> -->
-              {{-- PESAN BUAT YARA --}}
             </tbody>
           </table>
         </div>

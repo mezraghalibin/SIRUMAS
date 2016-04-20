@@ -59,7 +59,7 @@
         var id_staf = "<?php echo $id ?>";
         document.getElementById('staf_riset').value = id_staf;
 
-        //CHANGE RUPIAH TO NOMINAL
+        /*//CHANGE RUPIAH TO NOMINAL
         var danaHibah = "<?php echo $dana_hibah?>";
         var nominal = danaHibah.substring(4, danaHibah.length-2);
         var length = nominal.length;
@@ -67,8 +67,7 @@
         for (i = count; i > 0; i--) {
           var nominal = nominal.replace(".", "");
         }
-        document.getElementById('besar_dana').value = nominal;
-
+        document.getElementById('besar_dana').value = nominal;*/
     });
     </script>
 </head>
@@ -83,7 +82,7 @@
           <li id="kelola"><a href="{{action('HibahController@index')}}">Kembali</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Login Sebagai muhammad.ezra - Staf Riset</a></li>
+          <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
         </ul>
       </div>
     </nav>
@@ -140,9 +139,12 @@
               {{-- THIRD ROW = BESAR DANA --}}
               <div class="row">
                 <div class="input-field col s12">
-                  <input placeholder="Tuliskan Nominalnya Saja" id="besar_dana" name="besar_dana" type="text" 
-                    class="validate" value="">
+                  <input placeholder="Tuliskan Nominalnya Saja" id="nominal" name="nominal" type="number" 
+                    class="validate" value="{{ $dataHibah->nominal }}">
                   <label for="nama">Besar Dana</label>
+                </div>
+                <div class="input-field col s12">
+                  <input id="besar_dana" name="besar_dana" type="hidden" class="validate" value="">
                 </div>
               </div>
 

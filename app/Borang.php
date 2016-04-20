@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Borang extends Model
 {
     protected $table = 'borang';
-    //protected $fillable = array('nama_komp', 'id_proposal', 'staf_riset','nilai');
+    protected $fillable = array('komponen');
     protected $guarded = ['id'];
     public $timestamps = false;
  

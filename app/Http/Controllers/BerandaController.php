@@ -16,10 +16,8 @@ class BerandaController extends Controller
     {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
-        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-        
+        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();        
         // get semua pengumuman yang statusnya udah published
-        //$allPengumuman = Pengumuman::where('status', 1)->get();
         $allPengumuman = DB::table('pengumuman')
             ->join('users', 'pengumuman.staf_riset', '=', 'users.id')
             ->where('pengumuman.status', '=', 1)
@@ -38,22 +36,16 @@ class BerandaController extends Controller
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-        if($check) {  
-            //$pengumumanbyid = Pengumuman::find($id);
-            //$pengumumanbyid = DB::table('pengumuman')->where('id',$id)->first()->toString();
-            //return ($pengumumanbyid);
+        if($check) { 
             $pengumuman = DB::table('pengumuman')
             ->join('users', 'pengumuman.staf_riset', '=', 'users.id')
-            //->where('pengumuman.status', '=', 1)
             ->where('pengumuman.id', '=',$id)
             ->select('pengumuman.*', 'users.nama')
             ->get();
             if(!$pengumuman){
                 abort(404);
             } else {
-                //return ($pengumuman);
                 return view('detailPengumuman',compact('pengumuman')); 
-                //return view('/detailPengumuman')->with(compact('pengumuman'));
             }
         }
         else {
