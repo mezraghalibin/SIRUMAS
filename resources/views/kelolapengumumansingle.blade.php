@@ -1,15 +1,4 @@
 @extends('master')
-
-<?php 
-  //CHECK USER'S ROLE
-  $id             = $_SESSION['id'];
-  $username       = $_SESSION['username'];
-  $name           = $_SESSION['name'];
-  $role           = $_SESSION['role'];
-  $spesifik_role  = $_SESSION['spesifik_role']; 
-?>
-
-
 <?php 
   //CHECK USER'S ROLE
   $id             = $_SESSION['id'];
@@ -116,7 +105,7 @@
           class="col s12" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
           <input type="hidden" name="staf_riset" value="<?php echo $id ?>"> <!-- naro id staf riset -->
-          <input type="hidden" name="status" value=0> <!-- status di set 0 -->
+          <input type="hidden" name="status" value="{{ $pengumuman->status }}"  > <!-- status di set 0 -->
           {{-- FIRST ROW JUDUL NOMOR KATEGORI --}}
           <div class="row">
             <div class="input-field col s4 offset-s2">
@@ -148,7 +137,7 @@
           {{-- KONTEN PENGUMUMAN --}}
           <div class="row">
             <div class="input-field col s8 offset-s2">
-              <textarea id="konten_pengumuman" class="materialize-textarea" name="konten"></textarea>
+              <textarea id="konten_pengumuman" class="materialize-textarea" name="konten">{{ $pengumuman->konten }}</textarea>
               <label for="konten_pengumuman">Konten Pengumuman</label>
             </div>
           </div>
@@ -176,7 +165,7 @@
         </form>
       </div>
     </div>
-    {{-- END OF CONTENT BUAT HIBAH --}}
+    {{-- END OF CONTENT BUAT PENGUMUMAN --}}
   </div>
   {{-- END OF PAGE CONTENT --}}
     

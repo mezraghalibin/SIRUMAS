@@ -107,16 +107,13 @@ class ProposalHibahController extends Controller {
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         if($check) {
-            $hibah = Hibah::find($id);
-            $penyesuaianKeuangan = DB::select(
-                        "SELECT 
-                        menyesuaikan_keuangan.komentar, 
-                        proposal.*
-                        FROM menyesuaikan_keuangan, proposal
-                        WHERE proposal.id IN  
-                            (SELECT menyesuaikan_keuangan.id_proposal
-                            FROM menyesuaikan_keuangan)"
-                    
+        $hibah = Hibah::find($id);
+        $penyesuaianKeuangan = DB::select(
+                        "SELECT *
+                         FROM proposal
+                         left join menyesuaikan_keuangan on proposal.id = menyesuaikan_keuangan.id_proposal
+                         left join menilai_proposal on proposal.id = menilai_proposal.id_proposal
+                         left join hibah on $id = proposal.id_hibah"
                 );
             $AllProposal = DB::table('hibah')
                 ->join('proposal', 'proposal.id_hibah', '=', 'hibah.id')
@@ -140,7 +137,12 @@ class ProposalHibahController extends Controller {
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         if($check) {
             $hibah = Hibah::find($id);
-
+            $penyesuaianKeuangan = DB::select(
+                                       "SELECT * from 
+                        proposal left join menyesuaikan_keuangan on proposal.id = menyesuaikan_keuangan.id_proposal left join
+                        menilai_proposal on proposal.id = menilai_proposal.id_proposal
+                        left join hibah on proposal.id_hibah = $id"
+                );
             $AllProposal = DB::table('hibah')
                 ->join('proposal', 'proposal.id_hibah', '=', 'hibah.id')
                 ->select('*')
@@ -149,7 +151,7 @@ class ProposalHibahController extends Controller {
 
             //$AllProposal = Proposal::find($id);
 
-            return view('daftarproposalhibahpengmas', compact('AllProposal'));
+            return view('daftarproposalhibahpengmas', compact('AllProposal','penyesuaianKeuangan'));
         }
         else {
             return view('login');
