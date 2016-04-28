@@ -25,14 +25,11 @@ class ProposalHibahController extends Controller {
              $dataHibah = $this->readHibah();
              $proposalnya = $this->getPenyesuaianKeuangan();
              $penyesuaianKeuangan = DB::select(
-                        "SELECT 
-                        menyesuaikan_keuangan.komentar, 
-                        proposal.*
+                        "SELECT menyesuaikan_keuangan.komentar, proposal.*
                         FROM menyesuaikan_keuangan, proposal
                         WHERE proposal.id IN  
                             (SELECT menyesuaikan_keuangan.id_proposal
                             FROM menyesuaikan_keuangan)"
-                    
                 );
             return view('proposalhibah', compact('dataHibah','penyesuaianKeuangan'));
         }

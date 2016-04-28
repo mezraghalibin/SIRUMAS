@@ -53,10 +53,9 @@
 </head>
 <body>
   @section('main_content')
-  
-
-  <!-- SECOND NAVBAR -->
-    <div class="page-content">
+  {{-- PAGE CONTENT   --}}
+  <div class="page-content">
+    {{-- SECOND NAVBAR --}}
       <nav class="second-navbar">
         <div class="nav-wrapper">
           <ul class="left hide-on-med-and-down">

@@ -75,7 +75,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($penyesuaianKeuangan as $proposal)
+              @foreach ($AllProposal as $proposal)
                 <tr>
                   <td>{{ $proposal->judul_proposal }}</td>
                   <td>{{ $proposal->nama_pengaju}}</td>
@@ -87,13 +87,9 @@
                     <span class="white-text">Nilai</span></button></a>
                   </td>
                   <td>
-                    @if($proposal->komentar === "")
                       <a href='sesuaikanproposalpengmas/{{$proposal->id}}'>
                       <button class="btn waves-effect waves-teal card-panel red darken-2">
                       <span class="white-text">Sesuaikan</span></button></a>
-                    @else
-                    {{$proposal->komentar}}
-                    @endif
                   </td>
                   <td>
                     <select name="status" value="" class="browser-default validate" style="width:100px">

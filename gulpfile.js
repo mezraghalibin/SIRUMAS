@@ -91,3 +91,9 @@ elixir(function(mix) {
     mix.sass('borang.scss', 'public/assets/css/borang.css');
 });
 /*********** EO BORANG ***********/
+
+/*********** BORANG ***********/
+elixir(function(mix) {
+    mix.sass('publikasi.scss', 'public/assets/css/publikasi.css');
+});
+/*********** EO BORANG ***********/

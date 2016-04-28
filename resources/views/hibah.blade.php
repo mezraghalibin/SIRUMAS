@@ -102,7 +102,7 @@
     </nav>
     {{-- END OF CONTENT SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
+    {{-- FLASH MESSAGE --}}
     <div id="flash-msg">
       @if(Session::has('flash_message'))
         <div class="card-panel teal">
@@ -113,7 +113,7 @@
         </div>
       @endif 
     </div>
-    {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
+    {{-- END OF FLASH MESSAGE --}}
     
     {{-- CONTENT DAFTAR HIBAH --}}
     <div class="container">
@@ -124,10 +124,13 @@
             <tbody>
               @if (count($dataHibah))
                 @foreach ($dataHibah as $hibah)
-                  <tr>
-                    <td>{{ $hibah->nama_hibah }}</td>
-                    <td><a href="/hibah/applyhibah/{{$hibah->id}}" class="waves-effect waves-light btn card-panel red darken-2"><span class="white-text">Info & Daftar</span></a></td>
-                  </tr>
+                  @if ($hibah->status === 1) {{-- IF PUBLISH MUNCUL --}}
+                    <tr>
+                      <td>{{ $hibah->nama_hibah }}</td>
+                      <td><a href="/hibah/applyhibah/{{$hibah->id}}" class="waves-effect waves-light btn card-panel red darken-2"><span class="white-text">Info & Daftar</span></a></td>
+                    </tr>
+                  @endif
+
                 @endforeach
               @endif
             </tbody>
@@ -152,6 +155,8 @@
                   <th data-field="periode">Periode</th>
                   <th data-field="" style="width:7%">Edit</th>
                   <th data-field="" style="width:4%">Delete</th>
+                  <th data-field="" style="width:4%">Publish</th>
+                  <th data-field="" style="width:4%">Non-Aktif</th>
               </tr>
             </thead>
 
@@ -165,8 +170,19 @@
                     <td>{{ $hibah->besar_dana }}</td>
                     <td>{{ $hibah->tgl_awal }} - {{ $hibah->tgl_akhir }}</td>
                     <td> {{-- BUTTON ICON UNTUK EDIT HIBAH --}}
-                      <a class="btn-floating" href="/hibah/kelolahibah/{{$hibah->id}}">
-                      <i class="material-icons right">mode_edit</i></a>
+                      @if($hibah->status === 1 || $hibah->status === 2) {{-- IF HIBAH UDAH DI PUBLISH --}} 
+                        <a class="btn-floating black" href="#"><i class="material-icons right">mode_edit</i></a>  
+                        @else
+                        <a class="btn-floating" href="/hibah/kelolahibah/{{$hibah->id}}">
+                        <i class="material-icons right">mode_edit</i></a>
+                      @endif
+                    </td>
+                    <td>
+                    @if($hibah->status === 1 || $hibah->status === 2) 
+                      <button data-target="" class="btn-floating btn black">
+                          <i class="material-icons right">delete</i>
+                      </button>
+                    @else
                     </td>
                     <td> {{-- BUTTON ICON UNTUK HAPUS HIBAH --}}
                       <!-- Modal Trigger -->
@@ -184,6 +200,51 @@
                           <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
                         </div>
                       </div>
+                    </td>
+                    @endif
+                    <td> {{-- BUTTON ICON UNTUK PUBLISH PENGUMUMAN --}}
+                      @if($hibah->status === 1 || $hibah->status === 2)
+                          published
+                      @else
+                        <!-- Modal Trigger -->
+                        <button data-target="publish{{$hibah->id}}" class="btn-floating modal-trigger">
+                          <i class="material-icons right">arrow_upward</i>
+                        </button>
+                        <!-- Modal Structure -->
+                        <div id="publish{{$hibah->id}}" class="modal">
+                          <div class="modal-content">
+                            <h4>Publish {{ $hibah->nama_hibah }}?</h4>
+                            <p>Hibah Akan ditampilkan!</p>
+                          </div>
+                          <div class="modal-footer center-align">
+                            <a href="/publishhibah/{{$hibah->id}}" class="modal-action modal-close btn-flat">Ya</a>
+                            <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
+                          </div>
+                        </div>
+                        <!-- END OF MODAL STRUCTURE -->
+                      @endif
+                    </td>
+                    <td> {{-- FOR NON AKTIF --}}
+                      @if($hibah->status === 1)
+                        <!-- Modal Trigger -->
+                        <button data-target="nonAktif{{$hibah->id}}" class="btn-floating btn modal-trigger">
+                          <i class="material-icons right">clear</i>
+                        </button>
+                        <!-- Modal Structure -->
+                        <div id="nonAktif{{$hibah->id}}" class="modal">
+                          <div class="modal-content">
+                            <h4>Non-Aktifkan {{$hibah->nama_hibah}}?</h4>
+                          </div>
+                          <div class="modal-footer center-align">
+                            <a href="/hibah/nonaktifhibah/{{$hibah->id}}" class="modal-action modal-close btn-flat">Ya</a>
+                            <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
+                          </div>
+                        </div>
+                        @elseif ($hibah->status === 0)
+                          <button class="btn-floating black btn "><i class="material-icons right">clear</i></button>
+                        @elseif ($hibah->status === 2)
+                          <i class="material-icons right">done</i>
+                      @endif
                     </td>
                   </tr>
                 @endforeach
@@ -203,6 +264,7 @@
           <div class="row">
             <form method="post" action="createhibah" class="col s12" enctype="multipart/form-data">
               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+              <input type="hidden" name="status" value=0>
               {{-- FIRST ROW = CATEGORY, TIME START, TIME END --}}
               <div class="row">                
                 <div class="input-field col s6">

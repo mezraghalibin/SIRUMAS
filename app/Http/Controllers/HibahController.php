@@ -101,7 +101,7 @@ class HibahController extends Controller {
             'pemberi' => 'required',
             'tgl_awal' => 'required',
             'tgl_akhir' => 'required',
-            'staf_riset' => 'required'
+            'staf_riset' => 'required',
         ]);
 
         //CHECK VALIDATOR, IF FAILS RETURN TO HIBAH PAGE
@@ -207,5 +207,21 @@ class HibahController extends Controller {
             $counter = $counter+1;
         }
         return "Rp. " .  $rupiah . ",-";
+    }
+
+    public function publikasi($id){
+        $hibah = Hibah::find($id);
+        $hibah->status = 1;
+        $hibah->save();
+        Session::flash('flash_message', 'Hibah berhasil dipublish!');
+        return redirect('hibah');
+    }
+
+    public function nonaktif($id){
+        $hibah = Hibah::find($id);
+        $hibah->status = 2;
+        $hibah->save();
+        Session::flash('flash_message', 'Hibah berhasil Non-Aktifkan!');
+        return redirect('hibah');
     }
 }
