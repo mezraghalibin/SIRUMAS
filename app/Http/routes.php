@@ -35,13 +35,15 @@ Route::get('/detailpengumuman/{id}', 'BerandaController@show');
 
 /**************** ROUTE HIBAH ******************/
 Route::get('/hibah', 'HibahController@index'); //FIRST TIME TO HIBAH PAGE
+Route::get('/hibah/buathibah', 'HibahController@hibah'); //FIRST TIME TO BUAT HIBAH PAGE
+Route::get('/hibah/kelolahibah', 'HibahController@hibah'); //FIRST TIME TO KELOLAHIBAH PAGE
 //APPLY
 Route::get('/hibah/applyhibah/{id}', 'HibahController@applyhibah'); //GO TO SPECIFIC HIBAH PAGE
 //CREATE
-Route::post('/createhibah', 'HibahController@create'); //ROUTES TO CREATE HIBAH
+Route::post('/hibah/createhibah', 'HibahController@create'); //ROUTES TO CREATE HIBAH
 //KELOLA
-Route::get('/hibah/kelolahibah/{id}', 'HibahController@kelolaHibah'); //GOT TO SPECIFIC HIBAH PAGE FOR EDIT
-Route::post('/hibah/kelolahibah/updatehibah/{id}', 'HibahController@update'); //ROUTES TO UPDATE HIBAH
+Route::get('/hibah/kelolahibah/detail/{id}', 'HibahController@kelolaHibah'); //GOT TO SPECIFIC HIBAH PAGE FOR EDIT
+Route::post('/hibah/kelolahibah/detail/updatehibah/{id}', 'HibahController@update'); //ROUTES TO UPDATE HIBAH
 //DELETE
 Route::get('/hibah/deletehibah/{id}', 'HibahController@delete'); //GO TO SPECIFIC HIBAH PAGE
 //PUBLISH
@@ -174,8 +176,15 @@ Route::get('/editkegiatanilmiah', 'KegiatanIlmiahController@edit');
 /**************** KEGIATAN ILMIAH ******************/
 
 /**************** KONTAK ******************/
-Route::get('/kontak', 'KontakController@index');
-Route::get('/editkontak', 'KontakController@edit');
+Route::get('/kontak/buatkontak', 'KontakController@index'); //FIRST TIME TO BUAT KONTAK PAGE
+Route::get('/kontak/kelolakontak', 'KontakController@index'); //FIRST TIME TO KELOLA KONTAK PAGE
+//Create New Kontak
+Route::post('/kontak/create', 'KontakController@create'); //CREATE NEW CONTACT IN DATABASE
+//Delete Kontak
+Route::get('/kontak/delete/{id}', 'KontakController@delete'); //CREATE NEW CONTACT IN DATABASE
+//Edit Kontak
+Route::get('/kontak/editkontak/{id}', 'KontakController@edit'); //CREATE NEW CONTACT IN DATABASE
+Route::post('/kontak/update/{id}', 'KontakController@update'); //CREATE NEW CONTACT IN DATABASE
 /**************** KONTAK ******************/
 
 /**************** PRESENTASI ******************/

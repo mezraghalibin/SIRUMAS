@@ -6303,6 +6303,7 @@ html, body {
   width: 100%; }
 
 .page-content {
+  overflow: auto;
   padding-left: 15%;
   top: 4.4em; }
   .page-content .second-navbar {

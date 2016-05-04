@@ -6303,23 +6303,38 @@ html, body {
   width: 100%; }
 
 .nav-wrapper {
-  background: #e0e0e0; }
+  background: #011A27; }
   .nav-wrapper .brand-logo, .nav-wrapper img {
     height: 64px; }
 
 /*********** SIDEBAR **********/
 /* CSS declarations go here */
-.side-nav {
-  top: 4.25em;
-  width: 15%;
-  box-shadow: 0px 0px 0px;
-  border-right: 1px solid #000000; }
-  .side-nav li, .side-nav a {
-    height: 50px;
-    line-height: 50px;
-    font-size: 0.9em; }
-
 .header-kita {
   font: 60px; }
+
+header .side-bar {
+  z-index: 4;
+  position: fixed;
+  top: 3.9em;
+  left: 15%;
+  width: 15%;
+  height: 100%;
+  margin-left: -15%;
+  background: #011A27;
+  transition: all 0.5s ease; }
+  header .side-bar ul, header .side-bar .collapsible {
+    border-left: 0px;
+    box-shadow: 0px 0px 0px;
+    font-size: 12px;
+    margin: 0; }
+    header .side-bar ul li .collapsible-header, header .side-bar .collapsible li .collapsible-header {
+      color: #8D230F; }
+    header .side-bar ul li .collapsible-body, header .side-bar .collapsible li .collapsible-body {
+      background: #011A27; }
+      header .side-bar ul li .collapsible-body ul, header .side-bar ul li .collapsible-body li, header .side-bar ul li .collapsible-body a, header .side-bar .collapsible li .collapsible-body ul, header .side-bar .collapsible li .collapsible-body li, header .side-bar .collapsible li .collapsible-body a {
+        color: #FFFFFF;
+        padding-left: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px; }
 
 /*# sourceMappingURL=master.css.map */

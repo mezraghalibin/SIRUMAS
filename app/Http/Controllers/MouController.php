@@ -16,31 +16,31 @@ use App\MoU;
 class MouController extends Controller {
 	public function index() {
 		//CHECK IF USER IS LOGGED IN OR NOT
-        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
-        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+    $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+    $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
 
-        if($check) {
-            $dataMoU = $this->joinTable(); //CALL FUNCTION JOIN TABLE TO VARIABLE
-            return view('mou', compact('dataMoU'));
-        }
-        else {
-            return view('login');
-        }
+    if($check) {
+        $dataMoU = $this->joinTable(); //CALL FUNCTION JOIN TABLE TO VARIABLE
+        return view('mou', compact('dataMoU'));
+    }
+    else {
+        return view('login');
+    }
 	}
 
-    public function kelolaMoU($id) {
-        //CHECK IF USER IS LOGGED IN OR NOT
-        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
-        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+  public function kelolaMoU($id) {
+    //CHECK IF USER IS LOGGED IN OR NOT
+    $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+    $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
 
-        if($check) {
-            $dataMoU = MoU::find($id); //GET SPECIFIC MOU
-            return view('kelolamou', compact('dataMoU'));
-        }
-        else {
-            return view('login');
-        }
+    if($check) {
+      $dataMoU = MoU::find($id); //GET SPECIFIC MOU
+      return view('kelolamou', compact('dataMoU'));
     }
+    else {
+      return view('login');
+    }
+  }
 
     public function upload(Request $request) {
         $uploadValidator = Validator::make($request->all(), [
@@ -117,7 +117,7 @@ class MouController extends Controller {
             $mouNew->file('file')->move(base_path().'/public/upload/MoU', $mouNewName); //SIMPAN MOU KE SUATU FOLDER
 
             //CHANGE OLD FILE NAME WITH THE NEW ONES IN DATABASE
-            $mouOld->file  = $mouNewName; //KEEP OLD FILE
+            $mouOld->file  = $mouNewName;
         }        
 
         $mouOld->save(); //SAVE TO DATABASE
@@ -126,15 +126,15 @@ class MouController extends Controller {
     }
 
     public function delete($id) {
-        $MoU = MoU::find($id); //FIND SPECIFIC MOU
-        Session::flash('flash_message','MoU Milik ' . $MoU->peneliti . ' Berjudul ' . $MoU->judul . ' Telah Dihapus');
-        
-        $filename = public_path('upload/MoU/' . $MoU->file); //GET SPECIFIC MOU FILE NAME
-        if(File::exists($filename)) {
-            File::delete($filename); //DELETE FILE FROM DIRECTORY
-            $MoU->delete(); //DELETE FROM DATABASE 
-        }
-        return redirect('mou'); //REDIRECT BACK TO MOU PAGE
+      $MoU = MoU::find($id); //FIND SPECIFIC MOU
+      Session::flash('flash_message','MoU Milik ' . $MoU->peneliti . ' Berjudul ' . $MoU->judul . ' Telah Dihapus');
+      
+      $filename = public_path('upload/MoU/' . $MoU->file); //GET SPECIFIC MOU FILE NAME
+      if(File::exists($filename)) {
+        File::delete($filename); //DELETE FILE FROM DIRECTORY
+        $MoU->delete(); //DELETE FROM DATABASE 
+      }
+      return redirect('mou'); //REDIRECT BACK TO MOU PAGE
     }
 
     //JOIN TABLE USERS DENGAN MOU

@@ -1,0 +1,46 @@
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap"; //IMPORT BUAT BOOTSTRAP JANGAN DIHAPUS
+@import "node_modules/materialize-css/sass/materialize.scss"; //INI UDAH BENER MANGGILNYA
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400);
+
+$base-color1: #FFFFFF; //WHITE
+$base-color2: #D32F2F; //RED
+$base-color3: #333333; //BLACK
+$font: 'Roboto', sans-serif;
+$heading-font: 'Montserrat', sans-serif;
+
+html, body {
+	height: 100%;
+  width: 100%;
+}
+
+.page-content {
+  padding-left: 15%;
+  top: 4.4em;
+  .second-navbar {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .nav-wrapper {
+    background: #FFFFFF;
+    ul, li, a {
+      color: #333333;     
+    }
+  }
+
+  .container {
+    width: 95%;
+    .header {
+      padding-top: 25px;
+      padding-bottom: 25px;
+      font: 100% $heading-font;
+    }
+    .daftar-content {
+        
+    }
+  }
+}
+
+tr.hover {
+  cursor: pointer;
+}

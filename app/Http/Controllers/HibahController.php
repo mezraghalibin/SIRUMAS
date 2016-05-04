@@ -14,23 +14,45 @@ use App\Proposal;
 
 class HibahController extends Controller {
     public function index() {
-        //CHECK IF USER IS LOGGED IN OR NOT
-        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
-        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-        
-        //GET ALL USERS DENGAN SPESIFIK ROLE = DOSEN
-        $users = users::where('spesifik_role','dosen')->get();
+      //CHECK IF USER IS LOGGED IN OR NOT
+      $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+      $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+      
+      //GET ALL USERS DENGAN SPESIFIK ROLE = DOSEN
+      $users = users::where('spesifik_role','dosen')->get();
 
-        $id = $SSOController->getId(); //GET ID FROM SSO
-        $spesifik_role = $SSOController->getSpesifikRole(); //GET USER'S SPESIFIK ROLE FROM USERS TABLE
-        
-        if ($check) {
-            $dataHibah = $this->read(); //GET ALL HIBAH
-            return view('hibah', compact('dataHibah'));
+      $id = $SSOController->getId(); //GET ID FROM SSO
+      $spesifik_role = $SSOController->getSpesifikRole(); //GET USER'S SPESIFIK ROLE FROM USERS TABLE
+      
+      if ($check) {
+        $dataHibah = $this->read(); //GET ALL HIBAH
+        return view('hibah', compact('dataHibah'));
+      }
+      else {
+        return view('login');
+      }
+    }
+
+    //FUNCTION TO BUATHIBAH PAGE
+    public function hibah() {
+      //CHECK IF USER IS LOGGED IN OR NOT
+      $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+      $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+      
+      $route = $_SERVER['REQUEST_URI']; //GET URL ROUTE
+
+      if($check) {
+        if($route == '/hibah/buathibah') {
+          return view('buatHibah');
         }
-        else {
-            return view('login');
+        else if ($route == '/hibah/kelolahibah') {
+          $dataHibah = $this->read(); //GET ALL DATA HIBAH
+          return view('kelolahibah', compact('dataHibah'));
         }
+      }
+      else {
+        return view('login');
+      }
     }
 
     public function applyHibah($id) {
@@ -54,7 +76,7 @@ class HibahController extends Controller {
         
         if($check) {
             $dataHibah = Hibah::find($id); //GET SPECIFIC HIBAH
-            return view('kelolaHibah', compact('dataHibah'));
+            return view('kelolaHibahDetail', compact('dataHibah'));
         }
         else {
             return view('login');
@@ -92,40 +114,40 @@ class HibahController extends Controller {
         return redirect('hibah');
     }
     
-    public function create(Request $request) {
-        $createValidator = Validator::make($request->all(), [
-            'nama_hibah' => 'required',
-            'deskripsi' => 'required',
-            'kategori_hibah' => 'required',
-            'nominal' => 'required',
-            'pemberi' => 'required',
-            'tgl_awal' => 'required',
-            'tgl_akhir' => 'required',
-            'staf_riset' => 'required',
-        ]);
+  public function create(Request $request) {
+    $createValidator = Validator::make($request->all(), [
+      'nama_hibah' => 'required',
+      'deskripsi' => 'required',
+      'kategori_hibah' => 'required',
+      'nominal' => 'required',
+      'pemberi' => 'required',
+      'tgl_awal' => 'required',
+      'tgl_akhir' => 'required',
+      'staf_riset' => 'required',
+    ]);
 
-        //CHECK VALIDATOR, IF FAILS RETURN TO HIBAH PAGE
-        if ($createValidator->fails()) {
-            //FLASH MESSAGE IF FAILS
-            Session::flash('flash_message','Gagal Membuat Hibah, Harap Mengisi Semua Data.'); 
-            return redirect('hibah');
-        }
-
-        //INPUT NEW FILE
-        $hibah = Hibah::create($request->all()); //SIMPAN SEMUA MASUKAN DALAM BENTUK HIBAH
-        $namaHibah = $hibah->nama_hibah; //GET NAMA HIBAH
-
-        $hibah->besar_dana = $this->getRupiah($hibah->nominal); //PARSE NOMINAL TO RUPIAH
-        $hibah->nominal = $request->nominal;
-        $hibah->save(); //SAVE PERUBAHAN YANG DILAKUKAN KEDALAM DATABASE
-        Session::flash('flash_message',$namaHibah . ' Telah Tersimpan'); //FLASH MESSAGE IF SUCCESS
-        return redirect('hibah');
+    //CHECK VALIDATOR, IF FAILS RETURN TO HIBAH PAGE
+    if ($createValidator->fails()) {
+      //FLASH MESSAGE IF FAILS
+      Session::flash('flash_message','Gagal Membuat Hibah, Harap Mengisi Semua Data.'); 
+      return redirect('/hibah/buathibah');
     }
 
-    public function read() {
-        $dataHibah = Hibah::all(); //GET ALL DATA
-        return $dataHibah;
-    }
+    //INPUT NEW FILE
+    $hibah = Hibah::create($request->all()); //SIMPAN SEMUA MASUKAN DALAM BENTUK HIBAH
+    $namaHibah = $hibah->nama_hibah; //GET NAMA HIBAH
+
+    $hibah->besar_dana = $this->getRupiah($hibah->nominal); //PARSE NOMINAL TO RUPIAH
+    $hibah->nominal = $request->nominal;
+    $hibah->save(); //SAVE PERUBAHAN YANG DILAKUKAN KEDALAM DATABASE
+    Session::flash('flash_message',$namaHibah . ' Telah Tersimpan'); //FLASH MESSAGE IF SUCCESS
+    return redirect('/hibah/kelolahibah');
+  }
+
+  public function read() {
+    $dataHibah = Hibah::all(); //GET ALL DATA
+    return $dataHibah;
+  }
 
     public function readRiset() {
         $dataHibahRiset = DB::table('hibah')
@@ -160,7 +182,7 @@ class HibahController extends Controller {
         if ($updateValidator->fails()) {
             //FLASH MESSAGE IF FAILS
             Session::flash('flash_message','Gagal Memperbaharui Hibah, Harap Mengisi Semua Data');
-            return redirect('hibah'); 
+            return redirect('/hibah/kelolahibah/detail/{id}'); 
         }
 
         $hibahNew = $request; //GET HIBAH NEW BY REQUEST USER
@@ -180,15 +202,15 @@ class HibahController extends Controller {
         $namaHibah = $hibahOld->nama_hibah; //GET NAME OF OLD HIBAH
         $hibahOld->save(); //SAVE TO DATABASE
         Session::flash('flash_message',$namaHibah . ' Telah Diubah'); //FLASH MESSAGE IF SUCCESS
-        return redirect('hibah');
+        return redirect('/hibah/kelolahibah');
     }
 
-    public function delete($id) {
-        $hibah = Hibah::find($id);  //GET SPECIFIC HIBAH
-        Session::flash('flash_message',$hibah->nama_hibah . ' Telah Dihapus'); //FLASH MESSAGE IF SUCCESS
-        $hibah->delete(); //DELETE FROM DATABASE
-        return redirect('hibah');
-    }
+  public function delete($id) {
+    $hibah = Hibah::find($id);  //GET SPECIFIC HIBAH
+    Session::flash('flash_message',$hibah->nama_hibah . ' Telah Dihapus'); //FLASH MESSAGE IF SUCCESS
+    $hibah->delete(); //DELETE FROM DATABASE
+    return redirect('/hibah/kelolahibah');
+  }
 
     public function getRupiah($angka) {
         //PARSE NOMINAL TO RUPIAH
@@ -214,7 +236,7 @@ class HibahController extends Controller {
         $hibah->status = 1;
         $hibah->save();
         Session::flash('flash_message', 'Hibah berhasil dipublish!');
-        return redirect('hibah');
+        return redirect('/hibah/kelolahibah');
     }
 
     public function nonaktif($id){
@@ -222,6 +244,6 @@ class HibahController extends Controller {
         $hibah->status = 2;
         $hibah->save();
         Session::flash('flash_message', 'Hibah berhasil Non-Aktifkan!');
-        return redirect('hibah');
+        return redirect('/hibah/kelolahibah');
     }
 }

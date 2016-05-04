@@ -1,6 +1,9 @@
 //@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap"; //IMPORT BUAT BOOTSTRAP JANGAN DIHAPUS
 @import "node_modules/materialize-css/sass/materialize.scss"; //IMPORT BUAT MATERIALIZE JANGAN DIHAPUS
 
+$base-color1: #FFFFFF; //WHITE
+$base-color2: #8D230F; //RED
+$base-color3: #011A27; //BLACK
 $font: 'Roboto', sans-serif;
 
 html, body {
@@ -9,7 +12,7 @@ html, body {
 }
 
 .nav-wrapper {
-	background: #e0e0e0;
+	background: $base-color3;
 	.brand-logo, img {
 		height: 64px;
 	}
@@ -18,18 +21,43 @@ html, body {
 /*********** SIDEBAR **********/
 /* CSS declarations go here */
 
-.side-nav {
-	top: 4.25em;
-	width: 15%;
-	box-shadow: 0px 0px 0px;
-	border-right: 1px solid #000000;
-	li, a {
-		height: 50px;
-		line-height: 50px;
-		font-size: 0.9em;
-	}
-}
-
 .header-kita {
 	font: 60px;
+}
+
+header {
+	.side-bar {
+		z-index: 4;
+	  position: fixed;
+	  top: 3.9em;
+	  left: 15%;
+	  width: 15%;
+	  height: 100%;
+	  margin-left: -15%;
+	  background: $base-color3;
+	  -webkit-transition: all 0.5s ease;
+	  -moz-transition: all 0.5s ease;
+	  -o-transition: all 0.5s ease;
+	  transition: all 0.5s ease;
+		ul, .collapsible {
+	  	border-left: 0px;
+	  	box-shadow: 0px 0px 0px;
+	  	font-size: 12px;
+	  	margin: 0;
+	  	li .collapsible-header {
+	  		color: $base-color2;
+	  	}
+	  	li {
+	  		.collapsible-body {
+		  		background: $base-color3;
+		  		ul, li, a {
+		  			color: $base-color1;
+		  			padding-left: 10px;
+		  			padding-top : 3px;
+		  			padding-bottom: 3px;
+		  		}
+		  	}
+	  	}
+		}
+	}
 }

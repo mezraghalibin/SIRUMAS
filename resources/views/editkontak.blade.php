@@ -11,36 +11,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>KELOLA KONTAK</title>
-    <link rel="author" href="humans.txt">
+  <title>KONTAK</title>
+  <link rel="author" href="humans.txt">
 
-    <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="assets/css/publikasi.css">
+  <!-- CSS FOR PAGE HIBAH -->
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/kontak.css') }}">
 
-    <!--FOR MATERIALIZE DONT DELETE THIS-->
-      <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-    <!--FOR MATERIALIZE DONT DELETE THIS-->
+  <!--FOR MATERIALIZE DONT DELETE THIS-->
+    <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--FOR MATERIALIZE DONT DELETE THIS-->
 
-    <!--FOR BOOTSTRAP DONT DELETE THIS-->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Josefin+Slab:600' rel='stylesheet' type='text/css'>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!--FOR BOOTSTRAP DONT DELETE THIS-->
-
-    <script>
+  <script>
     $(document).ready(function(){
-      $role = "<?php echo $spesifik_role ?>";
 
-      });
-    </script>
+    });
+  </script>
 </head>
 <body>
   @section('main_content')
@@ -50,7 +37,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola-kontak"><a href="#">Kembali</a></li>   
+          <li id="kelola-kontak"><a href="/kontak/kelolakontak">Kembali</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
@@ -59,68 +46,105 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
+    {{-- FLASH MESSAGE --}}
+    <div id="flash-msg">
+      @if(Session::has('flash_message'))
+        <div class="card-panel teal">
+          <span class="white-text">
+            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
+            <i class="material-icons">clear</i></a>
+          </span>
+        </div>
+      @endif 
+    </div>
+    {{-- END OF FLASH MESSAGE --}}
 
-  
-       {{-- CONTENT BUAT BUKU --}}
-       <div id="buat-kontak-konten">
-       <div class="container">
-          <div class="header"><h4>Edit Kontak</h4></div>
-          <div class="hibah-riset-content">
-             <div class="row">
-            <form class="col s12">
-
-              {{-- FIRST ROW = NAMA --}}
-              <div class="row">
-                <div class="input-field col s6 offset-s1">
-                  <input placeholder="Nama kontak" id="nama" name="nama_pengaju" type="text" class="validate">
-                  <label for="nama">Nama Kontak</label>
+    {{-- CONTENT BUAT KONTAK --}}
+    <div id="buat-kontak-konten">
+      <div class="container">
+        <div class="header"><h4>Edit Kontak</h4></div>
+        <div class="hibah-riset-content">
+          <div class="row">
+            <form method="post" action="/kontak/update/{{ $dataKontak->id }}" class="col s12" enctype="multipart/form-data">
+              <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+              <div class="col s6 left-row">
+                {{-- FIRST ROW = NAMA --}}
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input placeholder="Nama kontak" name="nama" type="text" class="validate" value="{{$dataKontak->nama}}">
+                    <label for="nama">Nama Kontak</label>
+                  </div>
                 </div>
-                <div class="input-field col s4">
-                  <input placeholder="E-mail" id="nip/nup" name="nip/nup" type="text" class="validate">
-                  <label for="nip/nup">E-mail</label>
+
+                {{-- SECOND ROW = EMAIL HP --}}
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input placeholder="E-mail" name="email" type="text" class="validate" value="{{$dataKontak->email}}">
+                    <label for="nip/nup">E-mail</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input placeholder="Nomor HP" name="phone" type="text" class="validate" value="{{$dataKontak->phone}}">
+                    <label for="nohp">Nomor HP</label>
+                  </div>
                 </div>
 
+                {{-- SECOND ROW = EXPERTISE --}}
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input placeholder="Institusi" name="institusi" type="text" 
+                      class="validate" value="{{$dataKontak->institusi}}">
+                    <label for="nohp">Institusi</label>
+                  </div>
+                </div>
+
+                {{-- THIRD ROW = EXPERTISE --}}
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input placeholder="Expertise" name="expertise" type="text" 
+                      class="validate" value="{{$dataKontak->expertise}}">
+                    <label for="expertise">Expertise</label>
+                  </div>
+                </div>
               </div>
 
-              {{-- SECOND ROW = JUDUL PROPOSAL --}}
-              <div class="row">
-                <div class="input-field col s6 offset-s1">
-                  <input placeholder="Expertise" name="judul_proposal" 
-                    id="judulproposal" type="text" class="validate">
-                  <label for="judulproposal">Expertise</label>
+              <div class="col s6 right-row">
+                {{-- FILE FOTO --}}
+                <div class="row">
+                  <div class="file-field input-field col s12">
+                    <div class="btn card-panel red darken-2">
+                      <span class="white-text">Foto</span>
+                      <input type="file" name="foto">
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text" placeholder="Kosongkan Jika Tidak Mau Mengganti Foto">
+                    </div>
+                  </div>
                 </div>
-                <div class="input-field col s4">
-                  <input placeholder="Nomor HP" name="no_hp" id="nohp" type="text" class="validate">
-                  <label for="nohp">Nomor HP</label>
-                </div>
-              </div>
 
-                {{-- FOURTH ROW --}}
-              <div class="row">
-               <div class="input-field col s6 offset-s1">
-                  <input placeholder="Institusi" name="judul_proposal" 
-                    id="judulproposal" type="text" class="validate">
-                  <label for="judulproposal">Institusi</label>
+                {{-- FIFTH ROW = DESKRIPSI --}}
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea placeholder="Deskripsi Kontak" id="deskripsi" 
+                      name="deskripsi" class="materialize-textarea">{{$dataKontak->deskripsi}}</textarea>
+                    <label for="deskripsi">Deskripsi</label>
+                  </div>
                 </div>
               </div>
 
               {{-- BUTTON SUBMIT --}}
               <div class="center-align">
-                <button class="btn waves-effect waves-light" type="submit" name="action"><span class="white-text">Simpan</span><i class="material-icons right">send</i>
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                  <span class="white-text">Simpan</span><i class="material-icons right">send</i>
                 </button>
               </div>
-           
             </form>
           </div>
-          </div>
-          </div>
-          <!-- END OF TABEL DAFTAR PROPOSAL -->
-          </div>
-          {{-- CONTENT BUKU --}}
-
-     
-
+        </div>
+      </div>
+    </div>
+    {{-- END OF CONTENT BUAT KONTAK --}}
   </div>
+  {{-- END OF PAGE CONTENT --}}
   @stop
 </body>
 </html>

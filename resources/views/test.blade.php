@@ -34,7 +34,7 @@
 </head>
 
 <body>
-<div style="width:15%">
+{{-- <div style="width:15%">
  <ul class="collapsible" data-collapsible="accordion">
  	<li>
     <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
@@ -49,6 +49,28 @@
     <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
   </li>
  </ul>
+</div> --}}
+
+<div class="row center-align">
+	<h3>LOGIN</h3>
+	<form method="post" action="{{action('SSOController@index')}}" class="col s12" enctype="multipart/form-data">
+		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+		<div class="row">			
+			<div class="input-field col s4 offset-s4">
+		    <input placeholder="Username" name="username" id="first_name" type="text" class="validate">
+		  </div>
+		</div>
+		<div class="row">			
+		  <div class="input-field col s4 offset-s4">
+		    <input placeholder="Password" id="password" name="password" type="password" class="validate">
+		  </div>
+		</div>
+		<div class="row">			
+			<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+			  <i class="material-icons right">send</i>
+			</button>
+		</div>
+	</form>
 </div>
 </body>
 </html>
