@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreatePenulisAngBukuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('penulis_ang_buku', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username', 25)->unique();
-            $table->string('nama', 35);
-            $table->string('no_pengenal', 20);
-            $table->string('role', 25);
-            $table->string('spesifik_role',25);
+            $table->integer('id_buku')->unsigned();
+            $table->string('nama_anggota', 30);
+            $table->foreign('id_buku')->references('id')->on('buku');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('penulis_ang_buku');
     }
 }

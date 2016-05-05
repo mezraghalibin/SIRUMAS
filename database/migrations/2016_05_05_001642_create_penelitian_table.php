@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKomponenNilaiProposalTable extends Migration
+class CreatePenelitianTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,14 @@ class CreateKomponenNilaiProposalTable extends Migration
      */
     public function up()
     {
-        Schema::create('komponen_nilai_proposal', function (Blueprint $table) {
-            $table->integer('id_proposal')->unsigned();
+        Schema::create('penelitian', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('staf_riset')->unsigned();
-            $table->unique(['id_proposal','staf_riset']);
-            $table->foreign('id_proposal')->references('id')->on('proposal');
+            $table->string('judul',50);
+            $table->string('ketua',30);
+            $table->string('besar_dana', 30);
+            $table->string('sumber_dana', 30);
             $table->foreign('staf_riset')->references('id')->on('users');
-            $table->text('nama_komp');
-            $table->float('nilai',25);
         });
     }
 
@@ -31,6 +30,6 @@ class CreateKomponenNilaiProposalTable extends Migration
      */
     public function down()
     {
-        Schema::drop('komponen_nilai_proposal');
+        Schema::drop('penelitian');
     }
 }

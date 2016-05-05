@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePengumumanTable extends Migration
+class CreateKegiatanIlmiahTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,17 @@ class CreatePengumumanTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengumuman', function (Blueprint $table) {
+        Schema::create('kegiatan_ilmiah', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nomor',50)->nullable();
             $table->integer('staf_riset')->unsigned();
-            $table->timestamps();
-            $table->string('judul',50);
-            $table->boolean('status');
-            $table->string('kategori',15);
-            $table->text('konten');
-            $table->text('file')->nullable();
+            $table->string('nama',50);
+            $table->string('jenis',20);
+            $table->string('skala', 20);
+            $table->date('waktu');
+            $table->string('tempat',30);
+            $table->string('sumber_dana',30);
+            $table->string('pembicara',30);
+            $table->text('bukti')->nullable();
             $table->foreign('staf_riset')->references('id')->on('users');
         });
     }
@@ -33,6 +34,6 @@ class CreatePengumumanTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pengumuman');
+        Schema::drop('kegiatan_ilmiah');
     }
 }

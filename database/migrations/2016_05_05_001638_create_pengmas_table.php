@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMenilaiProposalTable extends Migration
+class CreatePengmasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,17 @@ class CreateMenilaiProposalTable extends Migration
      */
     public function up()
     {
-        Schema::create('menilai_proposal', function (Blueprint $table) {
-            $table->integer('id_proposal')->unsigned();
+        Schema::create('pengmas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('staf_riset')->unsigned();
-            $table->unique(['id_proposal','staf_riset']);
-            $table->foreign('id_proposal')->references('id')->on('proposal');
+            $table->string('nama_kegiatan',50);
+            $table->string('ketua',30);
+            $table->string('peranan', 30);
+            $table->string('penyelenggara', 30);
+            $table->date('waktu');
+            $table->string('tempat', 30);
+            $table->string('besar_dana', 30);
+            $table->text('bukti');
             $table->foreign('staf_riset')->references('id')->on('users');
         });
     }
@@ -29,6 +34,6 @@ class CreateMenilaiProposalTable extends Migration
      */
     public function down()
     {
-        Schema::drop('menilai_proposal');
+        Schema::drop('pengmas');
     }
 }
