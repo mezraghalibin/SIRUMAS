@@ -10,11 +10,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EDIT KEGIATAN ILMIAH</title>
+  <title>BUAT KEGIATAN ILMIAH</title>
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/publikasi.css') }}">
+    <link rel="stylesheet" href="assets/css/publikasi.css">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -79,55 +79,26 @@
        {{-- CONTENT DAFTAR BUKU --}}
        <div id="buat-kegiatan-ilmiah-konten">
        <div class="container">
-          <div class="header"><h4>Edit Kegiatan Ilmiah</h4></div>
+          <div class="header"><h4>Buat Kegiatan Ilmiah</h4></div>
           <div class="hibah-riset-content">
              <div class="row">
-            <form method="post" action="/editkegiatanilmiah/{{$kegiatanilmiah->id}}" class="col s12" enctype="multipart/form-data">
+            <form method="post" action="buatkegiatanilmiah" class="col s12" enctype="multipart/form-data">
             <input name="staf_riset" value="<?php echo $id ?>" type="hidden" class="validate">
              <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">            
               {{-- FIRST ROW = NAMA --}}
               <div class="row">
                 <div class="input-field col s6 offset-s1">
-                  <input placeholder="Nama kegiatan" name="nama" value="{{$kegiatanilmiah->nama}}" type="text" class="validate">
+                  <input placeholder="Nama kegiatan" name="nama" type="text" class="validate">
                   <label for="nama">Nama Kegiatan</label>
                 </div>
                 <div class="input-field col s4">
-                @if ($kegiatanilmiah->jenis === 'Seminar')
                  <select name="jenis">
-                    <option value="" disabled selected>Jenis</option>
-                    <option value="Seminar" selected="selected">Seminar</option>
-                    <option value="Konferensi">Konferensi</option>
-                    <option value="Kuliah Tamu">Kuliah Tamu</option>
-                    <option value="Diskusi">Diskusi</option>
-                  </select>
-                @endif
-                @if ($kegiatanilmiah->jenis === 'Konferensi')
-                 <select name="jenis">
-                    <option value="" disabled selected>Jenis</option>
+                    <option value="" disabled selected>Jenis Kegiatan</option>
                     <option value="Seminar">Seminar</option>
-                    <option value="Konferensi" selected="selectec">Konferensi</option>
-                    <option value="Kuliah Tamu">Kuliah Tamu</option>
-                    <option value="Diskusi">Diskusi</option>
-                  </select>
-                @endif
-                @if ($kegiatanilmiah->jenis === 'Kuliah Tamu')
-                 <select name="jenis">
-                    <option value="" disabled selected>Jenis</option>
-                    <option value="Seminar" selected="selected">Seminar</option>
-                    <option value="Konferensi">Konferensi</option>
-                    <option value="Kuliah Tamu" selected="selected">Kuliah Tamu</option>
-                    <option value="Diskusi">Diskusi</option>
-                  </select>
-                @endif
-                @if ($kegiatanilmiah->jenis === 'Diskusi')
-                 <select name="jenis">
-                    <option value="" disabled selected>Jenis</option>
-                    <option value="Seminar" selected="selected">Seminar</option>
                     <option value="Konferensi">Konferensi</option>
                     <option value="Kuliah Tamu">Kuliah tamu</option>
-                    <option value="Diskusi" selected="selected">Diskusi</option>
+                    <option value="Diskusi">Diskusi</option>
                   </select>
-                @endif
                 </div>
 
               </div>
@@ -135,57 +106,28 @@
               {{-- SECOND ROW = JUDUL PROPOSAL --}}
               <div class="row">
                 <div class="input-field col s6 offset-s1">
-                  <input placeholder="Judul kegiatan" name="judul" value="{{$kegiatanilmiah->judul}}" type="text" class="validate">
+                  <input placeholder="Judul kegiatan" name="judul" type="text" class="validate">
                   <label for="judulproposal">Judul Kegiatan</label>
                 </div>
                 <div class="input-field col s4">
-                  @if ($kegiatanilmiah->skala === 'Internal Departemen')
-                  <select name="skala">
-                    <option value="" disabled selected>Skala</option>
-                    <option value="Internal Departemen" selected="selected">Internal Departemen</option>
-                    <option value="Internal UI" >Internal UI</option>
-                    <option value="Nasional">Nasional</option>
-                    <option value="Internasional">Internasional</option>
-                  </select>
-                  @endif
-                  @if ($kegiatanilmiah->skala === 'Internal UI')
-                  <select name="skala">
-                    <option value="" disabled selected>Skala</option>
-                    <option value="Internal Departemen">Internal Departemen</option>
-                    <option value="Internal UI" selected="selected">Internal UI</option>
-                    <option value="Nasional">Nasional</option>
-                    <option value="Internasional">Internasional</option>
-                  </select>
-                  @endif
-                  @if ($kegiatanilmiah->skala === 'Nasional')
-                  <select name="skala">
-                    <option value="" disabled selected>Skala</option>
-                    <option value="Internal Departemen">Internal Departemen</option>
-                    <option value="Internal UI">Internal UI</option>
-                    <option value="Nasional" selected="selected">Nasional</option>
-                    <option value="Internasional">Internasional</option>
-                  </select>
-                  @endif
-                  @if ($kegiatanilmiah->skala === 'Internasional')
                   <select name="skala">
                     <option value="" disabled selected>Skala</option>
                     <option value="Internal Departemen">Internal Departemen</option>
                     <option value="Internal UI">Internal UI</option>
                     <option value="Nasional">Nasional</option>
-                    <option value="Internasional" selected="selected">Internasional</option>
+                    <option value="Internasional">Internasional</option>
                   </select>
-                  @endif
                 </div>
               </div>
 
                 {{-- FOURTH ROW --}}
               <div class="row">
                <div class="input-field col s6 offset-s1">
-                  <input placeholder="Pembicara" name="pembicara" value="{{$kegiatanilmiah->pembicara}}" type="text" class="validate">
+                  <input placeholder="Pembicara" name="pembicara" type="text" class="validate">
                   <label for="judulproposal">Pembicara</label>
                 </div>
                 <div class="input-field col s4">
-                  <input type="date" name="waktu" value="{{$kegiatanilmiah->waktu}}" class="datepicker">
+                  <input type="date" name="waktu" class="datepicker">
                   <label for="nohp">Waktu</label>
                 </div>
               </div>
@@ -193,11 +135,11 @@
                {{-- FOURTH ROW --}}
               <div class="row">
                <div class="input-field col s6 offset-s1">
-                  <input placeholder="Tempat" name="tempat" value="{{$kegiatanilmiah->tempat}}" type="text" class="validate">
+                  <input placeholder="Tempat" name="tempat" type="text" class="validate">
                   <label for="judulproposal">Tempat</label>
                 </div>
                 <div class="input-field col s4">
-                  <input placeholder="Sumber dana" name="sumber_dana" value="{{$kegiatanilmiah->sumber_dana}}" type="text" class="validate">
+                  <input placeholder="Sumber dana" name="sumber_dana" type="text" class="validate">
                   <label for="nohp">Sumber Dana</label>
                 </div>
               </div>
@@ -211,7 +153,7 @@
                     <input name="bukti" type="file" placeholder="Masukkan bukti kontrak kegiatan-ilmiah">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Masukkan bukti kegiatan" value="{{$kegiatanilmiah->bukti}}">
+                    <input class="file-path validate" type="text" placeholder="Masukkan bukti kegiatan">
                   </div>
                 </div>
               </div>

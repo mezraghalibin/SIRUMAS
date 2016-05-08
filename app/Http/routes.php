@@ -172,7 +172,11 @@ Route::get('/editartikelpopuler', 'ArtikelPopulerController@edit');
 /**************** KEGIATAN ILMIAH ******************/
 Route::get('/kegiatanilmiah', 'KegiatanIlmiahController@index');
 Route::get('/kelolakegiatanilmiah', 'KegiatanIlmiahController@kelola');
-Route::get('/editkegiatanilmiah', 'KegiatanIlmiahController@edit');
+Route::get('/editkegiatanilmiah/{id}', 'KegiatanIlmiahController@edit');
+Route::get('/buatkegiatanilmiah', 'KegiatanIlmiahController@buat');
+Route::post('/buatkegiatanilmiah', 'KegiatanIlmiahController@store');
+Route::get('/hapuskegilmiah/{id}', 'KegiatanIlmiahController@destroy');
+Route::post('/editkegiatanilmiah/{id}', 'KegiatanIlmiahController@update');
 /**************** KEGIATAN ILMIAH ******************/
 
 /**************** KONTAK ******************/

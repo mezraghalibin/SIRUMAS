@@ -6,6 +6,18 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Session;
+
+use Validator;
+
+use App\Http\Controllers\Controller;
+
+use App\Http\Controllers\SSOController;
+
+use App\users;
+
+use App\KegiatanIlmiah;
+
 class KegiatanIlmiahController extends Controller
 {
     /**
@@ -31,12 +43,26 @@ class KegiatanIlmiahController extends Controller
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         if($check) {
-            return view('kelolakegiatanilmiah');
+            $kegiatanilmiahs= KegiatanIlmiah::all();
+            return view('kelolakegiatanilmiah', ['kegiatanilmiahs' => $kegiatanilmiahs]);
         }
         else {
             return view('login');
         }
     }
+
+    public function buat() {
+         //CHECK IF USER IS LOGGED IN OR NOT
+        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        if($check) {
+            return view('buatKegiatanIlmiah');
+        }
+        else {
+            return view('login');
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -56,7 +82,49 @@ class KegiatanIlmiahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         //VALIDASI INPUT
+        $storeValidator = Validator::make($request->all(), [
+             'nama' => 'required',
+            'jenis' => 'required',
+            'judul' => 'required',
+            'skala' => 'required',
+            'pembicara' => 'required',
+            'waktu' => 'required',
+            'tempat' => 'required',
+            'sumber_dana' => 'required'
+        ]);
+
+        //VALIDATOR JIKA INPUT TIDAK DIISI (KECUALI FILE)
+        if ($storeValidator->fails()) {
+            Session::flash('flash_message', 'Harap mengisi seluruh data'); //FLASH MESSAGE IF FAILS
+            return redirect('buatkegiatanilmiah'); //REDIRECT BACK TO BUATKEGIATANILMIAH PAGE
+        }
+
+        //CHECK FILE YANG DIUPLOAD KOSONG ATAU ENGGA
+        $checkFile = Validator::make($request->all(), [
+            'bukti' => 'required'
+        ]);
+
+        //Bikin kegiatan ilmiah
+        $kegiatan_ilmiah = KegiatanIlmiah::create($request->all());
+
+        if($checkFile->fails()){
+            $kegiatan_ilmiah->bukti = "";
+        } else {
+            //SIMPAN NAMA FILE
+            $filename = $request->file('bukti')->getClientOriginalName(); 
+            //memindahkan file yg dilampirkan tadi ke path /public/upload
+            $request->file('bukti')->move(base_path().'/public/upload/kegiatanIlmiah', $filename);
+            //UBAH FILENAME DI DATABASE
+            $kegiatan_ilmiah->bukti = $filename;
+        }
+
+        //SAVE FILEnya
+        $kegiatan_ilmiah->save();
+        // Session untuk Success Notif
+        Session::flash('flash_message','Sukses membuat Kegiatan Ilmiah');
+        // then rederict back to hibah
+        return redirect('kelolakegiatanilmiah');
     }
 
     /**
@@ -76,15 +144,20 @@ class KegiatanIlmiahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
          //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-        if($check) {
-            return view('editkegiatanilmiah');
-        }
-        else {
+         if($check) {
+         $kegiatanilmiah= KegiatanIlmiah::find($id);
+         if(!$kegiatanilmiah){ 
+         abort(404);
+         } else {
+         return view('editkegiatanilmiah')->with('kegiatanilmiah',$kegiatanilmiah);
+            }
+
+        } else {
             return view('login');
         }
     }
@@ -98,7 +171,63 @@ class KegiatanIlmiahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        //VALIDASI INPUT
+        $storeValidator = Validator::make($request->all(), [
+             'nama' => 'required',
+            'jenis' => 'required',
+            'judul' => 'required',
+            'skala' => 'required',
+            'pembicara' => 'required',
+            'waktu' => 'required',
+            'tempat' => 'required',
+            'sumber_dana' => 'required'
+        ]);
+
+        //VALIDATOR JIKA INPUT TIDAK DIISI (KECUALI FILE)
+        if ($storeValidator->fails()) {
+            Session::flash('flash_message', 'Harap mengisi seluruh data'); //FLASH MESSAGE IF FAILS
+            return redirect('buatkegiatanilmiah'); //REDIRECT BACK TO BUATKEGIATANILMIAH PAGE
+        }
+
+        //CHECK FILE YANG DIUPLOAD KOSONG ATAU ENGGA
+        $checkFile = Validator::make($request->all(), [
+            'bukti' => 'required'
+        ]);
+
+
+        $kegiatanilmiah= KegiatanIlmiah::find($id);
+
+        //CHANGE OLD TO NEW
+        $kegiatanilmiah->nama = $request->nama;
+        $kegiatanilmiah->jenis = $request->jenis;
+        $kegiatanilmiah->judul = $request->judul;
+        $kegiatanilmiah->skala = $request->skala;
+        $kegiatanilmiah->pembicara = $request->pembicara;
+        $kegiatanilmiah->waktu = $request->waktu;
+        $kegiatanilmiah->tempat = $request->tempat;
+        $kegiatanilmiah->sumber_dana = $request->sumber_dana;
+
+        if ($checkFile->fails()) {
+            //DO NOTHING
+        } else {
+            //IF OLD FILE IS NULL OR EMPTY
+            $filenameOld = public_path('upload/kegiatanIlmiah/' . $kegiatanilmiah->bukti); //GET SPECIFIC MOU FILE NAME OLD
+            if(File::exists($filenameOld)) {
+                File::delete($filenameOld); //DELETE FILE FROM FOLDER MOU
+            }
+
+            //STORE NEW FILE TO FOLDER MOU
+            $ilmiahNewName = $request->file('bukti')->getClientOriginalName(); //SIMPAN NAMA FILE
+            $ilmiahNew->file('bukti')->move(base_path().'/public/upload/kegiatanIlmiah', $ilmiahNewName); //SIMPAN MOU KE SUATU FOLDER
+
+            //CHANGE OLD FILE NAME WITH THE NEW ONES IN DATABASE
+            $kegiatanilmiah->bukti  = $ilmiahNewName; //KEEP OLD FILE       
+        }
+
+        $kegiatanilmiah->save(); // save the array of models at once
+        Session::flash('flash_message','Kegiatan Ilmiah berhasil diubah.');
+        return redirect('kelolakegiatanilmiah');
     }
 
     /**
@@ -109,6 +238,9 @@ class KegiatanIlmiahController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kegiatanilmiah = KegiatanIlmiah::find($id);
+        $kegiatanilmiah->delete();
+        Session::flash('flash_message','Kegiatan Ilmiah berhasil dihapus.');
+        return redirect('kelolakegiatanilmiah');
     }
 }
