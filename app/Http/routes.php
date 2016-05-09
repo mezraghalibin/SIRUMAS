@@ -178,13 +178,16 @@ Route::get('/editkegiatanilmiah', 'KegiatanIlmiahController@edit');
 /**************** KONTAK ******************/
 Route::get('/kontak/buatkontak', 'KontakController@index'); //FIRST TIME TO BUAT KONTAK PAGE
 Route::get('/kontak/kelolakontak', 'KontakController@index'); //FIRST TIME TO KELOLA KONTAK PAGE
+//Route::get('/kontak/kelolakontak?', 'KontakController@index'); //FIRST TIME TO KELOLA KONTAK PAGE
 //Create New Kontak
 Route::post('/kontak/create', 'KontakController@create'); //CREATE NEW CONTACT IN DATABASE
 //Delete Kontak
-Route::get('/kontak/delete/{id}', 'KontakController@delete'); //CREATE NEW CONTACT IN DATABASE
+Route::get('/kontak/delete/{id}', 'KontakController@delete'); //DELETE CONTACT IN DATABASE
 //Edit Kontak
-Route::get('/kontak/editkontak/{id}', 'KontakController@edit'); //CREATE NEW CONTACT IN DATABASE
-Route::post('/kontak/update/{id}', 'KontakController@update'); //CREATE NEW CONTACT IN DATABASE
+Route::get('/kontak/editkontak/{id}', 'KontakController@edit'); //GO TO EDIT CONTACT PAGE
+Route::post('/kontak/update/{id}', 'KontakController@update'); //UPDATE CONTACT
+//Search Kontak
+Route::post('/kontak/search', 'KontakController@search'); //UPDATE CONTACT
 /**************** KONTAK ******************/
 
 /**************** PRESENTASI ******************/

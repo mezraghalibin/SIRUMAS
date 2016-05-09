@@ -39,7 +39,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola-kontak"><a href="#">Kelola Kontak</a></li>
+          <li id="kelola-kontak"><a href="/kontak/kelolakontak">Kelola Kontak</a></li>
           <li id="buat-kontak"><a href="/kontak/buatkontak">Buat Kontak</a></li>     
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -62,33 +62,77 @@
     </div>
     {{-- END OF FLASH MESSAGE --}}
 
-    {{-- CONTENT KELOLA HIBAH --}}
+    {{-- CONTENT KELOLA KONTAK --}}
     <div class="container">
       <div id="kelola-kontak-konten">
-        <div class="header"><h4>Kelola Kontak</h4></div>
+        <div class="row header">
+          <div class="col s6">
+            <h4>Kelola Kontak</h4>
+          </div>
+          <form method="post" action="/kontak/search" enctype="multipart/form-data">
+          <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <div class="col s2 offset-s1">
+              <div class="input-field">
+                <select name="category">
+                  <option value="all">Semua</option>
+                  <option value="nama">Nama</option>
+                  <option value="phone">Phone</option>
+                  <option value="email">Email</option>
+                  <option value="institusi">Institusi</option>
+                  <option value="expertise">Expertise</option>
+                </select>
+              </div>
+            </div>
+            <div class="col s3">
+              <div class="input-field">
+                <input placeholder="Search" id="search" name="word" type="text" required>
+              </div>
+            </div>
+            <button class="hide btn waves-effect waves-light" type="submit" name="action">
+              <span class="white-text">Search</span>
+            </button>
+          </form>
+        </div>
         <div class="kelola-content row">
           <div class="col s12">
             <?php $count = 1 ?>
-            @foreach($dataKontak as $kontak)
+            @if (count($dataKontak) == 0)
+              <div class="center-align">
+                <h5>Maaf, Data Tidak Ditemukan!</h5>
+              </div>
+            @else
+              @foreach($dataKontak as $kontak)
                 @if($count == 1)
                   <div class="row">
                 @endif
 
                 {{-- CONTENT --}}
-                  <div class="col s6">
-                    <div class="col s3 left-row">
-                      <img src="../upload/fotoKontak/{{ $kontak->foto }}" alt="" width="103" heigt="138" class="materialboxed">
-                    </div>
-                    <div class="col s9 right-row">
-                      Nama       : {{ $kontak->nama }} <br>
-                      {{ $kontak->phone }} / {{ $kontak->email }} <br>
-                      Institusi  : {{ $kontak->institusi }} <br>
-                      Expertise  : {{ $kontak->expertise }} <p></p>
+                <div class="col s6 kontak">
+                  <div class="col s3 left-row">
+                    <img src="../upload/fotoKontak/{{ $kontak->foto }}" alt="photo" class="materialboxed photo">
+                  </div>
+                  <div class="col s8 right-row">
+                    <div class="nama truncate">{{ $kontak->nama }}</div>
+                    <div class="kontak truncate">{{ $kontak->phone }} / {{ $kontak->email }}</div>
+                    <div class="content truncate">Institusi  : {{ $kontak->institusi }}</div>
+                    {{-- GET ALL EXPERTISE FROM SPECIFIC CONTACT --}}
+                    <?php 
+                      $expertises = $kontak::find($kontak->id)->getExpertise;
+                      $list = ""; 
+                    ?>
+                    @foreach($expertises as $expertise)
+                      <?php $list = $list . $expertise->expertise . ", " ; ?>
+                    @endforeach
+                    <div class="content truncate">Expertise  : <?php echo substr($list, 0, -2) ?></div>
+                    <br>
+                    {{-- END OF GET ALL EXPERTISE --}}
+
+                    <div class="button right">
                       {{-- MODAL DELETE KONTAK --}}
                       <button data-target="modal{{$kontak->id}}" class="btn-floating btn modal-trigger">
                         <i class="material-icons right">delete</i>
                       </button>
-                      <!-- MODAL STRUCTURE DELETE KONTAK -->
+                      {{-- MODAL STRUCTURE DELETE KONTAK --}}
                       <div id="modal{{$kontak->id}}" class="modal">
                         <div class="modal-content">
                           <h4>Hapus Kontak {{$kontak->nama}}?</h4>
@@ -102,22 +146,20 @@
                       {{-- END OF MODAL DELETE KONTAK --}}
 
                       {{-- MODAL DETAIL KONTAK --}}
-                      <button data-target="modal{{$kontak->id}}detail" class="btn-floating btn modal-trigger" alt="detail">
+                      <button data-target="modal{{$kontak->id}}detail" class="btn-floating btn modal-trigger">
                         <i class="material-icons right">info</i>
                       </button>
-                      <!-- MODAL STRUCTURE DETAIL KONTAK -->
+                      {{-- MODAL STRUCTURE DETAIL KONTAK --}}
                       <div id="modal{{$kontak->id}}detail" class="modal modal-fixed-footer">
                         <div class="modal-content">
                           <h4>Kontak Detail</h4>
-                          <p>
                           Nama       : {{ $kontak->nama }} <br>
                           Phone      : {{ $kontak->phone }} <br>
                           E-mail     : {{ $kontak->email }} <br>
                           Institusi  : {{ $kontak->institusi }} <br>
-                          Expertise  : {{ $kontak->expertise }} <br>
+                          Expertise  : <?php echo substr($list, 0, -2) ?> <br>
                           Detail     : <br>
                           {{ $kontak->deskripsi }}
-                          </p>
                         </div>
                         <div class="modal-footer">
                           <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Tutup</a>
@@ -131,6 +173,7 @@
                       {{-- END OF BUTTON EDIT PAGE --}}
                     </div>
                   </div>
+                </div>
                 {{-- END OF CONTENT --}}
 
                 @if($count == 2)
@@ -139,11 +182,15 @@
                 @else
                   <?php $count = 2?>
                 @endif
-            @endforeach
+              @endforeach
+            @endif
           </div>
         </div>
       </div>
     </div>
+    {{-- <div class="center-align">
+      {!! $dataKontak->render() !!}
+    </div> --}}
     {{-- END OF CONTENT KELOLA HIBAH --}}
   </div>
   {{-- END OF PAGE CONTENT --}}

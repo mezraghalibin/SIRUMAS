@@ -65,12 +65,12 @@
 
     <!-- SCRIPT FOR TRUNCATE -->
     <script>
-      var textParse =  document.getElementById("content{{ $pengumuman->id }}").innerHTML;
+      var textParse = document.getElementById("content{{ $pengumuman->id }}").innerHTML;
       document.getElementById("content{{ $pengumuman->id }}").innerHTML = shorten(textParse, 1200);
       function shorten(text, maxLength) {
         var ret = text;
         if (ret.length > maxLength) {
-            ret = ret.substr(0,maxLength-3) + "...";
+          ret = ret.substr(0,maxLength-3) + "...";
         }
         return ret;
       }

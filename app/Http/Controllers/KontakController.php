@@ -5,19 +5,15 @@ namespace App\Http\Controllers;
 use Session;
 use Validator;
 use File;
+use DB;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SSOController;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Kontak;
+use App\Expertise;
 
-class KontakController extends Controller
-{
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
+class KontakController extends Controller {
   public function index() {
     //CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
@@ -30,17 +26,20 @@ class KontakController extends Controller
         return view('buatKontak');
       }
       else if ($route == '/kontak/kelolakontak') {
-        $dataKontak = $this->read(); //GET ALL DATA HIBAH
+        $dataKontak = $this->read(); //GET ALL DATA KONTAK
         return view('kelolaKontak', compact('dataKontak'));
       }
+      // else if ($route == '/kontak/kelolakontak?page=2') {
+      //   $dataKontak = $this->read(); //GET ALL DATA KONTAK
+      //   return view('kelolaKontak', compact('dataKontak'));
+      // }
     }
     else {
       return view('login');
     }
   }
 
-  public function edit($id)
-  {
+  public function edit($id) {
     //CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
@@ -72,18 +71,40 @@ class KontakController extends Controller
       return redirect('/kontak/buatkontak'); //REDIRECT BACK TO BUAT KONTAK PAGE
     }
 
-    //INPUT NEW FILE
-    $kontak  = Kontak::create($request->all()); //SIMPAN SEMUA MASUKAN DALAM BENTUK KONTAK
-    $namaKontak = $kontak->nama; //GET NAMA KONTAK
+    //FILL FOR TABLE KONTAK
+    $kontak = Kontak::create();
+    $kontak->nama      = $request->nama;
+    $kontak->phone     = $request->phone;
+    $kontak->email     = $request->email;
+    $kontak->institusi = $request->institusi;
+    $kontak->deskripsi = $request->deskripsi;
+    //SIMPAN NAMA FOTO
+    $fotoName = $kontak->id . '_' . $request->nama . '.' . $request->file('foto')->getClientOriginalExtension();
+    //SIMPAN FOTO KE FOLDER FOTO KONTAK
+    $request->file('foto')->move(public_path('/upload/fotoKontak'), $fotoName); 
+    //MENAMAKAN FILE FOTO DIDALAM DATABASE
+    $kontak->foto = $fotoName; 
+    //END OF FILL FOR TABLE KONTAK
 
-    $fotoName = $kontak->id . '_' . $request->nama . '.' . 
-      $request->file('foto')->getClientOriginalExtension(); //SIMPAN NAMA FOTO
-    $request->file('foto')->move(public_path('/upload/fotoKontak'), $fotoName); //SIMPAN FOTO KE FOLDER FOTO KONTAK
-    $kontak->foto = $fotoName; //MENAMAKAN FILE FOTO DIDALAM DATABASE
+    //FILL FOR TABLE EXPERTISE
+    $list = explode(";", $request->expertise);
+    $count = count($list);
+    for($i = 0; $i < $count; $i++) {
+      $expertise = new Expertise;
+      $expertise->id_kontak = $kontak->id;
+      $expertise->expertise = $list[$i];
+      $expertise->save();
+    }
 
     $kontak->save(); //SAVE PERUBAHAN YANG DILAKUKAN KEDALAM DATABASE
-    Session::flash('flash_message','Kontak Dengan Nama ' . $namaKontak . ' Telah Berhasil Dibuat'); //FLASH MESSAGE IF SUCCESS
+    Session::flash('flash_message','Kontak Dengan Nama ' . $kontak->nama . ' Telah Berhasil Dibuat'); //FLASH MESSAGE IF SUCCESS
     return redirect('/kontak/kelolakontak');
+  }
+
+  public function read() {
+    //$dataKontak = Kontak::orderBy('nama')->paginate(2); //GET ALL DATA
+    $dataKontak = Kontak::orderBy('nama')->get(); //GET ALL DATA
+    return $dataKontak;
   }
 
   public function delete($id) {
@@ -127,7 +148,6 @@ class KontakController extends Controller
     $kontakOld->email     = $kontakNew->email;
     $kontakOld->nama      = $kontakNew->nama;
     $kontakOld->institusi = $kontakNew->institusi;
-    $kontakOld->expertise = $kontakNew->expertise;
     $kontakOld->deskripsi = $kontakNew->deskripsi;
 
     //IF UPLOAD FOTO KOSONG
@@ -150,15 +170,96 @@ class KontakController extends Controller
 
       //CHANGE OLD FILE NAME WITH THE NEW ONES IN DATABASE
       $kontakOld->foto  = $kontakNewFoto;
-    }        
+    }
+
+    //FILL FOR TABLE EXPERTISE
+    //NEW INPUT
+    $list = explode(";", $request->expertise);
+    $countNew = count($list);
+
+    //OLD INPUT
+    $expertiseOld = Kontak::find($kontakOld->id)->getExpertise;
+    $countOld = count($expertiseOld);
+
+    //CHECK INPUTAN EXPERTISE BERUBAH ATAU ENGGA
+    $check = 0;
+    if($countOld == $countNew) {
+      $i = 0;
+      foreach ($expertiseOld as $expertise) {
+        if($expertise->expertise == $list[$i]) {
+          //DO NOTHING
+        }
+        else {
+          $check = 1;
+          break;
+        }
+        $i++;
+      }
+    }
+
+    //IF INPUTAN EXPERTISE BERUBAH
+    if ($check == 1) {
+      //DELETE OLD EXPERTISE
+      foreach ($expertiseOld as $expertise) {
+        $expertise->delete(); 
+      }
+      //INPUT NEW EXPERTISE
+      for($i = 0; $i < $countNew; $i++) {
+        $expertise = new Expertise;
+        $expertise->id_kontak = $kontakOld->id;
+        $expertise->expertise = $list[$i];
+        $expertise->save();
+      } 
+    }
 
     $kontakOld->save(); //SAVE TO DATABASE
     Session::flash('flash_message', 'Kontak ' . $kontakNew->nama . ' Berhasil Diperbaharui'); //FLASH MESSAGE
     return redirect('/kontak/kelolakontak'); //REDIRECT BACK TO MOU PAGE
   }
 
-  public function read() {
-    $dataKontak = Kontak::all(); //GET ALL DATA
-    return $dataKontak;
+  public function search(Request $request) {
+    $category = $request->category;
+    $word = $request->word;
+
+    //CHECK IF USER IS LOGGED IN OR NOT
+    $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+    $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+
+    if ($check) {
+      if ($category == "all") {  
+        $dataKontak = Kontak::join('expertise', 'kontak.id', '=', 'expertise.id_kontak')
+          ->select('kontak.id', 'phone', 'email', 'nama', 'foto', 'institusi', 'deskripsi')
+          ->orWhere('nama', 'like', '%' . $word . '%')
+          ->orWhere('phone', 'like', '%' . $word . '%')
+          ->orWhere('email', 'like', '%' . $word . '%')
+          ->orWhere('institusi', 'like', '%' . $word . '%')
+          ->orwhere('expertise.expertise', 'like', '%' . $word . '%')
+          ->distinct()
+          ->orderBy('nama')
+          ->get();
+      }
+      else if ($category == "nama") {
+        $dataKontak = Kontak::where('nama', 'like', '%' . $word . '%')->orderBy('nama')->get();
+      }
+      else if ($category == "phone") {
+        $dataKontak = Kontak::where('phone', 'like', '%' . $word . '%')->orderBy('nama')->get();
+      }
+      else if ($category == "email") {
+        $dataKontak = Kontak::where('email', 'like', '%' . $word . '%')->orderBy('nama')->get();
+      }
+      else if ($category == "institusi") {
+        $dataKontak = Kontak::where('institusi', 'like', '%' . $word . '%')->orderBy('nama')->get();
+      }
+      else if ($category == "expertise") {
+        $dataKontak = Kontak::join('expertise', 'kontak.id', '=', 'expertise.id_kontak')
+          ->select('kontak.id', 'phone', 'email', 'nama', 'foto', 'institusi', 'deskripsi')
+          ->where('expertise.expertise', 'like', '%' . $word . '%')
+          ->distinct()
+          ->orderBy('nama')
+          ->get();
+      }
+
+      return view('kelolaKontak', compact('dataKontak'));
+    }
   }
 }

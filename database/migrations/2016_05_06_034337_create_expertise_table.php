@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKontakTable extends Migration
+class CreateExpertiseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,11 @@ class CreateKontakTable extends Migration
      */
     public function up()
     {
-      //
-      Schema::create('kontak', function (Blueprint $table) {
+        Schema::create('expertise', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('phone',15);
-        $table->string('email', 255);
-        $table->string('nama', 255);
-        $table->text('foto');
-        $table->string('institusi', 50);
-        $table->text('deskripsi');
+        $table->integer('id_kontak')->unsigned();
+        $table->foreign('id_kontak')->references('id')->on('kontak');
+        $table->string('expertise', 255);
       });
     }
 
@@ -31,6 +27,6 @@ class CreateKontakTable extends Migration
      */
     public function down()
     {
-      //
+        //
     }
 }

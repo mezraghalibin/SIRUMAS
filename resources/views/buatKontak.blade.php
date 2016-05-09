@@ -72,7 +72,7 @@
                 {{-- FIRST ROW = NAMA --}}
                 <div class="row">
                   <div class="input-field col s12">
-                    <input placeholder="Nama kontak" id="nama" name="nama" type="text" class="validate">
+                    <input placeholder="Nama kontak" id="nama" name="nama" type="text" class="validate" required>
                     <label for="nama">Nama Kontak</label>
                   </div>
                 </div>
@@ -80,11 +80,11 @@
                 {{-- SECOND ROW = EMAIL HP --}}
                 <div class="row">
                   <div class="input-field col s6">
-                    <input placeholder="E-mail" id="email" name="email" type="text" class="validate">
+                    <input placeholder="E-mail" id="email" name="email" type="text" class="validate" required>
                     <label for="nip/nup">E-mail</label>
                   </div>
                   <div class="input-field col s6">
-                    <input placeholder="Nomor HP" id="phone" name="phone" type="text" class="validate">
+                    <input placeholder="Nomor HP" id="phone" name="phone" type="text" class="validate" required>
                     <label for="nohp">Nomor HP</label>
                   </div>
                 </div>
@@ -92,7 +92,7 @@
                 {{-- SECOND ROW = INSTITUSI--}}
                 <div class="row">
                   <div class="input-field col s12">
-                    <input placeholder="Institusi" name="institusi" id="institusi" type="text" class="validate">
+                    <input placeholder="Institusi" name="institusi" id="institusi" type="text" class="validate" required>
                     <label for="nohp">Institusi</label>
                   </div>
                 </div>
@@ -100,7 +100,7 @@
                 {{-- THIRD ROW = EXPERTISE --}}
                 <div class="row">
                   <div class="input-field col s12">
-                    <input placeholder="Expertise" name="expertise" id="expertise" type="text" class="validate">
+                    <input placeholder="Expertise" name="expertise" id="expertise" type="text" class="validate" required>
                     <label for="expertise">Expertise</label>
                   </div>
                 </div>
@@ -112,7 +112,7 @@
                   <div class="file-field input-field col s12">
                     <div class="btn card-panel red darken-2">
                       <span class="white-text">Foto</span>
-                      <input type="file" name="foto">
+                      <input type="file" name="foto" required>
                     </div>
                     <div class="file-path-wrapper">
                       <input class="file-path validate" type="text" placeholder="Lampirkan Foto Kontak">
@@ -124,7 +124,7 @@
                 <div class="row">
                   <div class="input-field col s12">
                     <textarea placeholder="Deskripsi Kontak" id="deskripsi" 
-                      name="deskripsi" class="materialize-textarea"></textarea>
+                      name="deskripsi" class="materialize-textarea" required></textarea>
                     <label for="deskripsi">Deskripsi</label>
                   </div>
                 </div>

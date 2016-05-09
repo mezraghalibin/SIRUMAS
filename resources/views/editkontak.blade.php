@@ -71,7 +71,8 @@
                 {{-- FIRST ROW = NAMA --}}
                 <div class="row">
                   <div class="input-field col s12">
-                    <input placeholder="Nama kontak" name="nama" type="text" class="validate" value="{{$dataKontak->nama}}">
+                    <input placeholder="Nama kontak" name="nama" type="text" 
+                      class="validate" value="{{$dataKontak->nama}}" required>
                     <label for="nama">Nama Kontak</label>
                   </div>
                 </div>
@@ -79,11 +80,13 @@
                 {{-- SECOND ROW = EMAIL HP --}}
                 <div class="row">
                   <div class="input-field col s6">
-                    <input placeholder="E-mail" name="email" type="text" class="validate" value="{{$dataKontak->email}}">
+                    <input placeholder="E-mail" name="email" type="text" 
+                      class="validate" value="{{$dataKontak->email}}" required>
                     <label for="nip/nup">E-mail</label>
                   </div>
                   <div class="input-field col s6">
-                    <input placeholder="Nomor HP" name="phone" type="text" class="validate" value="{{$dataKontak->phone}}">
+                    <input placeholder="Nomor HP" name="phone" type="text" 
+                      class="validate" value="{{$dataKontak->phone}}" required>
                     <label for="nohp">Nomor HP</label>
                   </div>
                 </div>
@@ -92,16 +95,25 @@
                 <div class="row">
                   <div class="input-field col s12">
                     <input placeholder="Institusi" name="institusi" type="text" 
-                      class="validate" value="{{$dataKontak->institusi}}">
+                      class="validate" value="{{$dataKontak->institusi}}" required>
                     <label for="nohp">Institusi</label>
                   </div>
                 </div>
 
                 {{-- THIRD ROW = EXPERTISE --}}
+                {{-- GET ALL EXPERTISE FROM SPECIFIC CONTACT --}}
+                <?php 
+                  $expertises = $dataKontak->getExpertise;
+                  $list = ""; 
+                ?>
+                @foreach($expertises as $expertise)
+                  <?php $list = $list . $expertise->expertise . ";" ; ?>
+                @endforeach
+                {{-- END OF GET ALL EXPERTISE --}}
                 <div class="row">
                   <div class="input-field col s12">
                     <input placeholder="Expertise" name="expertise" type="text" 
-                      class="validate" value="{{$dataKontak->expertise}}">
+                      class="validate" value="<?php echo substr($list, 0, -1) ?>">
                     <label for="expertise">Expertise</label>
                   </div>
                 </div>
@@ -125,7 +137,7 @@
                 <div class="row">
                   <div class="input-field col s12">
                     <textarea placeholder="Deskripsi Kontak" id="deskripsi" 
-                      name="deskripsi" class="materialize-textarea">{{$dataKontak->deskripsi}}</textarea>
+                      name="deskripsi" class="materialize-textarea" required>{{$dataKontak->deskripsi}}</textarea>
                     <label for="deskripsi">Deskripsi</label>
                   </div>
                 </div>

@@ -3,8 +3,8 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400);
 
 $base-color1: #FFFFFF; //WHITE
-$base-color2: #D32F2F; //RED
-$base-color3: #333333; //BLACK
+$base-color2: #8D230F; //RED
+$base-color3: #011A27; //BLACK
 $font: 'Roboto', sans-serif;
 $heading-font: 'Montserrat', sans-serif;
 
@@ -44,3 +44,22 @@ html, body {
 tr.hover {
   cursor: pointer;
 }
+
+.kontak {
+  font: $heading-font;
+  .left-row {
+    .photo {
+      width: 103px;
+    }
+  }
+  .right-row {
+    .nama {
+      font-weight: bold;
+    }
+    .button {
+      .btn-floating {
+        background-color: $base-color2;
+      }
+    }
+  }
+} 

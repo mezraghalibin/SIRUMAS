@@ -6323,4 +6323,13 @@ html, body {
 tr.hover {
   cursor: pointer; }
 
+.kontak {
+  font: "Montserrat", sans-serif; }
+  .kontak .left-row .photo {
+    width: 103px; }
+  .kontak .right-row .nama {
+    font-weight: bold; }
+  .kontak .right-row .button .btn-floating {
+    background-color: #8D230F; }
+
 /*# sourceMappingURL=kontak.css.map */
