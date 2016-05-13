@@ -77,13 +77,43 @@
   {{-- SIDEBAR MENU FOR DOSEN --}}    
   @if($spesifik_role == 'dosen')
     <header>
-      <ul class="side-nav fixed">
-        <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li>
-        <li><a href="{{action('HibahController@index')}}" class="waves-effect waves-teal">HIBAH</a></li>
-        <li><a href="{{action('ProposalController@index')}}" class="waves-effect waves-teal">PROPOSAL</a></li>
-        <li><a href="{{action('LaporanController@index')}}" class="waves-effect waves-teal">LAPORAN</a></li>
-        <li><a href="#" class="waves-effect waves-teal">REPOSITORY</a></li>
-      </ul>
+      <div class="side-bar">
+        <ul class="collapsible" data-collapsible="accordion">      
+          <li>
+            <a href="{{action('BerandaController@index')}}" class="collapsible-header">
+              <i class="material-icons">home</i>BERANDA
+            </a>
+          </li>
+          <li>
+            <a href="/hibah/daftarHibah" class="collapsible-header">
+              <i class="material-icons">work</i>HIBAH
+            </a>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">book</i>PROPOSAL</div>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="/proposal/daftarProposal" class="waves-effect waves-teal">Daftar Proposal</a></li>
+                <li><a href="/proposal/uploadRevisiProposal" class="waves-effect waves-teal">Upload Revisi Proposal</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">description</i>LAPORAN</div>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="/laporan/laporanKemajuan" class="waves-effect waves-teal">Laporan Kemajuan</a></li>
+                <li><a href="/laporan/laporanAkhir" class="waves-effect waves-teal">Laporan Akhir</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="repository" class="collapsible-header">
+              <i class="material-icons">folder</i>REPOSITORY
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
   @endif
   {{-- END OF SIDEBAR MENU FOR DOSEN --}}
@@ -102,8 +132,8 @@
           <div class="collapsible-header"><i class="material-icons">work</i>HIBAH</div>
           <div class="collapsible-body">
             <ul>
-              <li><a href="/hibah/kelolahibah" class="waves-effect waves-teal">Kelola Hibah</a></li>
-              <li><a href="/hibah/buathibah" class="waves-effect waves-teal">Buat Hibah</a></li>
+              <li><a href="/hibah/kelolaHibah" class="waves-effect waves-teal">Kelola Hibah</a></li>
+              <li><a href="/hibah/buatHibah" class="waves-effect waves-teal">Buat Hibah</a></li>
             </ul>
           </div>
         </li>
@@ -129,8 +159,8 @@
           <div class="collapsible-header"><i class="material-icons">description</i>LAPORAN</div>
           <div class="collapsible-body">
             <ul>
-              <li><a href="#" class="waves-effect waves-teal">Laporan Kemajuan</a></li>
-              <li><a href="#" class="waves-effect waves-teal">Laporan Akhir</a></li>
+              <li><a href="/laporan/readLaporanKemajuan" class="waves-effect waves-teal">Laporan Kemajuan</a></li>
+              <li><a href="/laporan/readLaporanAkhir" class="waves-effect waves-teal">Laporan Akhir</a></li>
             </ul>
           </div>
         </li>
@@ -138,8 +168,8 @@
           <div class="collapsible-header"><i class="material-icons">people</i>KONTAK</div>
           <div class="collapsible-body">
             <ul>
-              <li><a href="/kontak/kelolakontak" class="waves-effect waves-teal">Kelola Kontak</a></li>
-              <li><a href="/kontak/buatkontak" class="waves-effect waves-teal">Buat Kontak</a></li>
+              <li><a href="/kontak/kelolaKontak" class="waves-effect waves-teal">Kelola Kontak</a></li>
+              <li><a href="/kontak/buatKontak" class="waves-effect waves-teal">Buat Kontak</a></li>
             </ul>
           </div>
         </li>
@@ -165,20 +195,30 @@
           <div class="collapsible-header"><i class="material-icons">desktop_windows</i>JADWAL PRESENTASI</div>
           <div class="collapsible-body">
             <ul>
-              <li><a href="#" class="waves-effect waves-teal">Kelola Jadwal Presentasi</a></li>
-              <li><a href="#" class="waves-effect waves-teal">Buat Jadwal Presentasi</a></li>
+              <li><a href="/kelolapresentasi" class="waves-effect waves-teal">Kelola Jadwal Presentasi</a></li>
+              <li><a href="/buatpresentasi" class="waves-effect waves-teal">Buat Jadwal Presentasi</a></li>
             </ul>
           </div>
         </li>
         <li>
-          <a href="{{action('BerandaController@index')}}" class="collapsible-header">
+          <a href="repository" class="collapsible-header">
             <i class="material-icons">folder</i>REPOSITORY
           </a>
         </li>
         <li>
-          <a href="{{action('BerandaController@index')}}" class="collapsible-header">
+          </a>
+          <a href="/kelolaRepository" class="collapsible-header">
             <i class="material-icons">build</i>KELOLA REPOSITORY
           </a>
+          <div class="collapsible-body">
+            <ul>
+            <!-- jgn lupa diganti a href nya -->
+              <li><a href="kelolapublikasi" class="waves-effect waves-teal">Kelola Publikasi</a></li>
+              <li><a href="kelolapenelitian" class="waves-effect waves-teal">Kelola Penelitian</a></li>
+              <li><a href="" class="waves-effect waves-teal">Kelola Pengabdian Masyarakat</a></li>
+              <li><a href="kelolakegiatanilmiah" class="waves-effect waves-teal">Kelola Kegiatan Ilmiah</a></li>
+            </ul>
+          </div>
         </li>
       </ul>
     </div>

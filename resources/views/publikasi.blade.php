@@ -91,7 +91,7 @@
         <div class="header"><h4>Jenis Publikasi</h4></div>
           <div class="berhibah-content">
             <ul class="collection with-header">
-              <li class="collection-header"><a href="#"><h5>Buku</h5></a></li>
+              <li class="collection-header"><a href="buku"><h5>Buku</h5></a></li>
               <li class="collection-item"><a href="#">Artikel Ilmiah</a></li>
               <li class="collection-item"><a href="#">Artikel Populer</a></li>
             </ul>

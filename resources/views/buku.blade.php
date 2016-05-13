@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BUKU</title>
+  <title>DAFTAR BUKU</title>
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
@@ -38,7 +38,19 @@
     <script>
     $(document).ready(function(){
       $role = "<?php echo $spesifik_role ?>";
-       
+
+        // $("#buat-buku-konten").hide();
+
+        // $("#kelola-buku").click(function(){
+        //     $("#kelola-buku-konten").fadeIn(500);
+        //     $("#buat-buku-konten").hide();
+        // });
+
+        //  $("#buat-buku").click(function(){
+        //     $("#buat-buku-konten").fadeIn(500);
+        //     $("#kelola-buku-konten").hide();
+        // });
+
       });
     </script>
 </head>
@@ -50,7 +62,9 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="publikasi"><a href="#">Kembali</a></li>
+        @if($spesifik_role == 'divisi riset') 
+          <li id="kelola-buku"><a href="publikasi">Kembali</a></li>
+        @endif 
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
@@ -59,39 +73,47 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
-       {{-- CONTENT DAFTAR BUKU --}}
-       <div id="daftar-buku">
-       <div class="container">
-          <div class="header"><h4>Daftar Buku</h4></div>
-          <div class="hibah-riset-content">
-            <table class="highlight centered">
-              <thead>
+    {{-- CONTENT KELOLA BUKU --}}
+    <div class="container">
+      <div id="kelola-buku-konten">
+        <div class="header"><h4>Daftar Buku</h4></div>
+        <div class="kelola-content">
+          <table class="highlight centered">
+            <thead> {{-- NAMA JUDUL DARI KELOLA HIBAH --}}
               <tr>
-                <th>No.</th>
-                <th>Judul</th>
-                <th>Penulis</th>
-                <th>Tahun Terbit</th>                           
-                <th>Penerbit</th>
-                <th>Gambar Sampul</th>
+                  <th data-field="judul" style="width:30%">Judul</th>
+                  <th data-field="penulis">Penulis</th>
+                  <th data-field="penerbit">Penerbit</th>
+                  <th data-field="isbn">Tahun Terbit</th>
+                  <th data-field="" style="width:7%">Gambar Sampul</th>
               </tr>
             </thead>
-            <tbody>        
-              <tr>
-                <td>1.</td>
-                <td>Buku Propensi</td>
-                <td>Sri Mulyani</td>
-                <td>2015</td>
-                <td>Gramedia</td>
-                <td></td>
-              </tr>
+
+            <tbody>  {{-- ISI DARI TIAP HIBAH --}}
+                @foreach ($dataBuku as $buku) 
+
+                  <tr>
+                    <td>{{$buku->judul}}</td>
+                    <td>{{$buku->penulis}}</td>
+                    <td>{{$buku->tahun}}</td>
+                    <td>{{$buku->penerbit}}</td>
+                    <td>{{$buku->file}}</td>
+                    
+                  </tr>
+          @endforeach
             </tbody>
           </table>
-          </div>
-          </div>
-          <!-- END OF TABEL DAFTAR PROPOSAL -->
-          </div>
-          {{-- CONTENT BUKU --}}
+        </div>
+      </div>
+    </div>
 
+  <script>
+    $(document).ready(function(){
+      $('.materialboxed').materialbox();
+      $('select').material_select();  //FOR FORM SELECT
+      $('.modal-trigger').leanModal(); //FOR MODAL
+    });
+  </script>
   </div>
   @stop
 </body>

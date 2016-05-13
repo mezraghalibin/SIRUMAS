@@ -3,50 +3,81 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Validator;
+use Session;
 use App\Http\Requests;
+use App\Laporan;
+use App\Users;
+use App\Http\Response;
+use App\Http\Controllers\SSOController;
+use DB;
+use App\JadwalPresentasi;
 
-class PresentasiController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        
-         //CHECK IF USER IS LOGGED IN OR NOT
-        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
-        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-        if($check) {
-            return view('presentasi');
-        }
-        else {
-            return view('login');
-        }
+class PresentasiController extends Controller {
+  public function index() {
+    //CHECK IF USER IS LOGGED IN OR NOT
+    $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+    $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+    
+    $route = $_SERVER['REQUEST_URI']; //GET URL ROUTE
+
+    if ($check) {
+      if($route == '/buatpresentasi') {
+        $dataLaporan = $this->getLaporan();
+        return view('buatpresentasi', compact('dataLaporan'));
+      }
+      else if ($route == '/kelolapresentasi') {
+        $dataPresentasi = $this->getPresentasi(); //GET ALL DATA HIBAH
+        return view('kelolapresentasi', compact('dataPresentasi'));
+      }
+    }
+    else {
+      return view('login');
+    }
+  }
+
+  public function store(Request $request) {
+    $createValidator = Validator::make($request->all(), [
+      'reviewer' => 'required',
+      'waktu' => 'required',
+      'gedung' => 'required',
+      'ruang' => 'required'
+    ]);
+
+    //CHECK VALIDATOR, IF FAILS RETURN TO BUAT KONTAK PAGE
+    if ($createValidator->fails()) {
+      //FLASH MESSAGE IF FAILS
+      Session::flash('flash_message','Gagal Membuat Jadwal Presentasi, Harap Mengisi Semua Data.'); 
+      return redirect('buatpresentasi'); //REDIRECT BACK TO BUAT KONTAK PAGE
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    $check = $this->check($request->id_laporan);
+    if($check== true) {
+      $presentasi = JadwalPresentasi::create($request->all()); //SIMPAN SEMUA MASUKAN DALAM BENTUK KONTAK
+      $presentasi->save();
+      Session::flash('flash_message','Jadwal Presentasi Berhasil Dibuat'); //FLASH
+    } 
+    else {
+      Session::flash('flash_message','Gagal Membuat, Jadwal Presentasi Sudah Ada');
     }
+    return redirect('buatpresentasi'); //REDIRECT BACK TO BUAT KONTAK PAGE
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    // fungsi buat ngecheck udah ada apa belom jadwal presentasi atas nama laporan
+  public function check($id) {
+    // cek ada ngga si nama laporan itu di tabel presentasi
+    $dataLaporan = DB::table('jadwal_presentasi')
+        ->select('jadwal_presentasi.*')
+        ->where('jadwal_presentasi.id_laporan', '=', $id)
+        ->get();
+    // kalau gaada isi
+    if(count($dataLaporan) == 0) {
+      return true;
     }
+    else {
+      return false;
+    } 
+  }
 
     /**
      * Display the specified resource.
@@ -65,16 +96,24 @@ class PresentasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-         //CHECK IF USER IS LOGGED IN OR NOT
+        //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-        if($check) {
-            return view('editpresentasi');
+        
+        if ($check) {
+          $data = JadwalPresentasi::find($id); //FIND SPECIFIC MOU
+          $id_laporan = $data->id_laporan;
+          $dataPresentasi = DB::table('jadwal_presentasi')
+            ->join('laporan', 'jadwal_presentasi.id_laporan', '=', 'laporan.id')
+            ->select('jadwal_presentasi.*', 'laporan.judul')
+            ->where('laporan.id', '=',$id_laporan)
+            ->get();
+          return view('editpresentasi', compact('dataPresentasi'));
         }
         else {
-            return view('login');
+          return view('login');
         }
     }
 
@@ -87,7 +126,36 @@ class PresentasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $createValidator = Validator::make($request->all(), [
+          'reviewer' => 'required',
+          'waktu' => 'required',
+          'gedung' => 'required',
+          'ruang' => 'required'
+        ]);
+
+        //CHECK VALIDATOR, IF FAILS RETURN TO BUAT KONTAK PAGE
+        if ($createValidator->fails()) {
+          //FLASH MESSAGE IF FAILS
+          Session::flash('flash_message','Gagal Mengubah Jadwal Presentasi, Harap Mengisi Semua Data.'); 
+          return redirect('kelolapresentasi'); //REDIRECT BACK TO EDIT PRESENTASI PAGE
+        }
+
+        $presentasiNew = $request; //GET JADWAL NEW BY REQUEST USER
+        $presentasiOld = JadwalPresentasi::find($id); //GET JADWAL OLD BY FIND ON TABLE JADWAL_PRESETASI
+
+        //REPLACE THE OLD WITH THE NEW ONES
+        $presentasiOld->id_laporan = $presentasiNew->id_laporan;
+        $presentasiOld->waktu = $presentasiNew->waktu;
+        $presentasiOld->status = $presentasiNew->status;
+        $presentasiOld->reviewer = $presentasiNew->reviewer;
+        $presentasiOld->ruang = $presentasiNew->ruang;
+        $presentasiOld->gedung = $presentasiNew->gedung;
+        $presentasiOld->staf_riset = $presentasiNew->staf_riset;    
+        
+        //SIMPAN SEMUA MASUKAN DALAM BENTUK KONTAK
+        $presentasiOld->save();
+        Session::flash('flash_message','Jadwal Presentasi Berhasil Diperbarui'); //FLASH
+        return redirect('kelolapresentasi');
     }
 
     /**
@@ -96,8 +164,29 @@ class PresentasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $presentasi = JadwalPresentasi::find($id); //FIND SPECIFIC PRESENTASI
+        Session::flash('flash_message','Jadwal Presentasi untuk laporan' . $presentasi->judul . ' Telah Dihapus');
+        $presentasi->delete(); //DELETE FROM DATABASE 
+        return redirect('/kelolapresentasi'); //REDIRECT BACK TO MOU PAGE
+    }
+
+    public function getLaporan()
+    {
+        $dataLaporan = DB::table('laporan')
+            ->join('users', 'laporan.dosen', '=', 'users.id')
+            ->select('laporan.*', 'users.nama')
+            ->where('users.spesifik_role', '=', 'dosen')
+            ->get();
+        return $dataLaporan;
+    }
+
+    public function getPresentasi(){
+        $dataPresentasi = DB::table('jadwal_presentasi')
+            ->join('laporan', 'jadwal_presentasi.id_laporan', '=', 'laporan.id')
+            ->select('jadwal_presentasi.*', 'laporan.judul')
+            ->get();
+        return $dataPresentasi;
     }
 }

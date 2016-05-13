@@ -70,23 +70,23 @@
             <table class="highlight centered">
               <thead>
               <tr>
-                <th>No.</th>
                 <th>Nama Peneliti</th>
                 <th>Judul Penelitian</th>
-                <th>Sumber Dana</th>                           
-                <th>Tahun</th>
-                <th>Mahasiswa Yang Terlibat</th>
+                <th>Sumber Dana</th>                  
+                <!-- <th>Tahun</th>
+                <th>Mahasiswa Yang Terlibat</th> -->
               </tr>
             </thead>
             <tbody>        
+            @foreach ($dataPenelitian as $penelitian)
               <tr>
-                <td>1.</td>
-                <td>Diana Rikasari</td>
-                <td>Ilmu Administrasi pada E-Commerce</td>
-                <td>Universitas Indonesia</td>
-                <td>2015</td>
-                <td>Ani, Budi, Cinta</td>
+                <td>{{$penelitian->ketua}}</td>
+                <td>{{$penelitian->judul}}</td>
+                <td>{{$penelitian->sumber_dana}}</td>
+                <!-- <td>Tahun<td>
+                <td>Ani, Budi, Cinta</td> -->
               </tr>
+            @endforeach
             </tbody>
           </table>
           </div>

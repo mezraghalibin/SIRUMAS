@@ -22,17 +22,13 @@ class KontakController extends Controller {
     $route = $_SERVER['REQUEST_URI']; //GET URL ROUTE
 
     if ($check) {
-      if($route == '/kontak/buatkontak') {
-        return view('buatKontak');
+      if ($route == '/kontak/buatKontak') {
+        return view('kontak/buatKontak');
       }
-      else if ($route == '/kontak/kelolakontak') {
+      else {
         $dataKontak = $this->read(); //GET ALL DATA KONTAK
-        return view('kelolaKontak', compact('dataKontak'));
+        return view('/kontak/kelolaKontak', compact('dataKontak'));
       }
-      // else if ($route == '/kontak/kelolakontak?page=2') {
-      //   $dataKontak = $this->read(); //GET ALL DATA KONTAK
-      //   return view('kelolaKontak', compact('dataKontak'));
-      // }
     }
     else {
       return view('login');
@@ -46,7 +42,7 @@ class KontakController extends Controller {
     
     if ($check) {
       $dataKontak = Kontak::find($id); //FIND SPECIFIC MOU
-      return view('editKontak', compact('dataKontak'));
+      return view('/kontak/editKontak', compact('dataKontak'));
     }
     else {
       return view('login');
@@ -68,7 +64,7 @@ class KontakController extends Controller {
     if ($createValidator->fails()) {
       //FLASH MESSAGE IF FAILS
       Session::flash('flash_message','Gagal Membuat Kontak, Harap Mengisi Semua Data.'); 
-      return redirect('/kontak/buatkontak'); //REDIRECT BACK TO BUAT KONTAK PAGE
+      return redirect('/kontak/buatKontak'); //REDIRECT BACK TO BUAT KONTAK PAGE
     }
 
     //FILL FOR TABLE KONTAK
@@ -98,12 +94,11 @@ class KontakController extends Controller {
 
     $kontak->save(); //SAVE PERUBAHAN YANG DILAKUKAN KEDALAM DATABASE
     Session::flash('flash_message','Kontak Dengan Nama ' . $kontak->nama . ' Telah Berhasil Dibuat'); //FLASH MESSAGE IF SUCCESS
-    return redirect('/kontak/kelolakontak');
+    return redirect('/kontak/kelolaKontak');
   }
 
   public function read() {
-    //$dataKontak = Kontak::orderBy('nama')->paginate(2); //GET ALL DATA
-    $dataKontak = Kontak::orderBy('nama')->get(); //GET ALL DATA
+    $dataKontak = Kontak::orderBy('nama')->paginate(16); //GET ALL DATA
     return $dataKontak;
   }
 
@@ -116,7 +111,7 @@ class KontakController extends Controller {
       File::delete($fotoName); //DELETE FILE FROM DIRECTORY
       $kontak->delete(); //DELETE FROM DATABASE 
     }
-    return redirect('/kontak/kelolakontak'); //REDIRECT BACK TO MOU PAGE
+    return redirect('/kontak/kelolaKontak'); //REDIRECT BACK TO MOU PAGE
   }
 
   public function update(Request $request, $id) {
@@ -132,7 +127,7 @@ class KontakController extends Controller {
     //VALIDATOR JIKA JUDUL MOU DAN/ATAU NAMA PENELITI TIDAK DIISI
     if ($updateValidator->fails()) {
       Session::flash('flash_message', 'Harap Mengisi Semua Data!'); //nampilin kalo sukses
-      return redirect('/kontak/kelolakontak'); //REDIRECT TO KELOLA KONTAK PAGE
+      return redirect('/kontak/kelolaKontak'); //REDIRECT TO KELOLA KONTAK PAGE
     }
 
     //CHECK FOTO YANG DIUPLOAD KOSONG ATAU ENGGA
@@ -214,7 +209,7 @@ class KontakController extends Controller {
 
     $kontakOld->save(); //SAVE TO DATABASE
     Session::flash('flash_message', 'Kontak ' . $kontakNew->nama . ' Berhasil Diperbaharui'); //FLASH MESSAGE
-    return redirect('/kontak/kelolakontak'); //REDIRECT BACK TO MOU PAGE
+    return redirect('/kontak/kelolaKontak'); //REDIRECT BACK TO MOU PAGE
   }
 
   public function search(Request $request) {
@@ -259,7 +254,7 @@ class KontakController extends Controller {
           ->get();
       }
 
-      return view('kelolaKontak', compact('dataKontak'));
+      return view('/kontak/kelolaKontak', compact('dataKontak'));
     }
   }
 }

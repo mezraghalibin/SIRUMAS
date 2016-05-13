@@ -103,3 +103,9 @@ elixir(function(mix) {
     mix.sass('kontak.scss', 'public/assets/css/kontak.css');
 });
 /*********** EO KONTAK ***********/
+
+/*********** REPOSITORY ***********/
+elixir(function(mix) {
+    mix.sass('repository.scss', 'public/assets/css/repository.css');
+});
+/*********** EO REPOSITORY ***********/

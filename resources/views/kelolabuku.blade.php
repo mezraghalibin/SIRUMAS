@@ -39,17 +39,17 @@
     $(document).ready(function(){
       $role = "<?php echo $spesifik_role ?>";
 
-        $("#buat-buku-konten").hide();
+        // $("#buat-buku-konten").hide();
 
-        $("#kelola-buku").click(function(){
-            $("#kelola-buku-konten").fadeIn(500);
-            $("#buat-buku-konten").hide();
-        });
+        // $("#kelola-buku").click(function(){
+        //     $("#kelola-buku-konten").fadeIn(500);
+        //     $("#buat-buku-konten").hide();
+        // });
 
-         $("#buat-buku").click(function(){
-            $("#buat-buku-konten").fadeIn(500);
-            $("#kelola-buku-konten").hide();
-        });
+        //  $("#buat-buku").click(function(){
+        //     $("#buat-buku-konten").fadeIn(500);
+        //     $("#kelola-buku-konten").hide();
+        // });
 
       });
     </script>
@@ -62,8 +62,10 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola-buku"><a href="#">Kelola Buku</a></li>
-          <li id="buat-buku"><a href="#">Buat Buku</a></li>     
+        @if($spesifik_role == 'divisi riset')
+          <li id="kelola-buku"><a href="kelolabuku">Kelola Buku</a></li>
+          <li id="buat-buku"><a href="buatbuku">Buat Buku</a></li>
+        @endif     
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
@@ -72,8 +74,20 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
+  {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
+      <div id="flash-msg">
+        @if(Session::has('flash_message'))
+          <div class="card-panel teal">
+            <span class="white-text">
+              {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
+              <i class="material-icons">clear</i></a>
+            </span>
+          </div>
+        @endif 
+      </div>
+      {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
 
-    {{-- CONTENT KELOLA HIBAH --}}
+    {{-- CONTENT KELOLA BUKU --}}
     <div class="container">
       <div id="kelola-buku-konten">
         <div class="header"><h4>Kelola Buku</h4></div>
@@ -81,51 +95,54 @@
           <table class="highlight centered">
             <thead> {{-- NAMA JUDUL DARI KELOLA HIBAH --}}
               <tr>
-                  <th data-field="nama_hibah" style="width:30%">Judul</th>
-                  <th data-field="kategori_hibah">Penulis</th>
-                  <th data-field="besar_dana">Penerbit</th>
-                  <th data-field="periode">ISBN</th>
+                  <th data-field="judul" style="width:30%">Judul</th>
+                  <th data-field="penulis">Penulis</th>
+                  <th data-field="penerbit">Penerbit</th>
+                  <th data-field="isbn">ISBN</th>
                   <th data-field="" style="width:7%">Edit</th>
                   <th data-field="" style="width:4%">Delete</th>
               </tr>
             </thead>
 
             <tbody>  {{-- ISI DARI TIAP HIBAH --}}
+                @foreach ($dataBuku as $buku) 
+
                   <tr>
-                    <td>Buku Propensi</td>
-                    <td>Bambang Sutedja</td>
-                    <td>Gramedia</td>
-                    <td>1432567893</td>
+                    <td>{{$buku->judul}}</td>
+                    <td>{{$buku->penulis}}</td>
+                    <td>{{$buku->penerbit}}</td>
+                    <td>{{$buku->isbn}}</td>
                     <td> {{-- BUTTON ICON UNTUK EDIT HIBAH --}}
-                      <a class="btn-floating" href="">
+                       <a class="btn-floating" href="/editbuku/{{$buku->id}}">
+                     
                       <i class="material-icons right">mode_edit</i></a>
                     </td>
                     <td> {{-- BUTTON ICON UNTUK HAPUS HIBAH --}}
-                      <!-- Modal Trigger -->
-                      <button data-target="" class="btn-floating btn modal-trigger">
+                    <!-- Modal Trigger -->
+                      <button data-target="modal{{$buku->id}}" class="btn-floating btn modal-trigger">
                         <i class="material-icons right">delete</i>
                       </button>
                       <!-- Modal Structure -->
-                      <div id="" class="modal">
+                      <div id="modal{{$buku->id}}" class="modal">
                         <div class="modal-content">
-                          <h4>Hapus?</h4>
-                          <p>Hibah akan dihapus secara permanen</p>
+                          <h4>Hapus {{$buku->judul}}?</h4>
+                          <p>Buku ini akan dihapus secara permanen</p>
                         </div>
                         <div class="modal-footer center-align">
-                          <a href="" class="modal-action modal-close btn-flat">Ya</a>
+                          <a href="/deletebuku/{{$buku->id}}" class="modal-action modal-close btn-flat">Ya</a>
                           <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
                         </div>
                       </div>
                     </td>
                   </tr>
-        
+          @endforeach
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-       {{-- CONTENT DAFTAR BUKU --}}
+       <!-- {{-- CONTENT DAFTAR BUKU --}}
        <div id="buat-buku-konten">
        <div class="container">
           <div class="header"><h4>Buat Buku</h4></div>
@@ -214,8 +231,15 @@
           </div>
           {{-- CONTENT BUKU --}}
 
-     
+      -->
 
+  <script>
+    $(document).ready(function(){
+      $('.materialboxed').materialbox();
+      $('select').material_select();  //FOR FORM SELECT
+      $('.modal-trigger').leanModal(); //FOR MODAL
+    });
+  </script>
   </div>
   @stop
 </body>
