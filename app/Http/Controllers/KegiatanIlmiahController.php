@@ -3,19 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use Session;
-
 use Validator;
-
 use App\Http\Controllers\Controller;
-
 use App\Http\Controllers\SSOController;
-
 use App\users;
-
 use App\KegiatanIlmiah;
 
 class KegiatanIlmiahController extends Controller

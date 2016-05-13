@@ -112,7 +112,6 @@ class PenelitianController extends Controller
         }
     }
 
-
     public function update(Request $request, $id)
     {
         $createValidator = Validator::make($request->all(), [
