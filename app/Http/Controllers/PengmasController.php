@@ -236,9 +236,10 @@ class PengmasController extends Controller
         $countNew = count($list);
 
         //Yang lama
-        $anggotaOld = PengmasAnggota::where('id_pengmas', $id)->get();
+        $anggotaOld = PengmasAnggota::find($pengmas->id)->get();
         $countOld = count($anggotaOld);
 
+        //cek inputan anggota berubah atau ga
         $check = 0;
         if($countOld == $countNew) {
             $i = 0;
@@ -246,31 +247,32 @@ class PengmasController extends Controller
                 if($anggota->nama_anggota == $list[$i]) {
                     //DO NOTHING
                 } else {
-                    $check = 0;
+                    $check = 1;
                     break;
                 }
                 $i--;
             }
         }
 
+        // Kalau inputan berubah
         if ($check == 1) {
             //Delete old anggota
             foreach ($anggotaOld as $anggota) {
                 $anggota->delete();
             }
-        }
-
-        for($i = 0; $i < $countNew; $i++) {
-                $nama_anggota = new PengmasAnggota;
-                $nama_anggota->id_pengmas = $pengmas->id;
-                $nama_anggota->nama_anggota = $list[$i];
-                $nama_anggota->save();
+            //input yang baru
+            for($i = 0; $i < $countNew; $i++) {
+                    $anggota = new PengmasAnggota;
+                    $anggota->id_pengmas = $pengmas->id;
+                    $anggota->nama_anggota = $list[$i];
+                    $anggota->save();
+            }
         }
 
         //SAVE FILEnya
         $pengmas->save();
         // Session untuk Success Notif
-        Session::flash('flash_message','Sukses membuat Pengabdian Masyarakat');
+        Session::flash('flash_message','Sukses mengubah Pengabdian Masyarakat');
         // then rederict back to hibah
         return redirect('kelolapengmas');
     }

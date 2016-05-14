@@ -85,25 +85,26 @@
 
               </div>
 
-              {{-- SECOND ROW = JUDUL PROPOSAL --}}
+              <?php
+              $list = "";
+               ?>
+
+               {{-- GET ALL ANGGOTA FROM SPECIFIC PENGMAS --}}
+                @foreach($listofanggota as $anggota)
+                  <?php
+                  $list = $list . $anggota->nama_anggota . ";" ;
+                  ?>
+                @endforeach
+                {{-- END OF GET ALL ANGGOTA --}}
+
+              {{-- SECOND ROW --}}
               <div class="row">
                 <div class="input-field col s6 offset-s1">
                   <input placeholder="Penyelenggara" name="penyelenggara" value="{{$pengmas->penyelenggara}}" type="text" class="validate">
                   <label for="judulproposal">Penyelenggara</label>
                 </div>
                 <div class="input-field col s4">
-                <input placeholder="Anggota tim" name="nama_anggota" value="
-                <?php 
-                $count = count($listofanggota);
-                $counter = 1;
-                foreach ($listofanggota as $anggota) {
-                  echo $anggota->nama_anggota; 
-                  if($counter != $count){
-                      echo ';'; // not the last element
-                  }
-                  $counter++;
-                }
-                ?>" type="text" class="validate">
+                <input placeholder="Anggota tim" name="nama_anggota" value="<?php echo substr($list, 0, -1) ?>" type="text" class="validate">
                 <label for="nohp">Anggota tim</label>
                 </div>
               </div>
@@ -141,7 +142,7 @@
                     <input name="bukti" type="file" placeholder="Masukkan bukti kontrak pengmas">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Masukkan bukti sertifikat/kontrak" value="{{$pengmas->bukti}}">
+                    <input class="file-path validate" type="text" placeholder="Kosongkan jika tidak ingin mengganti file" value="{{$pengmas->bukti}}">
                   </div>
                 </div>
               </div>
