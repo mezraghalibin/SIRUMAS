@@ -43,7 +43,7 @@ class KegiatanIlmiahController extends Controller
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
         if($check) {
-            $kegiatanilmiahs= KegiatanIlmiah::all();
+            $kegiatanilmiahs= KegiatanIlmiah::paginate(10);
             return view('kelolakegiatanilmiah', ['kegiatanilmiahs' => $kegiatanilmiahs]);
         }
         else {
@@ -86,7 +86,6 @@ class KegiatanIlmiahController extends Controller
         $storeValidator = Validator::make($request->all(), [
              'nama' => 'required',
             'jenis' => 'required',
-            'judul' => 'required',
             'skala' => 'required',
             'pembicara' => 'required',
             'waktu' => 'required',
@@ -176,7 +175,6 @@ class KegiatanIlmiahController extends Controller
         $storeValidator = Validator::make($request->all(), [
              'nama' => 'required',
             'jenis' => 'required',
-            'judul' => 'required',
             'skala' => 'required',
             'pembicara' => 'required',
             'waktu' => 'required',

@@ -16,7 +16,7 @@ class CreatePengmasAnggotaTable extends Migration
             $table->increments('id');
             $table->integer('id_pengmas')->unsigned();
             $table->string('nama_anggota', 30);
-            $table->foreign('id_pengmas')->references('id')->on('pengmas');
+            $table->foreign('id_pengmas')->references('id')->on('pengmas')->onDelete('cascade');
         });
     }
 

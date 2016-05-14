@@ -104,10 +104,10 @@
               </div>
 
               {{-- SECOND ROW = JUDUL PROPOSAL --}}
-              <div class="row">
-                <div class="input-field col s6 offset-s1">
-                  <input placeholder="Judul kegiatan" name="judul" type="text" class="validate">
-                  <label for="judulproposal">Judul Kegiatan</label>
+                <div class="row">
+               <div class="input-field col s6 offset-s1">
+                  <input placeholder="Pembicara" name="pembicara" type="text" class="validate">
+                  <label for="judulproposal">Pembicara</label>
                 </div>
                 <div class="input-field col s4">
                   <select name="skala">
@@ -123,8 +123,8 @@
                 {{-- FOURTH ROW --}}
               <div class="row">
                <div class="input-field col s6 offset-s1">
-                  <input placeholder="Pembicara" name="pembicara" type="text" class="validate">
-                  <label for="judulproposal">Pembicara</label>
+                  <input placeholder="Tempat" name="tempat" type="text" class="validate">
+                  <label for="judulproposal">Tempat</label>
                 </div>
                 <div class="input-field col s4">
                   <input type="date" name="waktu" class="datepicker">
@@ -133,12 +133,8 @@
               </div>
 
                {{-- FOURTH ROW --}}
-              <div class="row">
-               <div class="input-field col s6 offset-s1">
-                  <input placeholder="Tempat" name="tempat" type="text" class="validate">
-                  <label for="judulproposal">Tempat</label>
-                </div>
-                <div class="input-field col s4">
+              <div class="row"> 
+                <div class="input-field col s6 offset-s1">
                   <input placeholder="Sumber dana" name="sumber_dana" type="text" class="validate">
                   <label for="nohp">Sumber Dana</label>
                 </div>

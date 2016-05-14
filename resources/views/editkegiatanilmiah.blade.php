@@ -52,8 +52,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola-kegiatan-ilmiah"><a href="{{action('KegiatanIlmiahController@kelola')}}">Kelola Kegiatan Ilmiah</a></li>
-          <li id="buat-kegiatan-ilmiah"><a href="{{action('KegiatanIlmiahController@buat')}}">Buat Kegiatan Ilmiah</a></li>     
+          <li id="kelola-kegiatan-ilmiah"><a href="/kelolakegiatanilmiah">Kembali</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
@@ -135,8 +134,8 @@
               {{-- SECOND ROW = JUDUL PROPOSAL --}}
               <div class="row">
                 <div class="input-field col s6 offset-s1">
-                  <input placeholder="Judul kegiatan" name="judul" value="{{$kegiatanilmiah->judul}}" type="text" class="validate">
-                  <label for="judulproposal">Judul Kegiatan</label>
+                  <input placeholder="Pembicara" name="pembicara" value="{{$kegiatanilmiah->pembicara}}" type="text" class="validate">
+                  <label for="judulproposal">Pembicara</label>
                 </div>
                 <div class="input-field col s4">
                   @if ($kegiatanilmiah->skala === 'Internal Departemen')
@@ -180,9 +179,9 @@
 
                 {{-- FOURTH ROW --}}
               <div class="row">
-               <div class="input-field col s6 offset-s1">
-                  <input placeholder="Pembicara" name="pembicara" value="{{$kegiatanilmiah->pembicara}}" type="text" class="validate">
-                  <label for="judulproposal">Pembicara</label>
+                <div class="input-field col s6 offset-s1">
+                  <input placeholder="Tempat" name="tempat" value="{{$kegiatanilmiah->tempat}}" type="text" class="validate">
+                  <label for="judulproposal">Tempat</label>
                 </div>
                 <div class="input-field col s4">
                   <input type="date" name="waktu" value="{{$kegiatanilmiah->waktu}}" class="datepicker">
@@ -192,11 +191,7 @@
 
                {{-- FOURTH ROW --}}
               <div class="row">
-               <div class="input-field col s6 offset-s1">
-                  <input placeholder="Tempat" name="tempat" value="{{$kegiatanilmiah->tempat}}" type="text" class="validate">
-                  <label for="judulproposal">Tempat</label>
-                </div>
-                <div class="input-field col s4">
+                <div class="input-field col s6 offset-s1">
                   <input placeholder="Sumber dana" name="sumber_dana" value="{{$kegiatanilmiah->sumber_dana}}" type="text" class="validate">
                   <label for="nohp">Sumber Dana</label>
                 </div>

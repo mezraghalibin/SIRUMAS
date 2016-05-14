@@ -148,7 +148,11 @@ Route::get('/editpenelitian', 'PenelitianController@edit');
 /**************** PENGMAS ******************/
 Route::get('/pengmas', 'PengmasController@index');
 Route::get('/kelolapengmas', 'PengmasController@kelola');
-Route::get('/editpengmas', 'PengmasController@edit');
+Route::get('/editpengmas/{id}', 'PengmasController@edit');
+Route::post('/editpengmas/{id}', 'PengmasController@update');
+Route::get('/buatpengmas', 'PengmasController@buat');
+Route::post('/buatpengmas', 'PengmasController@store');
+Route::get('/hapuspengmas/{id}', 'PengmasController@destroy');
 /**************** PENGMAS ******************/
 
 /**************** BUKU ******************/

@@ -11,11 +11,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EDIT PENGABDIAN MASYARAKAT</title>
+  <title>BUAT PENGABDIAN MASYARAKAT</title>
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="{{URL::asset('assets/css/publikasi.css')}}">
+    <link rel="stylesheet" href="assets/css/publikasi.css">
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
@@ -40,7 +40,8 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola-pengmas"><a href="/kelolapengmas">Kembali</a></li>   
+          <li id="kelola-pengmas"><a href="/kelolapengmas">Kelola Pengabdian Masyarakat</a></li>
+          <li id="buat-pengmas"><a href="/buatpengmas">Buat Pengabdian Masyarakat</a></li>     
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
@@ -65,21 +66,22 @@
        {{-- CONTENT DAFTAR BUKU --}}
        <div id="buat-pengmas-konten">
        <div class="container">
-          <div class="header"><h4>Edit Pengabdian Masyarakat</h4></div>
+          <div class="header"><h4>Buat Pengabdian Masyarakat</h4></div>
           <div class="hibah-riset-content">
              <div class="row">
-            <form class="col s12" method="post" action="/editpengmas/{{$pengmas->id}}" enctype="multipart/form-data">
+            <form class="col s12" method="post" action="buatpengmas" enctype="multipart/form-data">
+
              <input name="staf_riset" value="<?php echo $id ?>" type="hidden" class="validate">
              <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">    
 
               {{-- FIRST ROW = NAMA --}}
               <div class="row">
                 <div class="input-field col s6 offset-s1">
-                  <input placeholder="Nama kegiatan" name="nama_kegiatan" value="{{$pengmas->nama_kegiatan}}" type="text" class="validate">
+                  <input placeholder="Nama kegiatan" name="nama_kegiatan" type="text" class="validate">
                   <label for="nama">Nama Kegiatan</label>
                 </div>
                 <div class="input-field col s4">
-                  <input placeholder="Ketua tim" name="ketua" type="text" value="{{$pengmas->ketua}}" class="validate">
+                  <input placeholder="Ketua tim" name="ketua" type="text" class="validate">
                   <label for="nip/nup">Ketua Tim</label>
                 </div>
 
@@ -88,34 +90,23 @@
               {{-- SECOND ROW = JUDUL PROPOSAL --}}
               <div class="row">
                 <div class="input-field col s6 offset-s1">
-                  <input placeholder="Penyelenggara" name="penyelenggara" value="{{$pengmas->penyelenggara}}" type="text" class="validate">
+                  <input placeholder="Penyelenggara" name="penyelenggara" type="text" class="validate">
                   <label for="judulproposal">Penyelenggara</label>
                 </div>
                 <div class="input-field col s4">
-                <input placeholder="Anggota tim" name="nama_anggota" value="
-                <?php 
-                $count = count($listofanggota);
-                $counter = 1;
-                foreach ($listofanggota as $anggota) {
-                  echo $anggota->nama_anggota; 
-                  if($counter != $count){
-                      echo ';'; // not the last element
-                  }
-                  $counter++;
-                }
-                ?>" type="text" class="validate">
-                <label for="nohp">Anggota tim</label>
+                  <input placeholder="Anggota A;Anggota B;Anggota C;dst.." name="nama_anggota" type="text" class="validate">
+                  <label for="nohp">Anggota tim</label>
                 </div>
               </div>
 
                 {{-- FOURTH ROW --}}
               <div class="row">
                <div class="input-field col s6 offset-s1">
-                  <input placeholder="Peranan" name="peranan" type="text" value="{{$pengmas->peranan}}" class="validate">
+                  <input placeholder="Peranan" name="peranan" type="text" class="validate">
                   <label for="judulproposal">Peranan</label>
                 </div>
                 <div class="input-field col s4">
-                  <input type="date" name="waktu" value="{{$pengmas->waktu}}" class="datepicker">
+                  <input type="date" name="waktu" class="datepicker">
                   <label for="nohp">Waktu</label>
                 </div>
               </div>
@@ -123,11 +114,11 @@
                {{-- FOURTH ROW --}}
               <div class="row">
                <div class="input-field col s6 offset-s1">
-                  <input placeholder="Tempat" name="tempat" value="{{$pengmas->tempat}}" type="text" class="validate">
+                  <input placeholder="Tempat" name="tempat" type="text" class="validate">
                   <label for="judulproposal">Tempat</label>
                 </div>
                 <div class="input-field col s4">
-                  <input placeholder="Besar dana" name="besar_dana" value="{{$pengmas->besar_dana}}" type="text" class="validate">
+                  <input placeholder="Besar dana" name="besar_dana" type="text" class="validate">
                   <label for="nohp">Besar Dana</label>
                 </div>
               </div>
@@ -141,7 +132,7 @@
                     <input name="bukti" type="file" placeholder="Masukkan bukti kontrak pengmas">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Masukkan bukti sertifikat/kontrak" value="{{$pengmas->bukti}}">
+                    <input class="file-path validate" type="text" placeholder="Masukkan bukti sertifikat/kontrak">
                   </div>
                 </div>
               </div>
