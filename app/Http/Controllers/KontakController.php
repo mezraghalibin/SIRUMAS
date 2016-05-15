@@ -68,12 +68,7 @@ class KontakController extends Controller {
     }
 
     //FILL FOR TABLE KONTAK
-    $kontak = Kontak::create();
-    $kontak->nama      = $request->nama;
-    $kontak->phone     = $request->phone;
-    $kontak->email     = $request->email;
-    $kontak->institusi = $request->institusi;
-    $kontak->deskripsi = $request->deskripsi;
+    $kontak = Kontak::create($request->all());
     //SIMPAN NAMA FOTO
     $fotoName = $kontak->id . '_' . $request->nama . '.' . $request->file('foto')->getClientOriginalExtension();
     //SIMPAN FOTO KE FOLDER FOTO KONTAK
@@ -177,15 +172,15 @@ class KontakController extends Controller {
     $countOld = count($expertiseOld);
 
     //CHECK INPUTAN EXPERTISE BERUBAH ATAU ENGGA
-    $check = 0;
+    $check = 1;
     if($countOld == $countNew) {
       $i = 0;
       foreach ($expertiseOld as $expertise) {
         if($expertise->expertise == $list[$i]) {
           //DO NOTHING
+          $check = 0
         }
         else {
-          $check = 1;
           break;
         }
         $i++;

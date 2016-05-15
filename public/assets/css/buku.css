@@ -6327,19 +6327,4 @@ tr.hover {
   cursor: pointer;
   /* whatever other hover styles you want */ }
 
-.publikasi ul, .publikasi li, .publikasi .collection-header {
-  background-image: url("..images/publication.jpg"); }
-
-.publikasi .collection .with-header .collection-header {
-  background-image: url("..images/publication.jpg"); }
-
-.kegiatan ul, .kegiatan li, .kegiatan .collection-header {
-  background-image: url("..images/kegiatan.png"); }
-
-.kegiatan .collection .with-header .collection-header {
-  background-image: url("..images/kegiatan.png"); }
-
-#search-bar #buku, #search-bar #artikelIlmiah, #search-bar #artikelPopuler, #search-bar #penelitian, #search-bar #pengabdianMasyarakat, #search-bar #kegiatanIlmiah {
-  padding-top: 20px; }
-
-/*# sourceMappingURL=repository.css.map */
+/*# sourceMappingURL=buku.css.map */

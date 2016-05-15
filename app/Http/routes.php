@@ -112,9 +112,7 @@ Route::post('/laporan/uploadLaporanAkhir/upload/{id}', 'LaporanController@upload
 //READ BY RISET
 Route::get('/laporan/readLaporanKemajuan', 'LaporanController@laporankemajuan'); //staf riset
 Route::get('/laporan/readLaporanAkhir', 'LaporanController@laporanakhir'); //staf riset
-
 /**************** OE LAPORAN ********************/
-
 
 /**************** PENGUMUMAN ********************/
 Route::get('/pengumuman', 'PengumumanController@index');
@@ -171,19 +169,6 @@ Route::get('/kelolapengmas', 'PengmasController@kelola');
 Route::get('/editpengmas', 'PengmasController@edit');
 /**************** PENGMAS ******************/
 
-/**************** BUKU ******************/
-Route::get('/buku', 'BukuController@index');
-Route::get('/kelolabuku', 'BukuController@index');
-//CREATE
-Route::get('/buatbuku', 'BukuController@index');
-Route::post('/tomakebuku', 'BukuController@store');
-//UPDATE
-Route::get('/editbuku/{id}', 'BukuController@edit');
-Route::post('/updatebuku/{id}', 'BukuController@update');
-//DELETE
-Route::get('/deletebuku/{id}', 'BukuController@delete');
-/**************** BUKU ******************/
-
 /**************** ARTIKEL ILMIAH ******************/
 Route::get('/artikelilmiah', 'ArtikelIlmiahController@index');
 Route::get('/kelolaartikelilmiah', 'ArtikelIlmiahController@kelola');
@@ -239,5 +224,43 @@ Route::get('/repository', 'RepositoryController@index');
 
 /**************** KELOLA REPOSITORY ******************/
 Route::get('/kelolaRepository', 'RepositoryController@indexKelolaRepository');
+
+/** ------------------  BUKU ------------------------- **/
+//--------------- DIVISI RISET ---------------//
+//READ 
+Route::get('/kelolaRepository/buku/kelola', 'BukuController@index');
+Route::get('/kelolaRepository/buku/buat', 'BukuController@index');
+//CREATE
+Route::post('/kelolaRepository/buku/buat', 'BukuController@store');
+//UPDATE
+Route::get('/kelolaRepository/buku/edit/{id}', 'BukuController@edit');
+Route::post('/kelolaRepository/buku/update/{id}', 'BukuController@update');
+//DELETE
+Route::get('/kelolaRepository/buku/delete/{id}', 'BukuController@delete');
+
+/** ------------------  PENELITIAN ------------------------- **/
+//--------------- DIVISI RISET ---------------//
+//READ 
+Route::get('/kelolaRepository/penelitian/kelola', 'PenelitianController@index');
+Route::get('/kelolaRepository/penelitian/buat', 'PenelitianController@index');
+//CREATE
+Route::post('/kelolaRepository/penelitian/buat', 'PenelitianController@store');
+//UPDATE
+Route::get('/kelolaRepository/penelitian/edit/{id}', 'PenelitianController@edit');
+Route::post('/kelolaRepository/penelitian/update/{id}', 'PenelitianController@update');
+//DELETE
+Route::get('/kelolaRepository/penelitian/delete/{id}', 'PenelitianController@delete');
 /**************** EO KELOLA REPOSITORY ******************/
 
+/**************** BUKU ******************/
+Route::get('/buku', 'BukuController@index');
+Route::get('/kelolabuku', 'BukuController@index');
+//CREATE
+Route::get('/buatbuku', 'BukuController@index');
+Route::post('/tomakebuku', 'BukuController@store');
+//UPDATE
+Route::get('/editbuku/{id}', 'BukuController@edit');
+Route::post('/updatebuku/{id}', 'BukuController@update');
+//DELETE
+Route::get('/deletebuku/{id}', 'BukuController@delete');
+/**************** BUKU ******************/

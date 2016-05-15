@@ -70,3 +70,9 @@ tr.hover {
     background-image : url("..images/kegiatan.png");
   }
 }
+
+#search-bar {
+  #buku, #artikelIlmiah, #artikelPopuler, #penelitian, #pengabdianMasyarakat, #kegiatanIlmiah {
+    padding-top : 20px;
+  }
+}

@@ -11,4 +11,8 @@ class Buku extends Model
     protected $fillable = array('judul', 'penulis', 'penerbit', 'isbn', 'tahun', 'sampul', 'staf_riset', 'jumlah_hlm', 'kota_terbit');
     protected $guarded = ['id'];
     public $timestamps = false;
+
+    public function getPenulis() {
+    	return $this->hasMany('\App\Penulis_Ang_Buku', 'id_buku', 'id');
+    }
 }

@@ -104,8 +104,8 @@ elixir(function(mix) {
 });
 /*********** EO KONTAK ***********/
 
-/*********** REPOSITORY ***********/
-elixir(function(mix) {
-    mix.sass('repository.scss', 'public/assets/css/repository.css');
-});
-/*********** EO REPOSITORY ***********/
+/*********** REPOSITORY & KELOLA REPOSITORY ***********/
+elixir(function(mix) { mix.sass('repository.scss', 'public/assets/css/repository.css');});
+elixir(function(mix) { mix.sass('buku.scss', 'public/assets/css/buku.css');});
+elixir(function(mix) { mix.sass('penelitian.scss', 'public/assets/css/penelitian.css');});
+/*********** EO REPOSITORY & KELOLA REPOSITORY ***********/

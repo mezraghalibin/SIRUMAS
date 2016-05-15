@@ -37,8 +37,8 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola-kontak"><a href="/kontak/kelolakontak">Kelola Kontak</a></li>
-          <li id="buat-kontak"><a href="#">Buat Kontak</a></li>     
+          <li id="kelola-kontak"><a href="/kontak/kelolaKontak">Kelola Kontak</a></li>
+          <li id="buat-kontak"><a href="/kontak/buatKontak">Buat Kontak</a></li>     
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>

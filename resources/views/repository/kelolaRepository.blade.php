@@ -26,11 +26,7 @@
 
   <script>
     $(document).ready(function(){
-      $("#search-bar").hide(); //HIDE APPLY HIBAH PAGE
-
-      $("#search").click(function(){
-          $("#search-bar").fadeIn(800);
-      });
+      
     });
   </script>
 </head>
@@ -48,102 +44,82 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
-    {{-- NAVIGATION KELOLA REPOSITORY --}}
-    <div class="container">
-      <div class="header"><h4>KELOLA REPOSITORY</h4></div>
-      <div class="row">
-        <div class="col s6 publikasi">
-          <ul class="collection with-header">
-            <li class="collection-header"><h4>PUBLIKASI</h4></li>
-            <li class="collection-item"><a href="#">Buku</a></li>
-            <li class="collection-item"><a href="#">Artikel Ilmiah</a></li>
-            <li class="collection-item"><a href="#">Artikel Populer</a></li>
-          </ul>
-        </div>
-
-        <div class="col s6 kegiatan">
-          <ul class="collection with-header">
-            <li class="collection-header"><h4>KEGIATAN</h4></li>
-            <li class="collection-item"><a href="#">Penelitian</a></li>
-            <li class="collection-item"><a href="#">Pengabdian Masyarakat</a></li>
-            <li class="collection-item"><a href="#">Kegiatan Ilmiah</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    {{-- END OF NAVIGATION KELOLA REPOSITORY --}}
-
-    {{-- BUTTON TO SHOW FORM OF APPLY HIBAH --}}
-    <div class="container center-align">
-      <button class="btn waves-effect waves-light card-panel red darken-2" id="search">
-        <span class="white-text">Search Content</span>
-      </button><br/>
-    </div>
-    {{-- END OF BUTTON TO SHOW FORM OF APPLY HIBAH --}}
-
     {{-- SEARCH --}}
-    <div id="search-bar" class="row">
-      <div class="col s12">
-        <ul class="tabs">
-          <li class="tab col s2"><a class="active" href="#buku">Buku</a></li>
-          <li class="tab col s2"><a href="#artikelIlmiah">Artikel Ilmiah</a></li>
-          <li class="tab col s2"><a href="#artikelPopuler">Artikel Populer</a></li>
-          <li class="tab col s2"><a href="#penelitian">Penelitian</a></li>
-          <li class="tab col s2"><a href="#pengabdianMasyarakat">Pengabdian Masyarkat</a></li>
-          <li class="tab col s2"><a href="#kegiatanIlmiah">Kegiatan Ilmiah</a></li>
-        </ul>      
-      </div>
-      <div id="buku" class="col s12"> {{-- CONTENT SEARCH BUKU  --}}
-        <div class="row">
-          <form method="post" action="/hibah/buatHibah" class="col s12" enctype="multipart/form-data">
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-            {{-- FIRST ROW = PENULIS PENERBIT --}}
-            <div class="row">
-              <div class="input-field offset-s2 col s4">
-                <input placeholder="Joko Susilo" name="penulis" type="text" class="validate">            
-                <label for="penulis">Penulis</label>
-              </div>
-              <div class="input-field col s4">
-                <input placeholder="Gramedia" name="penerbit" type="text" class="validate">            
-                <label for="penerbit">Penerbit</label>
-              </div>
+    <div class="container">
+      <div id="kelola-repository">
+        <div class="header"><h4>Kelola Repository</h4></div>
+        <div class="kelola-repository-content">
+          <div id="search-bar" class="row search-bar">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s2"><a class="active" href="#publikasi">PUBLIKASI</a></li>
+                <li class="tab col s2"><a href="#kegiatan">KEGIATAN</a></li>
+              </ul>      
             </div>
 
-            {{-- SECONF ROW = ISBN TAHUN KOTA TERBIT --}}
-            <div class="row">
-              <div class="input-field offset-s2 col s3">
-                <input placeholder="Gramedia" name="penerbit" type="text" class="validate">            
-                <label for="penerbit">Penerbit</label>
-              </div>
-              <div class="input-field col s3">
-                <input placeholder="Gramedia" name="penerbit" type="text" class="validate">            
-                <label for="penerbit">Penerbit</label>
-              </div>
-              <div class="input-field col s3">
-                <input placeholder="Gramedia" name="penerbit" type="text" class="validate">            
-                <label for="penerbit">Penerbit</label>
+            <div id="publikasi" class="row"> {{-- CONTENT SEARCH BUKU  --}}
+              <div class="col s6 publikasi">
+                <ul class="collection with-header center-align">
+                  <li class="collection-item"><a href="/kelolaRepository/buku/kelola">Buku</a></li>
+                  <li class="collection-item"><a href="/kelolaRepository/artikelIlmiah/kelola">Artikel Ilmiah</a></li>
+                  <li class="collection-item"><a href="/kelolaRepository/artikelPopuler/kelola">Artikel Populer</a></li>
+                </ul>
               </div>
             </div>
-
-            {{-- BUTTON SUMBIT --}}
-            <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Submit</span>
-              <i class="material-icons right">send</i>
-            </button>
-          </form>
+            <div id="kegiatan" class="row"> {{-- CONTENT SEARCH ARTIKEL ILMIAH --}}
+              <div class="offset-s6 col s6 kegiatan">
+                <ul class="collection with-header center-align">
+                  <li class="collection-item"><a href="/kelolaRepository/penelitian/kelola">Penelitian</a></li>
+                  <li class="collection-item"><a href="/kelolaRepository/pengmas/kelola">Pengabdian Masyarakat</a></li>
+                  <li class="collection-item"><a href="/kelolaRepository/kegiatanIlmiah/kelola">Kegiatan Ilmiah</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-      <div id="artikelIlmiah" class="col s12">Test 2</div>
-      <div id="artikelPopuler" class="col s12">Test 3</div>
-      <div id="penelitian" class="col s12">Test 4</div>
-      <div id="pengabdianMasyarakat" class="col s12">Test 5</div>
-      <div id="kegiatanIlmiah" class="col s12">Test 6</div>
+      </div>
     </div>
     {{-- END OF SEARCH --}}
+
   </div>
   {{-- END OF PAGE CONTENT --}}
   <script>
     $('ul.tabs').tabs();
     $('ul.tabs').tabs('select_tab', 'tab_id');
+    $('select').material_select();  //FOR FORM SELECT
   </script>
   @stop
 </body>
 </html>
+
+{{-- 
+Buku
+Judul
+Penulis
+Tahun Terbit
+Penerbit
+
+artikl ilmiah
+Judul
+Penulis
+Tahun Terbit
+Penerbit
+
+Artikel Populer
+Judul
+Penulis
+Tahun Terbit
+Penerbit
+
+Artikel Konferensi
+Judul
+Penulis
+
+KEGIATAN
+Judul/Nama Kegiatan
+
+ --}}
+{{-- 
+ transisi
+ probingnya kurang
+ masih kecepetan dodo --}}
