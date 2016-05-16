@@ -163,12 +163,6 @@ Route::post('/updatepenelitian/{id}', 'PenelitianController@update');
 Route::get('/deletepenelitian/{id}', 'PenelitianController@delete');
 /**************** PENELITIAN ******************/
 
-/**************** PENGMAS ******************/
-Route::get('/pengmas', 'PengmasController@index');
-Route::get('/kelolapengmas', 'PengmasController@kelola');
-Route::get('/editpengmas', 'PengmasController@edit');
-/**************** PENGMAS ******************/
-
 /**************** ARTIKEL ILMIAH ******************/
 Route::get('/artikelilmiah', 'ArtikelIlmiahController@index');
 Route::get('/kelolaartikelilmiah', 'ArtikelIlmiahController@kelola');
@@ -180,19 +174,6 @@ Route::get('/artikelpopuler', 'ArtikelPopulerController@index');
 Route::get('/kelolaartikelpopuler', 'ArtikelPopulerController@kelola');
 Route::get('/editartikelpopuler', 'ArtikelPopulerController@edit');
 /**************** ARTIKEL POPULER ******************/
-
-/**************** KEGIATAN ILMIAH ******************/
-Route::get('/kegiatanilmiah', 'KegiatanIlmiahController@index');
-Route::get('/kelolakegiatanilmiah', 'KegiatanIlmiahController@kelola');
-//CREATE
-Route::get('/buatkegiatanilmiah', 'KegiatanIlmiahController@buat');
-Route::post('/buatkegiatanilmiah', 'KegiatanIlmiahController@store');
-//UPDATE
-Route::get('/editkegiatanilmiah/{id}', 'KegiatanIlmiahController@edit');
-Route::post('/editkegiatanilmiah/{id}', 'KegiatanIlmiahController@update');
-//DELETE
-Route::get('/hapuskegilmiah/{id}', 'KegiatanIlmiahController@destroy');
-/**************** KEGIATAN ILMIAH ******************/
 
 /**************** KONTAK ******************/
 Route::get('/kontak/buatKontak', 'KontakController@index'); //FIRST TIME TO BUAT KONTAK PAGE
@@ -250,17 +231,43 @@ Route::get('/kelolaRepository/penelitian/edit/{id}', 'PenelitianController@edit'
 Route::post('/kelolaRepository/penelitian/update/{id}', 'PenelitianController@update');
 //DELETE
 Route::get('/kelolaRepository/penelitian/delete/{id}', 'PenelitianController@delete');
+
+/** ------------------  KEGIATAN ILMIAH ------------------------- **/
+//--------------- DIVISI RISET ---------------//
+//READ
+Route::get('/kelolaRepository/kegiatanIlmiah/kelola', 'KegiatanIlmiahController@index');
+Route::get('/kelolaRepository/kegiatanIlmiah/buat', 'KegiatanIlmiahController@index');
+//CREATE
+Route::post('/kelolaRepository/kegiatanIlmiah/buat', 'KegiatanIlmiahController@store');
+//EDIT
+Route::get('kelolaRepository/kegiatanIlmiah/edit/{id}', 'KegiatanIlmiahController@edit');
+Route::post('kelolaRepository/kegiatanIlmiah/update/{id}', 'KegiatanIlmiahController@update');
+//DELETE
+Route::get('kelolaRepository/kegiatanIlmiah/delete/{id}', 'KegiatanIlmiahController@destroy');
+
+/** ------------------  PENGMAS ------------------------- **/
+//--------------- DIVISI RISET ---------------//
+//READ
+Route::get('/kelolaRepository/pengmas/kelola', 'PengmasController@index');
+Route::get('/kelolaRepository/pengmas/buat', 'PengmasController@index');
+//CREATE
+Route::post('/kelolaRepository/pengmas/buat', 'PengmasController@store');
+//EDIT
+Route::get('kelolaRepository/pengmas/edit/{id}', 'PengmasController@edit');
+Route::post('kelolaRepository/pengmas/update/{id}', 'PengmasController@update');
+//DELETE
+Route::get('kelolaRepository/pengmas/delete/{id}', 'PengmasController@destroy');
+
+
 /**************** EO KELOLA REPOSITORY ******************/
 
-/**************** BUKU ******************/
-Route::get('/buku', 'BukuController@index');
-Route::get('/kelolabuku', 'BukuController@index');
-//CREATE
-Route::get('/buatbuku', 'BukuController@index');
-Route::post('/tomakebuku', 'BukuController@store');
-//UPDATE
-Route::get('/editbuku/{id}', 'BukuController@edit');
-Route::post('/updatebuku/{id}', 'BukuController@update');
-//DELETE
-Route::get('/deletebuku/{id}', 'BukuController@delete');
-/**************** BUKU ******************/
+
+/**************** PENGMAS ******************/
+Route::get('/pengmas', 'PengmasController@index');
+Route::get('/kelolapengmas', 'PengmasController@kelola');
+Route::get('/editpengmas/{id}', 'PengmasController@edit');
+Route::post('/editpengmas/{id}', 'PengmasController@update');
+Route::get('/buatpengmas', 'PengmasController@buat');
+Route::post('/buatpengmas', 'PengmasController@store');
+Route::get('/hapuspengmas/{id}', 'PengmasController@destroy');
+/**************** PENGMAS ******************/

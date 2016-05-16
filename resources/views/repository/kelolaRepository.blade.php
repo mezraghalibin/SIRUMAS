@@ -80,7 +80,6 @@
       </div>
     </div>
     {{-- END OF SEARCH --}}
-
   </div>
   {{-- END OF PAGE CONTENT --}}
   <script>

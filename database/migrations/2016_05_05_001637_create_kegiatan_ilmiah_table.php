@@ -27,11 +27,6 @@ class CreateKegiatanIlmiahTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('kegiatan_ilmiah');
