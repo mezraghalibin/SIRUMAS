@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArtikelKonferensiTable extends Migration
+class CreateBukuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,17 @@ class CreateArtikelKonferensiTable extends Migration
      */
     public function up()
     {
-        Schema::create('artikel_konferensi', function (Blueprint $table) {
+        Schema::create('buku', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('staf_riset')->unsigned();
             $table->string('judul',50);
-            $table->string('pemakalah',30);
-            $table->date('waktu');
-            $table->string('tempat',30);
-            $table->string('tingkat',20);
-            $table->string('penyelenggara',20);
-            $table->text('website');
+            $table->string('penulis',50);
+            $table->string('penerbit',30);
+            $table->string('isbn',20);
+            $table->integer('tahun');
+            $table->text('sampul');
+            $table->integer('jumlah_hlm');
+            $table->string('kota_terbit', 50);
+            $table->integer('staf_riset')->unsigned();
             $table->foreign('staf_riset')->references('id')->on('users');
         });
     }
@@ -33,6 +34,6 @@ class CreateArtikelKonferensiTable extends Migration
      */
     public function down()
     {
-        Schema::drop('artikel_konferensi');
+        Schema::drop('buku');
     }
 }

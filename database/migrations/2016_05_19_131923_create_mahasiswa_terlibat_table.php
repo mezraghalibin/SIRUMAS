@@ -16,7 +16,7 @@ class CreateMahasiswaTerlibatTable extends Migration
             $table->increments('id');
             $table->integer('id_penelitian')->unsigned();
             $table->string('nama_mhs', 30);
-            $table->foreign('id_penelitian')->references('id')->on('penelitian');
+            $table->foreign('id_penelitian')->references('id')->on('penelitian')->onDelete('cascade');
         });
     }
 

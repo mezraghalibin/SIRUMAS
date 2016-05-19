@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MoU</title>
+  <title>Edit MoU</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="author" href="humans.txt">
@@ -21,31 +21,11 @@
     <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--FOR MATERIALIZE DONT DELETE THIS-->
-
-  <!--FOR BOOTSTRAP DONT DELETE THIS-->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Josefin+Slab:600' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <!--FOR BOOTSTRAP DONT DELETE THIS-->
+  <!--FOR MATERIALIZE DONT DELETE THIS-->
 
   <script>
     $(document).ready(function(){
-      $("#arsip-mou").hide();
-
-      $("#kelola").click(function(){
-        $("#upload-mou").fadeIn(500);
-        $("#arsip-mou").hide();
-      });
-
-      $("#buat").click(function(){
-        $("#arsip-mou").fadeIn(500);
-        $("#upload-mou").hide();
-      });
-
       //FUNCTION CLEAR FLASH MESSAGE
       $("#clear").click(function(){
         $("#flash-msg").fadeOut(1000);
@@ -65,7 +45,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola"><a href="{{action('MouController@index')}}">Kembali</a></li>
+          <li id="kelola"><a href="/mou/arsip">Kembali</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
@@ -77,10 +57,19 @@
     {{-- CONTENT UPLOAD MOU --}}
     <div class="container">
       <div id="upload-mou">
-        <div class="header"><h4>Upload MoU</h4></div>
+        <div class="header"><h4>Edit MoU</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
           <div class="upload-content">
             <div class="row">
-              <form method="post" action="updatemou/{{ $dataMoU->id }}" class="col s12" enctype="multipart/form-data">
+              <form method="post" action="/mou/update/{{ $dataMoU->id }}" class="col s12" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <input type="hidden" name="id_mou" value="<?php echo $id ?>">
                 {{-- INPUT JUDUL MOU --}}

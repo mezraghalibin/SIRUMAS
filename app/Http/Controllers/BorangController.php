@@ -86,7 +86,7 @@ class BorangController extends Controller {
         $borang->komponen = $request->komponen;
         $borang->save(); // save the array of models at once
         Session::flash('flash_message','Borang berhasil diubah.');
-        return redirect('borang/kelolaborang');
+        return redirect('/borang/kelolaborang');
     }
 
     public function destroy($id) {

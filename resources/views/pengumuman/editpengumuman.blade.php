@@ -16,17 +16,15 @@
 <head>
   <title>PENGUMUMAN</title>
   <link rel="author" href="humans.txt">
-  <link rel="stylesheet" href="{{URL::asset('assets/css/master.css')}}">
   <link rel="stylesheet" href="{{URL::asset('assets/css/pengumuman.css')}}">
   <meta charset="utf-8">
 
   <!--FOR MATERIALIZE DONT DELETE THIS-->
-    <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <!--FOR MATERIALIZE DONT DELETE THIS-->
 
   <script>
@@ -62,8 +60,7 @@
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
             @if($spesifik_role == 'divisi riset')
-              <li id="kelola"><a href="#">Kelola Pengumuman</a></li>
-              <li id="buat"><a href="#">Buat Pengumuman</a></li>
+              <li id="kelola"><a href="/pengumuman/kelolapengumuman">Kembali</a></li>
             @endif
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -98,16 +95,18 @@
           {{-- FIRST ROW JUDUL NOMOR KATEGORI --}}
           <div class="row">
             <div class="input-field col s4 offset-s2">
-              <input id="judul_pengumuman" type="text" class="validate" name="judul" value="{{ $pengumuman->judul }}">
+              <input id="judul_pengumuman" type="text" class="validate" name="judul" 
+                value="{{ $pengumuman->judul }}" required>
               <label class="active" for="judul_hibah">Judul</label>
             </div>
             <div class="input-field col s2">
-              <input id="nomor_pengumuman" type="text" class="validate" name="nomor" value="{{ $pengumuman->nomor }}">
+              <input id="nomor_pengumuman" type="text" class="validate" name="nomor" 
+              value="{{ $pengumuman->nomor }}" required>
               <label class="active" for="nomor_hibah">Nomor</label>
             </div>                
             {{-- FOR RISET IS BEING SELECTED --}}
             <div id="riset-selected" class="input-field col s2">
-              <select name="kategori">
+              <select name="kategori" required>
                 <option value="" disabled selected>Kategori</option>
                 <option value="Riset" selected="selected">Riset</option>
                 <option value="Pengmas">Pengmas</option>
@@ -115,7 +114,7 @@
             </div>
             {{-- FOR PENGMAS IS BEING SELECTED --}}
             <div id="pengmas-selected" class="input-field col s2">
-              <select name="kategori">
+              <select name="kategori" required>
                 <option value="" disabled selected>Kategori</option>
                 <option value="Riset">Riset</option>
                 <option value="Pengmas" selected="selected">Pengmas</option>
@@ -126,7 +125,8 @@
           {{-- KONTEN PENGUMUMAN --}}
           <div class="row">
             <div class="input-field col s8 offset-s2">
-              <textarea id="konten_pengumuman" class="materialize-textarea" name="konten">{{ $pengumuman->konten }}</textarea>
+              <textarea id="konten_pengumuman" class="materialize-textarea" name="konten" required>
+                {{ $pengumuman->konten }}</textarea>
               <label for="konten_pengumuman">Konten Pengumuman</label>
             </div>
           </div>
@@ -134,7 +134,7 @@
           {{-- INPUT FILE --}}
           <div class="row">  
             <div class="file-field input-field col s8 offset-s2">
-              <div class="btn card-panel red darken-2">
+              <div class="btn card-panel teal darken-2">
                 <span class="white-text">File</span>
                 <input type="file" name="file">
               </div>
@@ -147,7 +147,7 @@
 
           {{-- BUTTON SUBMIT --}}
           <div class="center-align col s6">
-            <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">Perbarui Pengumuman</span>
+            <button class="btn waves-effect waves-light card-panel teal darken-2" type="submit" name="action" value="submit"><span class="white-text">Ubah</span>
             <i class="material-icons right">send</i>
             </button>
           </div>

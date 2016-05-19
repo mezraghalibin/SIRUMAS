@@ -48,6 +48,15 @@
       <!-- TABLE DAFTAR PROPOSAL-->
       <div id="daftar-proposal-riset">
         <div class="header"><h4>Daftar Proposal</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <div class="hibah-riset-content">
           <table class="highlight centered">
             <thead>
@@ -80,7 +89,7 @@
                   <td>
                     @if($proposal->nilai_proposal == null)
                     <a href='/daftarproposalhibahriset/nilaiproposalriset/{{$proposal->id_proposal}}'>
-                    <button class="btn waves-effect waves-teal card-panel red darken-2">
+                    <button class="btn waves-effect waves-teal card-panel teal darken-2">
                     <span class="white-text">Nilai</span></button></a>
                     @else
                     {{$proposal->nilai_proposal}}
@@ -91,7 +100,7 @@
                   <td>
                     @if($proposal->komentar == null)
                       <a href='/daftarproposalhibahriset/sesuaikanproposalriset/{{$proposal->id_proposal}}'>
-                      <button class="btn waves-effect waves-teal card-panel red darken-2" type="button">
+                      <button class="btn waves-effect waves-teal card-panel teal darken-2" type="button">
                       <span class="white-text">Sesuaikan</span></button></a>
                     @else
                     {{$proposal->komentar}}
@@ -107,10 +116,6 @@
                       <option>Lolos Seleksi</option>
                       <option>Ditolak</option>
                     </select>
-                  </td>
-                  <td>
-                  <!-- <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="post"> -->
-                  <!-- <span class="white-text">Ubah</span><i class="material-icons right">send</i></button> -->
                   </td>
                   </form>
                   <td> 
@@ -132,7 +137,7 @@
                   <td>
                     @if($proposal->nilai_proposal == null)
                     <a href='/daftarproposalhibahriset/nilaiproposalriset/{{$proposal->id_proposal}}'>
-                    <button class="btn waves-effect waves-teal card-panel red darken-2">
+                    <button class="btn waves-effect waves-teal card-panel teal darken-2">
                     <span class="white-text">Nilai</span></button></a>
                     @else
                     {{$proposal->nilai_proposal}}
@@ -143,7 +148,7 @@
                   <td>
                     @if($proposal->komentar == null)
                       <a href='/daftarproposalhibahriset/sesuaikanproposalriset/{{$proposal->id_proposal}}'>
-                      <button class="btn waves-effect waves-teal card-panel red darken-2" type="button">
+                      <button class="btn waves-effect waves-teal card-panel teal darken-2" type="button">
                       <span class="white-text">Sesuaikan</span></button></a>
                     @else
                     {{$proposal->komentar}}
@@ -161,7 +166,7 @@
                     </select>
                   </td>
                   <td>
-                  <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="post">
+                  <button class="btn waves-effect waves-light card-panel teal darken-2" type="submit" name="action" value="post">
                   <span class="white-text">Ubah</span><i class="material-icons right">send</i></button>
                   </td>
                   </form>

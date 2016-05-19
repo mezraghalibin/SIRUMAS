@@ -47,27 +47,22 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
-
-
     {{-- CONTENT EDIT PRESENTASI --}}
     <div id="buat-buku-konten">
       <div class="container">
-        @foreach($dataPresentasi as $presentasi)
-          <div class="header"><h4>Edit{{$presentasi->judul}}</h4></div>
-          <div class="hibah-riset-content">
-            <div class="row">
+      <div class="header"><h4>Edit Jadwal Presentasi</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
+        <div class="hibah-riset-content">
+          <div class="row">
+            @foreach($dataPresentasi as $presentasi)
               <form method="post" action="/presentasi/updatepresentasi/{{$presentasi->id}}" class="col s12">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <input type="hidden" name="staf_riset" value="<?php echo $id ?>"> <!-- naro id staf riset -->
@@ -146,9 +141,9 @@
                   </button>
                 </div>
               </form>
-            </div>
+            @endforeach
           </div>
-        @endforeach
+        </div>
       </div>
     </div>
     {{-- END OF CONTENT EDIT PRESENTASI --}}

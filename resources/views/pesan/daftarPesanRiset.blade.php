@@ -48,23 +48,19 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
     
-    {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
-    
     {{--  CONTENT DAFTAR PESAN --}}
     <div class="container">
       <div id="kelola-pesan">
         <div class="header"><h4>Daftar Pesan Terkirim</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <div class="kelola-content">
           <table class="highlight centered">
             <thead>
@@ -82,7 +78,7 @@
                     <td>{{ $message->created_at }}</td>
                     <td>{{ $message->subjek }}</td>
                     <td>
-                      <a href="/pesan/detailPesan/{{ $message->id }}">
+                      <a class="btn-floating" href="/pesan/detailPesan/{{ $message->id }}">
                         <i class="material-icons">mail</i></a>
                     </td>
                     <td>

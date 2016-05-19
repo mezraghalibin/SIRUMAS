@@ -70,7 +70,7 @@
                 </div>
               </div>
               <div class="file-field input-field">
-                <div class="btn card-panel red darken-2">
+                <div class="btn card-panel teal darken-2">
                   <span class="white-text">File</span>
                   <input name="file_akhir" type="file">
                   <input type="hidden" name="file_akhir" value="">
@@ -80,7 +80,7 @@
                 </div>
               </div>
               <br>
-              <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Ajukan Laporan</span> 
+              <button class="btn waves-effect waves-light card-panel teal darken-2" type="submit" name="action"><span class="white-text">Ajukan Laporan</span> 
                 <i class="material-icons right">send</i>
               </button>
             </form>

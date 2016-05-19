@@ -45,8 +45,8 @@ class KegiatanIlmiahController extends Controller {
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
     if($check) {
-        $kegiatanilmiahs= KegiatanIlmiah::paginate(10);
-        return view('kelolakegiatanilmiah', ['kegiatanilmiahs' => $kegiatanilmiahs]);
+        $kegiatanIlmiahs= KegiatanIlmiah::paginate(10);
+        return view('/kegiatanIlmiah/daftarKegiatanIlmiah', compact('kegiatanIlmiahs'));
     }
     else {
         return view('login');

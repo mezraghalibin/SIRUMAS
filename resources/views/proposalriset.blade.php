@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Proposal Hibah</title>
+  <title>Proposal Riset</title>
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
@@ -55,25 +55,28 @@
 
     <!-- CONTENT PROPOSAL HIBAH RISET -->
     <div class="container">
-        <div id="hibah-riset">
-
-        <!-- PILIH HIBAH -->
-        <div class="header"><h4>Pilih Hibah Riset</h4></div>
+      <div id="hibah-riset">
+      <!-- PILIH HIBAH -->
+      <div class="header"><h4>Pilih Hibah Riset</h4></div>
         <div class="hibah-riset-content">
-            <table id="list-hibah-riset" class="highlight centered">
+          <table id="list-hibah-riset" class="highlight centered">
             <tbody>
-            @foreach ($dataHibahRiset as $hibah)
-             @if ($hibah->kategori_hibah === 'Riset') 
-              <tr>
-                    <td><a href="/daftarproposalhibahriset/{{$hibah->id}}" >{{ $hibah->nama_hibah }}</a></td>
-              </tr>
-              @endif
+              @foreach ($dataHibahRiset as $hibah)
+                @if ($hibah->kategori_hibah === 'Riset') 
+                  <tr>
+                    <td>{{ $hibah->nama_hibah }}</td>
+                    <td>
+                      <a href="/daftarproposalhibahriset/{{$hibah->id}}" class="btn card-panel teal darken-2">
+                      <span class="white-text">Masuk</span></a>
+                    </td>
+                  </tr>
+                @endif
               @endforeach
             </tbody>
           </table>
         </div>
-       </div>
-     </div>
+      </div>
+    </div>
   </div>
   @stop
 </body>

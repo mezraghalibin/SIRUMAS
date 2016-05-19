@@ -33,7 +33,7 @@ class PengmasController extends Controller {
       /** FOR PAGINATION KELOLA BUKU **/
       else {
         $listofpengmas = Pengmas::paginate(10);
-        return view('/buku/kelolaPengmas', compact('listofpengmas'));
+        return view('/pengmas/kelolaPengmas', compact('listofpengmas'));
       }
     }
     else {
@@ -42,7 +42,14 @@ class PengmasController extends Controller {
   }
 
   public function daftarPengmas() {
-
+    //CHECK IF USER IS LOGGED IN OR NOT
+    $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+    $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+    
+    if ($check) {
+      $listofpengmas = Pengmas::paginate(10);
+      return view('/pengmas/daftarPengmas', compact('listofpengmas'));
+    }
   }
 
   public function store(Request $request) {

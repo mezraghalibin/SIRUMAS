@@ -57,23 +57,19 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
-
     {{-- CONTENT LAPORAN KEMAJUAN --}}
     <div class="container">
       <div id="upload-laporan-kemajuan">
         <div class="header"><h4>Proposal Yang Telah Diajukan</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <div class="kemajuan-content">
           <table class="highlight centered">
             <thead>
@@ -89,7 +85,7 @@
                   <td>{{ $proposal->status }}</td>
                   <td>
                     <a class="white-text" href="/laporan/uploadKemajuan/{{$proposal->id}}">
-                    <button class="btn" type="submit" id="edit">Upload
+                      <button class="btn teal darken-2" type="submit" id="edit">Upload
                     </button>
                     </a>
                   </td>

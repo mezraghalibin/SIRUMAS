@@ -1,13 +1,15 @@
 //@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap"; //IMPORT BUAT BOOTSTRAP JANGAN DIHAPUS
-@import "node_modules/materialize-css/sass/materialize.scss"; //INI UDAH BENER MANGGILNYA
-@import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400);
+@import "node_modules/materialize-css/sass/materialize.scss"; //IMPORT BUAT MATERIALIZE JANGAN DIHAPUS
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
 
-$base-color1: #fff;
-$base-color2: #222;
-$base-color3: #999;
-$heading-font: 'Montserrat', sans-serif;
-$content-font: 'Josefin Slab', serif;
-
+$base-color1: #FFFFFF; //WHITE
+$base-color2: #8D230F; //RED
+$base-color3: #e0e0e0;//GREY
+$base-color4: #008080; //TEAL
+$font: 'Roboto', sans-serif;
+$oswald: 'Oswald', sans-serif;
+$signika: 'Signika', sans-serif;
 html, body {
     height: 100%;
 }
@@ -33,7 +35,7 @@ html, body {
             padding-top: 25px;
             padding-bottom: 25px;
             font-size: 30px;
-            font: 100% $heading-font;
+            font: 100%;
         }
 
         .row{
@@ -46,8 +48,15 @@ html, body {
             }
         }
         .btn{
-                    background-color: black;
-                }
+            background-color: black;
+        }
 
+        .kelola-content {
+            table {
+                .btn-floating {
+                    background-color: $base-color4;
+                }
+            }
+        }
     }
 }

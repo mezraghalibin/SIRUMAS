@@ -1,13 +1,15 @@
-//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-//@import "app/bower_components/font-awesome/scss/font-awesome.scss";
-@import "node_modules/materialize-css/sass/materialize.scss";
-@import url(https://fonts.googleapis.com/css?family=Montserrat|Lato:900,400);
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap"; //IMPORT BUAT BOOTSTRAP JANGAN DIHAPUS
+@import "node_modules/materialize-css/sass/materialize.scss"; //IMPORT BUAT MATERIALIZE JANGAN DIHAPUS
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
 
-$base-color1: #FFFFFF;
-$base-color2: #D32F2F;
-$base-color3: #333333;
-$heading-font: 'Montserrat', sans-serif;
-$content-font: 'Josefin Slab', serif;
+$base-color1: #FFFFFF; //WHITE
+$base-color2: #8D230F; //RED
+$base-color3: #e0e0e0;//GREY
+$base-color4: #008080; //TEAL
+$font: 'Roboto', sans-serif;
+$oswald: 'Oswald', sans-serif;
+$signika: 'Signika', sans-serif;
 
 html, body {
     height: 100%;
@@ -33,7 +35,7 @@ html, body {
         .header {
             padding-top: 25px;
             padding-bottom: 25px;
-            font: 100% $heading-font;
+            font: 100%;
         }
 
         td{
@@ -45,5 +47,14 @@ html, body {
                 width: 10px;
             }    
         }
+
+        .kelola-content {
+            table {
+                .btn-floating {
+                    background-color: $base-color4;
+                }
+            }
+        }
+
     }
 }

@@ -59,7 +59,17 @@
           <ul class="right hide-on-med-and-down">
   	        <li><a class="navi" href="#">PORTAL</a></li>
             @if ($spesifik_role == "divisi riset")
-              <li><a class="navi" id="pesan" href="/daftarPesanRiset">PESAN</a></li>
+              <li>
+                <!-- Dropdown Trigger -->
+                <a class="navi dropdown-button" href="#" data-activates='pesan'>PESAN
+                <i class="material-icons right">arrow_drop_down</i></a>
+                
+                <!-- Dropdown Structure -->
+                <ul id='pesan' class='dropdown-content'>
+                  <li><a href="/daftarPesanRiset">Daftar Pesan</a></li>
+                  <li><a href="/pesan/buat">Buat Pesan</a></li>
+                </ul>
+              </li>
             @elseif ($spesifik_role == "dosen")
             <li>
               @if ($totalMessagge == 0)
@@ -83,10 +93,20 @@
   {{-- SIDEBAR MENU FOR MAHSISWA --}}
   @if($spesifik_role == 'mahasiswa')
     <header>
-      <ul class="side-nav fixed">
-        <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li>
-        <li><a href="/repository" class="waves-effect waves-teal">REPOSITORY</a></li>
-      </ul>
+      <div class="side-bar">
+        <ul class="collapsible" data-collapsible="accordion">      
+          <li>
+            <a href="{{action('BerandaController@index')}}" class="collapsible-header">
+              <i class="material-icons">home</i>BERANDA
+            </a>
+          </li>
+          <li>
+            <a href="/repository" class="collapsible-header">
+              <i class="material-icons">folder</i>REPOSITORY
+            </a>
+          </li>
+        </ul>
+      </div>
     </header>
   @endif
   {{-- END OF SIDEBAR MENU FOR MAHSISWA --}}
@@ -196,8 +216,8 @@
           <div class="collapsible-header"><i class="material-icons">assignment_turned_in</i>MoU</div>
           <div class="collapsible-body">
             <ul>
-              <li><a href="#" class="waves-effect waves-teal">Arsip MoU</a></li>
-              <li><a href="#" class="waves-effect waves-teal">Upload MoU</a></li>
+              <li><a href="/mou/arsip" class="waves-effect waves-teal">Arsip MoU</a></li>
+              <li><a href="/mou/upload" class="waves-effect waves-teal">Upload MoU</a></li>
             </ul>
           </div>
         </li>

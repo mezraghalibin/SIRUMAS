@@ -66,17 +66,19 @@
     <div class="container">
       <div id="buat-borang">
         <div class="header"><h4>Buat Borang</h4></div>
+        <div id="flash-msg">
           @if(Session::has('flash_message'))
-            <div class="card-panel red darken-2">
-              <span class="white-text alert {{ Session::get('alert-class', 'alert-info') }}">
-              {{ Session::get('message') }}</span>
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
             </div>
           @endif
-
+        </div>
         <div class="kelola-content">
           <form class="action" action="/borang/create" method="post">
             <div class="input_fields_wrap">
-              <button class="add_field_button btn-floating btn-large card-panel red darken-2" type="submit">
+              <button class="add_field_button btn-floating btn-large card-panel teal darken-2" type="submit">
                 <i class="material-icons">add</i></button>
               <div class="col s6"><input type="text" name="komponen[]" 
                 value="" placeholder="Isi komponen" class="validate">
@@ -84,8 +86,8 @@
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </div>
             <div align="center">
-              <button class="btn waves-effect waves-light card-panel red darken-2"  value="post">
-              <span class="white-text">Simpan Borang</span><i class="material-icons right">send</i></button>
+              <button class="btn waves-effect waves-light card-panel teal darken-2"  value="post">
+              <span class="white-text">Simpan</span><i class="material-icons right">send</i></button>
             </div>
           </form>
         </div>

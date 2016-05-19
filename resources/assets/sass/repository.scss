@@ -35,10 +35,30 @@ html, body {
     .header {
       padding-top: 25px;
       padding-bottom: 25px;
-      font: 100% $heading-font;
+      font: 100%;
     }
     .daftar-content {
         
+    }
+
+    .kelola-repository-content {
+      .card {
+        .card-image  {
+          .card-title {
+            color: blue;
+          }
+        }
+      }
+    }
+
+    .repository-content {
+      .card {
+        .card-image  {
+          .card-title {
+            color: blue;
+          }
+        }
+      }
     }
   }
 }

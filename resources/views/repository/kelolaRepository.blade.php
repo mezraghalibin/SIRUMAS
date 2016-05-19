@@ -47,24 +47,19 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE --}}
-
-
     {{-- SEARCH --}}
     <div class="container">
       <div id="kelola-repository">
         <div class="header"><h4>Kelola Repository</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <div class="kelola-repository-content">
           <div class="row">
             <div class="col s4 m4">
@@ -223,7 +218,7 @@
                   </div>
                   <div class="row">
                     <div class="input-field col s12 center">
-                      <button class="btn waves-effect waves-light" type="submit" name="action">
+                      <button class="btn waves-effect waves-light teal darken-2" type="submit" name="action">
                         <span class="white-text">Search</span>
                       </button>
                     </div>
@@ -246,35 +241,3 @@
   @stop
 </body>
 </html>
-
-{{-- 
-Buku
-Judul
-Penulis
-Tahun Terbit
-Penerbit
-
-artikl ilmiah
-Judul
-Penulis
-Tahun Terbit
-Penerbit
-
-Artikel Populer
-Judul
-Penulis
-Tahun Terbit
-Penerbit
-
-Artikel Konferensi
-Judul
-Penulis
-
-KEGIATAN
-Judul/Nama Kegiatan
-
- --}}
-{{-- 
- transisi
- probingnya kurang
- masih kecepetan dodo --}}

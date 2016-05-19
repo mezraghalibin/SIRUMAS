@@ -59,23 +59,19 @@
     </nav>
     {{-- END OF CONTENT SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE --}}
-
     {{-- CONTENT BUAT HIBAH --}}
     <div class="container">
       <div id="buat-hibah">
         <div class="header"><h4>Buat Hibah</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <div class="buat-hibah-content">
           <div class="row">
             <form method="post" action="/hibah/buatHibah" class="col s12" enctype="multipart/form-data">
@@ -145,9 +141,12 @@
               </div>
 
               {{-- BUTTON SUMBIT --}}
-              <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Submit</span>
-                <i class="material-icons right">send</i>
-              </button>
+              <div class="center">
+                <button class="btn waves-effect waves-light card-panel teal darken-2" type="submit"
+                  name="action"><span class="white-text">Simpan</span>
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
             </form>
           </div>
         </div>

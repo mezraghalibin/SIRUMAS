@@ -48,23 +48,19 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
-
     {{-- CONTENT KELOLA HIBAH --}}
     <div class="container">
       <div id="kelola-presentasi-konten">
         <div class="header"><h4>Kelola Jadwal Presentasi</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <div class="kelola-content">
           <table class="highlight centered">
             <thead> {{-- NAMA JUDUL DARI KELOLA HIBAH --}}
@@ -95,14 +91,14 @@
                     @endif
                     <td>{{$status_presentasi}}</td>
                     <td> {{-- BUTTON ICON UNTUK EDIT PRESENTASI --}}
-                      <a class="btn-floating" href="/presentasi/editpresentasi/{{$presentasi->id}}">
+                      <a class="btn-floating teal darken-2" href="/presentasi/editpresentasi/{{$presentasi->id}}">
                       <i class="material-icons right">mode_edit</i></a>
                     </td>
                     <td> {{-- BUTTON ICON UNTUK HAPUS PRESENTASI --}}
                       
                       @if($presentasi->status==0)
                         <!-- Modal Trigger -->
-                      <button data-target="modal{{$presentasi->id}}detail" class="btn-floating btn modal-trigger">
+                      <button data-target="modal{{$presentasi->id}}detail" class="btn-floating btn modal-trigger teal darken-2">
                         <i class="material-icons right">delete</i>
                       </button>
                       <!-- Modal Structure -->
@@ -112,8 +108,8 @@
                           <p>Jadwal Presentasi akan dihapus secara permanen</p>
                         </div>
                         <div class="modal-footer center-align">
-                          <a href="/presentasi/delete/{{$presentasi->id}}" class="modal-action modal-close btn-flat">Ya</a>
-                          <a href="#!" class=" modal-action modal-close btn-flat">Tidak</a>
+                          <a href="/presentasi/delete/{{$presentasi->id}}" class="modal-action modal-close btn-flat left">Ya</a>
+                          <a href="#!" class=" modal-action modal-close btn-flat left">Tidak</a>
                         </div>
                       </div>
                       @else

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePemakalahAnggotaTable extends Migration
+class CreatePenulisAngPopulerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class CreatePemakalahAnggotaTable extends Migration
      */
     public function up()
     {
-        Schema::create('pemakalah_anggota', function (Blueprint $table) {
+        Schema::create('penulis_ang_populer', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_konf')->unsigned();
+            $table->integer('id_artikel_populer')->unsigned();
             $table->string('nama_anggota', 30);
-            $table->foreign('id_konf')->references('id')->on('artikel_konferensi');
+            $table->foreign('id_artikel_populer')->references('id')->on('artikel_populer');
         });
     }
 
@@ -27,6 +27,6 @@ class CreatePemakalahAnggotaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pemakalah_anggota');
+        Schema::drop('penulis_ang_populer');
     }
 }

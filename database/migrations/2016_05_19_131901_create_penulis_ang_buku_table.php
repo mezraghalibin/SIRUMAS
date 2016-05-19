@@ -16,7 +16,7 @@ class CreatePenulisAngBukuTable extends Migration
             $table->increments('id');
             $table->integer('id_buku')->unsigned();
             $table->string('nama_anggota', 30);
-            $table->foreign('id_buku')->references('id')->on('buku');
+            $table->foreign('id_buku')->references('id')->on('buku')->onDelete('cascade');
         });
     }
 

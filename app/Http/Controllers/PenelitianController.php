@@ -48,7 +48,7 @@ class PenelitianController extends Controller {
 
     if ($check) {
       $dataPenelitian = $this->read(); //GET ALL DATA HIBAH
-      return view('kelolapenelitian', compact('dataPenelitian'));
+      return view('/penelitian/daftarPenelitian', compact('dataPenelitian'));
     }
     else {
       return view('login');

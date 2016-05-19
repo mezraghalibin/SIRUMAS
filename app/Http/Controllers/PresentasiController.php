@@ -66,7 +66,7 @@ class PresentasiController extends Controller {
     else {
       Session::flash('flash_message','Gagal Membuat, Jadwal Presentasi Sudah Ada');
     }
-    return redirect('/presentasi/buatpresentasi'); //REDIRECT BACK TO BUAT KONTAK PAGE
+    return redirect('/presentasi/kelolapresentasi'); //REDIRECT BACK TO BUAT KONTAK PAGE
   }
 
     // fungsi buat ngecheck udah ada apa belom jadwal presentasi atas nama laporan

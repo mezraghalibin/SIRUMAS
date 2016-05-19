@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Proposal Hibah</title>
+  <title>Proposal Pengmas</title>
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
@@ -35,44 +35,47 @@
   {{-- PAGE CONTENT   --}}
   <div class="page-content">
     {{-- SECOND NAVBAR --}}
-      <nav class="second-navbar">
-        <div class="nav-wrapper">
-          <ul class="left hide-on-med-and-down">
-              <li id="navbar-hibah-riset"><a href="/proposalriset">Proposal Hibah Riset
-              </a></li>
-              <li id="navbar-hibah-pengmas"><a href="/proposalpengmas">Proposal Hibah Pengmas
-              </a></li>
-          </ul>
-          <ul class="right hide-on-med-and-down">
-              <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
-          </ul>
-          </div>
-      </nav>
-      <!-- END of SECOND NAVBAR -->
+    <nav class="second-navbar">
+      <div class="nav-wrapper">
+        <ul class="left hide-on-med-and-down">
+            <li id="navbar-hibah-riset"><a href="/proposalriset">Proposal Hibah Riset
+            </a></li>
+            <li id="navbar-hibah-pengmas"><a href="/proposalpengmas">Proposal Hibah Pengmas
+            </a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
+        </ul>
+        </div>
+    </nav>
+    {{-- END of SECOND NAVBAR --}}
 
-    <!-- CONTENT HIBAH RISET -->            
-        <div class="container">
-        <div id="hibah-pengmas">
-       <!-- PILIH HIBAH -->
-        <div class="header"><h4>Pilih Hibah Pengmas</h4></div>
-        <div class="hibah-riset-content">
-            <table id="list-hibah-pengmas" class="highlight centered">
-            <tbody>
-            @foreach ($dataHibahPengmas as $hibah)
+    {{-- CONTENT HIBAH RISET --}}
+    <div class="container">
+      <div id="hibah-pengmas">
+      <!-- PILIH HIBAH -->
+      <div class="header"><h4>Pilih Hibah Pengmas</h4></div>
+      <div class="hibah-riset-content">
+        <table id="list-hibah-pengmas" class="highlight centered">
+          <tbody>
+          @foreach ($dataHibahPengmas as $hibah)
             @if ($hibah->kategori_hibah === 'Pengmas') 
               <tr>
-                    <td><a href="/daftarproposalhibahpengmas/{{$hibah->id}}" >{{ $hibah->nama_hibah }}</a></td>
+                <td>{{ $hibah->nama_hibah }}</td>
+                <td>
+                  <a href="/daftarproposalhibahpengmas/{{$hibah->id}}" class="btn card-panel teal darken-2">
+                  <span class="white-text">Masuk</span></a>
+                </td>
               </tr>
-              @endif
-              @endforeach
-            </tbody>
-          </table>
-          </div>
-        </div>
-        </div>
-        <!-- END of Pilih Hibah -->
+            @endif
+          @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {{-- END of Pilih Hibah --}}
   </div>
-
+  {{-- END OF PAGE CONTENT --}}
   @stop
 </body>
 </html>

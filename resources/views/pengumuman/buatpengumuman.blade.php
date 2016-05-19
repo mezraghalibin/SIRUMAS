@@ -55,23 +55,19 @@
     </nav>
     {{-- END of SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
-
     {{-- CONTENT BUAT PENGUMUMAN --}}
     <div class="container">
       <div id="buat-pengumuman">
           <div class="header"><h4>Buat Pengumuman</h4></div>
+            <div id="flash-msg">
+              @if(Session::has('flash_message'))
+                <div class="card-panel teal darken-2">
+                  <span class="white-text">{{ Session::get('flash_message') }}</span>
+                  <a id="clear" class="collection-item" style="cursor:pointer">
+                  <i class="material-icons white right">clear</i></a>
+                </div>
+              @endif
+            </div>
             <form method="post" action="/pengumuman/buatpengumuman" class="col s12" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="staf_riset" value="<?php echo $id ?>"> <!-- naro id staf riset -->
@@ -79,15 +75,15 @@
             {{-- bagian atas --}}
             <div class="row">
               <div class="input-field col s4">
-                <input id="judul_pengumuman"  placeholder="Judul Pengumuman" type="text" class="validate" name="judul">
+                <input id="judul_pengumuman"  placeholder="Judul Pengumuman" type="text" class="validate" name="judul" required>
                 <label class="active" for="judul_hibah">Judul</label>
               </div>
               <div class="input-field col s4">
-                <input id="nomor_pengumuman" type="text" placeholder="Nomor Pengumuman" class="validate" name="nomor">
+                <input id="nomor_pengumuman" type="text" placeholder="Nomor Pengumuman" class="validate" name="nomor" required>
                 <label class="active" for="nomor_hibah">Nomor</label>
               </div>
               <div class="input-field col s2">
-                <select name="kategori">
+                <select name="kategori" required>
                 <option value="" disabled selected>Kategori</option>
                 <option value="Riset">Riset</option>
                 <option value="Pengmas">Pengmas</option>
@@ -100,7 +96,7 @@
             <div class="row">
               <div class="input-field col s10">
                 <textarea id="konten_pengumuman" placeholder="Masukan Konten Pengumuman" 
-                      class="materialize-textarea" name="konten"></textarea>
+                  class="materialize-textarea" name="konten" required></textarea>
                 <label for="konten_pengumuman">Konten Pengumuman</label>
               </div>
             </div>
@@ -108,7 +104,7 @@
             {{-- INPUT FILE --}}
             <div class="row">
               <div class="file-field input-field col s6">
-                <div class="btn card-panel red darken-2">
+                <div class="btn card-panel teal darken-2">
                   <span class="white-text">File</span>
                   <input type="file" name="file">
                 </div>
@@ -120,7 +116,7 @@
 
             {{-- BUTTON SUBMIT --}}
             <div class="col s6">
-              <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">Buat Pengumuman</span>
+              <button class="btn waves-effect waves-light card-panel teal darken-2" type="submit" name="action" value="submit"><span class="white-text">Simpan</span>
               <i class="material-icons right">send</i>
               </button>
             </div>
@@ -129,22 +125,21 @@
     </div>
     {{-- END OF CONTENT BUAT HIBAH --}}
   </div>
-  
   {{-- END OF PAGE CONTENT --}}
-    <script>
-      $(document).ready(function() {
-        $('select').material_select();
-        $('.modal-trigger').leanModal();
-      });
-    </script>
+  <script>
+    $(document).ready(function() {
+      $('select').material_select();
+      $('.modal-trigger').leanModal();
+    });
+  </script>
 
-    @if ($errors->any())
-      <ul class="alert alert-danger">
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    @endif
+  @if ($errors->any())
+    <ul class="alert alert-danger">
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  @endif
   @stop
 </body>
 </html>

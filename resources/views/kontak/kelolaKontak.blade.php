@@ -49,26 +49,11 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE --}}
-
     {{-- CONTENT KELOLA KONTAK --}}
     <div class="container">
       <div id="kelola-kontak-konten">
         <div class="row header">
-          <div class="col s6">
-            <h4>Kelola Kontak</h4>
-          </div>
+          <div class="col s6"><h4>Kelola Kontak</h4></div>
           <form method="post" action="/kontak/search" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="col s2 offset-s1">
@@ -92,6 +77,15 @@
               <span class="white-text">Search</span>
             </button>
           </form>
+        </div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
         </div>
         <div class="kelola-content row">
           <div class="col s12">
@@ -129,7 +123,7 @@
 
                     <div class="button right">
                       {{-- MODAL DELETE KONTAK --}}
-                      <button data-target="modal{{$kontak->id}}" class="btn-floating btn modal-trigger">
+                      <button data-target="modal{{$kontak->id}}" class="btn-floating btn teal darken-2 modal-trigger">
                         <i class="material-icons right">delete</i>
                       </button>
                       {{-- MODAL STRUCTURE DELETE KONTAK --}}
@@ -146,7 +140,7 @@
                       {{-- END OF MODAL DELETE KONTAK --}}
 
                       {{-- MODAL DETAIL KONTAK --}}
-                      <button data-target="modal{{$kontak->id}}detail" class="btn-floating btn modal-trigger">
+                      <button data-target="modal{{$kontak->id}}detail" class="btn-floating btn teal darken-2 modal-trigger">
                         <i class="material-icons right">info</i>
                       </button>
                       {{-- MODAL STRUCTURE DETAIL KONTAK --}}
@@ -168,7 +162,7 @@
                       {{-- END OF MODAL DETAIL KONTAK --}}
 
                       {{-- BUTTON FOR EDIT PAGE --}}
-                      <a class="btn-floating" href="/kontak/editkontak/{{$kontak->id}}">
+                      <a class="btn-floating teal darken-2" href="/kontak/editKontak/{{$kontak->id}}">
                         <i class="material-icons right">mode_edit</i></a>
                       {{-- END OF BUTTON EDIT PAGE --}}
                     </div>

@@ -24,11 +24,11 @@ class PengumumanController extends Controller {
 
         // GET ALL PENGUMUMAN BASED ON ALL STAF DIVISI RISET 
         if($check) {
-            $allPengumuman = Pengumuman::all();
             if($route == '/pengumuman/buatpengumuman') {
-                return view('/pengumuman/buatpengumuman', compact('users', 'allPengumuman'));
+                return view('/pengumuman/buatpengumuman', compact('users'));
             }
-            else if ($route == '/pengumuman/kelolapengumuman') {
+            else {
+                $allPengumuman = $this->read();
                 return view('/pengumuman/kelolapengumuman', compact('users', 'allPengumuman'));
             }
         }
@@ -55,7 +55,7 @@ class PengumumanController extends Controller {
     }
 
     public function read() {
-        $dataPengumuman = Pengumuman::all(); //GET ALL DATA MOU
+        $dataPengumuman = Pengumuman::paginate(15); //GET ALL DATA MOU
         return $dataPengumuman;
     }
 
@@ -99,7 +99,7 @@ class PengumumanController extends Controller {
         // SUCCESS MESSAGE
         Session::flash('flash_message','Pengumuman berhasil dibuat');
         // then rederict back to pesan
-        return redirect('/pengumuman/buatpengumuman');
+        return redirect('/pengumuman/kelolapengumuman');
     }
 
     public function update(Request $request, $id){

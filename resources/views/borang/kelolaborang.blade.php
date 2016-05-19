@@ -18,7 +18,6 @@
 
     <!-- CSS FOR PAGE BORANG -->
     <link rel="stylesheet" href="{{ URL::asset('assets/css/borang.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/hibah.css') }}">
     <!--<link rel="stylesheet" href="assets/css/buatButton.css">-->
 
     <!--FOR MATERIALIZE DONT DELETE THIS-->
@@ -57,7 +56,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola"><a href="/borang/editborang">Kelola Borang</a></li>
+          <li id="kelola"><a href="/borang/kelolaborang">Kelola Borang</a></li>
           <li id="buat"><a href="/borang/buatborang">Buat Borang</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -71,11 +70,15 @@
     <div class="container">
       <div id="kelola-borang">
       <div class="header"><h4>Kelola Borang</h4></div>
-        @if(Session::has('flash_message'))
-          <div class="card-panel red darken-2">
-            <span class="white-text">{{ Session::get('flash_message') }}</span>
-          </div>
-        @endif
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <table>
           <thead>
               <th>ID Komponen</th>
@@ -88,25 +91,24 @@
               <td>
                 <form class="" action="/borang/hapusborang/{{$borang->id}}" method="post">
                   {{-- Modal Trigger --}}
-                  <button data-target="modal{{$borang->id}}" class="btn btn modal-trigger card-panel red darken-2" 
+                  <button data-target="modal{{$borang->id}}" class="btn btn modal-trigger card-panel teal darken-2" 
                     type="submit" value="post">Hapus</button>
                   {{-- Modal Structure --}}
                   <div id="modal{{$borang->id}}" class="modal">
-                    <div class="modal-content">
-                      <h4>Hapus Pengumuman?</h4>
-                      <p>Pengumuman akan dihapus</p>
+                    <div class="modal-content center-align">
+                      <h4>Hapus Borang?</h4>
+                      <p class="center-align">Borang akan dihapus permanen</p>
                     </div>
                     <div class="modal-footer">
-                      <input type="submit" name="name" value="Hapus" class="btn">
-                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                      <input type="" value="Tidak" class="modal-close btn">    
+                      <a href="/borang/hapusborang/{{$borang->id}}" class="modal-action modal-close btn-flat left">Ya</a>
+                      <a href="#!" class=" modal-action modal-close btn-flat left">Tidak</a>  
                     </div>
                   </div>
                 </form>
               </td>
               <td>
-                <button class="btn card-panel red darken-2" type="submit" id="edit">
-                  <a class="white-text" href="/borang/editborang/{{$borang->id}}">Edit</a>
+                <button class="btn card-panel teal darken-2" type="submit" id="edit">
+                  <a class="white-text" href="/borang/editborang/{{$borang->id}}">Perbarui</a>
                 </button>
               </td>
             </tr>

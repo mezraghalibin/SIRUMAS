@@ -62,15 +62,13 @@
       <div id="upload-laporan-kemajuan">
         <div class="header"><h4>Upload Laporan Akhir Berdasarkan Laporan Kemajuan</h4></div>
         <div id="flash-msg">
-        @if(Session::has('flash_message'))
-          <div class="card-panel red darken-2">
-            <span class="white-text">
-              {{ Session::get('flash_message') }}
-              <a id="clear" class="btn-flat transparent right">
-              <i class="material-icons">clear</i></a>
-            </span>
-          </div>
-        @endif
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
         </div>
         <div class="kemajuan-content">
           <table class="highlight centered">
@@ -85,7 +83,7 @@
                   <td>{{ $laporanKemajuan->judul_laporan_kemajuan }}</td>
                   <td>
                     <a href="/laporan/uploadLaporanAkhir/{{$laporanKemajuan->id}}" class="button">
-                    <button class="btn" type="submit" id="edit">Upload
+                    <button class="btn teal darken-2" type="submit" id="edit">Upload
                     </button>
                     </a>
                   </td>

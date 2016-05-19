@@ -52,24 +52,20 @@
       </div>
     </nav>
     {{-- END OF SECOND NAVBAR --}}
-      
-    {{-- FLASH MESSAGE AFTER UPLOAD MOU --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE AFTER UPLOAD MOU --}}
 
     {{-- CONTENT BUAT PRESENTASI --}}
     <div id="buat-presentasi-konten">
       <div class="container">
         <div class="header"><h4>Buat Jadwal Presentasi</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <div class="buat-presentasi-content">
           <form method="POST" action="/presentasi/buatpresentasi" class="col s12" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -136,8 +132,8 @@
               </div>
               {{-- BUTTON SUBMIT --}}
               <div class="center-align">
-                <button class="btn waves-effect waves-light" type="submit" name="action">
-                  <span class="white-text">Submit</span><i class="material-icons right">send</i>
+                <button class="btn waves-effect waves-light teal darken-2" type="submit" name="action">
+                  <span class="white-text">Simpan</span><i class="material-icons right">send</i>
                 </button>
               </div>
             </div>

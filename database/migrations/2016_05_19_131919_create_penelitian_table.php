@@ -18,7 +18,9 @@ class CreatePenelitianTable extends Migration
             $table->string('judul',50);
             $table->string('ketua',30);
             $table->string('besar_dana', 30);
+            $table->bigInteger('nominal');
             $table->string('sumber_dana', 30);
+            $table->text('file');
             $table->foreign('staf_riset')->references('id')->on('users');
         });
     }

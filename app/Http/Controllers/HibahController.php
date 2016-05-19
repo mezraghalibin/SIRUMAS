@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SSOController;
+use App\Http\Controllers\FunctionController;
 use App\users;
 use App\Hibah;
 use App\Proposal;
@@ -97,14 +98,15 @@ class HibahController extends Controller {
       return redirect('/hibah/buatHibah');
     }
 
+    $function = new FunctionController();
     //INPUT NEW FILE
     $hibah = Hibah::create($request->all()); //SIMPAN SEMUA MASUKAN DALAM BENTUK HIBAH
 
     //CHANGE TGL AWAL & AKHIR
-    $hibah->tgl_awal = $this->string_to_date($request->tgl_awal);
-    $hibah->tgl_akhir = $this->string_to_date($request->tgl_akhir);
+    $hibah->tgl_awal = $function->string_to_date($request->tgl_awal);
+    $hibah->tgl_akhir = $function->string_to_date($request->tgl_akhir);
 
-    $hibah->besar_dana = $this->getRupiah($hibah->nominal); //PARSE NOMINAL TO RUPIAH
+    $hibah->besar_dana = $function->getRupiah($hibah->nominal); //PARSE NOMINAL TO RUPIAH
     $hibah->nominal = $request->nominal;
     $hibah->save(); //SAVE PERUBAHAN YANG DILAKUKAN KEDALAM DATABASE
     Session::flash('flash_message', $hibah->nama_hibah . ' Telah Tersimpan'); //FLASH MESSAGE IF SUCCESS
@@ -132,6 +134,7 @@ class HibahController extends Controller {
       return redirect('/hibah/editHibah/{id}'); 
     }
 
+    $function = new FunctionController();
     $hibahNew = $request; //GET HIBAH NEW BY REQUEST USER
     $hibahOld = Hibah::find($id); //GET HIBAH OLD BY FIND ON TABLE HIBAH
 
@@ -140,10 +143,10 @@ class HibahController extends Controller {
     $hibahOld->deskripsi        = $hibahNew->deskripsi;
     $hibahOld->kategori_hibah   = $hibahNew->kategori_hibah;
     $hibahOld->nominal          = $hibahNew->nominal;
-    $hibahOld->besar_dana       = $this->getRupiah($hibahNew->nominal);
+    $hibahOld->besar_dana       = $function->getRupiah($hibahNew->nominal);
     $hibahOld->pemberi          = $hibahNew->pemberi;
-    $hibahOld->tgl_awal         = $this->string_to_date($hibahNew->tgl_awal);
-    $hibahOld->tgl_akhir        = $this->string_to_date($hibahNew->tgl_akhir);
+    $hibahOld->tgl_awal         = $function->string_to_date($hibahNew->tgl_awal);
+    $hibahOld->tgl_akhir        = $function->string_to_date($hibahNew->tgl_akhir);
     $hibahOld->staf_riset       = $hibahNew->staf_riset;
     $hibahOld->save(); //SAVE TO DATABASE
 
@@ -156,25 +159,6 @@ class HibahController extends Controller {
     Session::flash('flash_message',$hibah->nama_hibah . ' Telah Dihapus'); //FLASH MESSAGE IF SUCCESS
     $hibah->delete(); //DELETE FROM DATABASE
     return redirect('/hibah/kelolaHibah');
-  }
-
-  public function getRupiah($angka) {
-    //PARSE NOMINAL TO RUPIAH
-    $nominal = strval($angka); //INT TO STRING
-    $length = strlen($nominal);
-    $rupiah = "";
-    $counter = 0;
-    for ($i = $length-1; $i >= 0; $i--) {
-      if ($counter == 3) {
-        $rupiah = $nominal[$i] . "." . $rupiah;
-        $counter = 0;
-      }
-      else {
-        $rupiah = $nominal[$i] . $rupiah;
-      }
-      $counter = $counter+1;
-    }
-    return "Rp. " .  $rupiah . ",-";
   }
 
   public function publikasi($id){
@@ -191,27 +175,5 @@ class HibahController extends Controller {
     $hibah->save();
     Session::flash('flash_message', 'Hibah berhasil Non-Aktifkan!');
     return redirect('/hibah/kelolaHibah');
-  }
-
-  public function string_to_date($string) {
-    $list = explode(", ", $string);
-    $list2 = explode(" ", $list[0]);
-    $day = $list2[0];
-    $month = "";
-    $year = $list[1];
-    $monthName = array('January', 'February', 'March', 'April', 'May', "June", 
-      'July', 'August', 'September', 'October', 'November', 'December');
-    $monthNum = array('1', '2', '3', '4', '5', "6", 
-      '7', '8', '9', '10', '11', '12');
-    for ($i = 0; $i < 12 ; $i++) { 
-      if ($list2[1] == $monthName[$i]) {
-        $month = $monthNum[$i];
-        break;
-      }
-    }
-    $stringDate = $month . "/" . $day . "/" . $year;
-    $time = strtotime($stringDate);
-    $date = date('Y-m-d',$time);
-    return $date;
   }
 }

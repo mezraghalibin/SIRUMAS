@@ -70,12 +70,13 @@ Route::get('/pesan/detailPesan/{id}', 'PesanController@detailPesan');
 /**************** EO PESAN ********************/
 
 /***************** EO MOU ***************************/
-Route::get('/mou', 'MouController@index');
+Route::get('/mou/arsip', 'MouController@index');
+Route::get('/mou/upload', 'MouController@index');
 //CREATE
-Route::post('/uploadmou', 'MouController@upload');
+Route::post('/mou/upload', 'MouController@upload');
 //UPDATE
-Route::get('/mou/kelolamou/{id}', 'MouController@kelolaMoU');
-Route::post('/mou/kelolamou/updatemou/{id}', 'MouController@update');
+Route::get('/mou/update/{id}', 'MouController@editMoU');
+Route::post('/mou/update/{id}', 'MouController@update');
 //DELETE
 Route::get('/mou/deletemou/{id}', 'MouController@delete');
 //DOWNLOAD
@@ -150,15 +151,10 @@ Route::post('/daftarproposalhibahpengmas/sesuaikanproposalpengmas/sesuaikanpengm
 Route::get('/borang/kelolaborang', 'BorangController@index');
 Route::get('/borang/buatborang', 'BorangController@index');
 Route::post('/borang/create', 'BorangController@store');
-Route::post('/borang/hapusborang/{id}', 'BorangController@destroy');
+Route::get('/borang/hapusborang/{id}', 'BorangController@destroy');
 Route::get('/borang/editborang/{id}', 'BorangController@edit');
 Route::post('/borang/editborang/{id}', 'BorangController@update');
 /**************** EO BORANG PROPOSAL ******************/
-
-/**************** REPOSITORY ******************/
-Route::get('/publikasi', 'PublikasiController@index');
-Route::get('/kelolapublikasi', 'PublikasiController@kelola');
-/**************** REPOSITORY ******************/
 
 /**************** PENELITIAN ******************/
 Route::get('/penelitian', 'PenelitianController@index');
@@ -195,10 +191,6 @@ Route::get('/presentasi/delete/{id}', 'PresentasiController@delete'); //DELETE
 Route::get('/presentasi/editpresentasi/{id}', 'PresentasiController@edit');
 Route::post('/presentasi/updatepresentasi/{id}', 'PresentasiController@update');
 /**************** PRESENTASI ******************/
-
-/**************** DEPAN REPO ******************/
-Route::get('/repository', 'RepositoryController@index');
-/**************** DEPAN REPO  ******************/
 
 /**************** KELOLA REPOSITORY ******************/
 Route::get('/kelolaRepository', 'RepositoryController@index');
@@ -288,3 +280,17 @@ Route::post('kelolaRepository/pengmas/update/{id}', 'PengmasController@update');
 //DELETE
 Route::get('kelolaRepository/pengmas/delete/{id}', 'PengmasController@destroy');
 /**************** EO KELOLA REPOSITORY ******************/
+
+/**************** REPOSITORY ******************/
+Route::get('/repository', 'RepositoryController@index');
+
+Route::post('/repository/searchPublikasi', 'RepositoryController@searchPublikasiRepo');
+Route::post('/repository/searchKegiatan', 'RepositoryController@searchKegiatanRepo');
+
+Route::get('/repository/buku/daftar', 'BukuController@daftarBuku'); //BUKU
+Route::get('/repository/artikelIlmiah/daftar', 'ArtikelIlmiahController@daftarArtikelIlmiah'); //ARTIKEL ILMIAH
+Route::get('/repository/artikelPopuler/daftar', 'ArtikelPopulerController@daftarArtikelPopuler'); //ARTIKEL POPULER
+Route::get('/repository/penelitian/daftar', 'PenelitianController@daftarPenelitian'); //PENELITIAN
+Route::get('/repository/pengmas/daftar', 'PengmasController@daftarPengmas'); //PENGMAS
+Route::get('/repository/kegiatanIlmiah/daftar', 'KegiatanIlmiahController@daftarKegiatanIlmiah'); //KEGIATAN ILMIAH
+/**************** EO REPOSITORY ******************/

@@ -50,11 +50,11 @@
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
           @if($spesifik_role == 'dosen')
-            <li id="daftar"><a href="#">Daftar Hibah</a></li>
+            <li id="daftar"><a href="/hibah/daftarHibah">Daftar Hibah</a></li>
           @endif
           @if($spesifik_role == 'divisi riset')
-            <li id="kelola"><a href="#">Kelola Hibah</a></li>
-            <li id="buat"><a href="#">Buat Hibah</a></li>
+            <li id="kelola"><a href="/hibah/kelolaHibah">Kelola Hibah</a></li>
+            <li id="buat"><a href="/hibah/buatHibah">Buat Hibah</a></li>
           @endif
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -89,7 +89,7 @@
                   @if ($hibah->status === 1) {{-- IF PUBLISH MUNCUL --}}
                     <tr>
                       <td>{{ $hibah->nama_hibah }}</td>
-                      <td><a href="/hibah/applyHibah/{{$hibah->id}}" class="waves-effect waves-light btn card-panel red darken-2"><span class="white-text">Info & Daftar</span></a></td>
+                      <td><a href="/hibah/applyHibah/{{$hibah->id}}" class="waves-effect waves-light btn card-panel teal darken-2"><span class="white-text">Info & Daftar</span></a></td>
                     </tr>
                   @endif
                 @endforeach

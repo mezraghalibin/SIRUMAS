@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBukuTable extends Migration
+class CreateMouPenelitiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,11 @@ class CreateBukuTable extends Migration
      */
     public function up()
     {
-        Schema::create('buku', function (Blueprint $table) {
+        Schema::create('mou_peneliti', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('file');
+            $table->string('peneliti',30);
             $table->string('judul',50);
-            $table->string('penulis',50);
-            $table->string('penerbit',30);
-            $table->string('isbn',20);
-            $table->integer('tahun');
-            $table->text('sampul');
             $table->integer('staf_riset')->unsigned();
             $table->foreign('staf_riset')->references('id')->on('users');
         });
@@ -32,6 +29,6 @@ class CreateBukuTable extends Migration
      */
     public function down()
     {
-        Schema::drop('buku');
+        Schema::drop('mou_peneliti');
     }
 }

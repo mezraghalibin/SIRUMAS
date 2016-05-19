@@ -67,23 +67,19 @@
     </nav>
     {{-- END OF CONTENT SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE --}}
-
     {{-- CONTENT KELOLA HIBAH --}}
     <div class="container">
       <div id="kelola-hibah">
         <div class="header"><h4>Kelola Hibah</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <div class="kelola-content">
           <table class="highlight centered">
             <thead> {{-- NAMA JUDUL DARI KELOLA HIBAH --}}
@@ -114,7 +110,7 @@
                         <a class="btn-floating black" href="#" style="cursor:default">
                           <i class="material-icons right">mode_edit</i></a>  
                       @else {{-- IF HIBAH BELUM DI PUBLISH --}} 
-                        <a class="btn-floating" href="/hibah/editHibah/{{$hibah->id}}">
+                        <a class="btn-floating teal" href="/hibah/editHibah/{{$hibah->id}}">
                           <i class="material-icons right">mode_edit</i></a>
                       @endif
                     </td>
@@ -124,7 +120,7 @@
                           <i class="material-icons right">done</i></a>
                       @else {{-- IF UDAH DI PUBLISH/NON AKTIF --}}
                         <!-- Modal Trigger -->
-                        <button data-target="publish{{$hibah->id}}" class="btn-floating modal-trigger">
+                        <button data-target="publish{{$hibah->id}}" class="btn-floating teal modal-trigger">
                           <i class="material-icons right">arrow_upward</i>
                         </button>
                         <!-- Modal Structure -->
@@ -150,7 +146,7 @@
                     @else
                       <td> {{-- BUTTON ICON UNTUK HAPUS HIBAH SEBELUM DIPUBLISH/NON AKTIF--}}
                         <!-- Modal Trigger -->
-                        <button data-target="modal{{$hibah->id}}" class="btn-floating btn modal-trigger">
+                        <button data-target="modal{{$hibah->id}}" class="btn-floating btn teal modal-trigger">
                           <i class="material-icons right">delete</i>
                         </button>
                         <!-- Modal Structure -->
@@ -169,7 +165,7 @@
                     <td> {{-- FOR NON AKTIF --}}
                       @if($hibah->status === 1)
                         <!-- Modal Trigger -->
-                        <button data-target="nonAktif{{$hibah->id}}" class="btn-floating btn modal-trigger">
+                        <button data-target="nonAktif{{$hibah->id}}" class="btn-floating teal btn modal-trigger">
                           <i class="material-icons right">clear</i>
                         </button>
                         <!-- Modal Structure -->

@@ -6318,7 +6318,11 @@ html, body {
     .page-content .container .header {
       padding-top: 25px;
       padding-bottom: 25px;
-      font: 100% "Montserrat", sans-serif; }
+      font: 100%; }
+    .page-content .container .kelola-repository-content .card .card-image .card-title {
+      color: blue; }
+    .page-content .container .repository-content .card .card-image .card-title {
+      color: blue; }
 
 .font-saya {
   font: 120% "Lato", serif; }

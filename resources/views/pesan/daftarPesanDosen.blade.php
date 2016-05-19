@@ -18,10 +18,10 @@
   <link rel="stylesheet" href="{{ URL::asset('assets/css/pesan.css') }}">
 
   <!--FOR MATERIALIZE DONT DELETE THIS-->
-    <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <!--FOR MATERIALIZE DONT DELETE THIS-->
   <script>
     $(document).ready(function(){
@@ -67,7 +67,8 @@
                     <td>{{ $message->created_at }}</td>
                     <td>{{ $message->subjek }}</td>
                     <td>
-                      <a href="/pesan/readPesan/{{ $message->id }}">
+                      <a href="">
+                      <a class="btn-floating" href="/pesan/readPesan/{{ $message->id }}">
                         <i class="material-icons">mail</i></a>
                     </td>
                     <td>
@@ -75,7 +76,6 @@
                         <i class="material-icons center">done_all</i>
                       @elseif ($message->isread == 0 )
                         <a href="/pesan/readPesan/{{ $message->id }}" class="collection-item">
-                          <i class="material-icons center">info</i>
                           <span class="new badge"></span>
                         </a>
                       @endif

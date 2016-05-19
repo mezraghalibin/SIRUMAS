@@ -120,7 +120,7 @@
 
     {{-- BUTTON TO SHOW FORM OF APPLY HIBAH --}}
     <div class="container center-align">
-      <button class="btn waves-effect waves-light card-panel red darken-2" id="apply" ><span class="white-text">Apply Hibah</span></button><br/>
+      <button class="btn waves-effect waves-light card-panel teal darken-2" id="apply" ><span class="white-text">Daftar Hibah</span></button><br/>
     </div>
     {{-- END OF BUTTON TO SHOW FORM OF APPLY HIBAH --}}
 
@@ -171,7 +171,7 @@
               {{-- THIRD ROW = EMAIL --}}
               <div class="row">
                 <div class="file-field input-field col s6 offset-s1">
-                  <div class="btn card-panel red darken-2">
+                  <div class="btn card-panel teal darken-2">
                     <span class="white-text">File</span>
                     <input name="file" type="file" required>
                   </div>
@@ -187,7 +187,7 @@
 
               {{-- BUTTON SUBMIT --}}
               <div class="center-align">
-                <button class="btn waves-effect waves-light card-panel red darken-2 center-align" type="submit" name="action"><span class="white-text">Submit</span><i class="material-icons right">send</i>
+                <button class="btn waves-effect waves-light card-panel teal darken-2 center-align" type="submit" name="action"><span class="white-text">Daftar</span><i class="material-icons right">send</i>
                 </button>
               </div>
             </form>

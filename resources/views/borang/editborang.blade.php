@@ -13,11 +13,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EDIT BORANG</title>
+  <title>PERBARUI BORANG</title>
     <link rel="author" href="humans.txt">
 
     <!-- CSS FOR PAGE HIBAH -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/hibah.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/borang.css') }}">
     <!--<link rel="stylesheet" href="assets/css/buatButton.css">-->
 
@@ -55,6 +54,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
+          <li id="kelola"><a href="/borang/kelolaborang">Kembali</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
@@ -66,18 +66,18 @@
     {{-- CONTENT EDIT BORANG --}}
     <div class="container">
       <div id="buat-borang">
-        <div class="header"><h4>Edit Borang</h4></div>
+        <div class="header"><h4>Perbarui Borang</h4></div>
         <div class="kelola-content">
           <form class="" action="/borang/editborang/{{$borang->id}}" method="post">
             <div class="input_fields_wrap">
               <div class="col s6">
                 <input type="text" name="komponen" value="{{$borang->komponen}}" placeholder="Isi komponen" class="validate">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
               </div>
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </div>
             <div align="center">
-              <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" value="post">
-              <span class="white-text">Simpan Borang</span><i class="material-icons right">send</i></button>
+              <button class="btn waves-effect waves-light card-panel teal darken-2" type="submit" value="post">
+              <span class="white-text">Ubah</span><i class="material-icons right">send</i></button>
             </div>
           </form>
         </div>

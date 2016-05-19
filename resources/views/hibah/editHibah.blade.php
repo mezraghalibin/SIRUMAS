@@ -58,23 +58,19 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
-    {{-- FLASH MESSAGE --}}
-    <div id="flash-msg">
-      @if(Session::has('flash_message'))
-        <div class="card-panel teal">
-          <span class="white-text">
-            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
-            <i class="material-icons">clear</i></a>
-          </span>
-        </div>
-      @endif 
-    </div>
-    {{-- END OF FLASH MESSAGE --}}
-
     {{-- CONTENT UPDATE HIBAH --}}
     <div class="container">
       <div id="kelola-hibah">
         <div class="header"><h4>Kelola Hibah</h4></div>
+        <div id="flash-msg">
+          @if(Session::has('flash_message'))
+            <div class="card-panel teal darken-2">
+              <span class="white-text">{{ Session::get('flash_message') }}</span>
+              <a id="clear" class="collection-item" style="cursor:pointer">
+              <i class="material-icons white right">clear</i></a>
+            </div>
+          @endif
+        </div>
         <div class="kelola-content">
           <div class="row">
             <form method="post" action="/hibah/updateHibah/{{$dataHibah->id}}" class="col s12" enctype="multipart/form-data">
@@ -160,14 +156,13 @@
                 </div>
               </div>
 
-              {{-- CANCEL BUTTON --}}
-              <a class="btn waves-effect waves-light card-panel red darken-2" href="{{action('HibahController@index')}}" 
-              name="action"><span class="white-text">CANCEL</span>
-              </a>
               {{-- UPDATE BUTTON --}}
-              <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action"><span class="white-text">Update</span>
-                <i class="material-icons right">forward</i>
-              </button>
+              <div class="center">
+                <button class="btn waves-effect waves-light card-panel teal darken-2" type="submit" name="action">
+                  <span class="white-text">Ubah</span>
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
             </form>
           </div>
         </div>

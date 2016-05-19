@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePengmasTable extends Migration
+class CreateKomponenNilaiProposalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,14 @@ class CreatePengmasTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengmas', function (Blueprint $table) {
+        Schema::create('komponen_nilai_proposal', function (Blueprint $table) {
+            $table->integer('id_proposal')->unsigned();
             $table->increments('id');
             $table->integer('staf_riset')->unsigned();
-            $table->string('nama_kegiatan',50);
-            $table->string('ketua',30);
-            $table->string('peranan', 30);
-            $table->string('penyelenggara', 30);
-            $table->date('waktu');
-            $table->string('tempat', 30);
-            $table->string('besar_dana', 30);
-            $table->text('bukti');
+            $table->foreign('id_proposal')->references('id')->on('proposal');
             $table->foreign('staf_riset')->references('id')->on('users');
+            $table->text('nama_komp');
+            $table->float('nilai',25);
         });
     }
 
@@ -34,6 +30,6 @@ class CreatePengmasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pengmas');
+        Schema::drop('komponen_nilai_proposal');
     }
 }

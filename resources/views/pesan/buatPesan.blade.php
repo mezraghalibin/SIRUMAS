@@ -25,7 +25,9 @@
     <!--FOR MATERIALIZE DONT DELETE THIS-->
     <script>
       $(document).ready(function(){
-
+        //CLEAR FLASH MESSAGE
+        $("#clear").click(function(){
+          $("#flash-msg").fadeOut(1000);
         });
       });
     </script>
@@ -38,7 +40,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="kelola"><a href="/pesan">Daftar Pesan</a></li>
+          <li id="kelola"><a href="/daftarPesanRiset">Daftar Pesan</a></li>
           <li id="buat"><a href="/pesan/buat">Buat Pesan</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -77,6 +79,15 @@
       <div class="container">
         <div id="buat-pesan">
           <div class="header"><h4>Buat Pesan</h4></div>
+          <div id="flash-msg">
+            @if(Session::has('flash_message'))
+              <div class="card-panel teal darken-2">
+                <span class="white-text">{{ Session::get('flash_message') }}</span>
+                <a id="clear" class="collection-item" style="cursor:pointer">
+                <i class="material-icons white right">clear</i></a>
+              </div>
+            @endif
+          </div>
           <div class="kelola-content">
             <div class="row">
               <form method="post" action="/pesan/buat" class="col s12" enctype="multipart/form-data">            
@@ -86,11 +97,11 @@
                 {{-- ROW 1 = SUBJEK + PENERIMA --}}
                 <div class="row">
                   <div class="input-field col s6 offset-s2">
-                    <input placeholder="Subjek" id="subjek" name="subjek" type="text" class="validate">
+                    <input placeholder="Subjek" id="subjek" name="subjek" type="text" class="validate" required>
                     <label for="subjek">Subjek</label>
                   </div>
                   <div class="input-field col s2">
-                    <select name="penerima">
+                    <select name="penerima" required>
                       <option value="" disabled selected>Pilih</option>
                       @foreach($users as $user)
                         <option value="{{ $user->id }}">{{ $user->nama }}</option>
@@ -103,14 +114,14 @@
                 <div class="row">
                   <div class="input-field col s8 offset-s2">
                     <textarea id="textarea1" name="pesan" placeholder="Isi Pesan" 
-                      class="materialize-textarea"></textarea>
+                      class="materialize-textarea" required></textarea>
                     <label for="textarea1">Pesan</label>
                   </div>
                 </div>
                 {{-- ROW 3 INPUT FILE --}}
                 <div class="row">
                   <div class="file-field input-field col s8 offset-s2">
-                    <div class="btn card-panel red darken-2">
+                    <div class="btn card-panel teal darken-2">
                       <span class="white-text">File</span>
                       <input type="file" name="file">
                     </div>
@@ -122,8 +133,9 @@
                 </div>
                 {{-- BUTTON KIRIM PESAN --}}
                 <div class="center-align">
-                  <button class="btn waves-effect waves-light card-panel red darken-2" type="submit" name="action" value="submit"><span class="white-text">Kirim Pesan</span>
-                      <i class="material-icons right">send</i>
+                  <button class="btn waves-effect waves-light card-panel teal darken-2" type="submit" 
+                    name="action" value="submit"><span class="white-text">Kirim</span>
+                    <i class="material-icons right">send</i>
                   </button>
                 </div>
               </form>
