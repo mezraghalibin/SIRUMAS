@@ -73,7 +73,7 @@
     {{-- CONTENT LAPORAN KEMAJUAN --}}
     <div class="container">
       <div id="upload-laporan-kemajuan">
-        <div class="header"><h4>Judul Proposal Terkait</h4></div>
+        <div class="header"><h4>Proposal Yang Telah Diajukan</h4></div>
         <div class="kemajuan-content">
           <table class="highlight centered">
             <thead>
@@ -88,9 +88,10 @@
                   <td>{{ $proposal->kategori }}</td>
                   <td>{{ $proposal->status }}</td>
                   <td>
-                  <button class="btn" type="submit" id="edit">
-                    <a class="white-text" href="/laporan/uploadKemajuan/{{$proposal->id}}">Upload</a>
-                  </button>
+                    <a class="white-text" href="/laporan/uploadKemajuan/{{$proposal->id}}">
+                    <button class="btn" type="submit" id="edit">Upload
+                    </button>
+                    </a>
                   </td>
                 </tr>
               @endforeach              

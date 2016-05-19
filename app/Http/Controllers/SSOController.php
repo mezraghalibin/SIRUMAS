@@ -5,6 +5,7 @@ session_start(); // start the session
 
 use DB;
 use App\users; //database users
+use App\Pesan;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -32,11 +33,11 @@ class SSOController extends Controller {
       //username is new
       DB::table('users')->insert(
         [
-            'username' => $userSSO->username,
-            'nama' => $userSSO->name, 
-            'no_pengenal' => $userSSO->npm,
-            'role' => $userSSO->role,
-            'spesifik_role' => 'mahasiswa',
+          'username' => $userSSO->username,
+          'nama' => $userSSO->name, 
+          'no_pengenal' => $userSSO->npm,
+          'role' => $userSSO->role,
+          'spesifik_role' => 'mahasiswa',
         ]
       );                
     }
@@ -46,11 +47,11 @@ class SSOController extends Controller {
       //username is new
       DB::table('users')->insert(
         [
-            'username' => $userSSO->username,
-            'nama' => $userSSO->name, 
-            'no_pengenal' => $userSSO->nip,
-            'role' => $userSSO->role,
-            'spesifik_role' => 'staff',
+          'username' => $userSSO->username,
+          'nama' => $userSSO->name, 
+          'no_pengenal' => $userSSO->nip,
+          'role' => $userSSO->role,
+          'spesifik_role' => 'staff',
         ]
       );                
     }
@@ -65,6 +66,9 @@ class SSOController extends Controller {
       $_SESSION['spesifik_role']  = $user['spesifik_role'];    
     }
     
+    //GET COUNT PESAN
+    $_SESSION['countPesan'] = $this->totalMessage($_SESSION['id']);
+
     $_SESSION['login'] = '1'; //TRUE IF USER HAS LOGGED IN
     return redirect('/'); //REDIRECCT TO HOMEPAGE
   }
@@ -109,5 +113,18 @@ class SSOController extends Controller {
     else {
       return -1;
     }
+  }
+
+  //COUNT MESSAGE
+  public function totalMessage($id){
+    $pesan = Pesan::where("penerima", "=", $id)->get();
+    $count = 0;
+    foreach ($pesan as $pesan) {
+      if ($pesan->isread == 0) {
+        $count++;
+      }
+    }
+
+    return $count;
   }
 }

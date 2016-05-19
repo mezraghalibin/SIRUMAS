@@ -13,24 +13,41 @@ use App\users;
 class PesanController extends Controller
 {
   public function index() {
-	 //CHECK IF USER IS LOGGED IN OR NOT
+    //CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
     
     $users = users::where('spesifik_role','dosen')->get(); //dapetin semua user yg spesifik role nya dosen
-    $a = $SSOController->getId(); // ngambil id dari sso, liat methodnya di pesan model
-    $b = $SSOController->getSpesifikRole(); // ambil spesifik role dr user, liat methodnya di pesan model
-    // jika spesifik role nya adalah divisi riset, munculin pesan mana aja yang pernah dikirim oleh dirinya
-    if($b == 'divisi riset'){
-        $messages = Pesan::where('id_pengirim', $a)->get();
-    // jika spesifik rolenya dosen, munculin pesan yg diterima oleh dosen ybs
-    } else {
-        $messages = Pesan::where('penerima', $a)->get();
-    }
+    $id = $SSOController->getId(); // ngambil id dari sso, liat methodnya di pesan model
+    $spesifik_role = $SSOController->getSpesifikRole(); // ambil spesifik role dr user, liat methodnya di pesan model
 
-    // pass variable users, messaged to pesan.blade
+    $route = $_SERVER['REQUEST_URI']; //GET URL ROUTE
+
     if($check) {
-        return view('pesan',compact('users','messages')); //ngirim var user
+      if($route == "/pesan/buat") {
+        return view('/pesan/buatPesan', compact('users'));
+      }
+      else {
+        $messages = Pesan::where('id_pengirim', $id)->paginate(50);
+        return view('/pesan/daftarPesanRiset',compact('users','messages')); 
+      }
+    }
+    else {
+        return view('login');
+    }
+  }
+
+  public function daftarPesanDosen() {
+    //CHECK IF USER IS LOGGED IN OR NOT
+    $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+    $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+    
+    $users = users::where('spesifik_role','dosen')->get(); //GET ALL USER = DOSEN
+    $id = $SSOController->getId(); // ngambil id dari sso, liat methodnya di pesan model
+
+    if($check) {
+      $messages = Pesan::where('penerima', $id)->paginate(50);
+      return view('/pesan/daftarPesanDosen',compact('users','messages')); 
     }
     else {
         return view('login');
@@ -38,7 +55,7 @@ class PesanController extends Controller
   }
 
   //METHOD STORE PESAN KE DATABASE
-  public function create(CreatePesanFormRequest $request) {
+  public function kirim(CreatePesanFormRequest $request) {
     //BIKIN PESAN BARU
     if($request->hasFile('file')){
         $msg = Pesan::create($request->all());
@@ -58,13 +75,34 @@ class PesanController extends Controller
     // Session untuk Success Notif
     Session::flash('flash_message','Pesan berhasil terkirim!');
     // then rederict back to pesan
-    return redirect('pesan');
+    return redirect('/daftarPesanRiset');
   }
 
   public function detailPesan($id){
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-    $message = Pesan::find($id);
-    return view('detailPesan',compact('message'));
+
+    if ($check) {
+      $message = Pesan::find($id);
+      return view('/pesan/detailPesan',compact('message'));
+    }
+  }
+
+  public function readPesan($id){
+    $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+    $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+
+    if ($check) {
+      $message = Pesan::find($id);
+      if ($message->isread == 0) {
+        $message->isread = 1;
+        $message->save();
+
+        //KURANGIN TOTAL MESSAGE
+        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
+        $_SESSION['countPesan'] = $SSOController->totalMessage($_SESSION['id']);
+      }
+      return view('/pesan/detailPesan',compact('message'));
+    }
   }
 }

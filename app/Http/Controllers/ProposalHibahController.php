@@ -20,18 +20,26 @@ class ProposalHibahController extends Controller {
         $users = users::all();
         $id = $SSOController->getId();
         $spesifik_role = $SSOController->getSpesifikRole();
+        $route = $_SERVER['REQUEST_URI']; //GET URL ROUTE
 
         if($check) {
-             $dataHibah = $this->readHibah();
-             $proposalnya = $this->getPenyesuaianKeuangan();
-             $penyesuaianKeuangan = DB::select(
+            $dataHibahRiset = $this->readHibahRiset();
+            $dataHibahPengmas = $this->readHibahPengmas();
+            $proposalnya = $this->getPenyesuaianKeuangan();
+            $penyesuaianKeuangan = DB::select(
                         "SELECT menyesuaikan_keuangan.komentar, proposal.*
                         FROM menyesuaikan_keuangan, proposal
                         WHERE proposal.id IN  
                             (SELECT menyesuaikan_keuangan.id_proposal
                             FROM menyesuaikan_keuangan)"
-                );
-            return view('proposalhibah', compact('dataHibah','penyesuaianKeuangan'));
+            );
+            if($route == '/proposalriset') {
+                $borangs= Borang::all();
+                return view('/proposalriset', compact('dataHibahRiset','penyesuaianKeuangan'));
+            }
+            else if ($route == '/proposalpengmas') {
+                return view('/proposalpengmas', compact('dataHibahPengmas','penyesuaianKeuangan'));
+            }
         }
         else {
             return view('login');
@@ -81,6 +89,13 @@ class ProposalHibahController extends Controller {
         }
     }
 
+    public function ubahstatus(Request $request, $id){
+        $proposal = Proposal::find($id);
+        $proposal->status = $request->status;
+        $proposal->save();
+        return redirect()->back();
+    }
+
      public function sesuaikanProposalPengmas($id) {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
@@ -94,34 +109,25 @@ class ProposalHibahController extends Controller {
         }
     }
 
-     public function readHibah() {
+    public function readHibahRiset() {
         $dataHibah = Hibah::all();
         return $dataHibah;
     }
     
+    public function readHibahPengmas() {
+        $dataHibah = Hibah::all();
+        return $dataHibah;
+    }
+
     public function getProposalRiset($id) {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        $idHibah = $id; 
         if($check) {
-        $hibah = Hibah::find($id);
-        $penyesuaianKeuangan = DB::select(
-                        "SELECT *
-                         FROM proposal
-                         left join menyesuaikan_keuangan on proposal.id = menyesuaikan_keuangan.id_proposal
-                         left join menilai_proposal on proposal.id = menilai_proposal.id_proposal
-                         left join hibah on $id = proposal.id_hibah"
-                );
-            $AllProposal = DB::table('hibah')
-                ->join('proposal', 'proposal.id_hibah', '=', 'hibah.id')
-                ->select('*')
-                ->where('proposal.id_hibah', '=', $hibah->id)
-                ->get();
-
-
-            //$AllProposal = Proposal::find($id);
-
-            return view('daftarproposalhibahriset', compact('AllProposal','penyesuaianKeuangan'));
+        $allData = $this->getAllData($idHibah);
+        $allDataForKeuangan = $this->getAllDataForKeuangan($idHibah);
+            return view('/daftarproposalhibahriset', compact('allData', 'allDataForKeuangan'));
         }
         else {
             return view('login');
@@ -132,23 +138,11 @@ class ProposalHibahController extends Controller {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        $idHibah = $id; 
         if($check) {
-            $hibah = Hibah::find($id);
-            $penyesuaianKeuangan = DB::select(
-                                       "SELECT * from 
-                        proposal left join menyesuaikan_keuangan on proposal.id = menyesuaikan_keuangan.id_proposal left join
-                        menilai_proposal on proposal.id = menilai_proposal.id_proposal
-                        left join hibah on proposal.id_hibah = $id"
-                );
-            $AllProposal = DB::table('hibah')
-                ->join('proposal', 'proposal.id_hibah', '=', 'hibah.id')
-                ->select('*')
-                ->where('proposal.id_hibah', '=', $hibah->id)
-                ->get();
-
-            //$AllProposal = Proposal::find($id);
-
-            return view('daftarproposalhibahpengmas', compact('AllProposal','penyesuaianKeuangan'));
+            $allData = $this->getAllData($idHibah);
+            $allDataForKeuangan = $this->getAllDataForKeuangan($idHibah);
+            return view('/daftarproposalhibahpengmas', compact('allData','allDataForKeuangan'));
         }
         else {
             return view('login');
@@ -166,5 +160,55 @@ class ProposalHibahController extends Controller {
                             FROM menyesuaikan_keuangan)"
                     
                 );
+    }
+
+    public function getAllData($id){
+        $allData = DB::select(
+                        "SELECT a.id as id_proposal, a.judul_proposal, a.nama_pengaju, a.file, a.status, g.nama_hibah, a.created_at, c.komentar, e.nilai_proposal
+                            from proposal as a
+                            left join 
+                            (
+                            select *
+                            from menyesuaikan_keuangan as b
+                            ) as c on c.id_proposal = a.id 
+                            left join
+                            (
+                            select *
+                            from menilai_proposal as d
+                            ) as e on e.id_proposal = a.id 
+                            left join
+                            (
+                            select *
+                            from hibah as f
+                            ) as g on g.id = a.id_hibah 
+                            where a.id_hibah = '".$id."'
+                        "
+                );
+        return $allData;
+    }
+
+    public function getAllDataForKeuangan($id){
+        $allData = DB::select(
+                        "SELECT a.id as id_proposal, a.judul_proposal, a.nama_pengaju, a.file, a.status, g.nama_hibah, a.created_at, c.komentar, e.nilai_proposal
+                            from proposal as a
+                            left join 
+                            (
+                            select *
+                            from menyesuaikan_keuangan as b
+                            ) as c on c.id_proposal = a.id 
+                            left join
+                            (
+                            select *
+                            from menilai_proposal as d
+                            ) as e on e.id_proposal = a.id 
+                            left join
+                            (
+                            select *
+                            from hibah as f
+                            ) as g on g.id = a.id_hibah 
+                            where a.id_hibah = '".$id."' AND a.status = 'Lolos Seleksi'
+                        "
+                );
+        return $allData;
     }
 }

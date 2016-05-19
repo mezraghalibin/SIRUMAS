@@ -4,7 +4,8 @@
   $username       = $_SESSION['username'];
   $name           = $_SESSION['name'];
   $role           = $_SESSION['role'];
-  $spesifik_role  = $_SESSION['spesifik_role']; 	
+  $spesifik_role  = $_SESSION['spesifik_role'];
+  $totalMessagge  = $_SESSION['countPesan']
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +33,8 @@
       $("#flash-msg").fadeOut(1000);
     });
 
+    $("a[href*='" + location.pathname + "']").addClass("current");
+
     //DATE PICKER
     $('.datepicker').pickadate({
       selectMonths: true, // Creates a dropdown to control month
@@ -52,10 +55,23 @@
 	  <nav class="z-depth-0">
 	    <div class="nav-wrapper">
 	      <a href="#" class="brand-logo"><img class="responsive-img" src="/images/FIA_UI.png" alt="Logo"></a>
-	      <ul class="right hide-on-med-and-down">
-	        <li><a href="#">PORTAL</a></li>
-	        <li><a id="pesan" href="{{action('PesanController@index')}}">PESAN</a></li>
-	        <li><a href="{{action('SSOController@logout')}}">LOGOUT</a></li>
+        <a href="" class="brand-logo center"><img class="responsive-img" src="/images/logo-sirumas.png" alt="Logo-Sirumas"></a>
+          <ul class="right hide-on-med-and-down">
+  	        <li><a class="navi" href="#">PORTAL</a></li>
+            @if ($spesifik_role == "divisi riset")
+              <li><a class="navi" id="pesan" href="/daftarPesanRiset">PESAN</a></li>
+            @elseif ($spesifik_role == "dosen")
+            <li>
+              @if ($totalMessagge == 0)
+                <a class="navi" id="pesan" href="/daftarPesanDosen">PESAN</a>
+              @else
+                <a class="navi" id="pesan" href="/daftarPesanDosen">PESAN
+                <span class="new badge"><?php echo $totalMessagge ?></span>
+                </a>
+              @endif
+            </li>
+          @endif
+	        <li><a class="navi" href="{{action('SSOController@logout')}}">LOGOUT</a></li>
 	      </ul>
 	    </div>
 	  </nav>
@@ -63,12 +79,13 @@
   {{-- END OF HEADER --}}
 
   {{-- SIDEBAR MENU MASTER --}}
+  
   {{-- SIDEBAR MENU FOR MAHSISWA --}}
   @if($spesifik_role == 'mahasiswa')
     <header>
       <ul class="side-nav fixed">
         <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li>
-        <li><a href="#" class="waves-effect waves-teal">REPOSITORY</a></li>
+        <li><a href="/repository" class="waves-effect waves-teal">REPOSITORY</a></li>
       </ul>
     </header>
   @endif
@@ -102,13 +119,15 @@
             <div class="collapsible-header"><i class="material-icons">description</i>LAPORAN</div>
             <div class="collapsible-body">
               <ul>
-                <li><a href="/laporan/laporanKemajuan" class="waves-effect waves-teal">Laporan Kemajuan</a></li>
-                <li><a href="/laporan/laporanAkhir" class="waves-effect waves-teal">Laporan Akhir</a></li>
+                <li><a href="/laporan/laporanKemajuan" class="waves-effect waves-teal">Upload Laporan Kemajuan</a></li>
+                <li><a href="/laporan/readLaporanKemajuan" class="waves-effect waves-teal">Lihat Laporan Kemajuan</a></li>
+                <li><a href="/laporan/laporanAkhir" class="waves-effect waves-teal">Upload Laporan Akhir</a></li>
+                <li><a href="/laporan/readLaporanAkhir" class="waves-effect waves-teal">Lihat Laporan Akhir</a></li>
               </ul>
             </div>
           </li>
           <li>
-            <a href="repository" class="collapsible-header">
+            <a href="/repository" class="collapsible-header">
               <i class="material-icons">folder</i>REPOSITORY
             </a>
           </li>
@@ -141,17 +160,17 @@
           <div class="collapsible-header"><i class="material-icons">keyboard_voice</i>PENGUMUMAN</div>
           <div class="collapsible-body">
             <ul>
-              <li><a href="#" class="waves-effect waves-teal">Kelola Pengumuman</a></li>
-              <li><a href="#" class="waves-effect waves-teal">Buat Pengumuman</a></li>
+              <li><a href="/pengumuman/kelolapengumuman" class="waves-effect waves-teal">Kelola Pengumuman</a></li>
+              <li><a href="/pengumuman/buatpengumuman" class="waves-effect waves-teal">Buat Pengumuman</a></li>
             </ul>
           </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">books</i>PROPOSAL HIBAH</div>
+         <div class="collapsible-header"><i class="material-icons">books</i>PROPOSAL HIBAH</div>
           <div class="collapsible-body">
             <ul>
-              <li><a href="#" class="waves-effect waves-teal">Proposal Hibah Riset</a></li>
-              <li><a href="#" class="waves-effect waves-teal">Proposal Hibah Pengmas</a></li>
+              <li><a href="/proposalriset" class="waves-effect waves-teal">Proposal Hibah Riset</a></li>
+              <li><a href="/proposalpengmas" class="waves-effect waves-teal">Proposal Hibah Pengmas</a></li>
             </ul>
           </div>
         </li>
@@ -186,8 +205,8 @@
           <div class="collapsible-header"><i class="material-icons">border_color</i>BORANG</div>
           <div class="collapsible-body">
             <ul>
-              <li><a href="#" class="waves-effect waves-teal">Kelola Borang</a></li>
-              <li><a href="#" class="waves-effect waves-teal">Buat Borang</a></li>
+              <li><a href="/borang/kelolaborang" class="waves-effect waves-teal">Kelola Borang</a></li>
+              <li><a href="/borang/buatborang" class="waves-effect waves-teal">Buat Borang</a></li>
             </ul>
           </div>
         </li>
@@ -195,13 +214,13 @@
           <div class="collapsible-header"><i class="material-icons">desktop_windows</i>JADWAL PRESENTASI</div>
           <div class="collapsible-body">
             <ul>
-              <li><a href="/kelolapresentasi" class="waves-effect waves-teal">Kelola Jadwal Presentasi</a></li>
-              <li><a href="/buatpresentasi" class="waves-effect waves-teal">Buat Jadwal Presentasi</a></li>
+              <li><a href="/presentasi/kelolapresentasi" class="waves-effect waves-teal">Kelola Jadwal Presentasi</a></li>
+              <li><a href="/presentasi/buatpresentasi" class="waves-effect waves-teal">Buat Jadwal Presentasi</a></li>
             </ul>
           </div>
         </li>
         <li>
-          <a href="repository" class="collapsible-header">
+          <a href="/repository" class="collapsible-header">
             <i class="material-icons">folder</i>REPOSITORY
           </a>
         </li>
@@ -210,15 +229,6 @@
           <a href="/kelolaRepository" class="collapsible-header">
             <i class="material-icons">build</i>KELOLA REPOSITORY
           </a>
-          <div class="collapsible-body">
-            <ul>
-            <!-- jgn lupa diganti a href nya -->
-              <li><a href="kelolapublikasi" class="waves-effect waves-teal">Kelola Publikasi</a></li>
-              <li><a href="kelolapenelitian" class="waves-effect waves-teal">Kelola Penelitian</a></li>
-              <li><a href="" class="waves-effect waves-teal">Kelola Pengabdian Masyarakat</a></li>
-              <li><a href="kelolakegiatanilmiah" class="waves-effect waves-teal">Kelola Kegiatan Ilmiah</a></li>
-            </ul>
-          </div>
         </li>
       </ul>
     </div>
@@ -229,11 +239,30 @@
   {{-- SIDEBAR MENU FOR STAF DIVISI KEUANGAN --}}
   @if($spesifik_role == 'divisi keuangan')
     <header>
-      <ul class="side-nav fixed">
-        <li><a href="{{action('BerandaController@index')}}" class="waves-effect waves-teal">BERANDA</a></li>
-        <li><a href="{{action('ProposalHibahController@index')}}" class="waves-effect waves-teal">PROPOSAL HIBAH</a></li>
-        <li><a href="#" class="waves-effect waves-teal">REPOSITORY</a></li>
-      </ul>
+    <div class="side-bar">
+    <ul class="collapsible" data-collapsible="accordion"> 
+        <li>
+            <a href="{{action('BerandaController@index')}}" class="collapsible-header">
+              <i class="material-icons">home</i>BERANDA
+            </a>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">books</i>PROPOSAL HIBAH</div>
+          <div class="collapsible-body">
+            <ul>
+              <li><a href="/proposalriset" class="waves-effect waves-teal">Proposal Hibah Riset</a></li>
+              <li><a href="/proposalpengmas" class="waves-effect waves-teal">Proposal Hibah Pengmas</a></li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          </a>
+          <a href="/kelolaRepository" class="collapsible-header">
+            <i class="material-icons">build</i>KELOLA REPOSITORY
+          </a>
+        </li>
+    </ul>
+    </div>
     </header>
   @endif
   {{-- END OF SIDEBAR MENU FOR STAF DIVISI KEUANGAN --}}

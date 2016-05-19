@@ -1,20 +1,32 @@
 //@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap"; //IMPORT BUAT BOOTSTRAP JANGAN DIHAPUS
 @import "node_modules/materialize-css/sass/materialize.scss"; //IMPORT BUAT MATERIALIZE JANGAN DIHAPUS
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
 
 $base-color1: #FFFFFF; //WHITE
 $base-color2: #8D230F; //RED
-$base-color3: #011A27; //BLACK
+$base-color3: #e0e0e0;//GREY
 $font: 'Roboto', sans-serif;
+$oswald: 'Oswald', sans-serif;
+$signika: 'Signika', sans-serif;
 
 html, body {
 	height: 100%;
 	width: 100%;
 }
 
+.navi {
+	font-family: 'Oswald', sans-serif;
+}
+
 .nav-wrapper {
-	background: $base-color3;
+	background-color: $base-color3;
+	font-family: 'Droid Sans', sans-serif;
 	.brand-logo, img {
 		height: 64px;
+	}
+	.navi {
+		color: $base-color2;
 	}
 }
 
@@ -25,9 +37,13 @@ html, body {
 	font: 60px;
 }
 
+.container {
+	font-family: 'Droid Sans', sans-serif;
+}
+
 header {
 	.side-bar {
-		z-index: 4;
+	  z-index: 4;
 	  position: fixed;
 	  top: 3.9em;
 	  left: 15%;
@@ -43,15 +59,29 @@ header {
 	  	border-left: 0px;
 	  	box-shadow: 0px 0px 0px;
 	  	font-size: 12px;
+	  	font-family: 'Oswald', sans-serif;
 	  	margin: 0;
+	  	
 	  	li .collapsible-header {
 	  		color: $base-color2;
 	  	}
+
+	  	li a:hover {
+	  		color: $base-color2;
+	  		background-color: $base-color1;
+	  	}
+
+		  li a .current {
+		  	color: $base-color1;
+	  		background-color: $base-color2;
+			}
+
 	  	li {
 	  		.collapsible-body {
 		  		background: $base-color3;
 		  		ul, li, a {
-		  			color: $base-color1;
+		  			font-family: 'Oswald', sans-serif;
+		  			color: $base-color2;
 		  			padding-left: 10px;
 		  			padding-top : 3px;
 		  			padding-bottom: 3px;

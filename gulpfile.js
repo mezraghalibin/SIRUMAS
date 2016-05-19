@@ -107,5 +107,10 @@ elixir(function(mix) {
 /*********** REPOSITORY & KELOLA REPOSITORY ***********/
 elixir(function(mix) { mix.sass('repository.scss', 'public/assets/css/repository.css');});
 elixir(function(mix) { mix.sass('buku.scss', 'public/assets/css/buku.css');});
+elixir(function(mix) { mix.sass('artikelIlmiah.scss', 'public/assets/css/artikelIlmiah.css');});
+elixir(function(mix) { mix.sass('artikelPopuler.scss', 'public/assets/css/artikelPopuler.css');});
+elixir(function(mix) { mix.sass('artikelKonferensi.scss', 'public/assets/css/artikelKonferensi.css');});
 elixir(function(mix) { mix.sass('penelitian.scss', 'public/assets/css/penelitian.css');});
+elixir(function(mix) { mix.sass('pengmas.scss', 'public/assets/css/pengmas.css');});
+elixir(function(mix) { mix.sass('kegiatanIlmiah.scss', 'public/assets/css/kegiatanIlmiah.css');});
 /*********** EO REPOSITORY & KELOLA REPOSITORY ***********/

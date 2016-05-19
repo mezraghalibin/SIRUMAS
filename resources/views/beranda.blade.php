@@ -20,7 +20,8 @@
     <!--FOR MATERIALIZE DONT DELETE THIS-->
       <link href='node_modules/materialize-css/fonts/roboto/' rel='stylesheet' type='text/css'>
       <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>  
     <!--FOR MATERIALIZE DONT DELETE THIS-->
 
     <script>
@@ -44,41 +45,45 @@
       </div>
     </nav>
 
-    @foreach($allPengumuman as $pengumuman)
     <!-- PENGUMUMAN -->
     <div class="container">
       <div class="row">
         <div class="col s8 offset-s2">
-          <div class="pengumuman">
-            <div id="title" class="title center-align"><h5>{{ $pengumuman->judul }}</h5></div>
-            <div id="created_by" class="time center-align"><h6>By {{ $pengumuman->nama }}</h6></div>
-            <div id="time" class="time center-align"><h6>{{ $pengumuman->created_at }}</h6></div>
-            <div id="content{{$pengumuman->id}}" class="content">
-              {{ $pengumuman->konten }}
+          @foreach($allPengumuman as $pengumuman)
+            <div class="pengumuman">
+              <div id="title" class="title center-align"><h5>{{ $pengumuman->judul }}</h5></div>
+              <div id="created_by" class="time center-align"><h6>By {{ $pengumuman->nama }}</h6></div>
+              <div id="time" class="time center-align"><h6>{{ $pengumuman->updated_at }}</h6></div>
+              <div id="content{{$pengumuman->id}}" class="content">
+                {{ $pengumuman->konten }}
+              </div>
+              <a href="/detailpengumuman/{{$pengumuman->id}}" class="btn waves-effect waves-light card-panel red darken-2" name="action"><span class="white-text">Read More</span></a>
             </div>
-            <a href="/detailpengumuman/{{$pengumuman->id}}" class="btn waves-effect waves-light card-panel red darken-2" name="action"><span class="white-text">Read More</span></a>
-          </div>
+          <!-- END OF PENGUMUMAN -->
+
+          <!-- SCRIPT FOR TRUNCATE -->
+            <script>
+              var textParse = document.getElementById("content{{ $pengumuman->id }}").innerHTML;
+              document.getElementById("content{{ $pengumuman->id }}").innerHTML = shorten(textParse, 1200);
+              function shorten(text, maxLength) {
+                var ret = text;
+                if (ret.length > maxLength) {
+                  ret = ret.substr(0,maxLength-3) + "...";
+                }
+                return ret;
+              }
+            </script>
+            <!-- Script for truncate -->
+          @endforeach
         </div>
       </div>
     </div>
-    <!-- END OF PENGUMUMAN -->
-
-    <!-- SCRIPT FOR TRUNCATE -->
-    <script>
-      var textParse = document.getElementById("content{{ $pengumuman->id }}").innerHTML;
-      document.getElementById("content{{ $pengumuman->id }}").innerHTML = shorten(textParse, 1200);
-      function shorten(text, maxLength) {
-        var ret = text;
-        if (ret.length > maxLength) {
-          ret = ret.substr(0,maxLength-3) + "...";
-        }
-        return ret;
-      }
-    </script>
-    <!-- Script for truncate -->
-    @endforeach
-    
+    <div class="center-align">
+      {!! $allPengumuman->render() !!}
+    </div>
   </div>
+  {{-- END OF PAGE CONTENT --}}
+
   <script>
     $(document).ready(function() {
         $('select').material_select();

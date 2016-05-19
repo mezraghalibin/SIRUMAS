@@ -55,12 +55,21 @@ Route::get('/hibah/nonAktifHibah/{id}', 'HibahController@nonAktif');
 
 
 /**************** PESAN *************************/
-Route::get('/pesan', 'PesanController@index');
-Route::post('/kirimpesan', 'PesanController@create');
+//READ
+Route::get('/daftarPesanRiset', 'PesanController@index');
+Route::get('/daftarPesanDosen', 'PesanController@daftarPesanDosen');
+Route::get('/pesan/buat', 'PesanController@index');
+//CREATE
+Route::post('/pesan/buat', 'PesanController@kirim');
+
+//DETAIL PESAN
+//DOSEN
+Route::get('/pesan/readPesan/{id}', 'PesanController@readPesan');
+//RISET
+Route::get('/pesan/detailPesan/{id}', 'PesanController@detailPesan');
 /**************** EO PESAN ********************/
 
 /***************** EO MOU ***************************/
-Route::get('/detailPesan/{id}', 'PesanController@detailPesan');
 Route::get('/mou', 'MouController@index');
 //CREATE
 Route::post('/uploadmou', 'MouController@upload');
@@ -85,9 +94,9 @@ Route::get('/proposal/revisiProposal/{id}', 'ProposalController@revisiProposal')
 Route::post('/proposal/revisi/{id}', 'ProposalController@revisi'); //TO REVISI PAGE
 /**************** EO PROPOSAL ******************/
 
-
 /**************** PROPOSAL HIBAH ******************/
-Route::get('/proposalhibah', 'ProposalHibahController@index');
+Route::get('/proposalriset', 'ProposalHibahController@index');
+Route::get('/proposalpengmas', 'ProposalHibahController@index');
 Route::get('/daftarproposalhibahriset/{id}', 'ProposalHibahController@getProposalRiset');
 Route::get('/daftarproposalhibahpengmas/{id}', 'ProposalHibahController@getProposalPengmas');
 Route::get('/daftarproposalhibahriset/nilaiproposalriset/{id}', 'ProposalHibahController@nilaiProposalRiset');
@@ -96,8 +105,8 @@ Route::get('/daftarproposalhibahriset/sesuaikanproposalriset/{id}', 'ProposalHib
 Route::get('/daftarproposalhibahpengmas/sesuaikanproposalpengmas/{id}', 'ProposalHibahController@sesuaikanProposalPengmas');
 Route::get('/sesuaikanproposal', 'ProposalHibahController@sesuaikanProposal');
 Route::post('/hibah/applyhibah/applyproposal', 'HibahController@storeProposal');
+Route::post('/ubahstatus/{id}', 'ProposalHibahController@ubahstatus');
 /**************** EO PROPOSAL HIBAH ******************/
-
 
 /**************** LAPORAN ************************/
 //READ BY DOSEN
@@ -115,13 +124,13 @@ Route::get('/laporan/readLaporanAkhir', 'LaporanController@laporanakhir'); //sta
 /**************** OE LAPORAN ********************/
 
 /**************** PENGUMUMAN ********************/
-Route::get('/pengumuman', 'PengumumanController@index');
-Route::get('/kelolapengumumansingle/{id}', 'PengumumanController@edit');
+Route::get('/pengumuman/buatpengumuman', 'PengumumanController@index'); //FIRST TIME TO BUAT PAGE
+Route::get('/pengumuman/kelolapengumuman', 'PengumumanController@index'); //FIRST TIME TO KELOLA PAGE
 Route::get('/hapuspengumuman/{id}', 'PengumumanController@delete');
-Route::post('/kelolapengumumansingle/{id}', 'PengumumanController@update');
-Route::post('/buatpengumuman', 'PengumumanController@create');
-Route::get('/publishpengumuman/{id}', 'PengumumanController@publikasi');
-Route::get('/kelolapengumuman', 'PengumumanController@kelola');
+Route::get('/pengumuman/editpengumuman/{id}', 'PengumumanController@edit');
+Route::post('/pengumuman/editpengumuman/{id}', 'PengumumanController@update');
+Route::post('/pengumuman/buatpengumuman', 'PengumumanController@create');
+Route::get('/pengumuman/publishpengumuman/{id}', 'PengumumanController@publikasi');
 /**************** EO PENGUMUMAN ********************/
 
 /**************** NILAI PROPOSAL ******************/
@@ -138,11 +147,12 @@ Route::post('/daftarproposalhibahpengmas/sesuaikanproposalpengmas/sesuaikanpengm
 
 
 /**************** BORANG PROPOSAL ******************/
-Route::get('/borang', 'BorangController@index');
-Route::post('/borang', 'BorangController@store');
-Route::post('/hapusborang/{id}', 'BorangController@destroy');
-Route::get('/editborang/{id}', 'BorangController@edit');
-Route::post('/editborang/{id}', 'BorangController@update');
+Route::get('/borang/kelolaborang', 'BorangController@index');
+Route::get('/borang/buatborang', 'BorangController@index');
+Route::post('/borang/create', 'BorangController@store');
+Route::post('/borang/hapusborang/{id}', 'BorangController@destroy');
+Route::get('/borang/editborang/{id}', 'BorangController@edit');
+Route::post('/borang/editborang/{id}', 'BorangController@update');
 /**************** EO BORANG PROPOSAL ******************/
 
 /**************** REPOSITORY ******************/
@@ -163,18 +173,6 @@ Route::post('/updatepenelitian/{id}', 'PenelitianController@update');
 Route::get('/deletepenelitian/{id}', 'PenelitianController@delete');
 /**************** PENELITIAN ******************/
 
-/**************** ARTIKEL ILMIAH ******************/
-Route::get('/artikelilmiah', 'ArtikelIlmiahController@index');
-Route::get('/kelolaartikelilmiah', 'ArtikelIlmiahController@kelola');
-Route::get('/editartikelilmiah', 'ArtikelIlmiahController@edit');
-/**************** ARTIKEL ILMIAH ******************/
-
-/**************** ARTIKEL POPULER ******************/
-Route::get('/artikelpopuler', 'ArtikelPopulerController@index');
-Route::get('/kelolaartikelpopuler', 'ArtikelPopulerController@kelola');
-Route::get('/editartikelpopuler', 'ArtikelPopulerController@edit');
-/**************** ARTIKEL POPULER ******************/
-
 /**************** KONTAK ******************/
 Route::get('/kontak/buatKontak', 'KontakController@index'); //FIRST TIME TO BUAT KONTAK PAGE
 Route::get('/kontak/kelolaKontak', 'KontakController@index'); //FIRST TIME TO KELOLA KONTAK PAGE
@@ -190,13 +188,12 @@ Route::post('/kontak/search', 'KontakController@search'); //UPDATE CONTACT
 /**************** KONTAK ******************/
 
 /**************** PRESENTASI ******************/
-Route::get('/presentasi', 'PresentasiController@index'); //FIRST TIME TO PRESENTASI PAGE
-Route::get('/kelolapresentasi', 'PresentasiController@index'); //FIRST TIME TO KELOLAPRESENTASI PAGE
-Route::get('/buatpresentasi', 'PresentasiController@index'); //FIRST TIME TO BUAT JADWALPRESENTASI PAGE
-Route::post('/knpsi', 'PresentasiController@store'); // CREATE 
-Route::get('/jadwalpresentasi/delete/{id}', 'PresentasiController@delete'); //DELETE
-Route::get('/editpresentasi/{id}', 'PresentasiController@edit');
-Route::post('/updatepresentasi/{id}', 'PresentasiController@update');
+Route::get('/presentasi/kelolapresentasi', 'PresentasiController@index'); //FIRST TIME TO KELOLAPRESENTASI PAGE
+Route::get('/presentasi/buatpresentasi', 'PresentasiController@index'); //FIRST TIME TO BUAT JADWALPRESENTASI PAGE
+Route::post('/presentasi/buatpresentasi', 'PresentasiController@store'); // CREATE 
+Route::get('/presentasi/delete/{id}', 'PresentasiController@delete'); //DELETE
+Route::get('/presentasi/editpresentasi/{id}', 'PresentasiController@edit');
+Route::post('/presentasi/updatepresentasi/{id}', 'PresentasiController@update');
 /**************** PRESENTASI ******************/
 
 /**************** DEPAN REPO ******************/
@@ -204,7 +201,11 @@ Route::get('/repository', 'RepositoryController@index');
 /**************** DEPAN REPO  ******************/
 
 /**************** KELOLA REPOSITORY ******************/
-Route::get('/kelolaRepository', 'RepositoryController@indexKelolaRepository');
+Route::get('/kelolaRepository', 'RepositoryController@index');
+
+//SEARCH
+Route::post('/kelolaRepository/searchPublikasi', 'RepositoryController@searchPublikasi');
+Route::post('/kelolaRepository/searchKegiatan', 'RepositoryController@searchKegiatan');
 
 /** ------------------  BUKU ------------------------- **/
 //--------------- DIVISI RISET ---------------//
@@ -218,6 +219,35 @@ Route::get('/kelolaRepository/buku/edit/{id}', 'BukuController@edit');
 Route::post('/kelolaRepository/buku/update/{id}', 'BukuController@update');
 //DELETE
 Route::get('/kelolaRepository/buku/delete/{id}', 'BukuController@delete');
+
+/** ------------------  ARTIKEL ILMIAH ------------------------- **/
+//--------------- DIVISI RISET ---------------//
+//READ 
+Route::get('/kelolaRepository/artikelIlmiah/kelola', 'ArtikelIlmiahController@index');
+Route::get('/kelolaRepository/artikelIlmiah/buat', 'ArtikelIlmiahController@index');
+//CREATE
+Route::post('/kelolaRepository/artikelIlmiah/buat', 'ArtikelIlmiahController@create');
+//UPDATE
+Route::get('/kelolaRepository/artikelIlmiah/edit/{id}', 'ArtikelIlmiahController@edit');
+Route::post('/kelolaRepository/artikelIlmiah/update/{id}', 'ArtikelIlmiahController@update');
+//DELETE
+Route::get('/kelolaRepository/artikelIlmiah/delete/{id}', 'ArtikelIlmiahController@delete');
+
+/** ------------------  ARTIKEL POPULER ------------------------- **/
+//--------------- DIVISI RISET ---------------//
+//READ 
+Route::get('/kelolaRepository/artikelPopuler/kelola', 'ArtikelPopulerController@index');
+Route::get('/kelolaRepository/artikelPopuler/buat', 'ArtikelPopulerController@index');
+//CREATE
+Route::post('/kelolaRepository/artikelPopuler/buat', 'ArtikelPopulerController@create');
+//UPDATE
+Route::get('/kelolaRepository/artikelPopuler/edit/{id}', 'ArtikelPopulerController@edit');
+Route::post('/kelolaRepository/artikelPopuler/update/{id}', 'ArtikelPopulerController@update');
+//DELETE
+Route::get('/kelolaRepository/artikelPopuler/delete/{id}', 'ArtikelPopulerController@delete');
+
+/** ------------------  SEMINAR KONFERENSI ------------------------- **/
+//--------------- DIVISI RISET ---------------//
 
 /** ------------------  PENELITIAN ------------------------- **/
 //--------------- DIVISI RISET ---------------//
@@ -257,17 +287,4 @@ Route::get('kelolaRepository/pengmas/edit/{id}', 'PengmasController@edit');
 Route::post('kelolaRepository/pengmas/update/{id}', 'PengmasController@update');
 //DELETE
 Route::get('kelolaRepository/pengmas/delete/{id}', 'PengmasController@destroy');
-
-
 /**************** EO KELOLA REPOSITORY ******************/
-
-
-/**************** PENGMAS ******************/
-Route::get('/pengmas', 'PengmasController@index');
-Route::get('/kelolapengmas', 'PengmasController@kelola');
-Route::get('/editpengmas/{id}', 'PengmasController@edit');
-Route::post('/editpengmas/{id}', 'PengmasController@update');
-Route::get('/buatpengmas', 'PengmasController@buat');
-Route::post('/buatpengmas', 'PengmasController@store');
-Route::get('/hapuspengmas/{id}', 'PengmasController@destroy');
-/**************** PENGMAS ******************/

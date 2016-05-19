@@ -13,9 +13,16 @@ class BorangController extends Controller {
         //CHECK IF USER IS LOGGED IN OR NOT
         $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
         $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+        $route = $_SERVER['REQUEST_URI']; //GET URL ROUTE
+
         if($check) {
-            $borangs= Borang::all();
-            return view('borang', ['borangs' => $borangs]);
+            if($route == '/borang/kelolaborang') {
+                $borangs= Borang::all();
+                return view('/borang/kelolaborang', ['borangs' => $borangs]);
+            }
+            else if ($route == '/borang/buatborang') {
+                return view('/borang/buatborang');
+            }
         }
         else {
             return view('login');
@@ -47,7 +54,7 @@ class BorangController extends Controller {
         } else {
         Session::flash('flash_message','Borang berhasil disimpan.');
         }
-        return redirect('borang');
+        return redirect('/borang/kelolaborang');
     }
 
     public function show($id) {
@@ -62,7 +69,7 @@ class BorangController extends Controller {
          if(!$borang){ 
          abort(404);
          } else {
-         return view('editborang')->with('borang',$borang);
+         return view('/borang/editborang')->with('borang',$borang);
             }
 
         } else {
@@ -75,18 +82,17 @@ class BorangController extends Controller {
         'komponen' => 'required|unique:borang|max:255',
         ]);
 
-
         $borang= Borang::find($id);
         $borang->komponen = $request->komponen;
         $borang->save(); // save the array of models at once
         Session::flash('flash_message','Borang berhasil diubah.');
-        return redirect('borang');
+        return redirect('borang/kelolaborang');
     }
 
     public function destroy($id) {
         $borang = Borang::find($id);
         $borang->delete();
         Session::flash('flash_message','Komponen berhasil dihapus.');
-        return redirect('borang');
+        return redirect('/borang/kelolaborang');
     }
 }

@@ -98,7 +98,7 @@
             <?php $count = 1 ?>
             @if (count($dataKontak) == 0)
               <div class="center-align">
-                <h5>Maaf, Data Tidak Ditemukan!</h5>
+                <h5>Tidak Ada Data!</h5>
               </div>
             @else
               @foreach($dataKontak as $kontak)

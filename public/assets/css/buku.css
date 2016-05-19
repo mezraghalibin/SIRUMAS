@@ -6327,4 +6327,13 @@ tr.hover {
   cursor: pointer;
   /* whatever other hover styles you want */ }
 
+.buku {
+  font: "Montserrat", sans-serif; }
+  .buku .left-row .sampul {
+    width: 103px; }
+  .buku .right-row .judul {
+    font-weight: bold; }
+  .buku .right-row .button .btn-floating {
+    background-color: #222; }
+
 /*# sourceMappingURL=buku.css.map */

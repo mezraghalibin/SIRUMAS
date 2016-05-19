@@ -20,23 +20,17 @@ class PengumumanController extends Controller {
         $a = $SSOController->getId(); // ngambil id dari sso, liat methodnya di pesan model
         $users = new users;
         $users = users::where('spesifik_role','divisi riset')->get(); //dapetin semua user yg spesifik role nya divisi riset
-        
+        $route = $_SERVER['REQUEST_URI']; //GET URL ROUTE
+
         // GET ALL PENGUMUMAN BASED ON ALL STAF DIVISI RISET 
         if($check) {
             $allPengumuman = Pengumuman::all();
-            return view('pengumuman', compact('users', 'allPengumuman'));
-        }
-        else {
-            return view('login');
-        }
-    }
-
-    public function kelola() {
-		//CHECK IF USER IS LOGGED IN OR NOT
-        $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
-        $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-        if($check) {
-            return view('kelolapengumuman');
+            if($route == '/pengumuman/buatpengumuman') {
+                return view('/pengumuman/buatpengumuman', compact('users', 'allPengumuman'));
+            }
+            else if ($route == '/pengumuman/kelolapengumuman') {
+                return view('/pengumuman/kelolapengumuman', compact('users', 'allPengumuman'));
+            }
         }
         else {
             return view('login');
@@ -52,7 +46,7 @@ class PengumumanController extends Controller {
             if(!$pengumuman){
                 abort(404);
             } else {
-                return view('kelolapengumumansingle',compact('pengumuman'));    
+                return view('/pengumuman/editpengumuman',compact('pengumuman'));    
             }
         }
         else {
@@ -79,7 +73,7 @@ class PengumumanController extends Controller {
         //VALIDATOR JIKA JUDUL MOU DAN/ATAU BEBERAPA INPUT TIDAK DIISI (KECUALI FILE)
         if ($storeValidator->fails()) {
             Session::flash('flash_message', 'Harap Mengisi Seluruh Data'); //FLASH MESSAGE IF FAILS
-            return redirect('pengumuman'); //REDIRECT BACK TO KELOLAMOU PAGE
+            return redirect()->back(); //REDIRECT BACK TO KELOLAMOU PAGE
         }
 
         //CHECK FILE YANG DIUPLOAD KOSONG ATAU ENGGA
@@ -105,7 +99,7 @@ class PengumumanController extends Controller {
         // SUCCESS MESSAGE
         Session::flash('flash_message','Pengumuman berhasil dibuat');
         // then rederict back to pesan
-        return redirect('pengumuman');
+        return redirect('/pengumuman/buatpengumuman');
     }
 
     public function update(Request $request, $id){
@@ -120,7 +114,7 @@ class PengumumanController extends Controller {
         //VALIDATOR JIKA JUDUL MOU DAN/ATAU BEBERAPA INPUT TIDAK DIISI (KECUALI FILE)
         if ($updateValidator->fails()) {
             Session::flash('flash_message', 'Harap Mengisi Seluruh Data'); //nampilin kalo sukses
-            return redirect('pengumuman'); //REDIRECT BACK TO KELOLAMOU PAGE
+            return redirect()->back(); //REDIRECT BACK TO KELOLAMOU PAGE
         }
 
         //CHECK FILE YANG DIUPLOAD KOSONG ATAU ENGGA
@@ -163,14 +157,14 @@ class PengumumanController extends Controller {
         // FLASH MESSAGE UNTUK SUKSES
         Session::flash('flash_message','Pengumuman Berhasil Diperbarui');
         // then rederict back to pesan
-        return redirect('pengumuman');
+        return redirect('/pengumuman/kelolapengumuman');
     }
     
     public function delete($id) {
         $pengumuman = Pengumuman::find($id);
         $pengumuman->delete();
         Session::flash('flash_message', 'Pengumuman berhasil dihapus!');
-        return redirect('pengumuman');
+        return redirect('/pengumuman/kelolapengumuman');
     }
 
     public function publikasi($id){
@@ -178,6 +172,6 @@ class PengumumanController extends Controller {
         $pengumuman->status = 1;
         $pengumuman->save();
         Session::flash('flash_message', 'Pengumuman berhasil dipublish!');
-        return redirect('pengumuman');
+        return redirect('/pengumuman/kelolapengumuman');
     }
 }

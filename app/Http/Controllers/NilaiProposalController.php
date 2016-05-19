@@ -8,6 +8,7 @@ use Session;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
+use App\Penilaian;
 
 class NilaiProposalController extends Controller
 {
@@ -36,20 +37,8 @@ class NilaiProposalController extends Controller
         'id_proposal' => 'required',
         ]);
 
-        //$nilaiproposal = \App\NilaiProposal::create($request->all());  
-        //$nilaiproposal->save();
-
-        
         $komponenString = implode(",", $request->get('nama_komp'));
-        /*$nilaiproposal = new NilaiProposal;
-        $status = $this->nilaiproposal->create([
-        'nilai' => $request->get('nilai'),
-        'id_proposal' => $request->get('id_proposal'),
-        'staf_riset' => $request->get('staf_riset'),
-        'nama_komp' => $komponenString
-        ]);
-        $status->save();*/
-
+       
         $input=Input::all();
         $count = count($input['nama_komp']); // here we will know how many entries have been posted
         $languages = array();
@@ -67,7 +56,6 @@ class NilaiProposalController extends Controller
         Session::flash('flash_message','Penilaian berhasil disimpan.');
         return redirect('nilaiproposal');
     }
-
 
     public function storeRiset(Request $request, $id) {
         $this->validate($request, [
@@ -91,8 +79,33 @@ class NilaiProposalController extends Controller
            }
         }
         NilaiProposal::insert($proposal); // save the array of models at once
+
+        $Penilaian = new Penilaian();
+        $id_proposal = $request->get('id_proposal'); 
+        $staf_riset = $request->get('staf_riset');
+        $Penilaian->id_proposal = $id_proposal[0];
+        $Penilaian->staf_riset = $staf_riset[0];
+        $Penilaian->nilai_proposal = $this->hitungNilai($id_proposal[0]);
+        $Penilaian->save();
         Session::flash('flash_message','Penilaian berhasil disimpan.');
-        return redirect()->back();
+        return redirect('proposalriset');
+    }
+
+    public function hitungNilai($id){
+        $rata_rata = 0;
+        $jumlah = 0;
+        $getProposal = DB::table('komponen_nilai_proposal')
+            ->select('komponen_nilai_proposal.*')
+            ->where('komponen_nilai_proposal.id_proposal', '=', $id)
+            ->get();
+        
+        
+        foreach($getProposal as $p){
+          $jumlah += $p->nilai;
+        }
+
+        $rata_rata = $jumlah / count($getProposal);
+        return $rata_rata;
     }
 
     public function storePengmas(Request $request, $id) {
@@ -117,36 +130,25 @@ class NilaiProposalController extends Controller
            }
         }
         NilaiProposal::insert($proposal); // save the array of models at once
+
+        $Penilaian = new Penilaian();
+        $id_proposal = $request->get('id_proposal'); 
+        $staf_riset = $request->get('staf_riset');
+        $Penilaian->id_proposal = $id_proposal[0];
+        $Penilaian->staf_riset = $staf_riset[0];
+        $Penilaian->nilai_proposal = $this->hitungNilai($id_proposal[0]);
+        $Penilaian->save();
         Session::flash('flash_message','Penilaian berhasil disimpan.');
-        return redirect()->back();
+        return redirect('proposalpengmas');
     }
 
-    public function show($id) {
-        //
-    }
-
-    public function edit($id) {
-        //
-    }
-
-    public function update(Request $request, $id) {
-        //
-    }
-
-    public function destroy($id) {
-        //
-    }
-
-    public function getBorang()
-    {
-         View::share('borangs', DB::table('borang')->get());
-        
+    public function getBorang() {
+      View::share('borangs', DB::table('borang')->get());
     }
 
     protected function setupLayout() {
-        if (! is_null($this->layout))
-        {
-            $this->layout = View::make($this->layout);
-        }
+      if (! is_null($this->layout)) {
+        $this->layout = View::make($this->layout);
+      }
     }
 }

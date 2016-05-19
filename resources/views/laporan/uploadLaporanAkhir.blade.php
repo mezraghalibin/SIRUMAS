@@ -46,16 +46,29 @@
           <table class="highlight centered">
             <thead>
               <th>Judul Proposal</th>
+              <th>Judul Laporan Kemajuan</th>
             </thead>
               <tr>
                 <td>{{ $laporanAkhir->judul }}</td>
+                <td>{{ $laporanAkhir->judul_laporan_kemajuan }}</td>
               </tr>
           </table>
           <div class="upload-revisi-attach">
             <form class="" action="/laporan/uploadLaporanAkhir/upload/{{ $laporanAkhir->id }}" 
               method="post" enctype="multipart/form-data">
               <input type="hidden" name="tipe_progres" value="akhir">
+              <input type="hidden" name="flag_akhir" value=1>
+              <input type="hidden" name="flag_kemajuan" value=0>
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="id_proposal" value="{{ $laporanAkhir->id_proposal }}">
+              <input type="hidden" name="judul_laporan_kemajuan" value="{{ $laporanAkhir->judul_laporan_kemajuan }}">
+              <input type="hidden" name="judul" value="{{ $laporanAkhir->judul }}">
+              <input type="hidden" name="dosen" value="<?php echo $id ?>">
+              <div class="row">
+                <div class="input-field col s4">
+                  <input placeholder="Judul Laporan Akhir" name="judul_laporan_akhir" type="text" class="validate">
+                </div>
+              </div>
               <div class="file-field input-field">
                 <div class="btn card-panel red darken-2">
                   <span class="white-text">File</span>

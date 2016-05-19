@@ -23,7 +23,7 @@ class BerandaController extends Controller
             ->where('pengumuman.status', '=', 1)
             ->select('pengumuman.*', 'users.nama')
             ->orderBy('updated_at', 'DESC')
-            ->get();
+            ->paginate(10);
         if($check) {
             return view('beranda', compact('allPengumuman'));
         }

@@ -56,6 +56,7 @@
           <table class="highlight centered">
             <thead>
               <tr>
+                <th data-field="id">Judul Proposal</th>
                 <th data-field="id">Judul Laporan</th>
                 <th data-field="id">Hibah</th>
                 <th data-field="name">Pengaju</th>
@@ -67,6 +68,7 @@
               @foreach($allKemajuan as $kemajuan)
               <tr>
                 <td>{{$kemajuan->judul}}</td>
+                <td>{{$kemajuan->judul_laporan_kemajuan}}</td>
                 <td>{{$kemajuan->nama_hibah}}</td>              
                 <td>{{$kemajuan->nama}}</td>
                 <td>{{$kemajuan->created_at}}</td>
@@ -85,6 +87,9 @@
       </div>
     </div>
     {{-- END OF CONTENT READ LAPORAN KEMAJUAN --}}
+    <div class="center-align">
+      {!! $allKemajuan->render() !!}
+    </div>
   </div>
   {{-- END OF PAGE CONTENT --}}
   @stop

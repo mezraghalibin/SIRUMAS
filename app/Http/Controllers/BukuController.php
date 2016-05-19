@@ -26,11 +26,6 @@ class BukuController extends Controller {
       if($route == '/kelolaRepository/buku/buat') {
         return view('/buku/buatBuku');
       }
-      else if ($route == '/kelolaRepository/buku/kelola') {
-        $dataBuku = $this->read(); //GET ALL DATA HIBAH
-        return view('/buku/kelolaBuku', compact('dataBuku'));
-      }
-      /** FOR PAGINATION KELOLA BUKU **/
       else {
         $dataBuku = $this->read(); //GET ALL DATA HIBAH
         return view('/buku/kelolaBuku', compact('dataBuku'));
@@ -50,19 +45,7 @@ class BukuController extends Controller {
 
     if ($check) {
       $dataBuku = $this->read(); //GET ALL DATA HIBAH
-      return view('/buku/kelolaBuku', compact('dataBuku'));
-    }
-    else {
-      return view('login');
-    }
-  }
-
-  public function kelola() {
-    //CHECK IF USER IS LOGGED IN OR NOT
-    $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
-    $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
-    if($check) {
-      return view('kelolabuku');
+      return view('/buku/daftarBuku', compact('dataBuku'));
     }
     else {
       return view('login');
@@ -70,7 +53,7 @@ class BukuController extends Controller {
   }
 
   public function read() {
-    $dataBuku = Buku::all();
+    $dataBuku = Buku::orderBy('judul')->paginate(20);
     return $dataBuku;
   }
 
@@ -90,7 +73,7 @@ class BukuController extends Controller {
     $buku = Buku::create($request->all());
 
     $filename = $request->file('file')->getClientOriginalName(); 
-    $request->file('file')->move(base_path().'/public/upload/buku', $filename);
+    $request->file('file')->move(public_path('/upload/buku'), $filename);
     //UBAH FILENAME DI DATABASE
     $buku->sampul = $filename;
 

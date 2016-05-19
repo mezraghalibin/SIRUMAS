@@ -177,8 +177,7 @@ class KontakController extends Controller {
       $i = 0;
       foreach ($expertiseOld as $expertise) {
         if($expertise->expertise == $list[$i]) {
-          //DO NOTHING
-          $check = 0
+          $check = 0;
         }
         else {
           break;

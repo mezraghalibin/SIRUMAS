@@ -26,7 +26,10 @@
 
   <script>
     $(document).ready(function(){
-      
+      //CLEAR FLASH MESSAGE
+      $("#clear").click(function(){
+        $("#flash-msg").fadeOut(1000);
+      });
     });
   </script>
 </head>
@@ -44,11 +47,103 @@
     </nav>
     {{-- END OF SECOND NAVBAR --}}
 
+    {{-- FLASH MESSAGE --}}
+    <div id="flash-msg">
+      @if(Session::has('flash_message'))
+        <div class="card-panel teal">
+          <span class="white-text">
+            {{ Session::get('flash_message') }}<a id="clear" class="btn-flat transparent right">
+            <i class="material-icons">clear</i></a>
+          </span>
+        </div>
+      @endif 
+    </div>
+    {{-- END OF FLASH MESSAGE --}}
+
+
     {{-- SEARCH --}}
     <div class="container">
       <div id="kelola-repository">
         <div class="header"><h4>Kelola Repository</h4></div>
         <div class="kelola-repository-content">
+          <div class="row">
+            <div class="col s4 m4">
+              <div class="card">
+                <div class="card-image">
+                  <img src="../images/buku.jpg">
+                  <span class="card-title">BUKU</span>
+                </div>
+                <div class="card-action">
+                  <a href="/kelolaRepository/buku/kelola">Kelola</a>
+                  <a href="/kelolaRepository/buku/buat">Buat</a>
+                </div>
+              </div>
+            </div>
+            <div class="col s4 m4">
+              <div class="card">
+                <div class="card-image">
+                  <img src="../images/artikel_ilmiah.jpeg">
+                  <span class="card-title">ARTIKEL ILMIAH</span>
+                </div>
+                <div class="card-action">
+                  <a href="/kelolaRepository/artikelIlmiah/kelola">Kelola</a>
+                  <a href="/kelolaRepository/artikelIlmiah/buat">Buat</a>
+                </div>
+              </div>
+            </div>
+            <div class="col s4">
+              <div class="card">
+                <div class="card-image">
+                  <img src="../images/artikel_populer.jpg">
+                  <span class="card-title">ARTIKEL POPULER</span>
+                </div>
+                <div class="card-action">
+                  <a href="/kelolaRepository/artikelPopuler/kelola">Kelola</a>
+                  <a href="/kelolaRepository/artikelPopuler/buat">Buat</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s4">
+              <div class="card">
+                <div class="card-image">
+                  <img src="../images/penelitian.jpg">
+                  <span class="card-title">PENELITIAN</span>
+                </div>
+                <div class="card-action">
+                  <a href="/kelolaRepository/penelitian/kelola">Kelola</a>
+                  <a href="/kelolaRepository/penelitian/buat">Buat</a>
+                </div>
+              </div>
+            </div>
+            <div class="col s4">
+              <div class="card">
+                <div class="card-image">
+                  <img src="../images/pengabdian_masyarakat.jpg">
+                  <span class="card-title">PENGABDIAN MASYARAKAT</span>
+                </div>
+                <div class="card-action">
+                  <a href="/kelolaRepository/pengmas/kelola">Kelola</a>
+                  <a href="/kelolaRepository/pengmas/buat">Buat</a>
+                </div>
+              </div>
+            </div>
+            <div class="col s4">
+              <div class="card">
+                <div class="card-image">
+                  <img src="../images/kegiatan_ilmiah.jpg">
+                  <span class="card-title">KEGIATAN ILMIAH</span>
+                </div>
+                <div class="card-action">
+                  <a href="/kelolaRepository/kegiatanIlmiah/kelola">Kelola</a>
+                  <a href="/kelolaRepository/kegiatanIlmiah/buat">Buat</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div id="search-bar" class="row search-bar">
             <div class="col s12">
               <ul class="tabs">
@@ -57,22 +152,83 @@
               </ul>      
             </div>
 
-            <div id="publikasi" class="row"> {{-- CONTENT SEARCH BUKU  --}}
-              <div class="col s6 publikasi">
-                <ul class="collection with-header center-align">
-                  <li class="collection-item"><a href="/kelolaRepository/buku/kelola">Buku</a></li>
-                  <li class="collection-item"><a href="/kelolaRepository/artikelIlmiah/kelola">Artikel Ilmiah</a></li>
-                  <li class="collection-item"><a href="/kelolaRepository/artikelPopuler/kelola">Artikel Populer</a></li>
-                </ul>
+            <div id="publikasi" class="publikasi"> {{-- SEARCH PUBLIKASI --}}
+              <div class="col s12"> 
+                <form method="post" action="/kelolaRepository/searchPublikasi" enctype="multipart/form-data">
+                  <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                  <div class="header center-align"><h5>Search Publikasi</h5></div>
+                  <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                      <input placeholder="Judul" id="judul" name="judul" type="text" value="">
+                      <label>Judul Publikasi</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                      <input placeholder="Indrosuwandi" id="penulis" name="penulis" type="text" value="">
+                      <label for="penulis">Penulis Utama</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                      <input placeholder="Andi" id="anggota" name="anggota" type="text" value="">
+                      <label for="anggota">Anggota</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                      <input placeholder="PT. ABC" id="penerbit" name="penerbit" type="text" value="">
+                      <label>Penerbit</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                      <input placeholder="20.." id="tahun" name="tahun" type="text" value="">
+                      <label>Tahun Terbit</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12 center">
+                      <button class="btn waves-effect waves-light" type="submit" name="action">
+                        <span class="white-text">Search</span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
-            </div>
-            <div id="kegiatan" class="row"> {{-- CONTENT SEARCH ARTIKEL ILMIAH --}}
-              <div class="offset-s6 col s6 kegiatan">
-                <ul class="collection with-header center-align">
-                  <li class="collection-item"><a href="/kelolaRepository/penelitian/kelola">Penelitian</a></li>
-                  <li class="collection-item"><a href="/kelolaRepository/pengmas/kelola">Pengabdian Masyarakat</a></li>
-                  <li class="collection-item"><a href="/kelolaRepository/kegiatanIlmiah/kelola">Kegiatan Ilmiah</a></li>
-                </ul>
+            </div>            
+            <div id="kegiatan" class="row"> {{-- SEARCH KEGIATAN --}}
+              <div class="col s12">
+                <form method="post" action="/kelolaRepository/searchKegiatan" enctype="multipart/form-data">
+                  <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                  <input type="hidden" name="kategori" value="kegiatan">
+                  <div class="header center-align"><h5>Search Kegiatan</h5></div>
+                  <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                      <input placeholder="Judul" id="judul" name="judul" type="text">
+                      <label>Judul Penelitian / Nama Kegiatan</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                      <input placeholder="Indrosuwandi" id="ketua" name="ketua" type="text">
+                      <label for="penulis">Ketua Penelitian / Ketua Kegiatan (Penelitian/Pengabdian Masyarakat</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6 offset-s3">
+                      <input placeholder="Joko Widodo" id="pembicara" name="pembicara" type="text">
+                      <label>Pembicara (Kegiatan Ilmiah)</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12 center">
+                      <button class="btn waves-effect waves-light" type="submit" name="action">
+                        <span class="white-text">Search</span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

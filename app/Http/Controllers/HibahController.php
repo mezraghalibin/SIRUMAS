@@ -116,22 +116,6 @@ class HibahController extends Controller {
     return $dataHibah;
   }
 
-    public function readRiset() {
-        $dataHibahRiset = DB::table('hibah')
-            ->select('*')
-            ->where('kategori_hibah', '=', 'Riset')
-            ->get();
-        return $dataHibahRiset;
-    }
-
-    public function readPengmas() {
-        $dataHibahPengmas = DB::table('hibah')
-            ->select('*')
-            ->where('kategori_hibah', '=', 'Pengmas')
-            ->get();
-        return $dataHibahPengmas;
-    }
-
   public function update(Request $request, $id) {
     //CHECK VALIDATOR
     $updateValidator = Validator::make($request->all(), [

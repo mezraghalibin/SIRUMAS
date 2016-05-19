@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
 .materialize-red {
   background-color: #e51c23 !important; }
 
@@ -6302,15 +6304,24 @@ html, body {
   height: 100%;
   width: 100%; }
 
+.navi {
+  font-family: 'Oswald', sans-serif; }
+
 .nav-wrapper {
-  background: #011A27; }
+  background-color: #e0e0e0;
+  font-family: 'Droid Sans', sans-serif; }
   .nav-wrapper .brand-logo, .nav-wrapper img {
     height: 64px; }
+  .nav-wrapper .navi {
+    color: #8D230F; }
 
 /*********** SIDEBAR **********/
 /* CSS declarations go here */
 .header-kita {
   font: 60px; }
+
+.container {
+  font-family: 'Droid Sans', sans-serif; }
 
 header .side-bar {
   z-index: 4;
@@ -6320,19 +6331,27 @@ header .side-bar {
   width: 15%;
   height: 100%;
   margin-left: -15%;
-  background: #011A27;
+  background: #e0e0e0;
   transition: all 0.5s ease; }
   header .side-bar ul, header .side-bar .collapsible {
     border-left: 0px;
     box-shadow: 0px 0px 0px;
     font-size: 12px;
+    font-family: 'Oswald', sans-serif;
     margin: 0; }
     header .side-bar ul li .collapsible-header, header .side-bar .collapsible li .collapsible-header {
       color: #8D230F; }
+    header .side-bar ul li a:hover, header .side-bar .collapsible li a:hover {
+      color: #8D230F;
+      background-color: #FFFFFF; }
+    header .side-bar ul li a .current, header .side-bar .collapsible li a .current {
+      color: #FFFFFF;
+      background-color: #8D230F; }
     header .side-bar ul li .collapsible-body, header .side-bar .collapsible li .collapsible-body {
-      background: #011A27; }
+      background: #e0e0e0; }
       header .side-bar ul li .collapsible-body ul, header .side-bar ul li .collapsible-body li, header .side-bar ul li .collapsible-body a, header .side-bar .collapsible li .collapsible-body ul, header .side-bar .collapsible li .collapsible-body li, header .side-bar .collapsible li .collapsible-body a {
-        color: #FFFFFF;
+        font-family: 'Oswald', sans-serif;
+        color: #8D230F;
         padding-left: 10px;
         padding-top: 3px;
         padding-bottom: 3px; }

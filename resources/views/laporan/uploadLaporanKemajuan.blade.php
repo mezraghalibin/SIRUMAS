@@ -46,7 +46,7 @@
     {{-- CONTENT UPLOAD LAPORAN KEMAJUAN --}}
     <div class="container">
       <div id="laporan-kemajuan">
-        <div class="header"><h4>Upload Laporan</h4></div>
+        <div class="header"><h4>Upload Laporan Kemajuan {{ $proposal->judul_proposal }}</h4></div>
         <div class="kemajuan-content">
           <table class="highlight centered">
             <thead>
@@ -67,9 +67,17 @@
               method="post" enctype="multipart/form-data">
               <input type="hidden" name="id_proposal" value="{{ $proposal->id }}">
               <input type="hidden" name="tipe_progres" value="kemajuan">
+              <input type="hidden" name="flag_kemajuan" value=1>
+              <input type="hidden" name="flag_akhir" value=0>
+              <input type="hidden" name="judul_laporan_akhir" value="">
               <input type="hidden" name="judul" value="{{ $proposal->judul_proposal }}">
               <input type="hidden" name="dosen" value="<?php echo $id ?>">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <div class="row">
+                <div class="input-field col s4">
+                  <input placeholder="Judul Laporan Kemajuan" name="judul_laporan_kemajuan" type="text" class="validate">
+                </div>
+              </div>
               <div class="file-field input-field">
                 <div class="btn card-panel red darken-2">
                   <span class="white-text">File</span>
@@ -77,7 +85,7 @@
                   <input type="hidden" name="file_akhir" value="">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text" placeholder="Upload laporan">
+                  <input class="file-path validate" type="text" placeholder="Upload File Laporan Kemajuan">
                 </div>
               </div>
               <br>

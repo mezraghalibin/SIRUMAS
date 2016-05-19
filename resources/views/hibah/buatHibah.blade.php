@@ -91,7 +91,7 @@
                   </select>
                 </div>
                 <div class="input-field col s3">
-                  <input type="date" name="tgl_awal" class="datepicker" required>
+                  <input type="time" name="tgl_awal" class="datepicker" required>
                   <label>Waktu Mulai</label>
                 </div>
                 <div class="input-field col s3">

@@ -21,16 +21,16 @@ class LaporanController extends Controller {
     if($check) {
       $id = $_SESSION['id'];
       $proposals = DB::table('proposal')->where('dosen', '=', $id)->get();
-      $laporanAkhir = DB::table('laporan')
+      $laporanKemajuan = DB::table('laporan')
       ->where('dosen', '=', $id)
-      ->where('file_akhir', '=', '')
+      ->where('flag_kemajuan', '=', '1')
       ->get();
 
       if ($route == '/laporan/laporanKemajuan') {
           return view('/laporan/laporanKemajuan', compact('proposals'));
       }
       else if ($route == '/laporan/laporanAkhir') {
-          return view('/laporan/laporanAkhir', compact('laporanAkhir'));
+          return view('/laporan/laporanAkhir', compact('laporanKemajuan','proposals'));
       }
     } 
     else {
@@ -42,15 +42,31 @@ class LaporanController extends Controller {
 		//CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+    $idRole = $SSOController->getId(); // get id dosen / staf
+    $getSpesifikRole = $SSOController->getSpesifikRole(); // dapetin rolenya
     if($check) {
+      // tampilan di staf riset nampilin semua proposal
+      if($getSpesifikRole == 'divisi riset'){
         $allKemajuan = DB::table('laporan')
         ->join('users', 'laporan.dosen', '=', 'users.id')
         ->join('proposal', 'laporan.id_proposal', '=', 'proposal.id')
         ->join('hibah', 'proposal.id_hibah', '=', 'hibah.id')
         ->where('tipe_progres', '=', 'kemajuan')
         ->select('laporan.*', 'users.nama', 'hibah.nama_hibah')
-        ->get();
-        return view('/laporan/readLaporanKemajuan', compact('allKemajuan'));
+        ->paginate(20);
+        return view('/laporan/readlaporankemajuan', compact('allKemajuan'));
+      }
+      else if($getSpesifikRole == 'dosen'){
+        $allKemajuan = DB::table('laporan')
+        ->join('users', 'laporan.dosen', '=', 'users.id')
+        ->join('proposal', 'laporan.id_proposal', '=', 'proposal.id')
+        ->join('hibah', 'proposal.id_hibah', '=', 'hibah.id')
+        ->where('tipe_progres', '=', 'kemajuan')
+        ->where('laporan.dosen', '=', $idRole)
+        ->select('laporan.*', 'users.nama', 'hibah.nama_hibah')
+        ->paginate(20);
+        return view('/laporan/readlaporankemajuan', compact('allKemajuan'));
+      }
     }
     else {
         return view('login');
@@ -61,15 +77,30 @@ class LaporanController extends Controller {
     //CHECK IF USER IS LOGGED IN OR NOT
     $SSOController = new SSOController(); //INISIALISASI CLASS SSOCONTROLLER
     $check = $SSOController->loggedIn(); //SIMPAN NILAI FUNCTION LOGGEDIN();
+    $idRole = $SSOController->getId(); // get id dosen / staf
+    $getSpesifikRole = $SSOController->getSpesifikRole(); // dapetin rolenya
     if($check) {
+      if($getSpesifikRole == 'divisi riset'){
         $allAkhir = DB::table('laporan')
         ->join('users', 'laporan.dosen', '=', 'users.id')
         ->join('proposal', 'laporan.id_proposal', '=', 'proposal.id')
         ->join('hibah', 'proposal.id_hibah', '=', 'hibah.id')
         ->where('tipe_progres', '=', 'akhir')
         ->select('laporan.*', 'users.nama', 'hibah.nama_hibah')
-        ->get();
+        ->paginate(20);
         return view('/laporan/readLaporanAkhir', compact('allAkhir'));
+      }
+      else if($getSpesifikRole == 'dosen'){
+        $allAkhir = DB::table('laporan')
+        ->join('users', 'laporan.dosen', '=', 'users.id')
+        ->join('proposal', 'laporan.id_proposal', '=', 'proposal.id')
+        ->join('hibah', 'proposal.id_hibah', '=', 'hibah.id')
+        ->where('tipe_progres', '=', 'akhir')
+        ->where('laporan.dosen', '=', $idRole)
+        ->select('laporan.*', 'users.nama', 'hibah.nama_hibah')
+        ->paginate(20);
+        return view('/laporan/readLaporanAkhir', compact('allAkhir'));
+      }
     }
     else {
         return view('login');
@@ -98,6 +129,23 @@ class LaporanController extends Controller {
     $this->validate($request, [
         'file_kemajuan' => 'required'
     ]);
+
+    // get semua laporan terkait proposal dengan id proposal
+    $laporanOld = DB::table('laporan')
+          ->join('proposal', 'laporan.id_proposal', '=', 'proposal.id')
+          ->where('laporan.id_proposal', '=',$id)
+          ->select('laporan.*')
+          ->get();
+    
+    // ubah nilai laporan yang lama flag nya
+    foreach($laporanOld as $laporan){
+      if($laporan->flag_kemajuan == 1){
+        $id = $laporan->id; // id laporan yang mau diubah nilianya
+        $laporantemp = Laporan::find($id);
+        $laporantemp->flag_kemajuan = 0;
+        $laporantemp->save();
+      }
+    }
 
     $msg= Laporan::create($request->all());
     $filename = $request->file('file_kemajuan')->getClientOriginalName();
@@ -131,36 +179,35 @@ class LaporanController extends Controller {
       'file_akhir' => 'required'
     ]);
 
-    $akhirNew = $request; //GET HIBAH NEW BY REQUEST USER
-    $akhirOld = Laporan::find($id); //GET HIBAH OLD BY FIND ON TABLE HIBAH
-
     //VALIDATOR JIKA JUDUL MOU DAN/ATAU NAMA PENELITI TIDAK DIISI
     if ($updateValidator->fails()) {
-      $akhirOld->file_akhir = $akhirOld->file_akhir; //KEEP OLD FILE
       Session::flash('flash_message', 'Harap Melampirkan file laporan Akhir!'); //nampilin kalo sukses
     } 
     else {
-      $akhirOld->tipe_progres = $akhirNew->tipe_progres;
-      $filename = $akhirNew->file('file_akhir')->getClientOriginalName();
-      $request->file('file_akhir')->move(base_path().'/public/upload/laporanAkhir', $filename);
-      $akhirOld->file_akhir = $filename;
-      $akhirOld->save();
-      Session::flash('flash_message','Upload laporan Akhir berhasil dilakukan'); //FLASH MESSAGE
-
-      /* TO BE KALO PENGEN BISA REVISI LAPORAN 
-      //DELETE THE OLD FILES IN FOLDER MOU
-      $akhirNameOld = public_path('upload/laporankemajuan/' . $akhirOld->file_akhir); //GET SPECIFIC OLD FOTO NAME
-      if(File::exists($akhirNameOld)) {
-          File::delete($akhirNameOld); //DELETE FILE FROM FOLDER FOTO KONTAK
+    // get semua laporan terkait proposal dengan id proposal
+    
+    $laporan = Laporan::find($id);
+    $laporanOld = DB::table('laporan')
+          ->join('proposal', 'laporan.id_proposal', '=', 'proposal.id')
+          ->where('proposal.id', '=', $laporan->id_proposal)
+          ->select('laporan.*')
+          ->get();
+    
+    // ubah nilai laporan yang lama flag nya
+    foreach($laporanOld as $laporan){
+      if($laporan->flag_akhir == 1){
+        $id = $laporan->id; // id laporan yang mau diubah nilianya
+        $laporantemp = Laporan::find($id);
+        $laporantemp->flag_akhir = 0;
+        $laporantemp->save();
       }
-      //STORE NEW FOTO TO FOLDER MOU
-      $kontakNewFoto = $kontakNew->id . '_' . $kontakNew->nama . '.' . 
-        $request->file('foto')->getClientOriginalExtension(); //SIMPAN NAMA FILE
-      $kontakNew->file('foto')->move(base_path().'/public/upload/fotoKontak', $kontakNewFoto); //SIMPAN MOU KE SUATU FOLDER
-
-      //CHANGE OLD FILE NAME WITH THE NEW ONES IN DATABASE
-      $kontakOld->foto  = $kontakNewFoto;
-      */
+    }
+      $msg= Laporan::create($request->all()); 
+      $filename = $request->file('file_akhir')->getClientOriginalName();
+      $request->file('file_akhir')->move(base_path().'/public/upload/laporanAkhir', $filename);
+      $msg->file_akhir = $filename;
+      $msg->save();
+      Session::flash('flash_message','Upload laporan Akhir berhasil dilakukan'); //FLASH MESSAGE
     }
 
     return redirect('/laporan/laporanAkhir'); //REDIRECT TO LAPORAN AKHIR PAGE     

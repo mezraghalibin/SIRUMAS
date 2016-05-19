@@ -143,10 +143,10 @@
                 <div class="file-field input-field col s6 offset-s3">
                   <div class="btn">
                     <span class="white-text">File</span>
-                    <input name="file" type="file" placeholder="Masukkan bukti halaman cover dan ISBN">
+                    <input name="file" type="file" placeholder="Masukkan Sampul Buku">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Masukkan bukti halaman cover dan ISBN">
+                    <input class="file-path validate" type="text" placeholder="Masukkan Sampul Buku">
                   </div>
                 </div>
               </div>

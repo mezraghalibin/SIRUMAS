@@ -21,10 +21,13 @@
   <!--Import Google Icon Font-->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--FOR MATERIALIZE DONT DELETE THIS-->
-
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!--FOR MATERIALIZE DONT DELETE THIS-->
   <script>
     $(document).ready(function(){
-      $('tr').click( function() {
+      $('tr').click(function() {
         window.location = $(this).find('a').attr('href');
       }).hover( function() {
           $(this).toggleClass('hover');
@@ -45,10 +48,7 @@
     <nav class="second-navbar">
       <div class="nav-wrapper">
         <ul class="left hide-on-med-and-down">
-          <li id="berhibah"><a href="#">Laporan Berhibah</a></li>
-          <li id="tidak-hibah"><a href="#">Laporan Tidak Berhibah</a></li>
-          <!--<li id="upload-kemajuan"><a href="laporankemajuan">Upload Laporan Kemajuan</a></li>-->
-          <li id="upload-akhir"><a href="laporanakhir">Upload Laporan Akhir</a></li>
+          <li id="upload-akhir"><a href="/laporan/uploadLaporanAkhir">Upload Laporan Akhir</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="#"><?php echo "Login sebagai $name | $spesifik_role"; ?></a></li>
@@ -60,7 +60,7 @@
     {{-- CONTENT LAPORAN AKHIR --}}
     <div class="container">
       <div id="upload-laporan-kemajuan">
-        <div class="header"><h4>Judul Proposal Terkait</h4></div>
+        <div class="header"><h4>Upload Laporan Akhir Berdasarkan Laporan Kemajuan</h4></div>
         <div id="flash-msg">
         @if(Session::has('flash_message'))
           <div class="card-panel red darken-2">
@@ -76,19 +76,22 @@
           <table class="highlight centered">
             <thead>
               <th>Judul Proposal</th>
-            </thead>          
-            @foreach($laporanAkhir as $laporanakhir)
+              <th>Judul Laporan Kemajuan</th>
+            </thead>    
             <tbody>
-              <tr>
-                <td>{{$laporanakhir->judul}}</td>
-                <td>
-                <button class="btn" type="submit" id="edit">
-                  <a class="white-text" href="/laporan/uploadLaporanAkhir/{{$laporanakhir->id}}">Upload</a>
-                  </button>
-                </td>
-              </tr>
+              @foreach($laporanKemajuan as $laporanKemajuan)
+                <tr>
+                  <td>{{ $laporanKemajuan->judul }}</td>
+                  <td>{{ $laporanKemajuan->judul_laporan_kemajuan }}</td>
+                  <td>
+                    <a href="/laporan/uploadLaporanAkhir/{{$laporanKemajuan->id}}" class="button">
+                    <button class="btn" type="submit" id="edit">Upload
+                    </button>
+                    </a>
+                  </td>
+                </tr>
+              @endforeach              
             </tbody>
-            @endforeach              
           </table>
         </div>
       </div>

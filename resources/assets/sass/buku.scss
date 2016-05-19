@@ -51,3 +51,22 @@ tr.hover {
    cursor: pointer;
    /* whatever other hover styles you want */
 }
+
+.buku {
+  font: $heading-font;
+  .left-row {
+    .sampul {
+      width: 103px;
+    }
+  }
+  .right-row {
+    .judul {
+      font-weight: bold;
+    }
+    .button {
+      .btn-floating {
+        background-color: $base-color2;
+      }
+    }
+  }
+} 
